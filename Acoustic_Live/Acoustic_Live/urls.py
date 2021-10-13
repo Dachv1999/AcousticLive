@@ -20,5 +20,5 @@ from Acoustic_Live.views import niveles, nivel_principiante
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Mis_Cursos/', niveles),
-    path('Nivel/', nivel_principiante),
+    path('Nivel_Principiante/', nivel_principiante),
 ]
