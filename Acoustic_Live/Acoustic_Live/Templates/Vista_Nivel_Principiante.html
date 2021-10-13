@@ -1,39 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <title>Acoustic Live | Nivel Principiante</title>
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
 </head>
 <body>
-    <div class="container-fluid " style="background-color:#1E2327;">
+    <header class="header">
+        <div class="conteiner logo-nav-container">
+           <a href="3" class="logo">LOGO</a>
+            <nav class="navigation">
+                <ul>
+   
+                 <li><a style="color: white;"href="#">Mis Cursos</a></li>
+               
+                </ul>
+            </nav>
+        </div> 
+     </header>
+     <main class="main">
+        <div class="container">
+
+            <h1>
+                Elige por donde comenzar
+            </h1>
+            <p>
+                El artista no es nada sin el don, pero el don no es nada sin el trabajo
+            </p>
+
+        </div>
+    </main>
+    <!--<div class="container-fluid " style="background-color:#1E2327;">
         <center style="color: white;">aqui ponen el encabezado </center>
     </div>
     <div class="container-fluid "style="background-color: #343F4B;">
-        <h1 style="color: white;">Nivel Principiante</h1>
+        <h1 style="color: white;">Nivel Principiante</h1> -->
     </div>
     <div class="container-fluid">
         <div class="container">  
+
             <link rel="stylesheet" href="{% static '/css/fondo.css' %}" >  
                 <h1 style="color: white;">Leccion 1</h1>
                  <div>
                      <center><iframe width="660" height="415" src="https://www.youtube.com/embed/ptc4Awb0UpU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>>
                 </div>
                 <center><h4 style="color: white;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae magnam blanditiis sed distinctio aliquam amet aliquid repudiandae at nisi harum neque ratione, nesciunt voluptatem perferendis! Deserunt repudiandae blanditiis quod illum.</h4></center>>
-            <h1 style="color: white;">Leccion 2</h1>
+            <h2 style="color: white;">Leccion 2</h2>
                 <div>
                     <center><iframe width="660" height="415" src="https://www.youtube.com/embed/ptc4Awb0UpU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>>
                </div>
                 <center><h4 style="color: white;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae magnam blanditiis sed distinctio aliquam amet aliquid repudiandae at nisi harum neque ratione, nesciunt voluptatem perferendis! Deserunt repudiandae blanditiis quod illum.</h4></center>
-            <h1 style="color: white;">Leccion 3</h1>
+            <h2 style="color: white;">Leccion 3</h2>
                 <div>
                     <center><iframe width="660" height="415" src="https://www.youtube.com/embed/ptc4Awb0UpU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
                </div>
                 <center><h4 style="color: white;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae magnam blanditiis sed distinctio aliquam amet aliquid repudiandae at nisi harum neque ratione, nesciunt voluptatem perferendis! Deserunt repudiandae blanditiis quod illum.</h4></center>
         </div>
     </div>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 </body>
 </html>
