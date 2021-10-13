@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acoustic Live | Nivel Principiante</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap/css/style.css">
+
+ 
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+
 </head>
 <body>
     <header class="header">
@@ -39,9 +44,10 @@
     <div class="container-fluid "style="background-color: #343F4B;">
         <h1 style="color: white;">Nivel Principiante</h1> -->
     </div>
-    <div class="container-fluid" style="background-image: url('Imagenes/fondo.jpg'); background-repeat: no-repeat; background-size: 100% 100%;background-attachment: fixed;">
+    <div class="container-fluid">
         <div class="container">  
-                <h2 style="color: white;">Leccion 1</h2>
+            <link rel="stylesheet" href="{% static '/css/fondo.css' %}" >  
+                <h1 style="color: white;">Leccion 1</h1>
                  <div>
                      <center><iframe width="660" height="415" src="https://www.youtube.com/embed/ptc4Awb0UpU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>>
                 </div>
@@ -58,7 +64,6 @@
                 <center><h4 style="color: white;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae magnam blanditiis sed distinctio aliquam amet aliquid repudiandae at nisi harum neque ratione, nesciunt voluptatem perferendis! Deserunt repudiandae blanditiis quod illum.</h4></center>
         </div>
     </div>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-  
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 </body>
 </html>
