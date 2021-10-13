@@ -18,8 +18,8 @@ h1 {
 }
 main{
     background:  #343F4B;
-    padding-top: 6rem;
-    padding-bottom: 0.5rem;
+    padding-top: 9rem;
+    padding-bottom: 1rem;
    
 }
 .logo{
@@ -27,7 +27,7 @@ main{
 }
 .header {
     background-color: #1E2327;
-    padding: 1rem 0;
+    padding: 2rem 0;
     position: fixed;
     left: 0;
     top: 0;
