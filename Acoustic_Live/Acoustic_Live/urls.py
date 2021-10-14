@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('Mis_Cursos/', niveles),
     path('Nivel_Principiante/', nivel_principiante),
+    
 ]
