@@ -22,6 +22,106 @@ main{
     padding-bottom: 0.5rem;
    
 }
+.header{
+    background-color: #000000;
+    width: 100%;
+    height: 90px;  
+}
+#btn-menu{
+    display: none;
+}
+.header label{
+    display: none;
+    width: 42px;
+    height: 42px;
+    padding: 10px;
+    
+}
+.header label{
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.3);
+}
+
+/*.header{
+    background-color: #000000;
+    width: 100%;
+    height: 90px;  
+}*/
+.nav{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.logo{
+    width: 18%;
+    height: 90px; 
+    justify-content:flex-start ;
+}
+.lista-barra-navegacion{
+    width: 82%;
+    height: 100%;
+}
+.lista-barra-navegacion ul{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content:flex-start ;/*los botones al inico*/
+    align-items: center;
+    list-style: none;
+}
+.lista-barra-navegacion ul li{
+    border-right: 1px solid #f0e7e7 ;
+    border-left: 1px solid #f0e7e7;
+}
+.lista-barra-navegacion ul li:hover{
+
+    background-color:rgb(206, 186, 186);
+}
+.lista-barra-navegacion ul li a{
+    text-decoration:none;
+    color: white;
+    display: block;
+    padding: 5px 20px;
+
+}
+@media (max-width:768px){
+    
+    .header label{
+        display: block;
+    }
+    .nav{
+        position: absolute;
+        background-color: #000000;
+        width: 70%;
+        margin-left: -70%;
+        transition: all 0.5s;
+    }
+    .nav ul{
+        flex-direction: column;
+    
+    }
+    .nav ul li{
+        border-top: 1px solid #fff;
+    }
+    #btn-menu:checked ~ .nav{
+        margin: 0;
+    }
+    /*.nav{
+        display: block;
+    }
+    .logo{
+        width: 100%;
+        height: 80px;
+
+    }
+    .lista-barra-navegacion{
+        background-color: #000000;
+        width: 100%;
+    }*/
+    
+}
+/*
 .logo{
     padding: 0.5rem 1rem;
 }
@@ -32,19 +132,18 @@ main{
     left: 0;
     top: 0;
     width: 100%;
-}
+}*/
 
-.header a {
+/*.header a {
     color: white;
-    text-decoration: none;
-   
+    text-decoration: none;  
 }
 
-.logo-nav-container{
-   display: inline-flex;
+.barra-navegacion{
+    display: inline-flex;
     justify-content: space-between;
     align-items: center;
-}
+}*/
 
 .navigation ul{
     margin: 0;
