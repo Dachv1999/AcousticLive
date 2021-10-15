@@ -25,15 +25,19 @@
      </header>
 <!--En esta parte se encuntra el titulo de la pagina junto con la frase-->
      <main class="main">
-        <div class="container">
-
-            <h1>
-                Elige por donde comenzar
-            </h1>
-            <p>
-                El artista no es nada sin el don, pero el don no es nada sin el trabajo
-            </p>
-
+       
+        <div class="row">
+            <div class="col-1">
+                aqui boton
+            </div>
+        <div class="col-11">    
+                <h1 style="color: white;">
+                    Elige por donde comenzar
+                </h1>
+                <p style="color: white;">
+                    El artista no es nada sin el don, pero el don no es nada sin el trabajo
+                </p>
+            </div>
         </div>
     </main>
 <!--Aqui comienza el cuerpo de la paginan, container-fluid hara que la imagen de fondo se vaya reduciendo a medidad
@@ -46,12 +50,13 @@ de que el dispositivo cambie de tamaño-->
 imagen, el nombre del nivel y la descripcion. col-lg(grande), col-md(medio), y col-sm(pequeño) corresponden al tamaño
 que tomara el contenerdor cuando el dispositivo sea tamaño grande(computadora,tele), medio(tablets) y 
 pequeño(celulares). paddin-top sirve para hacer que las letras ocupen la parte de abajo del container-->            
-            <div class="row">
+            <div class="row" style="padding-top: 60px;">
                 <div class="col-lg-4 col-md-6 col-sm-12">  
-                    <div class="container" id="principiante"  style="height: 100%;">
-                        <link rel="stylesheet" href="{% static '/css/imagen_principiante.css' %}" > 
-                        <center><h1 style="padding-top: 160px;">Nivel Primario</h1></center>
-                        <center><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil aperiam facere dolorem saepe quod tenetur dolorum soluta! Consequuntur suscipit nobis maiores. Velit totam natus, adipisci deleniti modi aliquid officia odit.</p></center>
+                    <div class="container" id="principiante"  style="height: 90%;">
+                        <link rel="stylesheet" href="{% static '/css/imagenes.css' %}" > 
+                        <h1 style="padding-top: 160px;">Nivel Primario</h1>
+                        <p> En este nivel aprender&aacute;s:
+                             Partes de la Guitarra, Teoria Musical, Ejercicios de digitacion, Ejercicios de rasgueo y Lectura musical.</p>
 <!--La clase btn-block sirve para que el boton quede mas alargado-->                        
                     </div>
                     
@@ -61,10 +66,11 @@ pequeño(celulares). paddin-top sirve para hacer que las letras ocupen la parte 
 
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="container" id="principiante"  style="height: 100%;">
-                        <link rel="stylesheet" href="{% static '/css/imagen_principiante.css' %}" >
-                        <center><h1 style="padding-top: 160px;">Nivel Medio</h1></center>
-                        <center><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae perferendis, alias hic dolor, atque id, amet ducimus qui aut dolorum earum excepturi architecto nemo vitae sint eum itaque culpa soluta.</p></center>
+                    <div class="container" id="medio"  style="height: 90%;">
+                        <link rel="stylesheet" href="{% static '/css/imagenes.css' %}" >
+                        <h1 style="padding-top: 160px;">Nivel Medio</h1>
+                        <p>En este nivel aprender&aacute;s:
+                            Las nota musicales (Mayores y Menores), Tipos de rasgueos, Hacer un puente y aprender&aacute;s a tocar tus primeras canciones.</p>
                     </div>
 
                     <form action="/Nivel_Principiante/" method="GET">                      
@@ -72,15 +78,16 @@ pequeño(celulares). paddin-top sirve para hacer que las letras ocupen la parte 
                     </form>
 
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12" >
-                    <div class="container" id="principiante"  style="height: 100%;" >
-                        <link rel="stylesheet" href="{% static '/css/imagen_principiante.css' %}"
-                        <center><h1 style="padding-top: 160px" >Nivel Avanzado</h1></center>
-                        <center><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum debitis natus totam ut hic, nobis assumenda rerum itaque autem nemo! Animi voluptates perferendis nostrum quidem repellat, maxime natus necessitatibus pariatur!</p></center>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="container" id="avanzado"  style="height: 90%;">
+                        <link rel="stylesheet" href="{% static '/css/imagenes.css' %}">
+                        <h1 style="padding-top: 160px;">Nivel Avanzado</h1>
+                        <p>En este nivel aprender&aacute;s:
+                            Arpegios, Punteos, Conocer todas las notas (Mayores, Menores, sostenidos, bemoles), Conocer las escalas musicales y tus primeros solos</p>
                     </div>
                     
                     <form action="/Nivel_Principiante/" method="GET">                      
-                        <div class="row mx-3" ><input type="submit" value = "Ver Mas" class="btn btn-dark btn-block" ></div>
+                        <div class="row mx-3" style="padding-bottom: 50px;" ><input type="submit" value = "Ver Mas" class="btn btn-dark btn-block" ></div>
                     </form>
                 </div>
             </div>
