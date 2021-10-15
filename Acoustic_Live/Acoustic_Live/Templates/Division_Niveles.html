@@ -10,6 +10,7 @@
     <title>Acoustic Live | Mis Cursos</title>
 </head>
 <body>
+<!--La parte superior de la pagina "header" donde se encuentra el logo y una barra de navegacion-->
     <header class="header">
         <div class="conteiner logo-nav-container">
            <a href="3" class="logo">LOGO</a>
@@ -22,6 +23,7 @@
             </nav>
         </div> 
      </header>
+<!--En esta parte se encuntra el titulo de la pagina junto con la frase-->
      <main class="main">
         <div class="container">
 
@@ -34,21 +36,28 @@
 
         </div>
     </main>
-
+<!--Aqui comienza el cuerpo de la paginan, container-fluid hara que la imagen de fondo se vaya reduciendo a medidad
+de que el dispositivo cambie de tamaño-->
     <div class="container-fluid">
-        <link rel="stylesheet" href="{% static '/css/fondo.css' %}" >  
+        <link rel="stylesheet" href="{% static '/css/fondo.css' %}" > 
+<!--En este container iran las tres diviciones de nivel-->
         <div class="container">
+<!--La clase row es para que podamos hacer el responsive junto a los col, siendo col cada columna que contiene la
+imagen, el nombre del nivel y la descripcion. col-lg(grande), col-md(medio), y col-sm(pequeño) corresponden al tamaño
+que tomara el contenerdor cuando el dispositivo sea tamaño grande(computadora,tele), medio(tablets) y 
+pequeño(celulares). paddin-top sirve para hacer que las letras ocupen la parte de abajo del container-->            
             <div class="row">
-                <div class="col-4">
+                <div class="col-lg-4 col-md-6 col-sm-12">
                     <link rel="stylesheet">  
                     <div class="container" id="principiante"  style="height: 100%;">
                         <link rel="stylesheet" href="{% static '/css/imagen_principiante.css' %}" > 
                         <center><h1>Nivel Primario</h1></center>
                         <center><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil aperiam facere dolorem saepe quod tenetur dolorum soluta! Consequuntur suscipit nobis maiores. Velit totam natus, adipisci deleniti modi aliquid officia odit.</p></center>
+<!--La clase btn-block sirve para que el boton quede mas alargado-->                        
                         <center><button type="button" class="btn-btn-primary">Ver mas</button></center>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="container" style="background-color: white;">
                         <center><h1>Nivel Medio</h1></center>
                         <center><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae perferendis, alias hic dolor, atque id, amet ducimus qui aut dolorum earum excepturi architecto nemo vitae sint eum itaque culpa soluta.</p></center>
@@ -56,7 +65,7 @@
                     </div>
                 </div>
                 <div class="col-4" >
-                    <div class="container" style="background-color:white;">
+                    <div class="col-lg-4 col-md-6 col-sm-12" style="background-color:white;">
                         <center><h1>Nivel Avanzado</h1></center>
                         <center><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum debitis natus totam ut hic, nobis assumenda rerum itaque autem nemo! Animi voluptates perferendis nostrum quidem repellat, maxime natus necessitatibus pariatur!</p></center>
                         <center><button type="button" class="btn-btn-primary">Ver mas</button></center>
