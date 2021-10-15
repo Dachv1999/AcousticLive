@@ -1,0 +1,17 @@
+#principiante{
+    background-image: url('../Imagenes/nivelPrincipiante.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#medio{
+    background-image: url('../Imagenes/nMedio.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#avanzado{
+    background-image: url('../Imagenes/nivelAvanzado.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
