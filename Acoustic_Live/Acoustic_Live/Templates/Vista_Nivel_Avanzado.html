@@ -6,45 +6,55 @@
 
 {% block content %}
 {% load static %}
-    <main class="main">
-            
-        <div class="row">
-            <div class="col-1">
-                <form action="/Mis_Cursos/" method="GET">       
-                    <input type="image" name="boton_back" style="margin-left: 40px;" src="{% static 'Imagenes/boton_atras.png' %}" alt="Volver atras" width="50" height="50">                
-                </form>
-            </div>
-        <div class="col-11">    
-                <h1 style = "color: white;">
-                    Nivel Avanzado
-                </h1>
-                <p style = "color: white;">
-                    El artista no es nada sin el don, pero el don no es nada sin el trabajo
-                </p>
-            </div>
-        </div>       
-        
-    </main>
-
-    </div>
-    <div class="container-fluid">
-        <div class="container">  
-            <link rel="stylesheet" href="{% static '/css/Fondo.css' %}" >  
-                <h1 style="color: white;">Leccion 1</h1>
-                <div>
-                    <center><iframe width="660" height="415" src="https://www.youtube.com/embed/ptc4Awb0UpU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
-                </div>
-                <center><h4 style="color: white;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae magnam blanditiis sed distinctio aliquam amet aliquid repudiandae at nisi harum neque ratione, nesciunt voluptatem perferendis! Deserunt repudiandae blanditiis quod illum.</h4></center>
-            <h2 style="color: white;">Leccion 2</h2>
-                <div>
-                    <center><iframe width="660" height="415" src="https://www.youtube.com/embed/ptc4Awb0UpU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
-                </div>
-                <center><h4 style="color: white;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae magnam blanditiis sed distinctio aliquam amet aliquid repudiandae at nisi harum neque ratione, nesciunt voluptatem perferendis! Deserunt repudiandae blanditiis quod illum.</h4></center>
-            <h2 style="color: white;">Leccion 3</h2>
-                <div>
-                    <center><iframe width="660" height="415" src="https://www.youtube.com/embed/ptc4Awb0UpU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
-                </div>
-                <center><h4 style="color: white;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae magnam blanditiis sed distinctio aliquam amet aliquid repudiandae at nisi harum neque ratione, nesciunt voluptatem perferendis! Deserunt repudiandae blanditiis quod illum.</h4></center>
+<main class="main">         
+    <div class="row">
+        <div class="col-lg-1 col-md-2 col-sm-3">
+            <form action="/Mis_Cursos/" method="GET">       
+                <input type="image" name="boton_back" style="margin-left: 20px;" src="{% static 'Imagenes/boton_atras.png' %}" alt="Volver atras" width="50" height="50">                
+            </form>
         </div>
-    </div>
+    <div class="col-11 col-md-10 col-sm-7">    
+            <h1 style = "color: white;">
+                Nivel Avanzado
+            </h1>
+            <p style = "color: white;">
+                El artista no es nada sin el don, pero el don no es nada sin el trabajo
+            </p>
+        </div>
+    </div>       
+</main>
+
+
+<div class="container-fluid">
+    <div class="container">  
+        <link rel="stylesheet" href="{% static '/css/Fondo.css' %}" >  
+            <h1 style="color: white;">Leccion 1</h1>
+            <div class="container">
+                <div class="container">
+                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/ABM5UJeILjo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>   
+                    <center><h4 style="color: white;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae magnam blanditiis sed distinctio aliquam amet aliquid repudiandae at nisi harum neque ratione, nesciunt voluptatem perferendis! Deserunt repudiandae blanditiis quod illum.</h4></center>
+                </div>
+            </div>
+            <h2 style="color: white;">Leccion 2</h2>
+            <div class="container">
+                <div class="container">
+                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/ABM5UJeILjo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <center><h4 style="color: white;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae magnam blanditiis sed distinctio aliquam amet aliquid repudiandae at nisi harum neque ratione, nesciunt voluptatem perferendis! Deserunt repudiandae blanditiis quod illum.</h4></center>
+                </div>
+            </div>
+            <h2 style="color: white;">Leccion 3</h2>
+        <div class="container">
+            <div class="container">
+                <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/ABM5UJeILjo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <center><h4 style="color: white;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae magnam blanditiis sed distinctio aliquam amet aliquid repudiandae at nisi harum neque ratione, nesciunt voluptatem perferendis! Deserunt repudiandae blanditiis quod illum.</h4></center>
+            </div>
+        </div>
+    </div>    
+</div>
 {% endblock %}
