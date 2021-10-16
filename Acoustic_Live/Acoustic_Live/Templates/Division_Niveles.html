@@ -1,71 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static '/css/style.css' %}">
-    <title>Acoustic Live | Mis Cursos</title>
-</head>
-<body>
-    <header class="header">
-        <div class="conteiner logo-nav-container">
-           <a href="3" class="logo">LOGO</a>
-            <nav class="navigation">
-                <ul>
-   
-                 <li><a style="color: white;"href="#">Mis Cursos</a></li>
-               
-                </ul>
-            </nav>
-        </div> 
-     </header>
-     <main class="main">
-        <div class="container">
+{% extends 'base.html' %}
 
-            <h1>
-                Elige por donde comenzar
-            </h1>
-            <p>
-                El artista no es nada sin el don, pero el don no es nada sin el trabajo
-            </p>
+ {% block title %}
+    Acoustic Live | Mis Cursos
+ {% endblock %}
 
+{% block content %}
+{% load static %}        
+    <main class="main">
+       
+        <div class="row">
+            <div class="col-1">
+                
+            </div>
+        <div class="col-11">    
+                <h1 style="color: white;">
+                    Elige por donde comenzar
+                </h1>
+                <p style="color: white;">
+                    El artista no es nada sin el don, pero el don no es nada sin el trabajo
+                </p>
+            </div>
         </div>
     </main>
-
+<!--Aqui comienza el cuerpo de la paginan, container-fluid hara que la imagen de fondo se vaya reduciendo a medidad
+de que el dispositivo cambie de tamaño-->
     <div class="container-fluid">
-        <link rel="stylesheet" href="{% static '/css/fondo.css' %}" >  
+        <link rel="stylesheet" href="{% static '/css/fondo.css' %}" > 
+<!--En este container iran las tres diviciones de nivel-->
         <div class="container">
+<!--La clase row es para que podamos hacer el responsive junto a los col, siendo col cada columna que contiene la
+imagen, el nombre del nivel y la descripcion. col-lg(grande), col-md(medio), y col-sm(pequeño) corresponden al tamaño
+que tomara el contenerdor cuando el dispositivo sea tamaño grande(computadora,tele), medio(tablets) y 
+pequeño(celulares). paddin-top sirve para hacer que las letras ocupen la parte de abajo del container-->            
             <div class="row">
-                <div class="col-4">
-                    <link rel="stylesheet">  
-                    <div class="container" id="principiante"  style="height: 100%;">
-                        <link rel="stylesheet" href="{% static '/css/imagen_principiante.css' %}" > 
-                        <center><h1>Nivel Primario</h1></center>
-                        <center><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil aperiam facere dolorem saepe quod tenetur dolorum soluta! Consequuntur suscipit nobis maiores. Velit totam natus, adipisci deleniti modi aliquid officia odit.</p></center>
-                        <center><button type="button" class="btn-btn-primary">Ver mas</button></center>
+                <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 60px;">  
+                    <div class="container" id="principiante"  style="height: 95%;">
+                        <link rel="stylesheet" href="{% static '/css/imagenes.css' %}" > 
+                        <div>
+                            <h1 style="padding-top: 160px;">Nivel Primario</h1>
+                            <p> El Nivel Principiante es especial para quienes quieren aprender a tocar guitarra desde CERO. Se compone de 7 videos para aprender a tocar guitarra acustica donde aprender&aacute;s:
+                             Partes de la Guitarra, Teoria Musical, Ejercicios de digitacion, Ejercicios de rasgueo y Lectura musical.</p>
+                        </div>
+<!--La clase btn-block sirve para que el boton quede mas alargado-->                        
                     </div>
+                    
+                    <form action="/Nivel_Principiante/" method="GET">                      
+                        <div class="row mx-3" ><input type="submit" value = "Ver Mas" class="btn btn-dark btn-block" >
+                        </div>
+                    </form>
                 </div>
-                <div class="col-4">
-                    <div class="container" style="background-color: white;">
-                        <center><h1>Nivel Medio</h1></center>
-                        <center><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae perferendis, alias hic dolor, atque id, amet ducimus qui aut dolorum earum excepturi architecto nemo vitae sint eum itaque culpa soluta.</p></center>
-                        <center><button type="button" class="btn-btn-primary">Ver mas</button></center>
+                <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 60px;">
+                    <div class="container" id="medio"  style="height: 95%;">
+                        <link rel="stylesheet" href="{% static '/css/imagenes.css' %}" >
+                        <div >
+                            <h1 style="padding-top: 160px;">Nivel Medio</h1>
+                            <p>En este curso de guitarra online podr&aacute;s adquirir nuevos conocimientos y mejorar los que ya tienes. En este nivel aprender&aacute;s:
+                            Introduccion a acordes, Tipos de acordes, Arpegios y aprender&aacute;s a tocar tus primeras canciones.</p>
+                        </div>
                     </div>
+
+                    <form action="/Nivel_Medio/" method="GET">                      
+                        <div class="row mx-3" ><input type="submit" value = "Ver Mas" class="btn btn-dark btn-block" ></div>
+                    </form>
+
                 </div>
-                <div class="col-4" >
-                    <div class="container" style="background-color:white;">
-                        <center><h1>Nivel Avanzado</h1></center>
-                        <center><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum debitis natus totam ut hic, nobis assumenda rerum itaque autem nemo! Animi voluptates perferendis nostrum quidem repellat, maxime natus necessitatibus pariatur!</p></center>
-                        <center><button type="button" class="btn-btn-primary">Ver mas</button></center>
+                <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 60px;">
+                    <div class="container" id="avanzado"  style="height: 95%;">
+                        <link rel="stylesheet" href="{% static '/css/imagenes.css' %}">
+                        <div>
+                            <h1 style="padding-top: 160px;">Nivel Avanzado</h1>
+                            <p>En este nivel aprender&aacute;s nuevas tecnicas con las habilidades que desarrollaste en los cursos previos, lo que ver&aacute;s ser&aacute;: tocar canciones con capo, cambiar la tonalidad en una cancion, escala mayor, circulos armonicos y finger style. </p></div>
+                        
                     </div>
+                    
+                    <form action="/Nivel_Avanzado/" method="GET">                      
+                        <div class="row mx-3" style="padding-bottom: 50px;" ><input type="submit" value = "Ver Mas" class="btn btn-dark btn-block" ></div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
-
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-</body>
-</html>
+    </div>    
+{% endblock %}

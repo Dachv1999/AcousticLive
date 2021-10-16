@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
 
  {% block title %}
-     Acoustic Live | Nivel Principiante
+     Acoustic Live | Nivel Avanzado
  {% endblock %}
 
 {% block content %}
 {% load static %}
-<body>
-    
-<main class="main">
-            
+<main class="main">         
     <div class="row">
         <div class="col-lg-1 col-md-2 col-sm-3">
             <form action="/Mis_Cursos/" method="GET">       
@@ -18,7 +15,7 @@
         </div>
     <div class="col-11 col-md-10 col-sm-7">    
             <h1 style = "color: white;">
-                Nivel Principiante
+                Nivel Avanzado
             </h1>
             <p style = "color: white;">
                 El artista no es nada sin el don, pero el don no es nada sin el trabajo
@@ -27,7 +24,7 @@
     </div>       
 </main>
 
-</div>
+
 <div class="container-fluid">
     <div class="container">  
         <link rel="stylesheet" href="{% static '/css/Fondo.css' %}" >  
@@ -60,5 +57,4 @@
         </div>
     </div>    
 </div>
-</body>
 {% endblock %}
