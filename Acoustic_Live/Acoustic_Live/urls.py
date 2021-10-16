@@ -15,12 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+<<<<<<< HEAD
 from Acoustic_Live.views import niveles, nivel_principiante, nivel_medio, nivel_avanzado
+=======
+from Acoustic_Live.views import niveles, nivel_principiante, hijo
+>>>>>>> Diego
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Mis_Cursos/', niveles),
     path('Nivel_Principiante/', nivel_principiante),
+<<<<<<< HEAD
     path('Nivel_Medio/', nivel_medio),
     path('Nivel_Avanzado/', nivel_avanzado),
+=======
+    path('hijo/', hijo),
+>>>>>>> Diego
 ]
