@@ -1,31 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static '/css/style.css' %}">
-    <title>Acoustic Live | Mis Cursos</title>
-</head>
-<body>
-<!--La parte superior de la pagina "header" donde se encuentra el logo y una barra de navegacion-->
-    <header class="header">
-        <div class="conteiner logo-nav-container">
-            <img src="{% static 'Imagenes/Logo.jpg' %}" width="80" height="30">           
-            <nav class="navigation">
-                <ul>
-   
-                 <li><a style="color: white;"href="#">Mis Cursos</a></li>
-                 <li><a style="color: white;"href="#">Tutoriales</a></li>
-               
-                </ul>
-            </nav>
-        </div> 
-     </header>
+{% extends 'base.html' %}
+
+ {% block title %}
+    Acoustic Live | Mis Cursos
+ {% endblock %}
+
 <!--En esta parte se encuntra el titulo de la pagina junto con la frase-->
-     <main class="main">
+{% block content %}
+{% load static %}    
+    <main class="main">
        
         <div class="row">
             <div class="col-1">
@@ -99,7 +81,4 @@ pequeño(celulares). paddin-top sirve para hacer que las letras ocupen la parte 
             </div>
         </div>
     </div>
-
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-</body>
-</html>
+{% endblock %}
