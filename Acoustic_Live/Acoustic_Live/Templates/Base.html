@@ -1,4 +1,4 @@
-<!--Este html es la base de todos, de aqui van a heredar el resto de las paginas-->
+
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
     <title>
-        <!--block title es para que en las otras paginas que hereden cambien el titulo-->
+
         {% block title %}    {% endblock %}
     </title>
 </head>
@@ -27,7 +27,7 @@
             </nav>
         </div> 
      </header>
-<!--En este bloque va todo lo que se encuentra en el body del resto de las paginas-->
+
      {% block content %}   {% endblock %}
 
      <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>

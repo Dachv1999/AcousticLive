@@ -4,7 +4,7 @@
     Acoustic Live | Mis Cursos
  {% endblock %}
 
-<!--En esta parte se encuntra el titulo de la pagina junto con la frase-->
+
 {% block content %}
 {% load static %}    
     <main class="main">
@@ -33,11 +33,11 @@ de que el dispositivo cambie de tamaño-->
 imagen, el nombre del nivel y la descripcion. col-lg(grande), col-md(medio), y col-sm(pequeño) corresponden al tamaño
 que tomara el contenerdor cuando el dispositivo sea tamaño grande(computadora,tele), medio(tablets) y 
 pequeño(celulares). paddin-top sirve para hacer que las letras ocupen la parte de abajo del container-->            
-            <div class="row" style="padding-top: 60px;">
-                <div class="col-lg-4 col-md-6 col-sm-12">  
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 60px;">  
                     <div class="container" id="principiante"  style="height: 95%;">
                         <link rel="stylesheet" href="{% static '/css/imagenes.css' %}" > 
-                        <div class="info">
+                        <div>
                             <h1 style="padding-top: 160px;">Nivel Primario</h1>
                             <p> El Nivel Principiante es especial para quienes quieren aprender a tocar guitarra desde CERO. Se compone de 7 videos para aprender a tocar guitarra acustica donde aprender&aacute;s:
                              Partes de la Guitarra, Teoria Musical, Ejercicios de digitacion, Ejercicios de rasgueo y Lectura musical.</p>
@@ -46,14 +46,14 @@ pequeño(celulares). paddin-top sirve para hacer que las letras ocupen la parte 
                     </div>
                     
                     <form action="/Nivel_Principiante/" method="GET">                      
-                        <div class="row mx-3" ><input type="submit" value = "Ver Mas" class="btn btn-dark btn-block" ></div>
+                        <div class="row mx-3" ><input type="submit" value = "Ver Mas" class="btn btn-dark btn-block" >
+                        </div>
                     </form>
-
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 60px;">
                     <div class="container" id="medio"  style="height: 95%;">
                         <link rel="stylesheet" href="{% static '/css/imagenes.css' %}" >
-                        <div class="info">
+                        <div >
                             <h1 style="padding-top: 160px;">Nivel Medio</h1>
                             <p>En este curso de guitarra online podr&aacute;s adquirir nuevos conocimientos y mejorar los que ya tienes. En este nivel aprender&aacute;s:
                             Introduccion a acordes, Tipos de acordes, Arpegios y aprender&aacute;s a tocar tus primeras canciones.</p>
@@ -65,10 +65,10 @@ pequeño(celulares). paddin-top sirve para hacer que las letras ocupen la parte 
                     </form>
 
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 60px;">
                     <div class="container" id="avanzado"  style="height: 95%;">
                         <link rel="stylesheet" href="{% static '/css/imagenes.css' %}">
-                        <div class="info">
+                        <div>
                             <h1 style="padding-top: 160px;">Nivel Avanzado</h1>
                             <p>En este nivel aprender&aacute;s nuevas tecnicas con las habilidades que desarrollaste en los cursos previos, lo que ver&aacute;s ser&aacute;: tocar canciones con capo, cambiar la tonalidad en una cancion, escala mayor, circulos armonicos y finger style. </p></div>
                         
