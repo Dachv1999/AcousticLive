@@ -21,3 +21,23 @@ def nivel_principiante(request): #Vista nivel principiante
     documento = plt.render(ctx)
     
     return HttpResponse(documento)
+
+def nivel_medio(request): #Vista nivel medio
+    doc_externo = open("Acoustic_Live/Templates/Vista_Nivel_Medio.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)
+
+def nivel_avanzado(request): #Vista nivel avanzado
+    doc_externo = open("Acoustic_Live/Templates/Vista_Nivel_Avanzado.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)

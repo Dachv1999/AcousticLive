@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
     <title>
-
         {% block title %}    {% endblock %}
     </title>
 </head>
@@ -19,15 +18,14 @@
             <img src="{% static 'Imagenes/Logo.jpg' %}" width="80" height="30">           
             <nav class="navigation">
                 <ul>
-   
-                 <li><a style="color: white;"href="#">Mis Cursos</a></li>
+                    
+                 <li><a style="color: white;"href="/Mis_Cursos/">Mis Cursos</a></li>
                  <li><a style="color: white;"href="#">Tutoriales</a></li>
                
                 </ul>
             </nav>
         </div> 
      </header>
-
      {% block content %}   {% endblock %}
 
      <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
