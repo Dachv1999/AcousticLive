@@ -54,7 +54,7 @@ ROOT_URLCONF = 'Acoustic_Live.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'Acoustic_Live/Templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -21,3 +21,13 @@ def nivel_principiante(request): #Vista nivel principiante
     documento = plt.render(ctx)
     
     return HttpResponse(documento)
+
+def hijo(request): #Vista nivel principiante
+    doc_externo = open("Acoustic_Live/Templates/hijo.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)

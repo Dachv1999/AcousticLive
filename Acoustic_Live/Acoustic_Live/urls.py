@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Acoustic_Live.views import niveles, nivel_principiante
+from Acoustic_Live.views import niveles, nivel_principiante, hijo
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Mis_Cursos/', niveles),
     path('Nivel_Principiante/', nivel_principiante),
+    path('hijo/', hijo),
 ]
