@@ -34,7 +34,8 @@
         <div class="row justify-content-center mt-5 pt-5">
             <div class="col-md-7">
                 <h2 class="display-6 text-center">Formulario</h2>
-                <form>
+
+                <form action="/Mis_Cursos/" method="get">
 
                     <div class="row form-group justify-content-center  pt-3">
                         <label for="nombre" class="col-form-label col-md-2 ">
@@ -84,16 +85,33 @@
                     <div class="row form-group  pt-3 ">
                         <div class="col col-md-2 "></div>
                         <div class="col col-md-8 text-end">
-                            <input type="submit" value = " Aceptar " class="btn btn-dark btn-block" >
-                            <input type="submit" value = "Cancelar" class="btn btn-dark btn-block" >
+    
+                              <p>
+
+                                <input type= "submit" value="Aceptar" class="btn btn-dark btn-block" >
+
+                                 <input type= "reset" value="Borrar" class="btn btn-dark btn-block" >
+                                
+                                <form action="/Mis_Cursos/" method="GET">                      
+                                    <input type="submit" value = "Cancelar" class="btn btn-dark btn-block" >
+                                    
+                                </form>
+
+                              </p>     
+                         
                         </div>
-                        
+                       
                         <div class="col col-md-2 "></div>
-                    </div>
+                   
                     <div class="row form-group text-center  pt-3">
                         <p >(*)Campos obligatorios</p>
                     </div>  
                 </form>
+
+              
+                                  
+
+                </div>
                 
             </div>
             
