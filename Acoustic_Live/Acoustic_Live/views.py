@@ -41,3 +41,13 @@ def nivel_avanzado(request): #Vista nivel avanzado
     documento = plt.render(ctx)
     
     return HttpResponse(documento)
+
+def formulario_nuevoVideo(request):
+    doc_externo = open("Acoustic_Live/Templates/formulario.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+    documento = plt.render(ctx)
+
+    return HttpResponse(documento)
