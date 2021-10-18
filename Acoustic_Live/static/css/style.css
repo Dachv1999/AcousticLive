@@ -17,149 +17,140 @@ h1 {
     color: white;
 }
 main{
-    background:  #343F4B;
+    background:  #1a1c1f;
     padding-top: 6rem;
     padding-bottom: 0.5rem;
    
 }
 
-.header{
-    background-color: #000000;
+
+*{
+    padding: 0;
+    margin: 0;
+    
+    
+    box-sizing: border-box;
+}
+
+nav{
+    background: #1d1b1b;
+    height: 80px;
     width: 100%;
-    height: 80px; 
+    
+}
+.enlace{
+    position: absolute;
+    /*padding: 20px 50px;*/
+}
+.logo{
+    height: 80px;
+    width: 100%;
+}
+nav ul{
+    /*float: inline-start;*/
+    width: 100%;
+    height: 100%;
+    margin-left:22%;
+    margin-right: 20%;
+    justify-content: flex-start;/**/
+
+}
+nav ul li{
+    text-align: center;/**/
+    display: inline-block;
+    list-style: none;
+    line-height: 80px;
+    margin: 12px 0px;
+}
+nav ul li a{
+    color: white;
+    font-size: 18px;
+    padding: 7px 13px;
+    border-radius:10px;
+    text-transform: uppercase;
+    text-decoration: none;
 }
 
-#btn-menu {
-    display: none;
+li a:hover{
+    cursor: pointer;
+    background-color: rgb(231, 238, 240);
 }
-
-.lista-barra-navegacion label{
-    /*display: none;*/
-    width: 42px;
-    height: 42px;
-    margin-right: 20px; /*margen  al lado derecho*/
+li a.active{
+    /*background: #56646e;*/
+    background: #1b9bff;*
+    /*transition: .5s;*/
 }
-.lista-barra-navegacion label:hover{
+nav label:hover{
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.3);
 }
-.nav{
-    width: 100%;
-    height: 100%;
-    display: flex;
+.checkbtn{
+    font-size: 40px;
+    color: #2fcdcd;
+    float: right;
+    margin-top: 20px;
+    /*line-height: 80px;*/
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+#check{
+    display: none;
 }
 
-.logo{
-    width: 18%;
-    height:80px; 
- 
-    justify-content:flex-start ;
-}
-
-
-.lista-barra-navegacion{
-    width: 60%;
-    height: 100%;
-    
-}
-
-.lista-barra-navegacion ul{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content:  flex-start;/*los botones al inicio empezanod de derecha*/
-    align-items: center;
-}
-
-.lista-barra-navegacion ul li:hover{
-    background-color: #494242;
-}
-.lista-barra-navegacion ul li{
-    list-style: none;
-    text-align: center;
-    flex-grow: 1; 
-    border-right: 1px solid #fff;
-}
-
-.lista-barra-navegacion ul li a{
-    text-decoration:none; 
-    color: white;
-    display: block;
-    /*padding: 0px 10px; creo que es para los botones*/
-}
-#btn-primero{
-    border-left: 1px solid #fff;
-}
-
-@media (max-width:768px){  
-    .nav{
-        display:flex;
-        justify-content: flex-start;
+@media (max-width: 1031px){
+    .enlace{
+        padding-left: 0px;
     }
-    .logo{
-        width: 30%;
-        height: 80px;
-
+    nav ul li a{
+        font-size: 15px;
     }
-    .lista-barra-navegacion{
-        background-color: #000000;
-        width: 100%;
+    nav ul{
+        
+        margin-left:19%;
+        
+    }
+}
+
+@media (max-width: 890px){
+    .checkbtn{
+        display: block;
     }
     
+    nav ul{
+        flex-direction: column;
+        position: fixed;
+
+        width:100%;
+        height: 250px;
+        background: #2c3e50;
+        top: 80px;
+        left: -100%;
+        text-align: left;
+        transition: all .5s;
+        border-radius: 1px;
+    }
+    nav ul{
+        margin-left: 0%;
+        margin-right: 0px;
+    }
+    nav ul li{
+        display: block;
+        margin: 10px 0;
+        line-height: 30px;
+
+    }
+    nav ul li a{
+        font-size: 20px;
+    }
+    li a:hover, li a.active{
+        background: none;
+        color: #2fcdcd;
+    }
+    #check:checked ~ ul{
+        left:0;
+    }
 }
-/*
-.logo{
-    padding: 0.5rem 1rem;
-}
-.header {
-    background-color: #1E2327;
-    padding: 1rem 0;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-}*/
-
-/*.header a {
-    color: white;
-    text-decoration: none;  
-}
-
-.barra-navegacion{
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
-}*/
-
-.navigation ul{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-
-}
-
-.navigation ul li {
-    display: inline-block;
-   
-}
-
-.navigation ul li a {
-    display: block;
-    padding: 0.5rem 1rem;
-    
-}
-
-.navigation ul li a:hover{
-    background: #343F4B;
-}
-
-.container-fluid{
-    padding: 1rem;
-    margin: 0 auto;
- 
-    
-}
-
 
 .info{
     padding-top: 70px;
