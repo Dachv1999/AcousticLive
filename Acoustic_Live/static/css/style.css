@@ -26,9 +26,7 @@ main{
 
 *{
     padding: 0;
-    margin: 0;
-    
-    
+    margin: 0;  
     box-sizing: border-box;
 }
 
@@ -36,7 +34,7 @@ nav{
     background: #1d1b1b;
     height: 80px;
     width: 100%;
-    
+    position: fixed;
 }
 .enlace{
     position: absolute;
@@ -73,6 +71,7 @@ nav ul li a{
 
 li a:hover{
     cursor: pointer;
+    color: #000;
     background-color: rgb(231, 238, 240);
 }
 li a.active{
