@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+ {% block title %}
+     Acoustic Live | Nivel Avanzado
+ {% endblock %}
+
+{% block content %}
+{% load static %}
+<main class="main">         
+    <div class="row">
+        <div class="col-lg-1 col-md-2 col-sm-3">
+            <form action="/Mis_Cursos/" method="GET">       
+                <input type="image" name="boton_back" style="margin-left: 20px;" src="{% static 'Imagenes/boton_atras.png' %}" alt="Volver atras" width="50" height="50">                
+            </form>
+        </div>
+    <div class="col-11 col-md-10 col-sm-7">    
+            <h1 style = "color: white;">
+                Nivel Avanzado
+            </h1>
+            <p style = "color: white;">
+                El artista no es nada sin el don, pero el don no es nada sin el trabajo
+            </p>
+        </div>
+    </div>       
+</main>
+
+
+<div class="container-fluid">
+    <div class="container">  
+        <link rel="stylesheet" href="{% static '/css/Fondo.css' %}" >  
+            <h1 style="color: white;">Cancion de capo</h1>
+            <div class="container">
+                <div class="container">
+                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/xk2hKCwBVgo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                   
+                     </div>   
+                    <center><h4 style="color: white;">Los guitarristas suelen gastar mucho dinero en equipos, pedales y efectos, sea por aburrimiento, la busqueda de un sonido o tono especial o bien porque seamos honesto, es divertido.
+                        Sin embargo, se deja de lado un accesorio de la guitarra, muy sencillo, practico, barato, divertido, efectivo y en especial muy inspirador a la hora de componer.</h4></center>
+                </div>
+            </div>
+            <h2 style="color: white;">Cambio de tonalidad en una canci&oacute;n </h2>
+            <div class="container">
+                <div class="container"> 
+                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/hWO9ctdCA60" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>             
+                    </div>
+                    <center><h4 style="color: white;">Durante el desarrollo de una cancion es posible realizar un cambio de tono o escala, a este recurso se le conoce como modulacion, por lo general se aplica cuando se cambia de seccion en una pieza musical o cuando tenemos una seccion que se repite varias veces, en este post tendremos los tipos de modulacion mas comunes y veremos como realizarlos.</h4></center>
+                </div>
+            </div>
+                 <h2 style="color: white;">Escala mayor</h2>
+            <div class="container">
+                <div class="container">
+                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Yw2awUfseZk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <center><h4 style="color: white;">La escala mayor es la que se forma de manera natural a partir de las siete notas musicales que todos conocemos: Do, Re, Mi, Fa, Sol, La y Si.
+                        Por si no lo sabías, fue un monje italiano llamado Guido d'Arezzo quien les puso el nombre en el siglo X a partir de un himno a San Juan Bautista. ¡Vamos a estudiarla!</h4></center>
+                </div>
+            </div>
+                 <h2 style="color: white;">Circulos armonicos</h2>
+            <div class="container">
+                <div class="container">
+                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/AZsUB7eBQtc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <center><h4 style="color: white;">Ahora que tienes una idea de cómo utilizar tanto notas como acordes, queda solo un tema por aprender. Estoy hablando de los circulos armonicos de acordes. Despues de todo, son quiza las combinaciones de acordes que con mas frecuencia utilizaras durante una cancion.
+                                Hay tres circulos: mayor, menor y armonico.</h4></center>
+                     </div>
+            </div>
+            <h2 style="color: white;">Finger Style</h2>
+        <div class="container">
+            <div class="container">
+                <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/lNO81fCqvE8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+                </div>
+                <center><h4 style="color: white;">El Fingerpicking, también llamado Fingerstyle, es una tecnica de tocar la guitarra, desarrollada por los musicos de blues y folk del llamado Viejo Sur de los Estados Unidos, concretamente de las comarcas montaniosas de Carolina del Norte, Carolina del Sur y Virginia Occidental, a partir de la decada de 1920.
+</h4></center>
+            </div>
+        </div>
+    </div>    
+</div>
+{% endblock %}

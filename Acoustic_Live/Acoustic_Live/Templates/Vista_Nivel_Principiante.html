@@ -1,76 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+
+ {% block title %}
+     Acoustic Live | Nivel Principiante
+ {% endblock %}
+
+{% block content %}
 {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acoustic Live | Nivel Principiante</title>
-
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static '/css/style.css' %}">
-</head>
 <body>
-    <header class="header">
-        <nav class="nav">  
-            <div class="logo">
-                <img src="{% static 'Imagenes/Logo.jpg' %}" width="100%" height="100%">           
-            </div>       
-            <input type="checkbox" id="btn-menu">
-                   
-            <div class="lista-barra-navegacion">
-                <ul>
-                    <li id="btn-primero"><a style="color: white;"href="#">Mis Cursos</a></li>
-                    <li><a style="color: white;"href="#">Tutoriales</a></li>
-                    <li><a style="color: rgb(230, 39, 39);"href="#">Tutoriales</a></li>
-                    <li><a style="color: white;"href="#">Tutoriales</a></li>
-                    <li><a style="color: white;"href="#">Tutoriales</a></li>
-                    <li><a style="color: white;"href="#">Tutoriales</a></li>
-                    
-                </ul>
-                
-            </div>
-            <label  for="btn-menu"><img src="{% static 'Imagenes/i.png' %}" style="margin-top: 10px" ></label>
-        </nav>
-    </header>
-    <main class="main">
-        <div class="container">
-
-            <h1>
+    
+<main class="main">
+            
+    <div class="row">
+        <div class="col-lg-1 col-md-2 col-sm-3">
+            <form action="/Mis_Cursos/" method="GET">       
+                <input type="image" name="boton_back" style="margin-left: 20px;" src="{% static 'Imagenes/boton_atras.png' %}" alt="Volver atras" width="50" height="50">                
+            </form>
+        </div>
+    <div class="col-11 col-md-10 col-sm-7">    
+            <h1 style = "color: white;">
                 Nivel Principiante
             </h1>
-            <p>
+            <p style = "color: white;">
                 El artista no es nada sin el don, pero el don no es nada sin el trabajo
             </p>
+        </div>
+    </div>       
+</main>
 
-        </div>
-    </main>
-    <!--<div class="container-fluid " style="background-color:#1E2327;">
-        <center style="color: white;">aqui ponen el encabezado </center>
-    </div>
-    <div class="container-fluid "style="background-color: #343F4B;">
-        <h1 style="color: white;">Nivel Principiante</h1> -->
-    </div>
-    <div class="container-fluid">
-        <div class="container">  
-            <link rel="stylesheet" href="{% static '/css/fondo.css' %}" >  
-                <h1 style="color: white;">Leccion 1</h1>
-                 <div>
-                     <center><iframe width="660" height="415" src="https://www.youtube.com/embed/ptc4Awb0UpU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>>
+</div>
+<div class="container-fluid">
+    <div class="container">  
+        <link rel="stylesheet" href="{% static '/css/Fondo.css' %}" >  
+            <h1 style="color: white;">Partes de la guitarra</h1>
+            <div class="container">
+                <div class="container">
+                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/RH0UsIsUuFE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                    </div>   
+                    <center><h4 style="color: white;">Independientemente del color de la guitarra, los dibujos que tenga, el material con el que este hecha o incluso si tiene forma de flecha todas ellas tienen una serie de caracteristicas fisicas comunes que precisamente las convierten en guitarras y no en cualquier otro instrumento musical;
+                                la guitarra acustica desde el punto del hardware tiene un menor numero de componentes que la guitarra electrica, no obstante, los fabricantes de guitarras afirman que hacer una buena guitarra electrica es mas complicado que hacer una guitarra electrica.
+                            </h4>
+                    </center>
                 </div>
-                <center><h4 style="color: white;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae magnam blanditiis sed distinctio aliquam amet aliquid repudiandae at nisi harum neque ratione, nesciunt voluptatem perferendis! Deserunt repudiandae blanditiis quod illum.</h4></center>>
-            <h2 style="color: white;">Leccion 2</h2>
-                <div>
-                    <center><iframe width="660" height="415" src="https://www.youtube.com/embed/ptc4Awb0UpU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>>
-               </div>
-                <center><h4 style="color: white;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae magnam blanditiis sed distinctio aliquam amet aliquid repudiandae at nisi harum neque ratione, nesciunt voluptatem perferendis! Deserunt repudiandae blanditiis quod illum.</h4></center>
-            <h2 style="color: white;">Leccion 3</h2>
-                <div>
-                    <center><iframe width="660" height="415" src="https://www.youtube.com/embed/ptc4Awb0UpU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
-               </div>
-                <center><h4 style="color: white;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae magnam blanditiis sed distinctio aliquam amet aliquid repudiandae at nisi harum neque ratione, nesciunt voluptatem perferendis! Deserunt repudiandae blanditiis quod illum.</h4></center>
+            </div>
+            <h2 style="color: white;">Lectura de tablaturas 1</h2>
+            <div class="container">
+                <div class="container">
+                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/ozms4bU2YfQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                    </div>
+                    <center><h4 style="color: white;">Saber leer tablaturas es una de las primeras cosas que se debe tener en cuenta cuando queremos hacer sonar nuestra guitarra. Esta herramienta nos facilitará la lectura de los sonidos que tendremos que producir cuando estamos aprendiendo a tocar la guitarra.
+                             </h4></center>
+                </div>
+            </div>
+            <h2 style="color: white;">-Lectura de tablaturas 2</h2>
+        <div class="container">
+            <div class="container">
+                <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Da_Ym1VvSH4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                </div>
+                <center><h4 style="color: white;">La tablatura es una representacion grafica de una guitarra. Es decir, la tablatura tiene 6 l&iacute;neas 
+                            horizontales que nos indica las 6 cuerdas de la guitarra. Siendo la primera linea de arriba la cuerda m&aacute;s 
+                            aguda y la ultima linea la cuerda  mas grave,Para saber como leer tablaturas de guitarra basta con recordar que la guitarra tiene trastes y estos se representan con un n&uacute;mero sobre la linea o cuerda que queramos. Asi indicaremos el traste que debemos pisar.
+                        </h4></center>
+            </div>
+               <h2 style="color: white;">Mis primeros Acordes</h2>
+            <div class="container">
+                <div class="container">
+                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/kdHMt6H4kDc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    <center><h4 style="color: white;">Estos acordes son para los alumnos y alumnas que con un rango de 
+                                edad menor a 12 y no llegan bien a tocar todas las cuerdas a la vez.
+                                Tambi&eacute;n sirven para un primer contacto con el mundo de los acordes al resto
+                                de alumnos.
+                                En esta secci&oacute;n hay pocos acordes ya que no todos se pueden simplificar
+                                tanto.
+                                Los acordes que vas a aprender son de dos tipos: mayores y menores.
+                            </h4></center>
+                </div>
+            </div>
+               <h2 style="color: white;">Ejercicios de rasgueo</h2>
+                <div class="container">
+                    <div class="container">
+                        <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/CVPLN1Pqkug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> </div>
+                        <center><h4 style="color: white;">El rasgueo es un concepto com&uacute;nmente asociado a la guitarra y consiste b&aacute;sicamente en el acto mediante el cual se provoca la vibraci&oacute;n de dos o m&aacute;s cuerdas simult&aacute;neamente con los dedos a la vez que se realiza una postura en el diapas&oacute;n o m&aacute;stil del instrumento con la finalidad de interpretar un acorde.
+                                 </h4></center>
+                </div>
+            </div>
+            <h2 style="color: white;">Ejercicios de punteo</h2>
+            <div class="container">
+                <div class="container">
+                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9HzowZU6_ew" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <center><h4 style="color: white;">Estos ejercicios de guitarra son progresivos y pueden servir como calentamiento para lo que est&eacute;   s practicando por tu cuenta o como complemento al curso de guitarra para principiantes.</h4></center>
+                </div>
+            </div>
+            <h2 style="color: white;">Mi primera cancion</h2>
+            <div class="container">
+                <div class="container">
+                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Bx4BhDWmwiI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <center><h4 style="color: white;">Escribir una canci&oacute;n requiere de distintas t&eacute;cnicas y m&eacute;todos de composici&oacute;n musical. Por ello, te mostramos algunas pautas y consejos para empezar a componer una canci&oacute;n.</h4></center>
+                </div>
+            </div>
+            
         </div>
-    </div>
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    </div>    
+</div>
 </body>
-</html>
+{% endblock %}
