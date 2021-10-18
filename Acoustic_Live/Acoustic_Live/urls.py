@@ -23,5 +23,5 @@ urlpatterns = [
     path('Nivel_Principiante/', nivel_principiante),
     path('Nivel_Medio/', nivel_medio),
     path('Nivel_Avanzado/', nivel_avanzado),
-    path('form/', formulario_nuevoVideo),
+    path('Formulario/', formulario_nuevoVideo),
 ]
