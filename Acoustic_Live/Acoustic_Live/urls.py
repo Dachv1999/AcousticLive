@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Acoustic_Live.views import niveles, nivel_principiante, nivel_medio, nivel_avanzado
+from Acoustic_Live.views import niveles, nivel_principiante, nivel_medio, nivel_avanzado,formulario_nuevoVideo
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +23,5 @@ urlpatterns = [
     path('Nivel_Principiante/', nivel_principiante),
     path('Nivel_Medio/', nivel_medio),
     path('Nivel_Avanzado/', nivel_avanzado),
+    path('form/', formulario_nuevoVideo),
 ]
