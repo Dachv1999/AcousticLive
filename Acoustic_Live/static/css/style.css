@@ -76,7 +76,7 @@ li a:hover{
 }
 li a.active{
     /*background: #56646e;*/
-    background: #1b9bff;*
+    background: #1b9bff;
     /*transition: .5s;*/
 }
 nav label:hover{
