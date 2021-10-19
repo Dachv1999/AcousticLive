@@ -12,13 +12,20 @@
             <div class="col-1">
                 
             </div>
-        <div class="col-11">    
+        <div class="col-9">    
                 <h1 style="color: white;">
                     Elige por donde comenzar
                 </h1>
                 <p style="color: white;">
                     El artista no es nada sin el don, pero el don no es nada sin el trabajo
                 </p>
+            </div>
+            <div class="col-2">
+                <form action="/Formulario/" method="GET">                      
+                    <input type="submit" style="margin-top: 25px;" value = "Registrar Leccion" class="btn btn-dark" >
+                    
+                </form>
+
             </div>
         </div>
     </main>
@@ -37,14 +44,14 @@ pequeño(celulares). paddin-top sirve para hacer que las letras ocupen la parte 
                     <div class="container" id="principiante"  style="height: 95%;">
                         <link rel="stylesheet" href="{% static '/css/imagenes.css' %}" > 
                         <div>
-                            <h1 style="padding-top: 160px;">Nivel Primario</h1>
+                            <h1 style="padding-top: 160px;">Nivel Principiante</h1>
                             <p> El Nivel Principiante es especial para quienes quieren aprender a tocar guitarra desde CERO. Se compone de 7 videos para aprender a tocar guitarra acustica donde aprender&aacute;s:
                              Partes de la Guitarra, Teoria Musical, Ejercicios de digitacion, Ejercicios de rasgueo y Lectura musical.</p>
                         </div>
 <!--La clase btn-block sirve para que el boton quede mas alargado-->                        
                     </div>
                     
-                    <form action="/Nivel_Principiante/" method="GET">                      
+                    <form action="/Profesores_Nivel_Principiante/" method="GET">                      
                         <div class="row mx-3" ><input type="submit" value = "Ver Mas" class="btn btn-dark btn-block" >
                         </div>
                     </form>
@@ -59,7 +66,7 @@ pequeño(celulares). paddin-top sirve para hacer que las letras ocupen la parte 
                         </div>
                     </div>
 
-                    <form action="/Nivel_Medio/" method="GET">                      
+                    <form action="/Profesores_Nivel_Medio/" method="GET">                      
                         <div class="row mx-3" ><input type="submit" value = "Ver Mas" class="btn btn-dark btn-block" ></div>
                     </form>
 
@@ -73,7 +80,7 @@ pequeño(celulares). paddin-top sirve para hacer que las letras ocupen la parte 
                         
                     </div>
                     
-                    <form action="/Nivel_Avanzado/" method="GET">                      
+                    <form action="/Profesores_Nivel_Avanzado/" method="GET">                      
                         <div class="row mx-3" style="padding-bottom: 50px;" ><input type="submit" value = "Ver Mas" class="btn btn-dark btn-block" ></div>
                     </form>
                 </div>
