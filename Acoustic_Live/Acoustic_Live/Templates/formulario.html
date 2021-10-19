@@ -18,7 +18,7 @@
             <nav class="navigation">
                 <ul>
                  <li><a style="color: white;"href="#">Mis Cursos</a></li>
-                 <li><a style="color: white;"href="#">Tutoriales</a></li>
+                 {% comment %} <li><a style="color: white;"href="#">Tutoriales</a></li> {% endcomment %}
                 </ul>
                 
             </nav>
@@ -84,7 +84,12 @@
                     <div class="row form-group  pt-3 ">
                         <div class="col col-md-2 "></div>
                         <div class="col col-md-8 text-end">
+                            
                             <input type="submit" value = " Aceptar " class="btn btn-dark btn-block" >
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>Ups!</strong> leccion subida con exito
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
                             <input type="submit" value = "Cancelar" class="btn btn-dark btn-block" >
                         </div>
                         
