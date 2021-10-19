@@ -7,8 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <!-- <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/style.css"> -->
+    <!-- <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css"> -->
     <title>Acoustic Live | Mis Cursos</title>
-</head>
 </head>
 <body>
     <!--La parte superior de la pagina "header" donde se encuentra el logo y una barra de navegacion-->
@@ -20,16 +22,15 @@
                  <li><a style="color: white;"href="#">Mis Cursos</a></li>
                  <li><a style="color: white;"href="#">Tutoriales</a></li>
                 </ul>
-                
+
             </nav>
         </div>                    
     </header>
-    
+
     <div class="container-fluid">
-        <link rel="stylesheet" href="{% static '/css/fondo.css' %}" > 
-        
+        <link rel="stylesheet" href="{% static '/css/fondo.css' %}" >
     </div>
-    
+
     <div class="container">
         <div class="row justify-content-center mt-5 pt-5">
             <div class="col-md-7">
@@ -44,7 +45,7 @@
                             <input type="text" name="nombre" value="" id="nombre" class="form-control">
                         </div>
                     </div>
-                    
+
                     <div class="row form-group justify-content-center  pt-3">
                         <label for="Descripcion" class="col-form-label col-md-2 ">
                             Descripcion*:
@@ -87,20 +88,45 @@
                             <input type="submit" value = " Aceptar " class="btn btn-dark btn-block" >
                             <input type="submit" value = "Cancelar" class="btn btn-dark btn-block" >
                         </div>
-                        
+
                         <div class="col col-md-2 "></div>
                     </div>
+                    <!-- <div>
+                        <button type="submit" class="btn btn-dark btn-block col-md-2">Subir</button>
+                        <p class="col-1"></p>
+                        <button type="submit" class="btn btn-dark btn-block col-md-2">Cancelar</button>
+                    </div> -->
                     <div class="row form-group text-center  pt-3">
                         <p >(*)Campos obligatorios</p>
-                    </div>  
-                </form>
-                
-            </div>
-            
-        </div>
-        
-    </div>
+                    </div>
 
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+                    <!-- <button type="submit" class="btn btn-dark btn-block mt-10">Subir</button> -->
+
+                </form>
+                <div class="row  fondo align-items-center " >
+                    <div class="col" style="border: 1px solid black;">1</div>
+                    <div class="col"style="border: 1px solid black;">2</div>
+                    <div class="col"style="border: 1px solid black;">3</div>
+                    <div class="col"style="border: 1px solid black;">4</div>
+                    <div class="col"style="border: 1px solid black;">5</div>
+                    <div class="col"style="border: 1px solid black;">6</div>
+                    <div class="col"style="border: 1px solid black;">7</div>
+                    <div class="col"style="border: 1px solid black;">8</div>
+                    <div class="col"style="border: 1px solid black;">9</div>
+                    <div class="col"style="border: 1px solid black;">10</div>
+                    <div class="col"style="border: 1px solid black;">11</div>
+                    <div class="col"style="border: 1px solid black;">12</div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <!-- <script src="../../static/bootstrap/js/bootstrap.bundle.js"></script> -->
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- <script src="./js/bootstrap.bundle.min.js"></script> -->
+    <!-- <script src="../../static/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 </body>
 </html>
