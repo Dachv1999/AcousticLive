@@ -1,106 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static '/css/style.css' %}">
-    <title>Acoustic Live | Mis Cursos</title>
-</head>
-</head>
-<body>
-    <!--La parte superior de la pagina "header" donde se encuentra el logo y una barra de navegacion-->
-    <header class="header">
-        <div class="conteiner logo-nav-container">
-           <a href="#" class="logo">LOGO</a>
-            <nav class="navigation">
-                <ul>
-                 <li><a style="color: white;"href="#">Mis Cursos</a></li>
-                 <li><a style="color: white;"href="#">Tutoriales</a></li>
-                </ul>
-                
-            </nav>
-        </div>                    
-    </header>
-    
-    <div class="container-fluid">
+{% extends 'base.html' %}
+
+ {% block title %}
+     Acoustic Live | Formulario
+ {% endblock %}
+
+{% block content %}
+{% load static %}  
+<div class="container-fluid">
         <link rel="stylesheet" href="{% static '/css/fondo.css' %}" > 
         
-    </div>
+
+        <div class="container">
+            <div class="row justify-content-center pt-5">
+                <div class="col-md-7">
+                    <h2 class="display-6 text-center" style="padding-top: 70px;">Formulario</h2>
+                    <form action="/Mis_Cursos/" method="GET">
     
-    <div class="container">
-        <div class="row justify-content-center mt-5 pt-5">
-            <div class="col-md-7">
-                <h2 class="display-6 text-center">Formulario</h2>
-                <form>
-
-                    <div class="row form-group justify-content-center  pt-3">
-                        <label for="nombre" class="col-form-label col-md-2 ">
-                            Nombre*:
-                        </label>
-                        <div class="col-md-6">
-                            <input type="text" name="nombre" value="" id="nombre" class="form-control">
-                        </div>
-                    </div>
-                    
-                    <div class="row form-group justify-content-center  pt-3">
-                        <label for="Descripcion" class="col-form-label col-md-2 ">
-                            Descripcion*:
-                        </label>
-                        <div class="col-md-6">
-                            <textarea name="descripcion" id="descripcion" class="form-control" cols="30" rows="4"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="row form-group justify-content-center  pt-3 ">
-                        <label for="Descripcion" class="col-form-label col-md-2">
-                            Nivel*:
-                        </label>
-                        <div class="col-md-6">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="drop" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Selecione el nivel
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="drop">
-                                    <li><a href="#" class="dropdown-item">Basico</a></li>
-                                    <li><a href="#" class="dropdown-item">Medio</a></li>
-                                    <li><a href="#" class="dropdown-item">Avanzado</a></li>
-                                </ul>
+                        <div class="row form-group justify-content-center  pt-3">
+                            <label for="nombre" class="col-form-label col-md-2 ">
+                                Nombre*:
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="nombre" value="" id="nombre" class="form-control">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row form-group justify-content-center  pt-3">
-                        <label for="Descripcion" class="col-form-label col-md-2 ">
-                            Link*:
-                        </label>
-                        <div class="col-md-6">
-                            <input type="text" name="link" value="" id="link" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="row form-group  pt-3 ">
-                        <div class="col col-md-2 "></div>
-                        <div class="col col-md-8 text-end">
-                            <input type="submit" value = " Aceptar " class="btn btn-dark btn-block" >
-                            <input type="submit" value = "Cancelar" class="btn btn-dark btn-block" >
-                        </div>
                         
-                        <div class="col col-md-2 "></div>
-                    </div>
-                    <div class="row form-group text-center  pt-3">
-                        <p >(*)Campos obligatorios</p>
-                    </div>  
-                </form>
-                
+                        <div class="row form-group justify-content-center  pt-3">
+                            <label for="Descripcion" class="col-form-label col-md-2 ">
+                                Descripcion*:
+                            </label>
+                            <div class="col-md-6">
+                                <textarea name="descripcion" id="descripcion" class="form-control" cols="30" rows="4"></textarea>
+                            </div>
+                        </div>
+    
+                        <div class="row form-group justify-content-center  pt-3 ">
+                            <label for="Descripcion" class="col-form-label col-md-2">
+                                Nivel*:
+                            </label>
+                            <div class="col-md-6">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="drop" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Seleccione el nivel
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="drop">
+                                        <li><a href="#" class="dropdown-item">Basico</a></li>
+                                        <li><a href="#" class="dropdown-item">Medio</a></li>
+                                        <li><a href="#" class="dropdown-item">Avanzado</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="row form-group justify-content-center  pt-3">
+                            <label for="Descripcion" class="col-form-label col-md-2 ">
+                                Link*:
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="link" value="" id="link" class="form-control">
+                            </div>
+                        </div>
+    
+                        <div class="row form-group  pt-3 ">
+                            
+                            <div class="col col-md-8 text-end">
+        
+                                  <p>
+    
+                                    <input type= "submit" value="Aceptar" class="btn btn-dark btn-block" >
+    
+                                     <input type= "reset" value="Borrar" class="btn btn-dark btn-block" >
+                                    
+                                    <form action="/Mis_Cursos/" method="GET">                      
+                                        <input type="submit" value = "Cancelar" class="btn btn-dark btn-block" >
+                                        
+                                    </form>
+    
+                                  </p>     
+                             
+                            </div>
+                           
+                           
+                       
+                            <div class="row form-group text-center  pt-3">
+                                <p >(*)Campos obligatorios</p>
+                            </div>  
+                        </div>  
+                    </form>
+    
+                  
+                                      
+    
+                </div>
+                    
             </div>
-            
+                
         </div>
         
     </div>
 
-    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
-</body>
-</html>
+    
+</div>
+
+{% endblock %}
