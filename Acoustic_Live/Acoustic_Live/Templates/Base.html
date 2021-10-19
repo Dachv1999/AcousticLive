@@ -8,26 +8,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <title>
         {% block title %}    {% endblock %}
     </title>
 </head>
 <body>
-    <header class="header" style="z-index: 2;">
-        <div class="conteiner logo-nav-container">
-            <img src="{% static 'Imagenes/Logo.jpg' %}" width="80" height="30">           
-            <nav class="navigation">
-                <ul>
-                    
-                 <li><a style="color: white;"href="/Mis_Cursos/">Mis Cursos</a></li>
-                 <li><a style="color: white;"href="#">Tutoriales</a></li>
-               
-                </ul>
-            </nav>
-        </div> 
-     </header>
+    <!-- cabezera ini-->
+    <header >
+        <nav style="z-index: 2;">
+            
+            <input type="checkbox" id="check">
+            
+            <a href="/Mis_Cursos/" class="enlace">
+                <img src="{% static 'Imagenes/Logo.jpg' %}" alt="" class="logo">
+            </a>
+            <ul>
+                <li><a class="active"  href="/Mis_Cursos/">Mis cursos</a></li>
+                <!--<li><a  href="#">tutoriales</a></li>
+                <li><a  href="#">bibliografia</a></li>
+                <li><a  href="#">eventos</a></li>
+                <li><a  href="#">Mi Perfil</a></li>-->
+            </ul>
+            <label for="check" class="checkbtn">
+                <i class="fas fa-bars"></i>
+            </label>
+        </nav>
+    </header>  
+    <!-- cabezera fin-->
      {% block content %}   {% endblock %}
-
-     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
