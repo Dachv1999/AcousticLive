@@ -10,93 +10,92 @@
         <link rel="stylesheet" href="{% static '/css/fondo.css' %}" > 
         
 
-    <div class="container">
-        <div class="row justify-content-center mt-5 pt-5">
-            <div class="col-md-7">
-                <h2 class="display-6 text-center">Formulario</h2>
-
-                <form action="/Mis_Cursos/" method="get">
-
-                    <div class="row form-group justify-content-center  pt-3">
-                        <label for="nombre" class="col-form-label col-md-2 ">
-                            Nombre*:
-                        </label>
-                        <div class="col-md-6">
-                            <input type="text" name="nombre" value="" id="nombre" class="form-control">
-                        </div>
-                    </div>
-                    
-                    <div class="row form-group justify-content-center  pt-3">
-                        <label for="Descripcion" class="col-form-label col-md-2 ">
-                            Descripcion*:
-                        </label>
-                        <div class="col-md-6">
-                            <textarea name="descripcion" id="descripcion" class="form-control" cols="30" rows="4"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="row form-group justify-content-center  pt-3 ">
-                        <label for="Descripcion" class="col-form-label col-md-2">
-                            Nivel*:
-                        </label>
-                        <div class="col-md-6">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="drop" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Seleccione el nivel
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="drop">
-                                    <li><a href="#" class="dropdown-item">Basico</a></li>
-                                    <li><a href="#" class="dropdown-item">Medio</a></li>
-                                    <li><a href="#" class="dropdown-item">Avanzado</a></li>
-                                </ul>
+        <div class="container">
+            <div class="row justify-content-center pt-5">
+                <div class="col-md-7">
+                    <h2 class="display-6 text-center" style="padding-top: 70px;">Formulario</h2>
+                    <form action="/Mis_Cursos/" method="GET">
+    
+                        <div class="row form-group justify-content-center  pt-3">
+                            <label for="nombre" class="col-form-label col-md-2 ">
+                                Nombre*:
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="nombre" value="" id="nombre" class="form-control">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row form-group justify-content-center  pt-3">
-                        <label for="Descripcion" class="col-form-label col-md-2 ">
-                            Link*:
-                        </label>
-                        <div class="col-md-6">
-                            <input type="text" name="link" value="" id="link" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="row form-group  pt-3 ">
                         
-                        <div class="col col-md-8 text-end">
-    
-                              <p>
-
-                                <input type= "submit" value="Aceptar" class="btn btn-dark btn-block" >
-
-                                 <input type= "reset" value="Borrar" class="btn btn-dark btn-block" >
-                                
-                                <form action="/Mis_Cursos/" method="GET">                      
-                                    <input type="submit" value = "Cancelar" class="btn btn-dark btn-block" >
-                                    
-                                </form>
-
-                              </p>     
-                         
+                        <div class="row form-group justify-content-center  pt-3">
+                            <label for="Descripcion" class="col-form-label col-md-2 ">
+                                Descripcion*:
+                            </label>
+                            <div class="col-md-6">
+                                <textarea name="descripcion" id="descripcion" class="form-control" cols="30" rows="4"></textarea>
+                            </div>
                         </div>
+    
+                        <div class="row form-group justify-content-center  pt-3 ">
+                            <label for="Descripcion" class="col-form-label col-md-2">
+                                Nivel*:
+                            </label>
+                            <div class="col-md-6">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="drop" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Seleccione el nivel
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="drop">
+                                        <li><a href="#" class="dropdown-item">Basico</a></li>
+                                        <li><a href="#" class="dropdown-item">Medio</a></li>
+                                        <li><a href="#" class="dropdown-item">Avanzado</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="row form-group justify-content-center  pt-3">
+                            <label for="Descripcion" class="col-form-label col-md-2 ">
+                                Link*:
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="link" value="" id="link" class="form-control">
+                            </div>
+                        </div>
+    
+                        <div class="row form-group  pt-3 ">
+                            
+                            <div class="col col-md-8 text-end">
+        
+                                  <p>
+    
+                                    <input type= "submit" value="Aceptar" class="btn btn-dark btn-block" >
+    
+                                     <input type= "reset" value="Borrar" class="btn btn-dark btn-block" >
+                                    
+                                    <form action="/Mis_Cursos/" method="GET">                      
+                                        <input type="submit" value = "Cancelar" class="btn btn-dark btn-block" >
+                                        
+                                    </form>
+    
+                                  </p>     
+                             
+                            </div>
+                           
+                           
                        
-                       
-                   
-                        <div class="row form-group text-center  pt-3">
-                            <p >(*)Campos obligatorios</p>
+                            <div class="row form-group text-center  pt-3">
+                                <p >(*)Campos obligatorios</p>
+                            </div>  
                         </div>  
-                    </div>  
-                </form>
-
-              
-                                  
-
+                    </form>
+    
+                  
+                                      
+    
+                </div>
+                    
             </div>
                 
         </div>
-            
-    </div>
         
 </div>
 {% endblock %}
