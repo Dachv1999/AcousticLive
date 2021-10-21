@@ -6,10 +6,8 @@
 
 {% block content %}
 {% load static %}       
-
-<body>
-    
-    <div class="container-fluid" style="background-color: #343F4B;padding-top: 6rem;padding-bottom: 0.5rem;">
+ 
+<div class="container-fluid" style="background-color: #343F4B; padding-top: 6rem;padding-bottom: 0.5rem;">
                 
         <div class="row">
             <div class="col-lg-1 col-md-2 col-sm-3">
@@ -17,16 +15,16 @@
                     <input type="image" name="boton_back" style="margin-left: 20px;" src="{% static 'Imagenes/boton_atras.png' %}" alt="Volver atras" width="50" height="50">                
                 </form>
             </div>
-        <div class="col-11 col-md-10 col-sm-7">    
+            <div class="col-11 col-md-10 col-sm-7">    
                 <h1 style = "color: white;">
-                    Nivel Principiante
+                    Nivel Principiante 
                 </h1>
                 <p style = "color: white;">
                     Selecciona un profesor
                 </p>
             </div>
         </div>       
-    </div>
+</div>
 
     <div class="container-fluid">
         <div class="container">  
@@ -34,6 +32,7 @@
         </div>
     </div>
 
+<div class="container">
     <div class="row">
         <div class="col-4" style="background-color: white;">
             <div class="container" style="background-color: yellowgreen;"><h1>Louis Tomlinson</h1></div>
@@ -45,6 +44,7 @@
             <div class="container" style="background-color: yellowgreen;"><h1>Louis Tomlinson</h1></div>
         </div>
     </div>
-</body>    
+</div>
+   
 
 {% endblock %}
