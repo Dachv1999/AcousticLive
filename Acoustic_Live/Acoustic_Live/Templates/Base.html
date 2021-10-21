@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 {% load static %}
 <head>
     <meta charset="UTF-8">
@@ -16,6 +16,7 @@
 <body>
     <!-- cabezera ini-->
     <header >
+        
         <nav style="z-index: 2;">
             
             <input type="checkbox" id="check">
@@ -24,8 +25,8 @@
                 <img src="{% static 'Imagenes/Logo.jpg' %}" alt="" class="logo">
             </a>
             <ul>
-                <!--<li><a class="active"  href="/Mis_Cursos/">Mis cursos</a></li>
-                <li><a  href="#">tutoriales</a></li>
+                <li><a class="active"  href="/Mis_Cursos/">Mis Cursos</a></li>
+                <!--<li><a  href="#">tutoriales</a></li>
                 <li><a  href="#">bibliografia</a></li>
                 <li><a  href="#">eventos</a></li>
                 <li><a  href="#">Mi Perfil</a></li>-->
@@ -34,11 +35,10 @@
                 <i class="fas fa-bars"></i>
             </label>
         </nav>
+      
     </header> 
-    
     <!-- cabezera fin-->
      {% block content %}   {% endblock %}
-
-     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
