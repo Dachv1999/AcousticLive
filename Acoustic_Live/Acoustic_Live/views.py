@@ -53,18 +53,17 @@ def profesoresNP(request): #Vista profesoresNP
 
     ctx = Context()
     documento = plt.render(ctx)
-    
+
     return HttpResponse(documento)
 
 def profesoresNM(request): #Vista profesoresNM
     doc_externo = open("Acoustic_Live/Templates/Vista_Profesores_NM.html")
-    
     plt = Template(doc_externo.read())
     doc_externo.close()
 
     ctx = Context()
     documento = plt.render(ctx)
-    
+
     return HttpResponse(documento)
 
 def profesoresNA(request): #Vista profesoresNA
@@ -74,7 +73,7 @@ def profesoresNA(request): #Vista profesoresNA
 
     ctx = Context()
     documento = plt.render(ctx)
-    
+
     return HttpResponse(documento)
 
 def envio_formulario(request):

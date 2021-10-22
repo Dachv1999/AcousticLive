@@ -10,16 +10,16 @@
             
         <div class="row">
             <div class="col-lg-1 col-md-2 col-sm-3">
-                <form action="/Mis_Cursos/" method="GET">       
+                <form action="/Profesores_Nivel_Medio/" method="GET">       
                     <input type="image" name="boton_back" style="margin-left: 20px;" src="{% static 'Imagenes/boton_atras.png' %}" alt="Volver atras" width="50" height="50">                
                 </form>
             </div>
         <div class="col-11 col-md-10 col-sm-7">    
                 <h1 style = "color: white;">
-                    Nivel Medio
+                    {{ profesor.nombre_profesor }}
                 </h1>
                 <p style = "color: white;">
-                    El artista no es nada sin el don, pero el don no es nada sin el trabajo
+                    Nivel Medio
                 </p>
             </div>
         </div>       
@@ -28,64 +28,26 @@
 
     </div>
     <div class="container-fluid">
+        <link rel="stylesheet" href="{% static '/css/Fondo.css' %}" >  
         <div class="container">  
-            <link rel="stylesheet" href="{% static '/css/Fondo.css' %}" >  
-                <h1 style="color: white;">Introducci&oacute;n acordes de guitarra</h1>
-                <div class="container">
+ 
+                
+            {% for leccion in lecciones %} 
+
+                <h1 style="color: white;">{{ leccion.nombre_leccion }}</h1>
+                <div class="row">
                     <div class="container">
                         <div class="ratio" style="--bs-aspect-ratio: 50%;">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/KKJWoXyIw68" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                     
-                        </div>   
-                        <center><h4 style="color: white;">Tanto si acabas de empezar a tocar la guitarra y ya tocas los acordes b&aacute;sicos, como si llevas años de estudio, siempre puedes aprender acordes nuevos para tocar tus temas favoritos o componer los tuyos. Y es que las posibilidades del instrumento te permiten tocar infinidad de acordes, de distintos tipos (acordes de s&eacute;ptima, acordes disminuidos, acordes con extensiones...) y en diferentes partes del m&aacute;stil.</h4></center>
+                            <iframe width="560" height="315" src="{{ leccion.link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                    
+                        </div> 
+                            <div class="container text-left">  
+                                <p style="color: white;"> {{ leccion.descripcion }} </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            <h2 style="color: white;">Acordes mayores</h2>
-            <div class="container">
-                <div class="container">
-                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/yX-ROpmd_Ts" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>     
-                </div>
-                    <center><h4 style="color: white;">Los acordes mayores en la guitarra son, junto con los acordes menores, el tipo de acordes m&acute;s b&aacute;sicos y m&aacute;s faciles de tocar. Estos acordes son acordes triadas, dado que se forman con tres notas.
-                                Los acordes mayores se forman con la nota fundamental, la tercera mayor y la quinta justa.
-                                Una tercera mayor con respecto a la nota fundamental equivale a una distancia de dos tonos.
-                                Una quinta justa con respecto a la nota fundamental equivale a una distancia de tres tonos y medio. La distancia entre la tercera mayor y la quinta justa es de un tono y medio.</h4></center>
-                </div>
-            </div>
-            <h2 style="color: white;">Acordes menores</h2>
-            <div class="container">
-                <div class="container">
-                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/-6Uz905qRTQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                    </div>
-                    <center><h4 style="color: white;">Los acordes menores en la guitarra son muy similares a los acordes mayores. En este articulo describimos como construir estos acordes y como tocarlos en el piano.
-                                Un acorde menor se forma de un modo muy similar a un acorde mayor. Estos dos tipos de acordes son acordes triadas porque contienen tres notas. La unica diferencia entre un acorde menor y un acorde mayor está en la segunda nota del acorde: los acordes mayores utilizan una tercera mayor mientras que los acordes menores utilizan una tercera menor.</h4></center>
-                </div>
-            </div>
-            <h2 style="color: white;">Acordes sostenidos</h2>
-            <div class="container">
-                <div class="container">
-                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/9uuEzf1iSBc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                    </div>
-                    <center><h4 style="color: white;">Alguna vez te habras preguntado como se tocan los acordes sostenidos en guitarra, aquellos acordes que llevan un simbolo que recuerda a la almohadilla del telefono o al hashtag de las redes sociales (#). En esta entrada hablaremos de estos acordes y de como construirlos a partir de otros acordes.</h4></center>
-                </div>
-            </div>
-            <h2 style="color: white;">Arpegios</h2>
-            <div class="container">
-                <div class="container">
-                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/ZgZOzec7amI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                    </div>
-                    <center><h4 style="color: white;">Este segundo arpegio, dentro de la categoria de arpegios f&aacute;ciles, consta de un patr&oacute;n similar al anterior con la diferencia de un solo dedo. Solo tenemos que añadir otro dedo indice al final y regresar a la cuerda </h4></center>
-                </div>
-            </div>
-            <h2 style="color: white;">Tocando una cancion</h2>
-            <div class="container">
-                <div class="container">
-                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/cBYTo0euETw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>         
-                </div>
-                        <center><h4 style="color: white;">En la entrada de hoy veremos 40 canciones faciles para tocar en guitarra española o acustica.
-                                    Adem&aacute;s, esta pensada para que puedas ver los acordes y escuchar la versi&oacute;n de algunas de las personas que las tocan en acustico. Por otra parte, si no conoces alguna canci&oacute;n tambi&eacute;n tienes un enlace a la canci&oacute;n original.</h4></center>
-                </div>
-            </div>
+
+            {% endfor %}
+
         </div>    
     </div>
 {% endblock %}
