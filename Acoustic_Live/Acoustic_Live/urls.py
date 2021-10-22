@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Acoustic_Live.views import niveles, nivel_medio, nivel_avanzado,formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA
+from Acoustic_Live.views import niveles, nivel_medio, nivel_avanzado,formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA, envio_formulario
 from gestionBD.views import listar
 
 urlpatterns = [
@@ -28,4 +28,5 @@ urlpatterns = [
     path('Profesores_Nivel_Principiante/', profesoresNP),
     path('Profesores_Nivel_Medio/', profesoresNM),
     path('Profesores_Nivel_Avanzado/', profesoresNA),
+    path('Envio/', envio_formulario, name="Envio"),
 ]

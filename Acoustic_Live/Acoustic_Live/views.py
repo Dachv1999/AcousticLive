@@ -1,5 +1,8 @@
 from django.http import HttpResponse
 from django.template import Template, Context
+from django.shortcuts import render
+from gestionBD.models import Leccion, Profesor
+
 
 def niveles(request): #Vista niveles
     doc_externo = open("Acoustic_Live/Templates/Division_Niveles.html")
@@ -73,3 +76,13 @@ def profesoresNA(request): #Vista profesoresNA
     documento = plt.render(ctx)
     
     return HttpResponse(documento)
+
+def envio_formulario(request):
+    nombre=request.POST.get('nombre','')
+    descripcion= request.POST.get('descripcion','')
+    link= request.POST.get('link','')
+  
+    lecc=Leccion(nombre_leccion = nombre, nivel = 3 ,link=link, descripcion = descripcion, idprofesor_id =1 )
+    lecc.save()
+
+    return render (request, "prueba_envio_formulario.html",{"nombre":nombre, "descripcion": descripcion, "link":link} )
