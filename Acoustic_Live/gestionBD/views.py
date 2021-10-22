@@ -3,24 +3,15 @@ from .models import Leccion, Profesor
 
 # Create your views here.
 
-<<<<<<< HEAD
-def listar(request):
-
-    lecciones = Leccion.objects.filter(nivel=1, idprofesor=1)
-=======
 def lista_principiante(request, id_profesor):
     lecciones = Leccion.objects.filter(nivel=1, idprofesor_id=id_profesor)
     profesores = Profesor.objects.filter(id=id_profesor)
->>>>>>> Diego
 
     contexto = {
         'profesores' : profesores,
         'lecciones' : lecciones
     }
     
-<<<<<<< HEAD
-    return render(request, 'Vista_Nivel_Principiante.html', contexto)
-=======
     return render(request,'Vista_Nivel_Principiante.html', contexto)
 
 def lista_medio(request, id_profesor):
@@ -44,4 +35,3 @@ def lista_avanzado(request, id_profesor):
         'lecciones' : lecciones
     }
     return render(request,'Vista_Nivel_Avanzado.html', contexto)
->>>>>>> Diego
