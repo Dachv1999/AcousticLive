@@ -7,7 +7,7 @@
 {% block content %}
 {% load static %}       
  
-<div class="container-fluid" style="background-color: #343F4B; padding-top: 6rem;padding-bottom: 0.5rem;">
+<div class="container-fluid" style="background-color: #343F4B; padding-top: 6rem;">
                 
         <div class="row">
             <div class="col-lg-1 col-md-2 col-sm-3">
@@ -34,14 +34,32 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-4" style="background-color: white;">
-            <div class="container" style="background-color: yellowgreen;"><h1>Louis Tomlinson</h1></div>
+        <div class="col-lg-4 col-md-6 col-sm-12" style="padding-top: 50px;">
+            <center><form action="/Mis_Cursos/" method="GET">       
+                <input type="image" name="avatarMario" src="{% static 'Imagenes/MarioFreiria.jpg' %}" alt="Avatar Mario"  width="200" height="200" style="border-radius: 100%;">              
+            </form>
+            <div class="container" style="padding-top: 25px;"><h2>Mario Freiria</h2></div>
+            <p style="margin-left: 40px; margin-right: 40px;">Hola! Soy Mario Freiria tu nuevo profesor de guitarra, conmigo aprender&aacute;s las partes de la guitarra, leer tablas, y haremos ejercicios de rasgueo. Comencemos ya!</p>
+            </center>
         </div>
-        <div class="col-4" style="background-color: tomato;">
-            <div class="container" style="background-color: yellowgreen;"><h1>Louis Tomlinson</h1></div>
+        <div class="col-lg-4 col-md-6 col-sm-12" style="padding-top: 50px;">
+            <center><form action="/Mis_Cursos/" method="GET">       
+                <input type="image" name="avatarChristian" src="{% static 'Imagenes/ChristianVib.jpg' %}" alt="Avatar ChristianVib"  width="200" height="200" style="border-radius: 100%;">              
+            </form>
+            <div class="container" style="padding-top: 25px;"><h2>Christian Vib</h2></div>
+            <p style="margin-left: 40px; margin-right: 40px;">Que tal! Mi nombre es Christian Vib y me dedico a ensenar guitarra ya hace mas de 10 anos, 
+                contenido de todos los generos y tipos de canciones, desde las mas conocidas hasta las mas bizarras,  mi objetivo es que 
+                aprendas guitarra de manera rapida y divertida, ¡Disfruta del curso!</p>
+            </center>
         </div>
-        <div class="col-4" style="background-color: violet;">
-            <div class="container" style="background-color: yellowgreen;"><h1>Louis Tomlinson</h1></div>
+        <div class="col-lg-4 col-md-6 col-sm-12" style="padding-top: 50px;">
+            <center><form action="/Mis_Cursos/" method="GET">       
+                <input type="image" name="avatarAaron" src="{% static 'Imagenes/AaronSilva.jpg' %}" alt="Avatar Aaron"  width="200" height="200" style="border-radius: 100%;">              
+            </form>
+            <div class="container" style="padding-top: 25px;"><h2>Aaron Silva</h2></div>
+            <p style="margin-left: 40px; margin-right: 40px;">Soy Aaron Silva y quiero darte los recursos que toda persona necesita para empezar con el maravilloso mundo de la guitarra, 
+                veremos los diferentes acordes y arpegios... Acompaname en este viaje</p>
+            </center>
         </div>
     </div>
 </div>
