@@ -13,6 +13,6 @@ class Profesor(models.Model):
 class Leccion(models.Model):
     nombre_leccion = models.CharField(max_length=100)
     nivel =models.IntegerField()
-    link = models.TextField()
+    link = models.CharField(max_length=600)
     descripcion = models.TextField()
     idprofesor = models.ForeignKey(Profesor,on_delete=CASCADE)
