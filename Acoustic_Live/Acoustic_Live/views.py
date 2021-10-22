@@ -78,11 +78,19 @@ def profesoresNA(request): #Vista profesoresNA
     return HttpResponse(documento)
 
 def envio_formulario(request):
+
     nombre=request.POST.get('nombre','')
     descripcion= request.POST.get('descripcion','')
     link= request.POST.get('link','')
-  
-    lecc=Leccion(nombre_leccion = nombre, nivel = 3 ,link=link, descripcion = descripcion, idprofesor_id =1 )
-    lecc.save()
+    nivel= request.POST.get('nivel','')
 
-    return render (request, "prueba_envio_formulario.html",{"nombre":nombre, "descripcion": descripcion, "link":link} )
+    ventana_a_mostrar=" "
+    
+    if (len(nombre) == 0 or len(descripcion) == 0 or len(link) == 0 or len(nivel) == 0 ):
+         ventana_a_mostrar="ventana_error.html"   #
+    else:
+        ventana_a_mostrar="ventana_correcta.html"
+        lecc=Leccion(nombre_leccion = nombre, nivel=nivel,link=link, descripcion = descripcion, idprofesor_id =1 )
+        lecc.save()
+ 
+    return render (request, ventana_a_mostrar)

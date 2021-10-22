@@ -14,6 +14,7 @@
             <div class="row justify-content-center pt-5">
                 <div class="col-md-7">
                     <h2 class="display-6 text-center" style="padding-top: 70px;">Formulario</h2>
+
                     <form action="{% url 'Envio' %}" method="post">
                         {% csrf_token %}
                         <div class="row form-group justify-content-center  pt-3">
@@ -41,11 +42,10 @@
                             <div class="col-md-6">
                                 <div class="row form-group">
                                     <div class="col col-md-7 col-sm-7 ">
-                                        <select class="btn-secondary form-control">
-                                            <option selected class="text-center " >Selecionar el nivel</option>
-                                            <option >Principiante</option>
-                                            <option >Medio</option>
-                                            <option >Avanzado</option>
+                                        <select class="btn-secondary form-control" name="nivel" >
+                                            <option selected class="text-left " value="1" >Principiante</option>
+                                            <option value="2">Medio</option>
+                                            <option value="3">Avanzado</option>
                                         </select>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
         
                                   <p>
     
-                                    <input type= "submit" value="Aceptar" class="btn btn-dark btn-block mt-1" >
+                                    <input type= "submit" value="Aceptar" class="btn btn-dark btn-block mt-1" data-bs-toggle="modal" data-bs-target="#error">
     
                                     <input type= "reset" value="Borrar  " class="btn btn-dark btn-block mt-1" >
                                     
