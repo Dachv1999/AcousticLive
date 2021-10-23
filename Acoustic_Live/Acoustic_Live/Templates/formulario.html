@@ -9,13 +9,36 @@
 <div class="container-fluid">
         <link rel="stylesheet" href="{% static '/css/fondo.css' %}" > 
         
-
         <div class="container">
+           
             <div class="row justify-content-center pt-5">
                 <div class="col-md-7">
                     <h2 class="display-6 text-center" style="padding-top: 70px;">Formulario</h2>
-
-                    <form action="{% url 'Envio' %}" method="post">
+                    
+                    {% if "videoExiste" in request.GET %}
+                    <div class="alert alert-danger" role="alert">
+                        Error* El video que ingreso ya existe
+                    </div>
+                    {%endif%}
+                    {% if  "VideoGuardado" in request.GET %}
+                    <p>El video se agrego correctamente</p>
+                    {%endif%}
+                    {% if  "Alguno_Esta_Vacio" in request.GET %}
+                    <p>Porfavor revise los campos</p>
+                    {%endif%}
+                    
+                    {% if  "error_nombre_muy_grande" in request.GET %}
+                    <p>El nombre es muy grande</p>
+                    {%endif%}
+                    {% if  "error_descripcion_muy_grande" in request.GET %}
+                    <p>la descripcion es muy grande</p>
+                    {%endif%}
+                    {% if  "error_descripcion_muy_pequeña" in request.GET %}
+                    <p>la descripcion es muy pequeña</p>
+                    {%endif%}
+                    
+                    
+                    <form action="" method="POST"> 
                         {% csrf_token %}
                         <div class="row form-group justify-content-center  pt-3">
                             <label for="nombre" class="col-form-label col-md-2 ">
@@ -67,7 +90,7 @@
         
                                   <p>
     
-                                    <input type= "submit" value="Aceptar" class="btn btn-dark btn-block mt-1" data-bs-toggle="modal" data-bs-target="#error">
+                                    <input type= "submit" value="Aceptar" class="btn btn-dark btn-block mt-1" >
     
                                     <input type= "reset" value="Borrar  " class="btn btn-dark btn-block mt-1" >
                                     
@@ -99,5 +122,6 @@
 
     
 </div>
-
+<!-- <p style="color: white;">{{request.POST}}</p>
+<p style="color: white;">esta es la respuesta</p> -->
 {% endblock %}
