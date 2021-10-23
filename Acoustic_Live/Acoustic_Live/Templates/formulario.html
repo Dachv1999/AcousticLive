@@ -8,7 +8,8 @@
 {% load static %}  
 <div class="container-fluid">
         <link rel="stylesheet" href="{% static '/css/fondo.css' %}" > 
-        
+
+            </script>
         <div class="container">
            
             <div class="row justify-content-center pt-5">
@@ -16,25 +17,50 @@
                     <h2 class="display-6 text-center" style="padding-top: 70px;">Formulario</h2>
                     
                     {% if "videoExiste" in request.GET %}
-                    <div class="alert alert-danger" role="alert">
-                        Error* El video que ingreso ya existe
+                    <div class="ventana">
+                        <div class="alert alert-danger" role="alert">
+                         El video que ingreso ya existe
+                        </div>
                     </div>
                     {%endif%}
+
                     {% if  "VideoGuardado" in request.GET %}
-                    <p>El video se agrego correctamente</p>
+                    <div class="ventana">
+                        <div class="alert alert-success" role="alert">
+                            Video guardado correctamente
+                        </div>
+                    </div>
                     {%endif%}
+
                     {% if  "Alguno_Esta_Vacio" in request.GET %}
-                    <p>Porfavor revise los campos</p>
+                    <div class="ventana">
+                        <div class="alert alert-danger" role="alert">
+                            Porfavor revise los campos
+                        </div>
+                    </div>
+                   
                     {%endif%}
                     
                     {% if  "error_nombre_muy_grande" in request.GET %}
-                    <p>El nombre es muy grande</p>
+                    <div class="ventana">
+                        <div class="alert alert-dark" role="alert">
+                            El nombre es muy grande
+                        </div>
+                    </div>
                     {%endif%}
                     {% if  "error_descripcion_muy_grande" in request.GET %}
-                    <p>la descripcion es muy grande</p>
+                    <div class="ventana">
+                        <div class="alert alert-dark" role="alert">
+                            La descripcion es muy grande
+                        </div>
+                    </div>
                     {%endif%}
                     {% if  "error_descripcion_muy_pequeña" in request.GET %}
-                    <p>la descripcion es muy pequeña</p>
+                    <div class="ventana">
+                        <div class="alert alert-dark" role="alert">
+                            La descripcion es muy pequeña
+                        </div>
+                    </div>
                     {%endif%}
                     
                     
@@ -90,14 +116,11 @@
         
                                   <p>
     
-                                    <input type= "submit" value="Aceptar" class="btn btn-dark btn-block mt-1" >
+                                    <input type= "submit" value="Aceptar" class="btn btn-dark btn-block mt-1" data-bs-toggle="modal" data-bs-target="#ventana" >
     
                                     <input type= "reset" value="Borrar  " class="btn btn-dark btn-block mt-1" >
                                     
-                                    <form action="/Mis_Cursos/" method="GET">                      
-                                        <input type="submit" value = "Cancelar" class="btn btn-dark btn-block mt-1" >
-                                        
-                                    </form>
+ 
     
                                   </p>     
                              
@@ -105,14 +128,17 @@
                            
                            
                        
-                            <div class="row form-group text-center  pt-3">
-                                <p >(*)Campos obligatorios</p>
-                            </div>  
+
                         </div>  
                     </form>
-    
-                  
-                                      
+                    <div class="container">
+                        <form action="/Mis_Cursos/" method="GET">                      
+                            <input type="submit" value = "Cancelar" class="btn btn-dark btn-block" style="margin-left: 167px;" >
+                        </form>
+                    </div>
+                    <div class="row form-group text-center  pt-3">
+                        <p >(*)Campos obligatorios</p>
+                    </div>              
     
                 </div>
                     

@@ -47,3 +47,5 @@ def lista_avanzado(request, id_profesor):
 
     }
     return render(request,'Vista_Universal_Lecciones.html', contexto)
+
+
