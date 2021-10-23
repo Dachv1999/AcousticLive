@@ -89,7 +89,7 @@ def envio_formulario(request):
          ventana_a_mostrar="ventana_error.html"   #
     else:
         ventana_a_mostrar="ventana_correcta.html"
-        lecc=Leccion(nombre_leccion = nombre, nivel=nivel,link=link, descripcion = descripcion, idprofesor_id =1 )
-        lecc.save()
+        #lecc=Leccion(nombre_leccion = nombre, nivel=nivel,link=link, descripcion = descripcion, idprofesor_id =1 )
+        #lecc.save()
  
     return render (request, ventana_a_mostrar)
