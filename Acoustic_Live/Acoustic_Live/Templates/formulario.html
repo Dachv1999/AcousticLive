@@ -18,6 +18,7 @@
                     {% if "videoExiste" in request.GET %}
                     <div class="alert alert-danger" role="alert">
                         Error* El video que ingreso ya existe
+                        
                     </div>
                     {%endif%}
                     {% if  "VideoGuardado" in request.GET %}
@@ -33,8 +34,12 @@
                     {% if  "error_descripcion_muy_grande" in request.GET %}
                     <p>la descripcion es muy grande</p>
                     {%endif%}
-                    {% if  "error_descripcion_muy_pequeña" in request.GET %}
-                    <p>la descripcion es muy pequeña</p>
+                    {% if  nombre %}
+                    <div class="liilo">
+                        <div class="alert alert-danger" role="alert">
+                           <p> la letra {{nombre}} se repitio</p>
+                        </div>
+                    </div>
                     {%endif%}
                     
                     
@@ -106,7 +111,8 @@
                            
                        
                             <div class="row form-group text-center  pt-3">
-                                <p >(*)Campos obligatorios</p>
+                                <p >(*)Campos obligatorios </p>
+                                <p>{{nombre}}</p>
                             </div>  
                         </div>  
                     </form>
