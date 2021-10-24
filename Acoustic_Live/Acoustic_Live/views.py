@@ -93,6 +93,11 @@ def formulario_nuevoVideo(request):
         link= request.POST.get('link','')
         niveles= request.POST.get('nivel','')
 
+        nombre1 = nombre.strip()
+        descripcion1 = descripcion.strip()
+        link1 = link.strip()
+        
+
         lecciones = Leccion.objects.filter(nivel=niveles, idprofesor_id=1)
         nombre1 = nombre.strip()
         descripcion1 = descripcion.strip()
@@ -146,7 +151,7 @@ def formulario_nuevoVideo(request):
             hayVideo=False
             for leccion in lecciones:
                 if hayVideo==False:
-                    if leccion.link==link:
+                    if leccion.link==link1:
                         hayVideo=True
             if hayVideo==True:  
                 return redirect("/formulario/?videoExiste")
