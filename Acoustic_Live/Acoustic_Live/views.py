@@ -94,28 +94,55 @@ def formulario_nuevoVideo(request):
         niveles= request.POST.get('nivel','')
 
         lecciones = Leccion.objects.filter(nivel=niveles, idprofesor_id=1)
+        nombre1 = nombre.strip()
+        descripcion1 = descripcion.strip()
+        link1 = link.strip()
 
-        if(len(nombre) > 50):
-            return redirect("/formulario/?error_nombre_muy_grande")
-
-        if(len(descripcion)>500):
-            return redirect("/formulario/?error_descripcion_muy_grande")
-
-        if(len(descripcion)<20 and len(descripcion)>0):
-            doc_externo=open("D:/universidadd/Ingenieria de Software/AcousticLive/Acoustic_Live/Acoustic_Live/Templates/formulario.html")
-            plt = Template(doc_externo.read()) #documento almacenado
-    
-            doc_externo.close()
-            nombre = 'nnn'
-            ctx = Context({"nombre":nombre}) #en sus argumentos recibe un diccionario, uso de variales y objetos
-            documento =plt.render(ctx)
+        auxiliar_descripcion =descripcion.upper()
+        auxiliar_nombre = nombre.upper() 
+        
+        if ((len(nombre1)) != 0 and (len(descripcion1)) != 0 and (len(link1)) != 0):
+            if(len(nombre)>50):
+                return redirect("/formulario/?error_nombre_muy_grande")
+            if(len(descripcion)>500):
+                return redirect("/formulario/?error_descripcion_muy_grande")
+            if(len(descripcion)<20 ):
+                return redirect("/formulario/?error_descripcion_muy_pequeña")
             
-            return HttpResponse(documento)
-            # algo ='aaa'
-            # contexto ={'algo':algo}
-            # return redirect("/formulario/?error_descripcion_muy_pequeña",algo)
-
-        if ((len(nombre)) != 0 and (len(descripcion)) != 0 and (len(link)) != 0 and (len(niveles)) != 0 ):
+            encontre = False
+            numero =0
+            n=''
+            while(numero<len(auxiliar_nombre)-2 and not encontre):
+                if auxiliar_nombre[numero]==auxiliar_nombre[numero+1] and auxiliar_nombre[numero]==auxiliar_nombre[numero+2] :
+                    n =nombre[numero]
+                    encontre = True
+                numero += 1
+            if(encontre):
+                doc_externo=open("D:/universidadd/Ingenieria de Software/AcousticLive/Acoustic_Live/Acoustic_Live/Templates/formulario.html")
+                plt = Template(doc_externo.read()) #documento almacenado
+                doc_externo.close()
+                ctx = Context({"letra_encontrada_nombre":n})
+                documento =plt.render(ctx)
+                return HttpResponse(documento)
+            ###para la descripcion
+            encontre1 = False
+            contador1 =0
+            n1=''
+            while(contador1<len(auxiliar_descripcion)-2 and not encontre1):
+                if auxiliar_descripcion[contador1]==auxiliar_descripcion[contador1+1] and auxiliar_descripcion[contador1]==auxiliar_descripcion[contador1+2] :
+                    n1 =descripcion[contador1]
+                    encontre1 = True
+                contador1 += 1
+            if(encontre1):
+                doc_externo=open("D:/universidadd/Ingenieria de Software/AcousticLive/Acoustic_Live/Acoustic_Live/Templates/formulario.html")
+                plt = Template(doc_externo.read()) #documento almacenado
+                doc_externo.close()
+                ctx = Context({"letra_encontrada_descripcion":n1})
+                documento =plt.render(ctx)
+                return HttpResponse(documento)
+            ###fin
+            if(not('https://www.youtube.com/' in link)):
+                return redirect("/formulario/?error_verifique_link")
             hayVideo=False
             for leccion in lecciones:
                 if hayVideo==False:
@@ -124,8 +151,8 @@ def formulario_nuevoVideo(request):
             if hayVideo==True:  
                 return redirect("/formulario/?videoExiste")
             else:
-                # lecc=Leccion(nombre_leccion = nombre, nivel=niveles,link=link, descripcion = descripcion, idprofesor_id =1 )
-                # lecc.save()
+                lecc=Leccion(nombre_leccion = nombre, nivel=niveles,link=link, descripcion = descripcion, idprofesor_id =1 )
+                lecc.save()
                 return redirect("/formulario/?VideoGuardado")
         else:
             return redirect("/formulario/?Alguno_Esta_Vacio")

@@ -35,7 +35,7 @@
                     {% if  "Alguno_Esta_Vacio" in request.GET %}
                     <div class="ventana">
                         <div class="alert alert-danger" role="alert">
-                            Porfavor revise los campos
+                            Por favor revise los campos
                         </div>
                     </div>
                    
@@ -48,6 +48,7 @@
                         </div>
                     </div>
                     {%endif%}
+
                     {% if  "error_descripcion_muy_grande" in request.GET %}
                     <div class="ventana">
                         <div class="alert alert-dark" role="alert">
@@ -55,21 +56,38 @@
                         </div>
                     </div>
                     {%endif%}
-<<<<<<< HEAD
-                    {% if  nombre %}
-                    <div class="liilo">
-                        <div class="alert alert-danger" role="alert">
-                           <p> la letra {{nombre}} se repitio</p>
-=======
+
                     {% if  "error_descripcion_muy_pequeña" in request.GET %}
                     <div class="ventana">
                         <div class="alert alert-dark" role="alert">
                             La descripcion es muy pequeña
->>>>>>> d26907b1e6b23cf19b6159d5ac3117833e2cb2d8
+                        </div>
+                    </div>
+                    {%endif%}
+
+                    {% if  "error_verifique_link" in request.GET %}
+                    <div class="ventana">
+                        <div class="alert alert-dark" role="alert">
+                            Verifique el link que ingreso
+                        </div>
+                    </div>
+                    {%endif%}
+
+                    {% if letra_encontrada_nombre %}
+                    <div class="ventana">
+                        <div class="alert alert-danger" role="alert">
+                            <p> El caracter "{{letra_encontrada_nombre}}" no deberia repetrise tantas veces en el nombre</p>
                         </div>
                     </div>
                     {%endif%}
                     
+                    {% if letra_encontrada_descripcion %}
+                    <div class="ventana">
+                        <div class="alert alert-danger" role="alert">
+                            <p> El caracter "{{letra_encontrada_descripcion}}" no deberia repetrise tantas veces en la descripcion </p>
+                        </div>
+                    </div>
+                    {%endif%}
                     
                     <form action="" method="POST"> 
                         {% csrf_token %}
@@ -84,7 +102,7 @@
                         
                         <div class="row form-group justify-content-center  pt-3">
                             <label for="Descripcion" class="col-form-label col-md-2 ">
-                                Descripcion*:
+                                Descripcion*:    
                             </label>
                             <div class="col-md-6">
                                 <textarea name="descripcion" id="descripcion" class="form-control" cols="30" rows="4"></textarea>
@@ -127,6 +145,9 @@
     
                                     <input type= "reset" value="Borrar  " class="btn btn-dark btn-block mt-1" >
                                     
+                                                       
+                                    <a type="button" href="/Mis_Cursos/"  class="btn btn-dark btn-block" >Cancelar </a>
+                                    
  
     
                                   </p>     
@@ -135,21 +156,9 @@
                            
                            
                        
-<<<<<<< HEAD
-                            <div class="row form-group text-center  pt-3">
-                                <p >(*)Campos obligatorios </p>
-                                <p>{{nombre}}</p>
-                            </div>  
-=======
-
->>>>>>> d26907b1e6b23cf19b6159d5ac3117833e2cb2d8
                         </div>  
                     </form>
-                    <div class="container">
-                        <form action="/Mis_Cursos/" method="GET">                      
-                            <input type="submit" value = "Cancelar" class="btn btn-dark btn-block" style="margin-left: 167px;" >
-                        </form>
-                    </div>
+                    
                     <div class="row form-group text-center  pt-3">
                         <p >(*)Campos obligatorios</p>
                     </div>              
@@ -162,6 +171,5 @@
 
     
 </div>
-<!-- <p style="color: white;">{{request.POST}}</p>
-<p style="color: white;">esta es la respuesta</p> -->
+
 {% endblock %}
