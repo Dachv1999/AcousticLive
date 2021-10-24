@@ -75,22 +75,27 @@ def formulario_nuevoVideo(request):
         link= request.POST.get('link','')
         niveles= request.POST.get('nivel','')
 
+        nombre1 = nombre.strip()
+        descripcion1 = descripcion.strip()
+        link1 = link.strip()
+        
+
         lecciones = Leccion.objects.filter(nivel=niveles, idprofesor_id=1)
 
-        if(len(nombre) > 50):
+        if(len(nombre1) > 10):
             return redirect("/formulario/?error_nombre_muy_grande")
 
-        if(len(descripcion)>500):
+        if(len(descripcion1)>500):
             return redirect("/formulario/?error_descripcion_muy_grande")
 
-        if(len(descripcion)<20 and len(descripcion)>0):
+        if(len(descripcion1)<20 and len(descripcion1)>0):
             return redirect("/formulario/?error_descripcion_muy_pequeña")
 
-        if ((len(nombre)) != 0 and (len(descripcion)) != 0 and (len(link)) != 0 and (len(niveles)) != 0 ):
+        if ((len(nombre1)) != 0 and (len(descripcion1)) != 0 and (len(link1)) != 0 and (len(niveles)) != 0 ):
             hayVideo=False
             for leccion in lecciones:
                 if hayVideo==False:
-                    if leccion.link==link:
+                    if leccion.link==link1:
                         hayVideo=True
             if hayVideo==True:  
                 return redirect("/formulario/?videoExiste")
@@ -100,5 +105,5 @@ def formulario_nuevoVideo(request):
                 return redirect("/formulario/?VideoGuardado")
         else:
             return redirect("/formulario/?Alguno_Esta_Vacio")
-            
+   
     return render (request, "formulario.html")

@@ -24,11 +24,19 @@
                     <p>El video se agrego correctamente</p>
                     {%endif%}
                     {% if  "Alguno_Esta_Vacio" in request.GET %}
-                    <p>Porfavor revise los campos</p>
+                    <!--p>Porfavor revise los campos</p-->
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" >
+                        <strong>Esta Vacio</strong> You should check in on some of those fields below.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
                     {%endif%}
                     
                     {% if  "error_nombre_muy_grande" in request.GET %}
-                    <p>El nombre es muy grande</p>
+                    <!--p>El nombre es muy grande</p-->
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" >
+                        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
                     {%endif%}
                     {% if  "error_descripcion_muy_grande" in request.GET %}
                     <p>la descripcion es muy grande</p>
@@ -94,10 +102,7 @@
     
                                     <input type= "reset" value="Borrar  " class="btn btn-dark btn-block mt-1" >
                                     
-                                    <form action="/Mis_Cursos/" method="GET">                      
-                                        <input type="submit" value = "Cancelar" class="btn btn-dark btn-block mt-1" >
-                                        
-                                    </form>
+                                    
     
                                   </p>     
                              
@@ -105,11 +110,17 @@
                            
                            
                        
-                            <div class="row form-group text-center  pt-3">
-                                <p >(*)Campos obligatorios</p>
-                            </div>  
+>  
                         </div>  
                     </form>
+                    <form action="/Mis_Cursos/" method="GET">                      
+                        <input type="submit" value = "Cancelar" class="btn btn-dark btn-block mt-1" >
+                        
+                    </form>
+
+                    <div class="row form-group text-center  pt-3">
+                        <p >(*)Campos obligatorios</p>
+                    </div
     
                   
                                       
