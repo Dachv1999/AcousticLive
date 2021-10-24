@@ -123,7 +123,7 @@ def formulario_nuevoVideo(request):
                     encontre = True
                 numero += 1
             if(encontre):
-                doc_externo=open("D:/universidadd/Ingenieria de Software/AcousticLive/Acoustic_Live/Acoustic_Live/Templates/formulario.html")
+                doc_externo=open("Acoustic_Live/Templates/formulario.html")
                 plt = Template(doc_externo.read()) #documento almacenado
                 doc_externo.close()
                 ctx = Context({"letra_encontrada_nombre":n})
@@ -139,7 +139,7 @@ def formulario_nuevoVideo(request):
                     encontre1 = True
                 contador1 += 1
             if(encontre1):
-                doc_externo=open("D:/universidadd/Ingenieria de Software/AcousticLive/Acoustic_Live/Acoustic_Live/Templates/formulario.html")
+                doc_externo=open("Acoustic_Live/Templates/formulario.html")
                 plt = Template(doc_externo.read()) #documento almacenado
                 doc_externo.close()
                 ctx = Context({"letra_encontrada_descripcion":n1})
