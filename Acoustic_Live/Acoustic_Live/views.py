@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.template import Template, Context
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from gestionBD.models import Leccion, Profesor
-
+from tkinter import messagebox as MessageBox
 
 def niveles(request): #Vista niveles
     doc_externo = open("Acoustic_Live/Templates/Division_Niveles.html")
@@ -87,10 +87,12 @@ def envio_formulario(request):
     ventana_a_mostrar=" "
     
     if (len(nombre) == 0 or len(descripcion) == 0 or len(link) == 0 or len(nivel) == 0 ):
-         ventana_a_mostrar="ventana_error.html"   #
+         ventana_a_mostrar="ventana_error.html"
+
     else:
-        ventana_a_mostrar="ventana_correcta.html"
-        lecc=Leccion(nombre_leccion = nombre, nivel=nivel,link=link, descripcion = descripcion, idprofesor_id =1 )
-        lecc.save()
+        ventana_a_mostrar= "ventana_correcta.html"
+        #lecc=Leccion(nombre_leccion = nombre, nivel=nivel,link=link, descripcion = descripcion, idprofesor_id =1 )
+        #lecc.save()
+       
  
-    return render (request, ventana_a_mostrar)
+    return render(request,ventana_a_mostrar)
