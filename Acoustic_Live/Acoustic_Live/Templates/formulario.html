@@ -8,15 +8,89 @@
 {% load static %}  
 <div class="container-fluid">
         <link rel="stylesheet" href="{% static '/css/fondo.css' %}" > 
-        
 
+            </script>
         <div class="container">
+           
             <div class="row justify-content-center pt-5">
                 <div class="col-md-7">
 
                     <h2 class="display-6 text-center" style="padding-top: 70px;">Formulario</h2>
+                    
+                    {% if "videoExiste" in request.GET %}
+                    <div class="ventana">
+                        <div class="alert alert-danger" role="alert">
+                         El video que ingreso ya existe
+                        </div>
+                    </div>
+                    {%endif%}
 
-                    <form action="{% url 'Envio' %}" method="post">
+                    {% if  "VideoGuardado" in request.GET %}
+                    <div class="ventana">
+                        <div class="alert alert-success" role="alert">
+                            Video guardado correctamente
+                        </div>
+                    </div>
+                    {%endif%}
+
+                    {% if  "Alguno_Esta_Vacio" in request.GET %}
+                    <div class="ventana">
+                        <div class="alert alert-danger" role="alert">
+                            Por favor revise los campos
+                        </div>
+                    </div>
+                   
+                    {%endif%}
+                    
+                    {% if  "error_nombre_muy_grande" in request.GET %}
+                    <div class="ventana">
+                        <div class="alert alert-dark" role="alert">
+                            El nombre es muy grande
+                        </div>
+                    </div>
+                    {%endif%}
+
+                    {% if  "error_descripcion_muy_grande" in request.GET %}
+                    <div class="ventana">
+                        <div class="alert alert-dark" role="alert">
+                            La descripcion es muy grande
+                        </div>
+                    </div>
+                    {%endif%}
+
+                    {% if  "error_descripcion_muy_pequeña" in request.GET %}
+                    <div class="ventana">
+                        <div class="alert alert-dark" role="alert">
+                            La descripcion es muy pequeña
+                        </div>
+                    </div>
+                    {%endif%}
+
+                    {% if  "error_verifique_link" in request.GET %}
+                    <div class="ventana">
+                        <div class="alert alert-dark" role="alert">
+                            Verifique el link que ingreso
+                        </div>
+                    </div>
+                    {%endif%}
+
+                    {% if letra_encontrada_nombre %}
+                    <div class="ventana">
+                        <div class="alert alert-danger" role="alert">
+                            <p> El caracter "{{letra_encontrada_nombre}}" no deberia repetrise tantas veces en el nombre</p>
+                        </div>
+                    </div>
+                    {%endif%}
+                    
+                    {% if letra_encontrada_descripcion %}
+                    <div class="ventana">
+                        <div class="alert alert-danger" role="alert">
+                            <p> El caracter "{{letra_encontrada_descripcion}}" no deberia repetrise tantas veces en la descripcion </p>
+                        </div>
+                    </div>
+                    {%endif%}
+                    
+                    <form action="" method="POST"> 
                         {% csrf_token %}
                         <div class="row form-group justify-content-center  pt-3">
                             <label for="nombre" class="col-form-label col-md-2 ">
@@ -29,7 +103,7 @@
                         
                         <div class="row form-group justify-content-center  pt-3">
                             <label for="Descripcion" class="col-form-label col-md-2 ">
-                                Descripcion*:
+                                Descripcion*:    
                             </label>
                             <div class="col-md-6">
                                 <textarea name="descripcion" id="descripcion" class="form-control" cols="30" rows="4"></textarea>
@@ -68,14 +142,14 @@
         
                                   <p>
     
-                                    <input type= "submit" value="Aceptar" class="btn btn-dark btn-block mt-1" data-bs-toggle="modal" data-bs-target="#error">
+                                    <input type= "submit" value="Aceptar" class="btn btn-dark btn-block mt-1" data-bs-toggle="modal" data-bs-target="#ventana" >
     
-                                    <input type= "reset" value="Borrar  " class="btn btn-dark btn-block mt-1" >
+                                    <!--<input type= "reset" value="Borrar  " class="btn btn-dark btn-block mt-1" >-->
                                     
-                                    <form action="/Mis_Cursos/" method="GET">                      
-                                        <input type="submit" value = "Cancelar" class="btn btn-dark btn-block mt-1" >
-                                        
-                                    </form>
+                                                       
+                                    <a type="button" href="/Mis_Cursos/"  class="btn btn-dark btn-block" >Cancelar </a>
+                                    
+ 
     
                                   </p>     
                              
@@ -83,14 +157,12 @@
                            
                            
                        
-                            <div class="row form-group text-center  pt-3">
-                                <p >(*)Campos obligatorios</p>
-                            </div>  
                         </div>  
                     </form>
-    
-                  
-                                      
+                    
+                    <div class="row form-group text-center  pt-3">
+                        <p >(*)Campos obligatorios</p>
+                    </div>              
     
                 </div>
                     
