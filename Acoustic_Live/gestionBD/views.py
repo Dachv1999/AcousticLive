@@ -24,11 +24,13 @@ def lista_medio(request, id_profesor):
     profesores = Profesor.objects.filter(id=id_profesor)
     level = "Nivel Medio"
     atras = "/Profesores_Nivel_Medio/"
+    bandera = True;
     contexto = {
         'profesores' : profesores,
         'lecciones' : lecciones,
         'nivel' : level,
-        'atras' : atras
+        'atras' : atras,
+        'bandera' : bandera
 
     }
     
@@ -39,11 +41,13 @@ def lista_avanzado(request, id_profesor):
     profesores = Profesor.objects.filter(id=id_profesor)
     level = "Nivel Avanzado"
     atras = "/Profesores_Nivel_Avanzado/"
+    bandera = True;
     contexto = {
         'profesores' : profesores,
         'lecciones' : lecciones,
         'nivel' : level,
-        'atras' : atras
+        'atras' : atras,
+        'bandera' : bandera
 
     }
     return render(request,'Vista_Universal_Lecciones.html', contexto)

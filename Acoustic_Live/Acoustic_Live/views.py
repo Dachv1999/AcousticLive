@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.template import Template, Context, context
 from django.shortcuts import render, redirect
 from gestionBD.models import Leccion, Profesor
-
+from tkinter import messagebox as MessageBox
 
 
 def niveles(request): #Vista niveles
