@@ -93,11 +93,6 @@ def formulario_nuevoVideo(request):
         link= request.POST.get('link','')
         niveles= request.POST.get('nivel','')
 
-        nombre1 = nombre.strip()
-        descripcion1 = descripcion.strip()
-        link1 = link.strip()
-        
-
         lecciones = Leccion.objects.filter(nivel=niveles, idprofesor_id=1)
         nombre1 = nombre.strip()
         descripcion1 = descripcion.strip()
@@ -114,6 +109,24 @@ def formulario_nuevoVideo(request):
             if(len(descripcion)<20 ):
                 return redirect("/formulario/?error_descripcion_muy_pequeña")
             
+            valido = True
+            i = 0
+            while(i<len(nombre) and valido):
+                aux = (int)(ord(nombre[i]))
+                letrita = nombre[i]
+                if (not((aux>64 and aux<91) or (aux>96 and aux<123) or (aux>47 and aux<59) \
+                    or (aux==40 or aux==41 or aux==32 or aux==46 or aux==44
+                    or letrita=="¿" or aux==63 or aux==45 or letrita=='!' or aux==35
+                    or aux==58 or letrita=="á" or letrita=="é" or letrita=="í"
+                    or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
+                    or letrita=="Í" or letrita=="Ó" or letrita=="Ú"))):
+                    
+                    valido = False
+                i +=1
+                
+            if valido== False:
+                return redirect("/formulario/?nombre_invalido")        
+            #letra repetida
             encontre = False
             numero =0
             n=''
@@ -146,12 +159,17 @@ def formulario_nuevoVideo(request):
                 documento =plt.render(ctx)
                 return HttpResponse(documento)
             ###fin
-            if(not('https://www.youtube.com/' in link)):
+            #verficar link 
+            link_auxi1="https://www.youtube.com/embed/"
+
+            if(not('https://youtu.be/' in link)):
                 return redirect("/formulario/?error_verifique_link")
+            else:
+                link=link_auxi1+link[17:]
             hayVideo=False
             for leccion in lecciones:
                 if hayVideo==False:
-                    if leccion.link==link1:
+                    if leccion.link==link:
                         hayVideo=True
             if hayVideo==True:  
                 return redirect("/formulario/?videoExiste")
