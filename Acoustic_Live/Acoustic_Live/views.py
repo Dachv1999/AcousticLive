@@ -136,9 +136,11 @@ def formulario_nuevoVideo(request):
             numero =0
             n=''
             while(numero<len(auxiliar_nombre)-2 and not encontre):
-                if auxiliar_nombre[numero]==auxiliar_nombre[numero+1] and auxiliar_nombre[numero]==auxiliar_nombre[numero+2] :
-                    n =nombre[numero]
-                    encontre = True
+                codigo = (ord(auxiliar_nombre[numero]))
+                if not(codigo>47 and codigo<59):
+                    if auxiliar_nombre[numero]==auxiliar_nombre[numero+1] and auxiliar_nombre[numero]==auxiliar_nombre[numero+2] :
+                        n =nombre[numero]
+                        encontre = True
                 numero += 1
             if(encontre):
                 doc_externo=open("Acoustic_Live/Templates/formulario.html")
@@ -154,9 +156,11 @@ def formulario_nuevoVideo(request):
             contador1 =0
             n1=''
             while(contador1<len(auxiliar_descripcion)-2 and not encontre1):
-                if auxiliar_descripcion[contador1]==auxiliar_descripcion[contador1+1] and auxiliar_descripcion[contador1]==auxiliar_descripcion[contador1+2] :
-                    n1 =descripcion[contador1]
-                    encontre1 = True
+                codigoDescripcion = (ord(auxiliar_descripcion[contador1]))
+                if not(codigoDescripcion>47 and codigoDescripcion<59):
+                    if auxiliar_descripcion[contador1]==auxiliar_descripcion[contador1+1] and auxiliar_descripcion[contador1]==auxiliar_descripcion[contador1+2] :
+                        n1 =descripcion[contador1]
+                        encontre1 = True
                 contador1 += 1
             if(encontre1):
                 doc_externo=open("Acoustic_Live/Templates/formulario.html")
