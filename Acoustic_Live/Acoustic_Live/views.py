@@ -93,13 +93,8 @@ def formulario_nuevoVideo(request):
         descripcion= request.POST.get('descripcion','')
         link= request.POST.get('link','')
         niveles= request.POST.get('nivel','')
-<<<<<<< HEAD
-        
-        lecciones = Leccion.objects.filter(nivel=niveles, idprofesor_id=1)
-=======
 
         lecciones = Leccion.objects.filter(idprofesor_id=1)
->>>>>>> 25f3dbf87d17871b872691a79c1a96e96f04485f
         nombre1 = nombre.strip()
         descripcion1 = descripcion.strip()
         link1 = link.strip()
