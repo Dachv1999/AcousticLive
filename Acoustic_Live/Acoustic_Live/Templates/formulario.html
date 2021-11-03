@@ -2,12 +2,14 @@
 
  {% block title %}
      Acoustic Live | Formulario
+        
  {% endblock %}
 
 {% block content %}
 {% load static %}  
 <div class="container-fluid">
         <link rel="stylesheet" href="{% static '/css/fondo.css' %}" > 
+        
 
             </script>
         <div class="container">
@@ -17,86 +19,17 @@
 
                     <h2 class="display-6 text-center" style="padding-top: 70px;">Formulario</h2>
                     
-                    {% if "videoExiste" in request.GET %}
-                    <div class="ventana">
-                        <div class="alert alert-danger" role="alert">
-                         El video que ingreso ya existe
-                        </div>
-                    </div>
-                    {%endif%}
 
-                    {% if  "VideoGuardado" in request.GET %}
+                    {% if messages %}
                     <div class="ventana">
-                        <div class="alert alert-success" role="alert">
-                            Video guardado correctamente
-                        </div>
+                        <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
                     </div>
-                    {%endif%}
-
-                    {% if  "Alguno_Esta_Vacio" in request.GET %}
-                    <div class="ventana">
-                        <div class="alert alert-danger" role="alert">
-                            Por favor revise los campos
-                        </div>
-                    </div>
-                   
-                    {%endif%}
-
-                    {% if  "nombre_invalido" in request.GET %}
-                    <div class="ventana">
-                        <div class="alert alert-dark" role="alert">
-                            El nombre contiene caracteres inv&aacute;lidos
-                        </div>
-                    </div>
-                    {%endif%}
+                    {% endif %}
                     
-                    {% if  "error_nombre_muy_grande" in request.GET %}
-                    <div class="ventana">
-                        <div class="alert alert-dark" role="alert">
-                            L&iacute;mite de caracteres alcanzado en el campo nombre
-                        </div>
-                    </div>
-                    {%endif%}
-
-                    {% if  "error_descripcion_muy_grande" in request.GET %}
-                    <div class="ventana">
-                        <div class="alert alert-dark" role="alert">
-                            L&iacute;mite de caracteres alcanzado en el campo descrici&oacute;n
-                        </div>
-                    </div>
-                    {%endif%}
-
-                    {% if  "error_descripcion_muy_pequeña" in request.GET %}
-                    <div class="ventana">
-                        <div class="alert alert-dark" role="alert">
-                            La descripci&oacute;n es demasiado corta
-                        </div>
-                    </div>
-                    {%endif%}
-
-                    {% if  "error_verifique_link" in request.GET %}
-                    <div class="ventana">
-                        <div class="alert alert-dark" role="alert">
-                            Verifique el link que ingres&oacute;
-                        </div>
-                    </div>
-                    {%endif%}
-
-                    {% if letra_encontrada_nombre %}
-                    <div class="ventana">
-                        <div class="alert alert-danger" role="alert">
-                            <p> El caracter "{{letra_encontrada_nombre}}" no deber&iacute;a repetirse tantas veces seguidas </p>
-                        </div>
-                    </div>
-                    {%endif%}
-                    
-                    {% if letra_encontrada_descripcion %}
-                    <div class="ventana">
-                        <div class="alert alert-danger" role="alert">
-                            <p> El caracter "{{letra_encontrada_descripcion}}" no deber&iacute;a repetirse tantas veces seguidas </p>
-                        </div>
-                    </div>
-                    {%endif%}
                     
                     <form action="" method="POST"> 
                         {% csrf_token %}

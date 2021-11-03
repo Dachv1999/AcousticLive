@@ -3,6 +3,7 @@ from django.template import Template, Context, context
 from django.shortcuts import render, redirect
 from gestionBD.models import Leccion, Profesor
 from tkinter import messagebox as MessageBox
+from django.contrib import messages
 
 
 def niveles(request): #Vista niveles
@@ -92,8 +93,13 @@ def formulario_nuevoVideo(request):
         descripcion= request.POST.get('descripcion','')
         link= request.POST.get('link','')
         niveles= request.POST.get('nivel','')
+<<<<<<< HEAD
         
         lecciones = Leccion.objects.filter(nivel=niveles, idprofesor_id=1)
+=======
+
+        lecciones = Leccion.objects.filter(idprofesor_id=1)
+>>>>>>> 25f3dbf87d17871b872691a79c1a96e96f04485f
         nombre1 = nombre.strip()
         descripcion1 = descripcion.strip()
         link1 = link.strip()
@@ -103,11 +109,14 @@ def formulario_nuevoVideo(request):
         
         if ((len(nombre1)) != 0 and (len(descripcion1)) != 0 and (len(link1)) != 0):
             if(len(nombre)>50):
-                return redirect("/formulario/?error_nombre_muy_grande")
+                messages.add_message(request=request, level=messages.WARNING, message = "El nombre es muy grande")
+                return redirect("/formulario/")
             if(len(descripcion)>500):
-                return redirect("/formulario/?error_descripcion_muy_grande")
+                messages.add_message(request=request, level=messages.WARNING, message = "La descripción es muy grande")
+                return redirect("/formulario/")
             if(len(descripcion)<20 ):
-                return redirect("/formulario/?error_descripcion_muy_pequeña")
+                messages.add_message(request=request, level=messages.WARNING, message = "La descripción es muy pequeña")
+                return redirect("/formulario/")
             
             valido = True
             i = 0
@@ -125,7 +134,8 @@ def formulario_nuevoVideo(request):
                 i +=1
                 
             if valido== False:
-                return redirect("/formulario/?nombre_invalido")        
+                messages.add_message(request=request, level=messages.WARNING, message = "El nombre contiene carcteres inválidos")
+                return redirect("/formulario/")        
             #letra repetida
             encontre = False
             numero =0
@@ -141,9 +151,11 @@ def formulario_nuevoVideo(request):
                 doc_externo=open("Acoustic_Live/Templates/formulario.html")
                 plt = Template(doc_externo.read()) #documento almacenado
                 doc_externo.close()
-                ctx = Context({"letra_encontrada_nombre":n})
-                documento =plt.render(ctx)
-                return HttpResponse(documento)
+                #ctx = Context({"letra_encontrada_nombre":n})
+                #documento =plt.render(ctx)
+                #return HttpResponse(documento)
+                messages.add_message(request=request, level=messages.WARNING, message = "El carácter '" + n + "' no debería repetirse tantas veces en el nombre")
+                return redirect("/formulario/") 
             ###para la descripcion
             encontre1 = False
             contador1 =0
@@ -159,15 +171,18 @@ def formulario_nuevoVideo(request):
                 doc_externo=open("Acoustic_Live/Templates/formulario.html")
                 plt = Template(doc_externo.read()) #documento almacenado
                 doc_externo.close()
-                ctx = Context({"letra_encontrada_descripcion":n1})
-                documento =plt.render(ctx)
-                return HttpResponse(documento)
+                #ctx = Context({"letra_encontrada_descripcion":n1})
+                #documento =plt.render(ctx)
+                #return HttpResponse(documento)
+                messages.add_message(request=request, level=messages.WARNING, message = "El carácter '" + n1 + "' no debería repetirse tantas veces en la descripción")
+                return redirect("/formulario/") 
             ###fin
             #verficar link 
             link_auxi1="https://www.youtube.com/embed/"
 
             if(not('https://youtu.be/' in link)):
-                return redirect("/formulario/?error_verifique_link")
+                messages.add_message(request=request, level=messages.WARNING, message = "Verifique el link que ingresó")
+                return redirect("/formulario/")
             else:
                 link=link_auxi1+link[17:]
             hayVideo=False
@@ -176,12 +191,17 @@ def formulario_nuevoVideo(request):
                     if leccion.link==link:
                         hayVideo=True
             if hayVideo==True:  
-                return redirect("/formulario/?videoExiste")
+                messages.add_message(request=request, level=messages.ERROR, message = "El video que ingresó ya existe")
+                return redirect("/formulario/")
             else:
                 lecc=Leccion(nombre_leccion = nombre, nivel=niveles,link=link, descripcion = descripcion, idprofesor_id =1 )
                 lecc.save()
-                return redirect("/formulario/?VideoGuardado")
+                messages.add_message(request=request, level=messages.SUCCESS, message = "Video guardado correctamente")
+                return redirect("/formulario/")
         else:
-            return redirect("/formulario/?Alguno_Esta_Vacio")
-            
+            messages.add_message(request=request, level=messages.ERROR, message = "Por favor revise los campos")
+            return redirect("/formulario/")
+    
     return render (request, "formulario.html")
+        
+
