@@ -17,6 +17,17 @@ def niveles(request): #Vista niveles
     
     return HttpResponse(documento)
 
+def login(request): #Login
+    doc_externo = open("Acoustic_Live/Templates/login.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)
+
 
 def nivel_medio(request): #Vista nivel medio
     doc_externo = open("Acoustic_Live/Templates/Vista_Nivel_Medio.html")
