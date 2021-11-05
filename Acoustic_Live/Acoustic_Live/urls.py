@@ -15,13 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Acoustic_Live.views import niveles, nivel_principiante, nivel_medio, nivel_avanzado,formulario_nuevoVideo
+from Acoustic_Live.views import niveles, nivel_medio, nivel_avanzado,formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA, login
+from gestionBD.views import lista_principiante, lista_medio, lista_avanzado
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Mis_Cursos/', niveles),
-    path('Nivel_Principiante/', nivel_principiante),
-    path('Nivel_Medio/', nivel_medio),
-    path('Nivel_Avanzado/', nivel_avanzado),
-    path('form/', formulario_nuevoVideo),
+    path('Login/', login),
+    path('Nivel_Principiante/<int:id_profesor>/', lista_principiante),
+    path('Nivel_Medio/<int:id_profesor>/', lista_medio),
+    path('Nivel_Avanzado/<int:id_profesor>/', lista_avanzado),
+    path('formulario/', formulario_nuevoVideo),
+    path('Profesores_Nivel_Principiante/', profesoresNP),
+    path('Profesores_Nivel_Medio/', profesoresNM),
+    path('Profesores_Nivel_Avanzado/', profesoresNA),
+    # path('Envio/', envio_formulario, name="Envio"),
 ]

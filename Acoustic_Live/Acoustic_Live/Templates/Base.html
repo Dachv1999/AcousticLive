@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 {% load static %}
 <head>
     <meta charset="UTF-8">
@@ -9,6 +9,20 @@
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <link rel="icon" href="{% static '/imagenes/icon.ico' %}">
+
+<script type="text/javascript">
+$(document).ready(function() {
+    setTimeout(function() {
+        $(".ventana").fadeOut(1500);
+    },4000);
+ 
+    // setTimeout(function() {
+    //     $(".content2").fadeIn(1500);
+    // },6000);
+    });
+</script>
     <title>
         {% block title %}    {% endblock %}
     </title>
@@ -16,16 +30,17 @@
 <body>
     <!-- cabezera ini-->
     <header >
+        
         <nav style="z-index: 2;">
             
             <input type="checkbox" id="check">
             
-            <a href="#" class="enlace">
+            <div href="#" class="enlace">
                 <img src="{% static 'Imagenes/Logo.jpg' %}" alt="" class="logo">
-            </a>
+            </div>
             <ul>
-                <li><a class="active"  href="#">Mis cursos</a></li>
-                <!--<li><a  href="#">tutoriales</a></li>
+                <li><a class="active"  href="/Mis_Cursos/">Mis Cursos</a></li>
+               <!-- <li><a  href="#">tutoriales</a></li>
                 <li><a  href="#">bibliografia</a></li>
                 <li><a  href="#">eventos</a></li>
                 <li><a  href="#">Mi Perfil</a></li>-->
@@ -34,10 +49,10 @@
                 <i class="fas fa-bars"></i>
             </label>
         </nav>
-    </header>  
+      
+    </header> 
     <!-- cabezera fin-->
      {% block content %}   {% endblock %}
-
-     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

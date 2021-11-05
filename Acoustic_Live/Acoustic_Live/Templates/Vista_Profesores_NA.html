@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+ {% block title %}
+    Acoustic Live | Profesores Nivel Principiante
+ {% endblock %}
+
+{% block content %}
+{% load static %}       
+
+<div class="container-fluid" style="background-color: #343F4B; padding-top: 6rem;padding-bottom: 0.5rem;">             
+    <div class="row">
+        <div class="col-lg-1 col-md-2 col-sm-3">
+            <form action="/Mis_Cursos/" method="GET">       
+                <input type="image" name="boton_back" style="margin-left: 20px;" src="{% static 'Imagenes/boton_atras.png' %}" alt="Volver atras" width="50" height="50">                
+            </form>
+        </div>
+        <div class="col-11 col-md-10 col-sm-7">    
+            <h1 style = "color: white;">
+                Nivel Avanzado
+            </h1>
+            <p style = "color: white;">
+                Selecciona un profesor
+            </p>
+        </div>
+    </div>       
+</div>
+
+<div class="container-fluid">
+    <div class="container">  
+        <link rel="stylesheet" href="{% static '/css/Fondo.css' %}" >  
+    </div>
+</div>
+
+<div class="container">
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12" style="padding-top: 50px;">
+        <center><form action="/Nivel_Avanzado/1/" method="GET">       
+            <input type="image" name="avatarMario" src="{% static 'Imagenes/MarioFreiria.jpg' %}" alt="Avatar Mario"  width="200" height="200" style="border-radius: 100%;">              
+        </form>
+        <div class="container" style="padding-top: 25px;"><h2>Mario Freiria</h2><h5>{{cantidad_cursos_1}} videos</h5></div>
+        <p style="margin-left: 40px; margin-right: 40px;">Hola! Soy Mario Freiria en este curso aprender&aacute;s: ejercicios para agilizar tu mano derecha, ejercicios para un mejor manejo de la guitarra, acordes con cejilla y notas musicales. &iexcl;Comencemos ya!</p>
+        </center>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12" style="padding-top: 50px;">
+        <center><form action="/Nivel_Avanzado/2/" method="GET">       
+            <input type="image" name="avatarChristian" src="{% static 'Imagenes/ChristianVib.jpg' %}" alt="Avatar ChristianVib"  width="200" height="200" style="border-radius: 100%;">              
+        </form>
+        <div class="container" style="padding-top: 25px;"><h2>Christian Vib</h2><h5>{{cantidad_cursos_2}} videos</h5></div>
+        <p style="margin-left: 40px; margin-right: 40px;">Que tal! Mi nombre es Christian Vib y me dedico a ense&ntilde;ar guitarra ya hace m&aacute;s de 10 a&ntilde;os, 
+            contenido de todos los g&eacute;neros y tipos de canciones, desde las m&aacute;s conocidas hasta las m&aacute;s bizarras, mi objetivo es que 
+            aprendas guitarra de manera r&aacute;pida y divertida, &iexcl;Disfruta del curso!</p>
+        </center>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12" style="padding-top: 50px;">
+        <center><form action="/Nivel_Avanzado/3/" method="GET">       
+            <input type="image" name="avatarAaron" src="{% static 'Imagenes/AaronSilva.jpg' %}" alt="Avatar Aaron"  width="200" height="200" style="border-radius: 100%;">              
+        </form>
+        <div class="container" style="padding-top: 25px;"><h2>Aaron Silva</h2><h5>{{cantidad_cursos_3}} videos</h5></div>
+        <p style="margin-left: 40px; margin-right: 40px;">Soy Aaron Silva y quiero darte los recursos que toda persona necesita para empezar con el maravilloso mundo de la guitarra, en este curso veremos:  
+            acordes sostenidos, acordes mayores con s&eacute;ptima, acordes menores con s&eacute;ptima, afinar tu guitarra a oido y uso del capo traste. &nbsp; Acomp&aacute;&ntilde;ame en este viaje. </p>
+        </center>
+    </div>
+</div>
+</div>
+
+{% endblock %}
