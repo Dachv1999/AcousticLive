@@ -1,0 +1,40 @@
+body{
+    background-image: url('../Imagenes/fondoChiri.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+@font-face{
+    font-family: Grand-Hotel;
+    src: url('../Imagenes/GrandHotel-Regular.ttf');
+}
+h1{
+    font-family: Grand-Hotel;
+    font-size: 4rem;
+    margin-bottom: 0;
+}
+hr{
+    height: 2px;
+    
+}
+.linea {
+    border-top: 4px solid rgb(255, 255, 255);
+    height: 2px;
+    width: 40%;
+    padding: 0;
+    margin: 20px auto 0 auto;
+  }
+.formulario{
+    background: rgba(212, 212, 212, 0.2);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0,-0,-0,0.568);
+    color: white;
+}
+a{
+    color: white;
+}
+a:hover{
+    color: rgba(0,-0,-0,0.568);
+}
+
