@@ -28,6 +28,17 @@ def login(request): #Login
     
     return HttpResponse(documento)
 
+def Formulario_Registro(request):
+    if request.method=="POST":
+        nombre=request.POST.get('nombre','')
+        correo= request.POST.get('correo','')
+        contraseña= request.POST.get('contraseña','')
+        confirmacion= request.POST.get('confirmacion','')
+        if(len(nombre)==0):
+            messages.add_message(request=request, level=messages.WARNING, message = "El campo nombre esta vacio")
+        return redirect("/Formulario_Registro/")
+    return render (request, "Formulario_Registro.html")
+
 
 def nivel_medio(request): #Vista nivel medio
     doc_externo = open("Acoustic_Live/Templates/Vista_Nivel_Medio.html")
