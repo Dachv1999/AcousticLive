@@ -28,17 +28,6 @@ def login(request): #Login
     
     return HttpResponse(documento)
 
-def Formulario_Registro(request):
-    doc_externo = open("Acoustic_Live/Templates/Formulario_Registro.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
-
-    ctx = Context()
-
-    documento = plt.render(ctx)
-    
-    return HttpResponse(documento)
-
 
 def nivel_medio(request): #Vista nivel medio
     doc_externo = open("Acoustic_Live/Templates/Vista_Nivel_Medio.html")
