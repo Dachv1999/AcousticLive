@@ -22,9 +22,14 @@ def login(request):
     if request.method=="POST":
         usuario=request.POST.get('usuario','')
         contraseña=request.POST.get('contraseña','')
-        if validar(usuario)==False:
-            messages.add_message(request=request, level=messages.WARNING, message = "Error eel nombre de usuario no es valido")
+        if len(contraseña)==0 or len(usuario)==0:
+            messages.add_message(request=request, level=messages.WARNING, message = "Porfavor llene todos los campos")
             return redirect("/Login/")
+        if validar(usuario)==False:
+            messages.add_message(request=request, level=messages.WARNING, message = "Error el nombre de usuario no es valido")
+            return redirect("/Login/")
+        
+
     
     return render (request, "login.html")
 
