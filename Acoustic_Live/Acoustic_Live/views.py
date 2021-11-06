@@ -18,6 +18,35 @@ def niveles(request): #Vista niveles
     
     return HttpResponse(documento)
 
+def login(request): 
+    if request.method=="POST":
+        usuario=request.POST.get('usuario','')
+        contraseña=request.POST.get('contraseña','')
+        if len(contraseña)==0 or len(usuario)==0:
+            messages.add_message(request=request, level=messages.WARNING, message = "Porfavor llene todos los campos")
+            return redirect("/Login/")
+        if validar(usuario)==False:
+            messages.add_message(request=request, level=messages.WARNING, message = "Error el nombre de usuario no es valido")
+            return redirect("/Login/")
+        
+
+    
+    return render (request, "login.html")
+
+def validar(nombreUsuario):
+    valido_usuario = True
+    i = 0
+    while(i<len(nombreUsuario) and valido_usuario):
+        aux = (int)(ord(nombreUsuario[i]))
+        letrita = nombreUsuario[i]
+        if (not((aux>64 and aux<91) or (aux>96 and aux<123)or (aux>47 and aux<59)
+            or letrita=="á" or letrita=="é" or letrita=="í" or letrita=="_" or letrita=="-"
+            or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
+            or letrita=="Í" or letrita=="Ó" or letrita=="Ú")):
+                    
+            valido_usuario = False
+        i +=1
+    return valido_usuario
 
 def Formulario_Registro(request):
     if request.method=="POST":
@@ -270,18 +299,3 @@ def formulario_nuevoVideo(request):
     return render (request, "formulario.html")
         
 
-def login(request): #Login
-    # doc_externo = open("Acoustic_Live/Templates/login.html")
-    # plt = Template(doc_externo.read())
-    # doc_externo.close()
-
-    # ctx = Context()
-
-    # documento = plt.render(ctx)
-    if request.method=="POST":
-        usuario=request.POST.get('usuario','')
-        contraseña= request.POST.get('contraseña','')
-        print(usuario)
-        print(contraseña)
-    return render (request, "login.html")
-    # return HttpResponse(documento)
