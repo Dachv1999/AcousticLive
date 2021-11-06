@@ -2,7 +2,7 @@ from tkinter.constants import FALSE
 from django.http import HttpResponse
 from django.template import Template, Context, context
 from django.shortcuts import render, redirect
-from gestionBD.models import Leccion, Profesor
+from gestionBD.models import Leccion, Profesor, Estudiante
 from tkinter import messagebox as MessageBox
 from django.contrib import messages
 
@@ -18,16 +18,6 @@ def niveles(request): #Vista niveles
     
     return HttpResponse(documento)
 
-def login(request): #Login
-    doc_externo = open("Acoustic_Live/Templates/login.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
-
-    ctx = Context()
-
-    documento = plt.render(ctx)
-    
-    return HttpResponse(documento)
 
 def Formulario_Registro(request):
     if request.method=="POST":
@@ -89,6 +79,9 @@ def Formulario_Registro(request):
                     messages.add_message(request=request, level=messages.WARNING, message = "Verifique que el correo sea valido")
                     return redirect("/Formulario_Registro/")
                 else:
+
+                    est=Estudiante(nombre_estudiante = nombre, usuario= nombreUsuario, correo= correo, contraseña_estudiante=contraseña)
+                    est.save()
                     messages.add_message(request=request, level=messages.WARNING, message = "todo bien ")
                     return redirect("/Formulario_Registro/")
         else:
@@ -280,3 +273,18 @@ def formulario_nuevoVideo(request):
     return render (request, "formulario.html")
         
 
+def login(request): #Login
+    # doc_externo = open("Acoustic_Live/Templates/login.html")
+    # plt = Template(doc_externo.read())
+    # doc_externo.close()
+
+    # ctx = Context()
+
+    # documento = plt.render(ctx)
+    if request.method=="POST":
+        usuario=request.POST.get('usuario','')
+        contraseña= request.POST.get('contraseña','')
+        print(usuario)
+        print(contraseña)
+    return render (request, "login.html")
+    # return HttpResponse(documento)
