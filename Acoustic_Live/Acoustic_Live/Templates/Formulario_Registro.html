@@ -13,6 +13,17 @@
 
     <title>Formulario De Registro</title>
 </head>
+<script type="text/javascript">
+    $(document).ready(function() {
+        setTimeout(function() {
+            $(".ventana").fadeOut(1500);
+        },2000);
+     
+        // setTimeout(function() {
+        //     $(".content2").fadeIn(1500);
+        // },6000);
+        });
+</script>
 <body>
     
     <div class="col-lg-1 col-md-2 col-sm-3">
@@ -29,8 +40,8 @@
                 
                 <form action="" method="POST"> 
                     <!-- {% csrf_token %} -->
-                    <div class="form-group text-center mt-3">
-                        <h2 class="text-light">Reg&iacute;strate</h2>
+                    <div class="form-group text-center mt-0">
+                        <h2 class="text-light ">Reg&iacute;strate</h2>
                     </div>
                     {% if messages %}
                         <p></p>
@@ -42,12 +53,20 @@
                         </ul>
                     </div>
                     {% endif %}
+                    <div class="row form-group justify-content-center  pt-1">
+                        <label for="nombre" >
+                            Nombre*:
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="nombre" value="" id="nombre" class="form-control">
+                        </div>
+                    </div>
                     <div class="row form-group justify-content-center  pt-3">
                         <label for="nombre" >
                             Nombre de usuario*:
                         </label>
                         <div class="mt-1">
-                            <input type="text" name="nombre" value="" id="nombre" class="form-control">
+                            <input type="text" name="nombreUsuario" value="" id="nombreUsuario" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group justify-content-center  pt-3">
@@ -63,7 +82,7 @@
                             Contrase&ntilde;a*:
                         </label>
                         <div class="mt-1">
-                            <input type="text" name="contraseña" value="" id="contraseña" class="form-control">
+                            <input type="password" name="contraseña" value="" id="contraseña" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group justify-content-center  pt-3">
@@ -71,15 +90,16 @@
                             Confirmar contrase&ntilde;a*:
                         </label>
                         <div class="mt-1">
-                            <input type="text" name="confirmacion" value="" id="confirmacion" class="form-control">
+                            <input type="password" name="confirmacion" value="" id="confirmacion" class="form-control">
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <input type="submit" class="col col-md-6 col-sm-6 col-6 btn btn-dark mt-4 mb-1" value="Registrarse">
+                        <input type="submit" class="col col-md-6 col-sm-6 col-6 btn btn-dark mt-3 mb-0" value="Registrarse">
                     </div>
                 </form>
             </div>
         </div>
+        <p></p>
     </div>
 
 
