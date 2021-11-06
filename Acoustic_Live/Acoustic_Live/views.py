@@ -22,7 +22,7 @@ def login(request):
     if request.method=="POST":
         usuario=request.POST.get('usuario','')
         contraseña=request.POST.get('contraseña','')
-        if validar(usuario)==False:
+        if len(usuario)>0:
             messages.add_message(request=request, level=messages.WARNING, message = "Error eel nombre de usuario no es valido")
             return redirect("/Login/")
     
