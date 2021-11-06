@@ -20,28 +20,34 @@
         
 
         
-        for(var i = 1; i <= cantidad_videos; i++){
+      //  for(var i = 1; i <= cantidad_videos; i++){
         
             var a = "#";
-            var b = 1;
+            var b = 2;
             var d= " input";
-            var c = a+ i + d;
+            var c = a+ b + d;
             console.log(c);
-            $(c).on('change', function()
-        {
-            if ($(c).is(":checked") == true) {
 
+            $(c).on('change', function()
+        { 
+            var x = this.id;
+            var xx = "#" + x + " input"
+
+            document.getElementById("demo").innerHTML = xx
+            if ($(xx).is(":checked") == true) {
+            
+            
             progress = progress+porcentaje;
 
             $('#blips > .progress-bar').attr("style","width:" + progress + "%");
             }
-            else if ($(c).is(":checked") == false) {
+            else if ($(xx).is(":checked") == false) {
             progress = progress-porcentaje;
             $('#blips > .progress-bar').attr("style","width:" + progress + "%");
             }
         });
 
-        }
+        //}
         
     
     
@@ -110,6 +116,7 @@
                   </div>
             </div>
             {% endif %}
+            <p id="demo"></p>
             {% for leccion in lecciones %} 
                 
 
@@ -117,10 +124,12 @@
 
                 <div class="checkbox" id="{{forloop.counter}}">
                     <label>Visto
-                      <input type="checkbox" value="">
+                      <input type="checkbox" value="{{forloop.counter}}"  name= "{{forloop.counter}}" id= "{{forloop.counter}}">
                     </label>
                   </div>
+                
 
+                  
 
 
                 <div class="row">

@@ -66,10 +66,10 @@ def Formulario_Registro(request):
                     valido_correo = False
                 i +=1
             if(valido==False):
-                messages.add_message(request=request, level=messages.WARNING, message = "Nonbre ingresado invalido")
+                messages.add_message(request=request, level=messages.WARNING, message = "Nombre ingresado invalido")
                 return redirect("/Formulario_Registro/")
             if(valido_usuario==False):
-                messages.add_message(request=request, level=messages.WARNING, message = "Nonbre de usuario invalido")
+                messages.add_message(request=request, level=messages.WARNING, message = "Nombre de usuario invalido")
                 return redirect("/Formulario_Registro/")
             if(confirmacion!=contraseña):
                 messages.add_message(request=request, level=messages.WARNING, message = "La contraseña de verificacion no coincide")
