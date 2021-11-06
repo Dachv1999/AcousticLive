@@ -1,3 +1,4 @@
+from tkinter.constants import FALSE
 from django.http import HttpResponse
 from django.template import Template, Context, context
 from django.shortcuts import render, redirect
@@ -62,7 +63,18 @@ def Formulario_Registro(request):
                     
                     valido_usuario = False
                 i +=1
-
+            valido_correo = True
+            i = 0
+            while(i<len(correo) and valido_correo):
+                aux = (int)(ord(correo[i]))
+                letrita = correo[i]
+                if (not((aux>64 and aux<91) or (aux>96 and aux<123)or (aux>47 and aux<59)
+                    or letrita=="á" or letrita=="é" or letrita=="í" or letrita=="_" or letrita=="-"
+                    or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
+                    or letrita=="Í" or letrita=="Ó" or letrita=="Ú" or letrita=="@"
+                    or letrita==".")):
+                    valido_correo = False
+                i +=1
             if(valido==False):
                 messages.add_message(request=request, level=messages.WARNING, message = "Nonbre ingresado invalido")
                 return redirect("/Formulario_Registro/")
@@ -72,8 +84,8 @@ def Formulario_Registro(request):
             if(confirmacion!=contraseña):
                 messages.add_message(request=request, level=messages.WARNING, message = "La contraseña de verificacion no coincide")
                 return redirect("/Formulario_Registro/")
-            else:
-                if(not('@gmail.com' in correo) and not('@hotmail.com' in correo)):
+            else:   
+                if(valido_correo==FALSE or not('@gmail.com' in correo) and not('@hotmail.com' in correo)):
                     messages.add_message(request=request, level=messages.WARNING, message = "Verifique que el correo sea valido")
                     return redirect("/Formulario_Registro/")
                 else:
