@@ -13,6 +13,17 @@
 
     <title>Login</title>
 </head>
+<script type="text/javascript">
+    $(document).ready(function() {
+        setTimeout(function() {
+            $(".ventana").fadeOut(1500);
+        },2000);
+     
+        // setTimeout(function() {
+        //     $(".content2").fadeIn(1500);
+        // },6000);
+        });
+</script>
 <body>
     <div class="container-fluid">
         <div class="row">
@@ -30,15 +41,26 @@
     <div class="container">
         <div class="row justify-content-center pt-5">
             <div class="col-lg-4 col-md-6 col-sm-8 formulario">
-                <form action="">
+                <form action="" method="POST">
                     <div class="form-group text-center mt-3">
                         <h2 class="text-light">Iniciar sesi&oacute;n</h2>
                     </div>
+                    
                     <div class="form-group mx-sm-4 mt-5">
-                        <input type="text" class="form-control" placeholder="Usuario" id="">
+                            {% if messages %}
+                            <p></p>
+                            <div class="ventana row ">
+                            <ul class="messages">   
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                            </ul>
+                            </div>
+                        {% endif %}
+                        <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario" id="">
                     </div>
                     <div class="form-group mx-sm-4 mt-3">
-                        <input type="password" class="form-control" placeholder="Contrase&ntilde;a" id="">
+                        <input type="password" name="contraseña" id="contraseña" class="form-control" placeholder="Contrase&ntilde;a" id="">
                     </div>
                     <div class="form-group mx-sm-4">
                         <input type="submit" class="btn btn-dark w-100 mt-5 mb-3" value="Ingresar">
