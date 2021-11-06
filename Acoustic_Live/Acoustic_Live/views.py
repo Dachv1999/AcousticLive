@@ -18,16 +18,6 @@ def niveles(request): #Vista niveles
     
     return HttpResponse(documento)
 
-def login(request): #Login
-    doc_externo = open("Acoustic_Live/Templates/login.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
-
-    ctx = Context()
-
-    documento = plt.render(ctx)
-    
-    return HttpResponse(documento)
 
 def Formulario_Registro(request):
     if request.method=="POST":
@@ -280,3 +270,18 @@ def formulario_nuevoVideo(request):
     return render (request, "formulario.html")
         
 
+def login(request): #Login
+    # doc_externo = open("Acoustic_Live/Templates/login.html")
+    # plt = Template(doc_externo.read())
+    # doc_externo.close()
+
+    # ctx = Context()
+
+    # documento = plt.render(ctx)
+    if request.method=="POST":
+        usuario=request.POST.get('usuario','')
+        contraseña= request.POST.get('contraseña','')
+        print(usuario)
+        print(contraseña)
+    return render (request, "login.html")
+    # return HttpResponse(documento)

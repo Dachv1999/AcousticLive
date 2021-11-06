@@ -21,7 +21,9 @@ h1 {
     margin: 0;  
     box-sizing: border-box;
 }
-
+#cerrar{
+    margin-left: 80px;
+}
 nav{
     background: #1E2327;
     height: 80px;
