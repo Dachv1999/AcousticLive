@@ -51,6 +51,8 @@ def validar(nombreUsuario):
 def Formulario_Registro(request):
     if request.method=="POST":
         nombre=request.POST.get('nombre','')
+        apellidoPaterno=request.POST.get('apellido_paterno', '')
+        apellidoMaterno=request.POST.get('apellido_materno','')
         nombreUsuario=request.POST.get('nombreUsuario','')
         correo= request.POST.get('correo','')
         contraseña= request.POST.get('contraseña','')
@@ -109,6 +111,8 @@ def Formulario_Registro(request):
                     return redirect("/Formulario_Registro/")
                 else:
                     messages.add_message(request=request, level=messages.WARNING, message = "todo bien ")
+                    estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
+                    estudiante.save() #ingresar datos
                     return redirect("/Formulario_Registro/")
         else:
             messages.add_message(request=request, level=messages.WARNING, message = "Porfavor llene todos los campos")
