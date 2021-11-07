@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+ {% block title %}
+     Acoustic Live | Inicio
+ {% endblock %}
+
+{% block content %}
+{% load static %}
+<!--<div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</div>-->
+<div class="container-fluid">
+    <link rel="stylesheet" href="{% static '/css/fondo.css' %}" >
+    <div class="container" style="padding-top: 10%;">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          
+          <div class="carousel-inner"> <!--El carrusel completo"el que contiene a los demas"-->
+              <!--inicio de una ventana del carrusel-->
+            <div class="carousel-item active" id="principiante"> 
+                <link rel="stylesheet" href="{% static '/css/imagenes.css' %}" >
+              <div class="container-carrusel">
+                <h1>Comienza tus clases ya</h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus itaque quos sapiente tempore, voluptatem repudiandae numquam</p>
+              </div>
+            </div>
+            <!--Fin carrusel-->
+            <div class="carousel-item" id="principiante">
+                <link rel="stylesheet" href="{% static '/css/imagenes.css' %}" >
+              <div class="container-carrusel">
+                <h1>Comienza tus clases ya</h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus itaque quos sapiente tempore, voluptatem repudiandae numquam </p>
+              </div>
+            </div>
+            <div class="carousel-item" id="principiante">
+                <link rel="stylesheet" href="{% static '/css/imagenes.css' %}" >
+              <div class="container-carrusel">
+                <h1>Comienza tus clases ya</h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus itaque quos sapiente tempore, voluptatem repudiandae numquam </p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <div class="container-fluid formulario" style="margin-top: 5%;">
+            <h1>titulo</h1>
+            <div class="row" style="margin-left: 6%;">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <img src="{% static 'Imagenes/MarioFreiria.jpg' %}" alt="1" width="200" height="200" style="border-radius: 100%;">
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <img src="{% static 'Imagenes/ChristianVib.jpg' %}" alt="2" width="200" height="200" style="border-radius: 100%;">
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <img src="{% static 'Imagenes/AaronSilva.jpg' %}" alt="3" width="200" height="200" style="border-radius: 100%;">
+                </div>
+            </div>
+        </div>
+      </div> 
+</div>
+{% endblock %}

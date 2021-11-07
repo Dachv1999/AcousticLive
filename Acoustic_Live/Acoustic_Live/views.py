@@ -6,6 +6,27 @@ from gestionBD.models import Leccion, Profesor
 from tkinter import messagebox as MessageBox
 from django.contrib import messages
 
+def inicio(request): #Vista Inicio
+    doc_externo = open("Acoustic_Live/Templates/Inicio.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)
+
+def inicio_profesores(request): #Vista Inicio de profesores
+    doc_externo = open("Acoustic_Live/Templates/Vista_Principal_Profesores.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)    
 
 def niveles(request): #Vista niveles
     doc_externo = open("Acoustic_Live/Templates/Division_Niveles.html")
@@ -17,6 +38,7 @@ def niveles(request): #Vista niveles
     documento = plt.render(ctx)
     
     return HttpResponse(documento)
+
 
 def login(request): 
     if request.method=="POST":
