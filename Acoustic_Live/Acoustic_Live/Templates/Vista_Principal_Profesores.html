@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+ {% block title %}
+    Acoustic Live | Mis Cursos
+ {% endblock %}
+
+{% block content %}
+{% load static %}
+
+    <div class="container-fluid">
+        <link rel="stylesheet" href="{% static '/css/Fondo.css' %}">
+        <div class="container" style="padding-top: 10%;">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="row">
+                        <div class="container" style="background-color: snow;">
+                            <h1>Nivel Principiante</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container mt-2" style="background-color: sienna;">
+                            <h1>Nivel medio</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container mt-2" style="background-color: salmon;">
+                            <h1>Nivel avanzado</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="row mt-5 mb-5">
+                        <div class="container" style="background-color: goldenrod;">
+                            <h1>Registro de video</h1>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="container mt-2">
+                            <center><input type="image" src="Imagenes/llamita icon.png" width="200" height="200" style="border-radius: 100%;"></center>
+                            <h1 style="color: white;">datos personales</h1>
+                            <p style="color: white;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias distinctio enim voluptatem molestias quo nisi nemo, vitae blanditiis quaerat. Nulla voluptatem voluptatibus non modi fugit ea id quibusdam, repellendus ipsum?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+{% endblock %}

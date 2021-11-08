@@ -5,6 +5,27 @@ from gestionBD.models import Leccion, Profesor
 from tkinter import messagebox as MessageBox
 from django.contrib import messages
 
+def inicio(request): #Vista Inicio
+    doc_externo = open("Acoustic_Live/Templates/Inicio.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)
+
+def inicio_profesores(request): #Vista Inicio de profesores
+    doc_externo = open("Acoustic_Live/Templates/Vista_Principal_Profesores.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)    
 
 def niveles(request): #Vista niveles
     doc_externo = open("Acoustic_Live/Templates/Division_Niveles.html")
@@ -17,17 +38,112 @@ def niveles(request): #Vista niveles
     
     return HttpResponse(documento)
 
-def login(request): #Login
-    doc_externo = open("Acoustic_Live/Templates/login.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
+<<<<<<< HEAD
+=======
 
-    ctx = Context()
+def login(request): 
+    if request.method=="POST":
+        usuario=request.POST.get('usuario','')
+        contraseña=request.POST.get('contraseña','')
+        if len(contraseña)==0 or len(usuario)==0:
+            messages.add_message(request=request, level=messages.WARNING, message = "Porfavor llene todos los campos")
+            return redirect("/Login/")
+        if validar(usuario)==False:
+            messages.add_message(request=request, level=messages.WARNING, message = "Error el nombre de usuario no es valido")
+            return redirect("/Login/")
+        
 
-    documento = plt.render(ctx)
     
-    return HttpResponse(documento)
+    return render (request, "login.html")
 
+def validar(nombreUsuario):
+    valido_usuario = True
+    i = 0
+    while(i<len(nombreUsuario) and valido_usuario):
+        aux = (int)(ord(nombreUsuario[i]))
+        letrita = nombreUsuario[i]
+        if (not((aux>64 and aux<91) or (aux>96 and aux<123)or (aux>47 and aux<59)
+            or letrita=="á" or letrita=="é" or letrita=="í" or letrita=="_" or letrita=="-"
+            or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
+            or letrita=="Í" or letrita=="Ó" or letrita=="Ú")):
+                    
+            valido_usuario = False
+        i +=1
+    return valido_usuario
+
+def Formulario_Registro(request):
+    if request.method=="POST":
+        nombre=request.POST.get('nombre','')
+        apellidoPaterno=request.POST.get('apellido_paterno', '')
+        apellidoMaterno=request.POST.get('apellido_materno','')
+        nombreUsuario=request.POST.get('nombreUsuario','')
+        correo= request.POST.get('correo','')
+        contraseña= request.POST.get('contraseña','')
+        confirmacion= request.POST.get('confirmacion','')
+        
+        if(len(nombre)!=0 and len(correo)!=0 and len(contraseña)!=0 and len(confirmacion)!=0):
+            valido = True
+            i = 0
+            while(i<len(nombre) and valido):
+                aux = (int)(ord(nombre[i]))
+                letrita = nombre[i]
+                if (not((aux>64 and aux<91) or (aux>96 and aux<123)
+                    or letrita=="á" or letrita=="é" or letrita=="í"
+                    or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
+                    or letrita=="Í" or letrita=="Ó" or letrita=="Ú")):
+                    
+                    valido = False
+                i +=1
+
+            valido_usuario = True
+            i = 0
+            while(i<len(nombreUsuario) and valido_usuario):
+                aux = (int)(ord(nombreUsuario[i]))
+                letrita = nombreUsuario[i]
+                if (not((aux>64 and aux<91) or (aux>96 and aux<123)or (aux>47 and aux<59)
+                    or letrita=="á" or letrita=="é" or letrita=="í" or letrita=="_" or letrita=="-"
+                    or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
+                    or letrita=="Í" or letrita=="Ó" or letrita=="Ú")):
+                    
+                    valido_usuario = False
+                i +=1
+            valido_correo = True
+            i = 0
+            while(i<len(correo) and valido_correo):
+                aux = (int)(ord(correo[i]))
+                letrita = correo[i]
+                if (not((aux>64 and aux<91) or (aux>96 and aux<123)or (aux>47 and aux<59)
+                    or letrita=="á" or letrita=="é" or letrita=="í" or letrita=="_" or letrita=="-"
+                    or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
+                    or letrita=="Í" or letrita=="Ó" or letrita=="Ú" or letrita=="@"
+                    or letrita==".")):
+                    valido_correo = False
+                i +=1
+            if(valido==False):
+                messages.add_message(request=request, level=messages.WARNING, message = "Nonbre ingresado invalido")
+                return redirect("/Formulario_Registro/")
+            if(valido_usuario==False):
+                messages.add_message(request=request, level=messages.WARNING, message = "Nonbre de usuario invalido")
+                return redirect("/Formulario_Registro/")
+            if(confirmacion!=contraseña):
+                messages.add_message(request=request, level=messages.WARNING, message = "La contraseña de verificacion no coincide")
+                return redirect("/Formulario_Registro/")
+            else:   
+                if(valido_correo==FALSE or not('@gmail.com' in correo) and not('@hotmail.com' in correo)):
+                    messages.add_message(request=request, level=messages.WARNING, message = "Verifique que el correo sea valido")
+                    return redirect("/Formulario_Registro/")
+                else:
+                    messages.add_message(request=request, level=messages.WARNING, message = "todo bien ")
+                    estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
+                    estudiante.save() #ingresar datos
+                    return redirect("/Formulario_Registro/")
+        else:
+            messages.add_message(request=request, level=messages.WARNING, message = "Porfavor llene todos los campos")
+            return redirect("/Formulario_Registro/")
+
+    return render (request, "Formulario_Registro.html")
+
+>>>>>>> main
 
 def nivel_medio(request): #Vista nivel medio
     doc_externo = open("Acoustic_Live/Templates/Vista_Nivel_Medio.html")
