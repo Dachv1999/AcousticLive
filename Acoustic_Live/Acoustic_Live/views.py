@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import Template, Context, context
 from django.shortcuts import render, redirect
-from gestionBD.models import Leccion, Profesor
+from gestionBD.models import Leccion, Profesor, Estudiante
 from tkinter import messagebox as MessageBox
 from django.contrib import messages
 
@@ -37,9 +37,6 @@ def niveles(request): #Vista niveles
     documento = plt.render(ctx)
     
     return HttpResponse(documento)
-
-<<<<<<< HEAD
-=======
 
 def login(request): 
     if request.method=="POST":
@@ -129,7 +126,7 @@ def Formulario_Registro(request):
                 messages.add_message(request=request, level=messages.WARNING, message = "La contraseña de verificacion no coincide")
                 return redirect("/Formulario_Registro/")
             else:   
-                if(valido_correo==FALSE or not('@gmail.com' in correo) and not('@hotmail.com' in correo)):
+                if(valido_correo==False or not('@gmail.com' in correo) and not('@hotmail.com' in correo)):
                     messages.add_message(request=request, level=messages.WARNING, message = "Verifique que el correo sea valido")
                     return redirect("/Formulario_Registro/")
                 else:
@@ -143,7 +140,6 @@ def Formulario_Registro(request):
 
     return render (request, "Formulario_Registro.html")
 
->>>>>>> main
 
 def nivel_medio(request): #Vista nivel medio
     doc_externo = open("Acoustic_Live/Templates/Vista_Nivel_Medio.html")

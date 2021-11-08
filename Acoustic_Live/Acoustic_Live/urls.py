@@ -15,11 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-<<<<<<< HEAD
-from Acoustic_Live.views import niveles, nivel_medio, nivel_avanzado,formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA, login
-=======
 from Acoustic_Live.views import niveles, nivel_medio, nivel_avanzado,formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA, login,Formulario_Registro,inicio,inicio_profesores
->>>>>>> main
 from gestionBD.views import lista_principiante, lista_medio, lista_avanzado
 
 urlpatterns = [
