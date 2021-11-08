@@ -8,58 +8,6 @@
 {% load static %}
 
 
-<script>
-
-    jQuery(document).ready(function($){
-
-        var progress = 0;
-        var cantidad_videos = JSON.parse("{{cantidad_videos}}")    
-        var porcentaje = 100/cantidad_videos;
-
-        var bool = true
-        
-
-        
-      //  for(var i = 1; i <= cantidad_videos; i++){
-        
-            var a = "#";
-            var b = 2;
-            var d= " input";
-            var c = a+ b + d;
-            console.log(c);
-
-            $(c).on('change', function()
-        { 
-            var x = this.id;
-            var xx = "#" + x + " input"
-
-            document.getElementById("demo").innerHTML = xx
-            if ($(xx).is(":checked") == true) {
-            
-            
-            progress = progress+porcentaje;
-
-            $('#blips > .progress-bar').attr("style","width:" + progress + "%");
-            }
-            else if ($(xx).is(":checked") == false) {
-            progress = progress-porcentaje;
-            $('#blips > .progress-bar').attr("style","width:" + progress + "%");
-            }
-        });
-
-        //}
-        
-    
-    
-    });
-    </script>
-
-
-
-
-
-
-
 
 <div class="container-fluid" style="background-color: #343F4B;padding-top: 6rem;padding-bottom: 0.5rem;">
             
@@ -82,16 +30,6 @@
             </p>
         </div>
           
-        <div class="container">
-            <hr>
-            <h5>Progreso del curso</h5>
-            <div class="progress" id="blips">
-              <div class="progress-bar" role="progressbar">
-                <span class="sr-only"></span>
-              </div>
-            </div>
-            
-        </div>
     </div>     
     
     
@@ -116,20 +54,12 @@
                   </div>
             </div>
             {% endif %}
-            <p id="demo"></p>
+            
             {% for leccion in lecciones %} 
                 
 
                 <h1 style="color: white; margin-top: 30px; margin-bottom: 30px;">{{ leccion.nombre_leccion }}</h1>
-
-                <div class="checkbox" id="{{forloop.counter}}">
-                    <label>Visto
-                      <input type="checkbox" value="{{forloop.counter}}"  name= "{{forloop.counter}}" id= "{{forloop.counter}}">
-                    </label>
-                  </div>
-                
-
-                  
+   
 
 
                 <div class="row">

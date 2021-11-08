@@ -129,8 +129,6 @@ def Formulario_Registro(request):
                     return redirect("/Formulario_Registro/")
                 else:
 
-                    est=Estudiante(nombre_estudiante = nombre, usuario= nombreUsuario, correo= correo, contraseña_estudiante=contraseña)
-                    est.save()
                     messages.add_message(request=request, level=messages.WARNING, message = "todo bien ")
                     estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
                     estudiante.save() #ingresar datos
