@@ -19,8 +19,10 @@ class Leccion(models.Model):
 
 class Estudiante(models.Model):
     nombre_estudiante=models.CharField(max_length=100)
+    apellidoP_estudiante=models.CharField(max_length=50)
+    apellidoM_estudiante=models.CharField(max_length=50)
     usuario=models.CharField(max_length=50)
-    correo=models.CharField(max_length=100)
+    correo_estudiante=models.CharField(max_length=100)
     contraseña_estudiante=models.CharField(max_length=50)
 
 class Cursa(models.Model):

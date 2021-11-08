@@ -39,7 +39,7 @@
             <div class="col-md-4 formulario">
                 
                 <form action="" method="POST"> 
-                    <!-- {% csrf_token %} -->
+                     {% csrf_token %}
                     <div class="form-group text-center mt-0">
                         <h2 class="text-light ">Reg&iacute;strate</h2>
                     </div>
@@ -51,7 +51,7 @@
                         <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
                         {% endfor %}
                         </ul>
-                    </div>
+                        </div>
                     {% endif %}
                     <div class="row form-group justify-content-center  pt-1">
                         <label for="nombre" >
@@ -59,6 +59,22 @@
                         </label>
                         <div class="mt-1">
                             <input type="text" name="nombre" value="" id="nombre" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group justify-content-center  pt-3">
+                        <label for="nombre" >
+                            Apellido paterno*:
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="apellido_paterno" value="" id="apellidoP" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group justify-content-center  pt-3">
+                        <label for="nombre" >
+                            Apellido materno*:
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="apellido_materno" value="" id="apellidoM" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group justify-content-center  pt-3">
@@ -96,6 +112,9 @@
                     <div class="row justify-content-center">
                         <input type="submit" class="col col-md-6 col-sm-6 col-6 btn btn-dark mt-3 mb-0" value="Registrarse">
                     </div>
+                    <label for="nombre" >
+                        (*)Campo Obligatorio
+                    </label>
                 </form>
             </div>
         </div>
