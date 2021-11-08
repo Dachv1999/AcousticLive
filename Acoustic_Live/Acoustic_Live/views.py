@@ -115,10 +115,10 @@ def Formulario_Registro(request):
                     valido_correo = False
                 i +=1
             if(valido==False):
-                messages.add_message(request=request, level=messages.WARNING, message = "Nonbre ingresado invalido")
+                messages.add_message(request=request, level=messages.WARNING, message = "Nombre ingresado invalido")
                 return redirect("/Formulario_Registro/")
             if(valido_usuario==False):
-                messages.add_message(request=request, level=messages.WARNING, message = "Nonbre de usuario invalido")
+                messages.add_message(request=request, level=messages.WARNING, message = "Nombre de usuario invalido")
                 return redirect("/Formulario_Registro/")
             if(confirmacion!=contraseña):
                 messages.add_message(request=request, level=messages.WARNING, message = "La contraseña de verificacion no coincide")
@@ -128,6 +128,7 @@ def Formulario_Registro(request):
                     messages.add_message(request=request, level=messages.WARNING, message = "Verifique que el correo sea valido")
                     return redirect("/Formulario_Registro/")
                 else:
+
                     messages.add_message(request=request, level=messages.WARNING, message = "todo bien ")
                     estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
                     estudiante.save() #ingresar datos
