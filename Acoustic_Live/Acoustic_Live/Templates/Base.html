@@ -39,10 +39,12 @@ $(document).ready(function() {
                 <img src="{% static 'Imagenes/Logo.jpg' %}" alt="" class="logo">
             </div>
             <ul>
-                <li><a class="active"  href="/Mis_Cursos/">Mis Cursos</a></li>
+                <li><a class="#"  href="/Inicio/">Inicio</a></li>
+                <li><a class="#"  href="/Mis_Cursos/">Mis Cursos</a></li>
                <!-- <li><a  href="#">tutoriales</a></li>
                 <li><a  href="#">bibliografia</a></li>
                 <li><a  href="#">eventos</a></li>-->
+                <li><a class="#"  href="/Login/">Ingresar</a></li>
                 <li><a  href="#">Cerrar Sesion</a></li>
             </ul>
             <label for="check" class="checkbtn">
@@ -53,9 +55,17 @@ $(document).ready(function() {
     </header> 
     <!-- cabezera fin-->
      {% block content %}   {% endblock %}
-     <footer style="margin-top: 4%; padding-bottom: 1%; background-color: gray; padding-top: 1%;">
-         <center><h6 class="text-light">Powered by CodeMasters</h6></center>
-     </footer>
+     <footer style="margin-top: 5%; padding-bottom: 1%; background-color: #111; padding-top: 1.5%; color: #fff;">
+        <div class="footer-content">
+            <h6 class="text-light">Designed by CodeMasters</h6>
+            <ul class="socials">
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+            </ul>
+        </div>
+        
+    </footer>
      <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

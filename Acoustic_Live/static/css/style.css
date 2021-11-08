@@ -190,3 +190,46 @@ nav label:hover{
     box-shadow: 0 0 30px rgba(0,-0,-0,0.568);
     color: white;
 }
+#info{
+    margin-top: 0;
+    padding-left: 1%;
+    padding-right: 1%;
+    font-size: 1.2rem;
+    margin-bottom: 2.4%;
+}
+@font-face{
+    font-family: JosefinSans;
+    src: url('../Imagenes/JosefinSans-VariableFont_wght.ttf');
+}
+@font-face{
+    font-family: Comfortaa;
+    src: url('../Imagenes/Comfortaa-VariableFont_wght.ttf');
+}
+.footer-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-family: Comfortaa;
+}
+.socials{
+    list-style: none;
+    display: flex;
+    padding-left: 0%;
+}
+.socials li{
+    margin: 0 10px;
+}
+.socials a{
+    text-decoration: none;
+    color: #fff;
+}
+.socials a i{
+    font-size: 1rem;
+    transition: color .3s ease;
+}
+.socials a:hover{
+    color: #111;
+
+}
