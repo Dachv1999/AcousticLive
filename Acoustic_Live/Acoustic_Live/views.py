@@ -1,11 +1,31 @@
-from tkinter.constants import FALSE
 from django.http import HttpResponse
 from django.template import Template, Context, context
 from django.shortcuts import render, redirect
-from gestionBD.models import Leccion, Profesor
+from gestionBD.models import Leccion, Profesor, Estudiante
 from tkinter import messagebox as MessageBox
 from django.contrib import messages
 
+def inicio(request): #Vista Inicio
+    doc_externo = open("Acoustic_Live/Templates/Inicio.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)
+
+def inicio_profesores(request): #Vista Inicio de profesores
+    doc_externo = open("Acoustic_Live/Templates/Vista_Principal_Profesores.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)    
 
 def niveles(request): #Vista niveles
     doc_externo = open("Acoustic_Live/Templates/Division_Niveles.html")
@@ -25,11 +45,9 @@ def login(request):
         if len(contraseña)==0 or len(usuario)==0:
             messages.add_message(request=request, level=messages.WARNING, message = "Porfavor llene todos los campos")
             return redirect("/Login/")
-        if validar(usuario)==False:
+        elif validar(usuario)==False:
             messages.add_message(request=request, level=messages.WARNING, message = "Error el nombre de usuario no es valido")
             return redirect("/Login/")
-        
-
     
     return render (request, "login.html")
 
@@ -51,6 +69,8 @@ def validar(nombreUsuario):
 def Formulario_Registro(request):
     if request.method=="POST":
         nombre=request.POST.get('nombre','')
+        apellidoPaterno=request.POST.get('apellido_paterno', '')
+        apellidoMaterno=request.POST.get('apellido_materno','')
         nombreUsuario=request.POST.get('nombreUsuario','')
         correo= request.POST.get('correo','')
         contraseña= request.POST.get('contraseña','')
@@ -104,11 +124,13 @@ def Formulario_Registro(request):
                 messages.add_message(request=request, level=messages.WARNING, message = "La contraseña de verificacion no coincide")
                 return redirect("/Formulario_Registro/")
             else:   
-                if(valido_correo==FALSE or not('@gmail.com' in correo) and not('@hotmail.com' in correo)):
+                if(valido_correo==False or not('@gmail.com' in correo) and not('@hotmail.com' in correo)):
                     messages.add_message(request=request, level=messages.WARNING, message = "Verifique que el correo sea valido")
                     return redirect("/Formulario_Registro/")
                 else:
                     messages.add_message(request=request, level=messages.WARNING, message = "todo bien ")
+                    estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
+                    estudiante.save() #ingresar datos
                     return redirect("/Formulario_Registro/")
         else:
             messages.add_message(request=request, level=messages.WARNING, message = "Porfavor llene todos los campos")
