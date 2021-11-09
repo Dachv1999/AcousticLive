@@ -2,6 +2,7 @@
 
  {% block title %}
      Acoustic Live | Formulario
+        
  {% endblock %}
 
 {% block content %}
@@ -10,12 +11,27 @@
         <link rel="stylesheet" href="{% static '/css/fondo.css' %}" > 
         
 
+            </script>
         <div class="container">
+           
             <div class="row justify-content-center pt-5">
                 <div class="col-md-7">
-                    <h2 class="display-6 text-center" style="padding-top: 70px;">Formulario</h2>
 
-                    <form action="{% url 'Envio' %}" method="post">
+                    <h2 class="display-6 text-center" style="padding-top: 70px;">Formulario</h2>
+                    
+
+                    {% if messages %}
+                    <div class="ventana">
+                        <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    
+                    
+                    <form action="" method="POST"> 
                         {% csrf_token %}
                         <div class="row form-group justify-content-center  pt-3">
                             <label for="nombre" class="col-form-label col-md-2 ">
@@ -28,7 +44,7 @@
                         
                         <div class="row form-group justify-content-center  pt-3">
                             <label for="Descripcion" class="col-form-label col-md-2 ">
-                                Descripcion*:
+                                Descripci&oacute;n*:    
                             </label>
                             <div class="col-md-6">
                                 <textarea name="descripcion" id="descripcion" class="form-control" cols="30" rows="4"></textarea>
@@ -67,14 +83,14 @@
         
                                   <p>
     
-                                    <input type= "submit" value="Aceptar" class="btn btn-dark btn-block mt-1" data-bs-toggle="modal" data-bs-target="#error">
+                                    <input type= "submit" value="Subir" class="btn btn-dark btn-block mt-1" style="margin-left: 36%; margin-right: 10px;" data-bs-toggle="modal" data-bs-target="#ventana" >
     
-                                    <input type= "reset" value="Borrar  " class="btn btn-dark btn-block mt-1" >
+                                    <!--<input type= "reset" value="Borrar  " class="btn btn-dark btn-block mt-1" >-->
                                     
-                                    <form action="/Mis_Cursos/" method="GET">                      
-                                        <input type="submit" value = "Cancelar" class="btn btn-dark btn-block mt-1" >
-                                        
-                                    </form>
+                                                       
+                                    <a type="button" href="/Mis_Cursos/"  class="btn btn-dark btn-block mt-1" >Cancelar </a>
+                                    
+ 
     
                                   </p>     
                              
@@ -82,14 +98,12 @@
                            
                            
                        
-                            <div class="row form-group text-center  pt-3">
-                                <p >(*)Campos obligatorios</p>
-                            </div>  
                         </div>  
                     </form>
-    
-                  
-                                      
+                    
+                    <div class="row form-group text-center  pt-3">
+                        <p >(*)Campos obligatorios</p>
+                    </div>              
     
                 </div>
                     

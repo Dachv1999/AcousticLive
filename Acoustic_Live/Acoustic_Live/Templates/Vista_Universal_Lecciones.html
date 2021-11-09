@@ -11,16 +11,20 @@
             
     <div class="row">
         <div class="col-lg-1 col-md-2 col-sm-3">
-            <form action="/Profesores_Nivel_Principiante/" method="GET">       
+            <form action="{{ atras }}" method="GET">       
                 <input type="image" name="boton_back" style="margin-left: 20px;" src="{% static 'Imagenes/boton_atras.png' %}" alt="Volver atras" width="50" height="50">                
             </form>
         </div>
-    <div class="col-11 col-md-10 col-sm-7">    
+    <div class="col-11 col-md-10 col-sm-7">
+        {% for profesor in profesores %}     
             <h1 style = "color: white;">
-                {{ profesor.nombre_profesor }}
+
+                {{ profesor.nombre_profesor }} {{ profesor.apellido_profesor }} 
+                
             </h1>
+        {% endfor %}
             <p style = "color: white;">
-                Nivel Principiante
+                {{nivel}}
             </p>
         </div>
     </div>       
@@ -29,24 +33,36 @@
 
 <div class="container-fluid">
     <link rel="stylesheet" href="{% static '/css/Fondo.css' %}" >
-        <div class="container">  
-        
+        <div class="container"> 
+
+            {% if lecciones %}
+            {% if bandera %} 
+            <div class="container">
+                <div class="alert alert-dismissible" style="margin-top: 15px; background-color: rgb(88, 90, 107); color: white;">
+                    <h6><strong>Recomendaci&oacute;n:</strong> Si no logras entender los videos de este nivel, te recomendamos que empieces por un nivel inferior.</h6>
+                  </div>
+            </div>
+            {% endif %}
             {% for leccion in lecciones %} 
 
-                <h1 style="color: white;">{{ leccion.nombre_leccion }}</h1>
+                <h1 style="color: white; margin-top: 30px; margin-bottom: 30px;">{{ leccion.nombre_leccion }}</h1>
                 <div class="row">
                     <div class="container">
                         <div class="ratio" style="--bs-aspect-ratio: 50%;">
                             <iframe width="560" height="315" src="{{ leccion.link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                    
                         </div> 
-                            <div class="container text-left">  
-                                <p style="color: white;"> {{ leccion.descripcion }} </p>
+                            <div class="container text-left" style="margin-top: 30px;">  
+                                <h4 style="color: white;"> {{ leccion.descripcion }} </h4>
                             </div>
                         </div>
                     </div>
 
-            {% endfor %}
-
+            {% endfor %} 
+            {% else %}
+            <div class="container" style="padding-top: 60px; padding-bottom: 60px;">
+                <center><h1>No hay videos disponibles</h1></center>
+            </div>
+            {% endif %}
         </div>
 </div>    
 
