@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+ {% block title %}
+     Acoustic Live | Inicio
+ {% endblock %}
+
+{% block content %}
+{% load static %}
+<!--<div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</div>-->
+<div class="container-fluid">
+    <link rel="stylesheet" href="{% static '/css/fondo.css' %}" >
+    <div class="container" style="padding-top: 9%;" >
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          </div>
+          
+          <div class="carousel-inner"> <!--El carrusel completo"el que contiene a los demas"-->
+              <!--inicio de una ventana del carrusel-->
+            <div class="carousel-item active" id="c1" style="background-image: url(../static/Imagenes/c2.jpg);"> 
+                
+              <div class="container-carrusel" style="text-shadow: black 0.1em 0.1em 0.2em;">
+                <h1><b>Comienza tus clases ya</b></h1>
+                <p>Acoustic Live es la escuela online de guitarra donde puedes aprender a tu ritmo, con un itinerario claro y el acompa&ntilde;amiento de los mejores profesores.</p>
+              </div>
+            </div>
+            <!--Fin carrusel-->
+            <div class="carousel-item" id="c2" style="background-image: url(../static/Imagenes/c1.jpg);">
+              <div class="container-carrusel" style="text-shadow: black 0.1em 0.1em 0.2em;">
+                <h1><b>Descubre c&oacute;mo tocar guitarra de manera f&aacute;cil y divertida</b></h1>
+                <p>A tu ritmo, paso a paso, con un m&eacute;todo estructurado. </p>
+              </div>
+            </div>
+            <div class="carousel-item" id="c3" style="background-image: url(../static/Imagenes/c3.jpg);">
+              <div class="container-carrusel" style="text-shadow: black 0.1em 0.1em 0.2em;">
+                <h1><b>Cuando y donde quieras</b></h1>
+                <p>Accede a todo el contenido desde cualquier lugar y en cualquier momento.</p>
+              </div>
+            </div>
+            <div class="carousel-item" id="c4" style="background-image: url(../static/Imagenes/c4.jpg);">
+              <div class="container-carrusel" style="text-shadow: black 0.1em 0.1em 0.2em;">
+                <h1><b>Ense&ntilde;anza basada en objetivos</b></h1>
+                <p>Nuestros programas de estudio est&aacute;n preparados para que consigas el resultado que buscas.</p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <div class="container-fluid formulario" style="margin-top: 5%;">
+            <h1 style="padding-bottom: 0.5%; padding-left: 1%; font-weight: bold;">Aut&eacute;nticos maestros de la guitarra</h1>
+            <p id="info">Contamos con profesores excelentes con amplia experiencia en escenarios, todos ellos guitarristas reconocidos y grandes pedagogos.</p>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+                    <img src="{% static 'Imagenes/MarioFreiria.jpg' %}" alt="1" width="200" height="200" style="border-radius: 100%;">
+                    <div class="container" style="padding-top: 25px;"><h2>Mario Freiria</h2></div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+                    <img src="{% static 'Imagenes/ChristianVib.jpg' %}" alt="2" width="200" height="200" style="border-radius: 100%;">
+                    <div class="container" style="padding-top: 25px;"><h2>Christian Vib</h2></div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+                    <img src="{% static 'Imagenes/AaronSilva.jpg' %}" alt="3" width="200" height="200" style="border-radius: 100%;">
+                    <div class="container" style="padding-top: 25px; "><h2>Aaron Silva</h2></div>
+                </div>
+            </div>
+        </div>
+      </div> 
+</div>
+{% endblock %}
