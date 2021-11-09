@@ -30,7 +30,7 @@ urlpatterns = [
     path('Profesores_Nivel_Principiante/', profesoresNP),
     path('Profesores_Nivel_Medio/', profesoresNM),
     path('Profesores_Nivel_Avanzado/', profesoresNA),
-    path('', inicio),
+    path('Inicio/', inicio),
     path('Inicio_Profesores/', inicio_profesores),
     # path('Envio/', envio_formulario, name="Envio"),
 ]

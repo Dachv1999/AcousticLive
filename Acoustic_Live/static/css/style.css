@@ -1,6 +1,5 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    
     margin: 0;
 }
 p{
@@ -205,6 +204,7 @@ nav label:hover{
     font-family: Comfortaa;
     src: url('../Imagenes/Comfortaa-VariableFont_wght.ttf');
 }
+
 .footer-content{
     display: flex;
     align-items: center;
@@ -232,4 +232,9 @@ nav label:hover{
 .socials a:hover{
     color: #111;
 
+}
+input[type="checkbox"]{
+    position: relative;
+    width: 20px;
+    height: 20px;
 }

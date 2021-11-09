@@ -35,9 +35,9 @@ $(document).ready(function() {
             
             <input type="checkbox" id="check">
             
-            <div href="#" class="enlace">
+            <a href="/Inicio/" class="enlace">
                 <img src="{% static 'Imagenes/Logo.jpg' %}" alt="" class="logo">
-            </div>
+            </a>
             <ul>
                 <li><a class="#"  href="/">Inicio</a></li>
                 <li><a class="#"  href="/Mis_Cursos/">Mis Cursos</a></li>
@@ -57,14 +57,13 @@ $(document).ready(function() {
      {% block content %}   {% endblock %}
      <footer style="margin-top: 5%; padding-bottom: 1%; background-color: #111; padding-top: 1.5%; color: #fff;">
         <div class="footer-content">
-            <h6 class="text-light">Designed by CodeMasters</h6>
             <ul class="socials">
                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                 <li><a href="#"><i class="fab fa-instagram"></i></a></li>
                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
             </ul>
+            <h6 class="text-light">Designed by CodeMasters</h6> 
         </div>
-        
     </footer>
      <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
