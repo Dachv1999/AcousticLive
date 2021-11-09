@@ -113,11 +113,31 @@ def validarCorreo(correo):
         i +=1
     return valido_correo
 
-def imprimir(request):
+def mensaje(req,mensajeError):  
+    messages.add_message(request=req, level=messages.WARNING, message = mensajeError)
+
+def validarTamaño(palabra,maximo,minimo):
     
-    messages.add_message(request=request, level=messages.WARNING, message = "Este es el mensaje")
-    return redirect("/Formulario_Registro/") 
+    cadena=-1
+    if(len(palabra)>maximo):
+        cadena=1
+        
+    else:
+        if(len(palabra)<minimo):
+            cadena=2
+    return cadena
+
+def generador(variable,numero):
     
+    cadena=False
+    if(numero==1):
+        cadena="Error el campo "+variable+" es muy grande"
+        
+    else:
+        if(numero==2):
+            cadena="Error el campo "+variable+" es muy pequeño"
+    return cadena
+
 
 def Formulario_Registro(request):
     if request.method=="POST":
@@ -128,8 +148,10 @@ def Formulario_Registro(request):
         correo= request.POST.get('correo','')
         contraseña= request.POST.get('contraseña','')
         confirmacion= request.POST.get('confirmacion','')
-        
+        res=redirect("/Formulario_Registro/")
+
         if(len(nombre)!=0 and len(correo)!=0 and len(contraseña)!=0 and len(confirmacion)!=0):
+            
             
             validoNombre=validarNombres(nombre)
             validoApePat=validarNombres(apellidoPaterno)
@@ -138,53 +160,55 @@ def Formulario_Registro(request):
             valido_correo=validarCorreo(correo)
 
             if((len(apellidoPaterno)==0 and len(apellidoMaterno)==0)):
-                messages.add_message(request=request, level=messages.WARNING, message = "Eroor debe ingresar al menos un apellido")
-                return redirect("/Formulario_Registro/")
-
+                mensaje(request,"Error debe ingresar al menos un apellido")
+                return res
             if(validoNombre==False):
-                messages.add_message(request=request, level=messages.WARNING, message = "Nombre ingresado invalido")
-                return redirect("/Formulario_Registro/")
+                mensaje(request,"Nombre ingresado invalido")
+                return res
             if(validoApePat==False):
-                messages.add_message(request=request, level=messages.WARNING, message = "Apellido paterno ingresado invalido")
-                return redirect("/Formulario_Registro/")
+                mensaje(request,"Apellido paterno ingresado invalido")
+                return res
             if(validoApeMat==False):
-                messages.add_message(request=request, level=messages.WARNING, message = "Apellido materno ingresado invalido")
-                return redirect("/Formulario_Registro/")
+                mensaje(request,"Apellido materno ingresado invalido")
+                return res
 
             if(valido_usuario==False):
-                messages.add_message(request=request, level=messages.WARNING, message = "Nombre de usuario invalido")
-                return redirect("/Formulario_Registro/")
+                mensaje(request,"Nombre de usuario invalido")
+                return res
 
             if(espacio(nombre)):
-                messages.add_message(request=request, level=messages.WARNING, message = "Error el nombre debe tener caracteres alfabéticos")
-                return redirect("/Formulario_Registro/")
+                mensaje(request,"Error el nombre debe tener caracteres alfabéticos")
+                return res
             if(espacio(apellidoPaterno)):
-                messages.add_message(request=request, level=messages.WARNING, message = "Error el apellido paterno debe tener caracteres alfabéticos")
-                return redirect("/Formulario_Registro/")
+                mensaje(request,"Error el apellido paterno debe tener caracteres alfabéticos")
+                return res
             if(espacio(apellidoMaterno)):
-                messages.add_message(request=request, level=messages.WARNING, message = "Error el apellido materno debe tener caracteres alfabéticos")
-                return redirect("/Formulario_Registro/")
+                mensaje(request,"Error el apellido materno debe tener caracteres alfabéticos")
+                return res
 
-            # if(len(nombre)>25 or len(apellidoPaterno)>25 or len(apellidoPaterno)>25 or len(nombreUsuario)>30):
-            #     messages.add_message(request=request, level=messages.WARNING, message = "Error los campos de nombre y apellidos permiten maximo 25 caracteres")
-            #     return redirect("/Formulario_Registro/")
-            imprimir(request) 
+            if(validarTamaño(nombre,25,2)==1):
+                mensaje(request,generador("Nombre",1))
+                return res
+            elif (validarTamaño(nombre,25,2)==2):
+                mensaje(request,generador("Nombre",2))
+                return res
+
             if(confirmacion!=contraseña):
-                messages.add_message(request=request, level=messages.WARNING, message = "La contraseña de verificacion no coincide")
-                return redirect("/Formulario_Registro/")
+                mensaje(request,"La contraseña de verificacion no coincide")
+                return res
             else:   
                 if(valido_correo==False or not('@gmail.com' in correo) and not('@hotmail.com' in correo)):
-                    messages.add_message(request=request, level=messages.WARNING, message = "Verifique que el correo sea valido")
-                    return redirect("/Formulario_Registro/")
+                    mensaje(request,"Verifique que el correo sea valido")
+                    return res
                 else:
 
-                    messages.add_message(request=request, level=messages.WARNING, message = "todo bien ")
+                    mensaje(request,"todo bien ")
                     # estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
                     # estudiante.save() #ingresar datos
-                    return redirect("/Formulario_Registro/")
+                    return res
         else:
-            messages.add_message(request=request, level=messages.WARNING, message = "Porfavor llene todos los campos obligatorios")
-            return redirect("/Formulario_Registro/")
+            mensaje(request,"Porfavor llene todos los campos obligatorios")
+            return res
 
     return render (request, "Formulario_Registro.html")
 
