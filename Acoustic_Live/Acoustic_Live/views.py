@@ -45,11 +45,9 @@ def login(request):
         if len(contraseña)==0 or len(usuario)==0:
             messages.add_message(request=request, level=messages.WARNING, message = "Porfavor llene todos los campos")
             return redirect("/Login/")
-        if validar(usuario)==False:
+        elif validar(usuario)==False:
             messages.add_message(request=request, level=messages.WARNING, message = "Error el nombre de usuario no es valido")
             return redirect("/Login/")
-        
-
     
     return render (request, "login.html")
 
@@ -117,10 +115,10 @@ def Formulario_Registro(request):
                     valido_correo = False
                 i +=1
             if(valido==False):
-                messages.add_message(request=request, level=messages.WARNING, message = "Nonbre ingresado invalido")
+                messages.add_message(request=request, level=messages.WARNING, message = "Nombre ingresado invalido")
                 return redirect("/Formulario_Registro/")
             if(valido_usuario==False):
-                messages.add_message(request=request, level=messages.WARNING, message = "Nonbre de usuario invalido")
+                messages.add_message(request=request, level=messages.WARNING, message = "Nombre de usuario invalido")
                 return redirect("/Formulario_Registro/")
             if(confirmacion!=contraseña):
                 messages.add_message(request=request, level=messages.WARNING, message = "La contraseña de verificacion no coincide")
@@ -130,6 +128,7 @@ def Formulario_Registro(request):
                     messages.add_message(request=request, level=messages.WARNING, message = "Verifique que el correo sea valido")
                     return redirect("/Formulario_Registro/")
                 else:
+
                     messages.add_message(request=request, level=messages.WARNING, message = "todo bien ")
                     estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
                     estudiante.save() #ingresar datos
