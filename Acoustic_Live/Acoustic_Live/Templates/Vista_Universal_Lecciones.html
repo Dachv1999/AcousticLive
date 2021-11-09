@@ -17,7 +17,7 @@
                 <input type="image" name="boton_back" style="margin-left: 20px;" src="{% static 'Imagenes/boton_atras.png' %}" alt="Volver atras" width="50" height="50">                
             </form>
         </div>
-    <div class="col-11 col-md-10 col-sm-7">
+    <div class="col-lg-5 col-md-5 col-sm-7">
         {% for profesor in profesores %}     
             <h1 style = "color: white;">
 
@@ -29,7 +29,14 @@
                 {{nivel}}
             </p>
         </div>
-          
+        <div class="col-lg-5 col-md-5 col-sm-12">
+            <h5 class="text-light" style="margin-top: 2%;">Tu progreso en este curso:</h5>
+                <div class="progress" id="blips">
+                  <div class="progress-bar" role="progressbar">
+                    <span class="sr-only"></span>
+                  </div>
+                </div>
+        </div>     
     </div>     
     
     
