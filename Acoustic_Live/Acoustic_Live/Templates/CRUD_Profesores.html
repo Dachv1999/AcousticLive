@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+ {% block title %}
+     Acoustic Live | Mis_Videos
+ {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container-fluid" style="padding-top: 10%;">
+    <link rel="stylesheet" href="{% static '/css/fondo.css' %}" >
+    <div class="col-lg-12">
+        <div class="table-responsive">
+          <table class="table table-dark table-hover">
+            <thead>
+              <tr>
+                <th>Titulo</th>
+                <th>Descripcion</th>
+                <th class="text-center">Edicion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!--for-->
+              <tr>
+                <td>nombre video</td><!--{{video.nombre}}-->
+                <td>descripcion del video </td> <!--{{video.descripcion}}-->
+                <td>
+                    <center><a href="" class="btn btn-secondary" style="margin-right: 2%; margin-left: 2%;margin-top: 2%;">Subir</a>
+                    <a href="" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">bajar</a>
+                    <a href="" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">editar</a></center>
+                </td>
+              </tr>
+              <!--endfor-->
+              </tr>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</div>    
+
+{% endblock %}

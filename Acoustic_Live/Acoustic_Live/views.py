@@ -16,6 +16,17 @@ def inicio(request): #Vista Inicio
     
     return HttpResponse(documento)
 
+def crud_profesores(request): #CRUD Profesores
+    doc_externo = open("Acoustic_Live/Templates/CRUD_Profesores.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)
+
 def inicio_profesores(request): #Vista Inicio de profesores
     doc_externo = open("Acoustic_Live/Templates/Vista_Principal_Profesores.html")
     plt = Template(doc_externo.read())
