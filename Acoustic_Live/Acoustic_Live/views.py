@@ -60,11 +60,84 @@ def validar(nombreUsuario):
         if (not((aux>64 and aux<91) or (aux>96 and aux<123)or (aux>47 and aux<59)
             or letrita=="á" or letrita=="é" or letrita=="í" or letrita=="_" or letrita=="-"
             or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
-            or letrita=="Í" or letrita=="Ó" or letrita=="Ú")):
+            or letrita=="Í" or letrita=="Ó" or letrita=="Ú" or letrita==" ")):
                     
             valido_usuario = False
         i +=1
     return valido_usuario
+
+def espacio(palabra):
+    res=False
+    contador=0
+    aux=0
+    control=0
+    while(contador<2 and aux<len(palabra)and control<100):
+        control=control+1
+        if(palabra[aux]==" "):
+            contador=contador+1
+        aux=aux+1
+    if(contador==2):
+        res=True
+    if(contador==1 and len(palabra)==1):
+        res=True
+    return res
+
+
+def validarNombres(palabra):
+    valido = True
+    i = 0
+    while(i<len(palabra) and valido):
+        aux = (int)(ord(palabra[i]))
+        letrita = palabra[i]
+        if (not((aux>64 and aux<91) or (aux>96 and aux<123)
+            or letrita=="á" or letrita=="é" or letrita=="í"
+            or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
+            or letrita=="Í" or letrita=="Ó" or letrita=="Ú" or letrita==" ")):
+                    
+            valido = False
+        i +=1
+    return valido
+
+def validarCorreo(correo):
+    valido_correo = True
+    i = 0
+    while(i<len(correo) and valido_correo):
+        aux = (int)(ord(correo[i]))
+        letrita = correo[i]
+        if (not((aux>64 and aux<91) or (aux>96 and aux<123)or (aux>47 and aux<59)
+            or letrita=="á" or letrita=="é" or letrita=="í" or letrita=="_" or letrita=="-"
+            or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
+            or letrita=="Í" or letrita=="Ó" or letrita=="Ú" or letrita=="@"
+            or letrita==".")):
+            valido_correo = False
+        i +=1
+    return valido_correo
+
+def mensaje(req,mensajeError):  
+    messages.add_message(request=req, level=messages.WARNING, message = mensajeError)
+
+def validarTamaño(palabra,maximo,minimo):
+    
+    cadena=-1
+    if(len(palabra)>maximo):
+        cadena=1
+        
+    else:
+        if(len(palabra)<minimo):
+            cadena=2
+    return cadena
+
+def generador(variable,numero):
+    
+    cadena=False
+    if(numero==1):
+        cadena="Error el campo "+variable+" es muy grande"
+        
+    else:
+        if(numero==2):
+            cadena="Error el campo "+variable+" es muy pequeño"
+    return cadena
+
 
 def Formulario_Registro(request):
     if request.method=="POST":
@@ -75,67 +148,67 @@ def Formulario_Registro(request):
         correo= request.POST.get('correo','')
         contraseña= request.POST.get('contraseña','')
         confirmacion= request.POST.get('confirmacion','')
-        
-        if(len(nombre)!=0 and len(correo)!=0 and len(contraseña)!=0 and len(confirmacion)!=0):
-            valido = True
-            i = 0
-            while(i<len(nombre) and valido):
-                aux = (int)(ord(nombre[i]))
-                letrita = nombre[i]
-                if (not((aux>64 and aux<91) or (aux>96 and aux<123)
-                    or letrita=="á" or letrita=="é" or letrita=="í"
-                    or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
-                    or letrita=="Í" or letrita=="Ó" or letrita=="Ú")):
-                    
-                    valido = False
-                i +=1
+        res=redirect("/Formulario_Registro/")
 
-            valido_usuario = True
-            i = 0
-            while(i<len(nombreUsuario) and valido_usuario):
-                aux = (int)(ord(nombreUsuario[i]))
-                letrita = nombreUsuario[i]
-                if (not((aux>64 and aux<91) or (aux>96 and aux<123)or (aux>47 and aux<59)
-                    or letrita=="á" or letrita=="é" or letrita=="í" or letrita=="_" or letrita=="-"
-                    or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
-                    or letrita=="Í" or letrita=="Ó" or letrita=="Ú")):
-                    
-                    valido_usuario = False
-                i +=1
-            valido_correo = True
-            i = 0
-            while(i<len(correo) and valido_correo):
-                aux = (int)(ord(correo[i]))
-                letrita = correo[i]
-                if (not((aux>64 and aux<91) or (aux>96 and aux<123)or (aux>47 and aux<59)
-                    or letrita=="á" or letrita=="é" or letrita=="í" or letrita=="_" or letrita=="-"
-                    or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
-                    or letrita=="Í" or letrita=="Ó" or letrita=="Ú" or letrita=="@"
-                    or letrita==".")):
-                    valido_correo = False
-                i +=1
-            if(valido==False):
-                messages.add_message(request=request, level=messages.WARNING, message = "Nombre ingresado invalido")
-                return redirect("/Formulario_Registro/")
+        if(len(nombre)!=0 and len(correo)!=0 and len(contraseña)!=0 and len(confirmacion)!=0):
+            
+            
+            validoNombre=validarNombres(nombre)
+            validoApePat=validarNombres(apellidoPaterno)
+            validoApeMat=validarNombres(apellidoMaterno)
+            valido_usuario = validar(nombreUsuario)
+            valido_correo=validarCorreo(correo)
+
+            if((len(apellidoPaterno)==0 and len(apellidoMaterno)==0)):
+                mensaje(request,"Error debe ingresar al menos un apellido")
+                return res
+            if(validoNombre==False):
+                mensaje(request,"Nombre ingresado invalido")
+                return res
+            if(validoApePat==False):
+                mensaje(request,"Apellido paterno ingresado invalido")
+                return res
+            if(validoApeMat==False):
+                mensaje(request,"Apellido materno ingresado invalido")
+                return res
+
             if(valido_usuario==False):
-                messages.add_message(request=request, level=messages.WARNING, message = "Nombre de usuario invalido")
-                return redirect("/Formulario_Registro/")
+                mensaje(request,"Nombre de usuario invalido")
+                return res
+
+            if(espacio(nombre)):
+                mensaje(request,"Error el nombre debe tener caracteres alfabéticos")
+                return res
+            if(espacio(apellidoPaterno)):
+                mensaje(request,"Error el apellido paterno debe tener caracteres alfabéticos")
+                return res
+            if(espacio(apellidoMaterno)):
+                mensaje(request,"Error el apellido materno debe tener caracteres alfabéticos")
+                return res
+
+            if(validarTamaño(nombre,25,2)==1):
+                mensaje(request,generador("Nombre",1))
+                return res
+            elif (validarTamaño(nombre,25,2)==2):
+                mensaje(request,generador("Nombre",2))
+                return res
+
             if(confirmacion!=contraseña):
-                messages.add_message(request=request, level=messages.WARNING, message = "La contraseña de verificacion no coincide")
-                return redirect("/Formulario_Registro/")
+                mensaje(request,"La contraseña de verificacion no coincide")
+                return res
             else:   
                 if(valido_correo==False or not('@gmail.com' in correo) and not('@hotmail.com' in correo)):
-                    messages.add_message(request=request, level=messages.WARNING, message = "Verifique que el correo sea valido")
-                    return redirect("/Formulario_Registro/")
+                    mensaje(request,"Verifique que el correo sea valido")
+                    return res
                 else:
 
-                    messages.add_message(request=request, level=messages.WARNING, message = "todo bien ")
-                    estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
-                    estudiante.save() #ingresar datos
-                    return redirect("/Formulario_Registro/")
+                    mensaje(request,"todo bien ")
+                    # estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
+                    # estudiante.save() #ingresar datos
+                    return res
         else:
-            messages.add_message(request=request, level=messages.WARNING, message = "Porfavor llene todos los campos")
-            return redirect("/Formulario_Registro/")
+            mensaje(request,"Porfavor llene todos los campos obligatorios")
+            return res
 
     return render (request, "Formulario_Registro.html")
 
