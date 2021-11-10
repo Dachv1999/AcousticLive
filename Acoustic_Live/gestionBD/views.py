@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Leccion, Profesor, Cursa
 
 # Create your views here.
@@ -136,4 +136,43 @@ def lista_avanzado(request, id_profesor):
     }
     return render(request,'Vista_Universal_Lecciones.html', contexto)
 
+
+def crud_profesores(request, nivel): #CRUD Profesores
+
+    lecciones = Leccion.objects.filter(nivel=nivel, idprofesor_id=3).order_by('orden')
+
+    cant = 0
+    for leccion in lecciones:
+        cant = cant + 1
+        
+    contexto = {
+        'lecciones' : lecciones,
+        'cantidad' : cant,
+
+    }
+    return render(request,'CRUD_Profesores.html', contexto)
+
+def mover_video_arriba(request, id_profesor, orden_video, num_nivel):
+    lecciones1 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video)
+    lecciones2 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video- 1)
+    redireccion = '/Mis_Videos/'+ str(num_nivel) +'/'
+
+    lecciones2.orden = lecciones2.orden + 1
+    lecciones1.orden = lecciones1.orden - 1
+    
+    lecciones1.save()
+    lecciones2.save()
+    return redirect(redireccion)
+
+def mover_video_abajo(request, id_profesor, orden_video, num_nivel):
+    lecciones1 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video)
+    lecciones2 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video+ 1)
+    redireccion = '/Mis_Videos/'+ str(num_nivel) +'/'
+
+    lecciones2.orden = lecciones2.orden - 1
+    lecciones1.orden = lecciones1.orden + 1
+    
+    lecciones1.save()
+    lecciones2.save()
+    return redirect(redireccion)
 
