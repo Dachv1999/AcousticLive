@@ -16,7 +16,16 @@ def inicio(request): #Vista Inicio
     
     return HttpResponse(documento)
 
+def crud_profesores(request): #CRUD Profesores
+    doc_externo = open("Acoustic_Live/Templates/CRUD_Profesores.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
 
+    ctx = Context()
+
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)
 
 def inicio_profesores(request): #Vista Inicio de profesores
     doc_externo = open("Acoustic_Live/Templates/Vista_Principal_Profesores.html")
@@ -48,6 +57,12 @@ def login(request):
         if(espacio(usuario_login)):
             mensaje(request,"Porfavor llene todos los campos")
             return res
+        if len(contraseña)==0 or len(usuario_login)==0:
+            mensaje(request,"Porfavor llene todos los campos")
+            return res
+        elif validar(usuario_login)==False:
+            mensaje(request,"Error el nombre de usuario no es valido")
+            return res
         if(Estudiante.objects.filter(usuario=usuario_login).exists()):
             if(Estudiante.objects.filter(contraseña_estudiante=contraseña).exists()and Estudiante.objects.filter(usuario=usuario_login).exists()):
                 mensaje(request,"Todo bien :D")
@@ -58,12 +73,7 @@ def login(request):
         else:
             mensaje(request,"Error: Usuario no registrado")
             return res
-        if len(contraseña)==0 or len(usuario_login)==0:
-            mensaje(request,"Porfavor llene todos los campos")
-            return res
-        elif validar(usuario_login)==False:
-            mensaje(request,"Error el nombre de usuario no es valido")
-            return res
+    
     
     return render (request, "login.html")
 
@@ -314,10 +324,11 @@ def Formulario_Registro(request):
                     return res
                 
                 else:
-                    mensaje(request,"todo bien ")
                     # estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
                     # estudiante.save() #ingresar datos
-                    return res
+                    mensaje(request,"Bienvenido a Acusctic Live :D")
+                    return redirect("/Login/")
+
         else:
             mensaje(request,"Porfavor llene todos los campos obligatorios")
             return res
