@@ -415,11 +415,11 @@ def formulario_nuevoVideo(request, id_profesor):
         lecciones = Leccion.objects.filter(idprofesor_id=id_profesor)
         leccion_2 = Leccion.objects.filter(idprofesor_id=id_profesor,nivel=niveles)
         
+        redireccion = "/Formulario/"+ str(id_profesor)
         cant = 0
         for leccion in leccion_2:
             cant = cant + 1
 
-        lecciones = Leccion.objects.filter(idprofesor_id=1)
         nombre1 = nombre.strip()
         descripcion1 = descripcion.strip()
         link1 = link.strip()
@@ -430,13 +430,13 @@ def formulario_nuevoVideo(request, id_profesor):
         if ((len(nombre1)) != 0 and (len(descripcion1)) != 0 and (len(link1)) != 0):
             if(len(nombre)>50):
                 messages.add_message(request=request, level=messages.WARNING, message = "El nombre es muy grande")
-                return redirect("/formulario/")
+                return redirect(redireccion)
             if(len(descripcion)>500):
                 messages.add_message(request=request, level=messages.WARNING, message = "La descripción es muy grande")
-                return redirect("/formulario/")
+                return redirect(redireccion)
             if(len(descripcion)<20 ):
                 messages.add_message(request=request, level=messages.WARNING, message = "La descripción es muy pequeña")
-                return redirect("/formulario/")
+                return redirect(redireccion)
             
             valido = True
             i = 0
@@ -455,7 +455,7 @@ def formulario_nuevoVideo(request, id_profesor):
                 
             if valido== False:
                 messages.add_message(request=request, level=messages.WARNING, message = "El nombre contiene carcteres inválidos")
-                return redirect("/formulario/")        
+                return redirect(redireccion)       
             #letra repetida
             encontre = False
             numero =0
@@ -475,7 +475,7 @@ def formulario_nuevoVideo(request, id_profesor):
                 #documento =plt.render(ctx)
                 #return HttpResponse(documento)
                 messages.add_message(request=request, level=messages.WARNING, message = "El carácter '" + n + "' no debería repetirse tantas veces en el nombre")
-                return redirect("/formulario/") 
+                return redirect(redireccion) 
             ###para la descripcion
             encontre1 = False
             contador1 =0
@@ -495,14 +495,14 @@ def formulario_nuevoVideo(request, id_profesor):
                 #documento =plt.render(ctx)
                 #return HttpResponse(documento)
                 messages.add_message(request=request, level=messages.WARNING, message = "El carácter '" + n1 + "' no debería repetirse tantas veces en la descripción")
-                return redirect("/formulario/") 
+                return redirect(redireccion) 
             ###fin
             #verficar link 
             link_auxi1="https://www.youtube.com/embed/"
 
             if(not('https://youtu.be/' in link)):
                 messages.add_message(request=request, level=messages.WARNING, message = "Verifique el link que ingresó")
-                return redirect("/formulario/")
+                return redirect(redireccion)
             else:
                 link=link_auxi1+link[17:]
             hayVideo=False
@@ -512,7 +512,7 @@ def formulario_nuevoVideo(request, id_profesor):
                         hayVideo=True
             if hayVideo==True:  
                 messages.add_message(request=request, level=messages.ERROR, message = "El video que ingresó ya existe")
-                return redirect("/formulario/")
+                return redirect(redireccion)
             else:
                 if (cant > 0):
                     lecc=Leccion(nombre_leccion = nombre, nivel=niveles,link=link, descripcion = descripcion, idprofesor_id =id_profesor, orden = cant + 1)
@@ -520,10 +520,10 @@ def formulario_nuevoVideo(request, id_profesor):
                     lecc=Leccion(nombre_leccion = nombre, nivel=niveles,link=link, descripcion = descripcion, idprofesor_id =id_profesor, orden = cant)
                 lecc.save()
                 messages.add_message(request=request, level=messages.SUCCESS, message = "Video guardado correctamente")
-                return redirect("/formulario/")
+                return redirect(redireccion)
         else:
             messages.add_message(request=request, level=messages.ERROR, message = "Por favor revise los campos")
-            return redirect("/formulario/")
+            return redirect(redireccion)
     
     return render (request, "formulario.html")
         
