@@ -148,8 +148,6 @@ def generador(variable,numero):
         if(numero==2):
             cadena="Error el campo "+variable+" es muy pequeño"
     return cadena
-
-
 def Formulario_Registro(request):
     if request.method=="POST":
         nombre=request.POST.get('nombre','')
@@ -161,7 +159,7 @@ def Formulario_Registro(request):
         confirmacion= request.POST.get('confirmacion','')
         res=redirect("/Formulario_Registro/")
 
-        if(len(nombre)!=0 and len(correo)!=0 and len(contraseña)!=0 and len(confirmacion)!=0):
+        if(len(nombre)!=0 and len(correo)!=0 and len(contraseña)!=0 and len(nombreUsuario)!=0 and len(confirmacion)!=0):
             
             
             validoNombre=validarNombres(nombre)
@@ -186,7 +184,7 @@ def Formulario_Registro(request):
             if(valido_usuario==False):
                 mensaje(request,"Nombre de usuario invalido")
                 return res
-
+        
             if(espacio(nombre)):
                 mensaje(request,"Error el nombre debe tener caracteres alfabéticos")
                 return res
@@ -196,21 +194,52 @@ def Formulario_Registro(request):
             if(espacio(apellidoMaterno)):
                 mensaje(request,"Error el apellido materno debe tener caracteres alfabéticos")
                 return res
-
+            if(espacio(nombreUsuario)):
+                mensaje(request,"Error el nombre de usario debe tener caracteres alfabéticos")
+                return res   
             if(validarTamaño(nombre,25,2)==1):
                 mensaje(request,generador("Nombre",1))
                 return res
             elif (validarTamaño(nombre,25,2)==2):
                 mensaje(request,generador("Nombre",2))
                 return res
+            if(validarTamaño(apellidoPaterno,25,2)==1):
+                mensaje(request,generador("apellido paterno",1))
+                return res
+            elif(validarTamaño(apellidoPaterno,25,2)==2):
+                mensaje(request,generador("apellido paterno",1))
+                return res
+            if(validarTamaño(nombreUsuario,30,5)==1):
+                mensaje(request,generador("nombre de usuario",1))
+                return res
+            elif (validarTamaño(nombreUsuario,30,5)==2):
+                mensaje(request,generador("nombre de usuario",2))
+                return res
+            if(validarTamaño(contraseña,30,8)==1):
+                mensaje(request,"Error: la contraseña debe tener un maximo de 30 caracteres" )
+                return res
+            elif (validarTamaño(contraseña,30,8)==2):
+                mensaje(request,"Error: la contraseña debe tener un minimo de 8 caracteres")
+                return res
+            if(contraseña ==nombreUsuario):
+                mensaje(request,"Error: La contraseña es poco segura, ¡ingrese una nueva!")
+                return res
+            if(Estudiante.objects.filter(usuario=nombreUsuario).exists()):
+                mensaje(request,"Nombre de usuario existente")
+                return res
+
+            if(Estudiante.objects.filter(correo_estudiante=correo).exists()):
+                mensaje(request,"Error: ¡Correo ya registrado! por favor ingrese un correo diferente a : "+ correo)
+                return res
 
             if(confirmacion!=contraseña):
                 mensaje(request,"La contraseña de verificacion no coincide")
                 return res
             else:   
-                if(valido_correo==False or not('@gmail.com' in correo) and not('@hotmail.com' in correo)):
-                    mensaje(request,"Verifique que el correo sea valido")
+                if(valido_correo==False or not('@gmail.com' in correo) and not('@hotmail.com' in correo)and not('@outlook.com')and not('@yahoo.com')):
+                    mensaje(request,"Error el correo debe estar en los siguientes dominios: gmail, hotmail, outlook, yahoo")
                     return res
+                    #falta un detallito un graaaan detallito
                 else:
 
                     mensaje(request,"todo bien ")
