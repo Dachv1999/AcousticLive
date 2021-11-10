@@ -404,13 +404,20 @@ def profesoresNA(request): #Vista profesoresNA
 
     return HttpResponse(documento)
 
-def formulario_nuevoVideo(request):
+def formulario_nuevoVideo(request, id_profesor):
 
     if request.method=="POST":
         nombre=request.POST.get('nombre','')
         descripcion= request.POST.get('descripcion','')
         link= request.POST.get('link','')
         niveles= request.POST.get('nivel','')
+
+        lecciones = Leccion.objects.filter(idprofesor_id=id_profesor)
+        leccion_2 = Leccion.objects.filter(idprofesor_id=id_profesor,nivel=niveles)
+        
+        cant = 0
+        for leccion in leccion_2:
+            cant = cant + 1
 
         lecciones = Leccion.objects.filter(idprofesor_id=1)
         nombre1 = nombre.strip()
@@ -507,7 +514,10 @@ def formulario_nuevoVideo(request):
                 messages.add_message(request=request, level=messages.ERROR, message = "El video que ingresó ya existe")
                 return redirect("/formulario/")
             else:
-                lecc=Leccion(nombre_leccion = nombre, nivel=niveles,link=link, descripcion = descripcion, idprofesor_id =1 )
+                if (cant > 0):
+                    lecc=Leccion(nombre_leccion = nombre, nivel=niveles,link=link, descripcion = descripcion, idprofesor_id =id_profesor, orden = cant + 1)
+                else:
+                    lecc=Leccion(nombre_leccion = nombre, nivel=niveles,link=link, descripcion = descripcion, idprofesor_id =id_profesor, orden = cant)
                 lecc.save()
                 messages.add_message(request=request, level=messages.SUCCESS, message = "Video guardado correctamente")
                 return redirect("/formulario/")
