@@ -51,16 +51,31 @@ def niveles(request): #Vista niveles
 
 def login(request): 
     if request.method=="POST":
-        usuario=request.POST.get('usuario','')
+        res= redirect("/Login/")
+        usuario_login=request.POST.get('usuario','')
         contraseña=request.POST.get('contraseña','')
-        if len(contraseña)==0 or len(usuario)==0:
-            messages.add_message(request=request, level=messages.WARNING, message = "Porfavor llene todos los campos")
-            return redirect("/Login/")
-        elif validar(usuario)==False:
-            messages.add_message(request=request, level=messages.WARNING, message = "Error el nombre de usuario no es valido")
-            return redirect("/Login/")
+        if(espacio(usuario_login)):
+            mensaje(request,"Porfavor llene todos los campos")
+            return res
+        if(Estudiante.objects.filter(usuario=usuario_login).exists()):
+            if(Estudiante.objects.filter(contraseña_estudiante=contraseña).exists()and Estudiante.objects.filter(usuario=usuario_login).exists()):
+                mensaje(request,"Todo bien :D")
+                return res
+            else:
+                mensaje(request,"Error: contraseña incorrecta")
+                return res
+        else:
+            mensaje(request,"Error: Usuario no registrado")
+            return res
+        if len(contraseña)==0 or len(usuario_login)==0:
+            mensaje(request,"Porfavor llene todos los campos")
+            return res
+        elif validar(usuario_login)==False:
+            mensaje(request,"Error el nombre de usuario no es valido")
+            return res
     
     return render (request, "login.html")
+
 
 def validar(nombreUsuario):
     valido_usuario = True
@@ -123,6 +138,37 @@ def validarCorreo(correo):
             valido_correo = False
         i +=1
     return valido_correo
+def sacarExt(var_correo):
+    i=0
+    j=0
+    encontre=False
+    palabra=""
+    while(i<len(var_correo)):
+        if(var_correo[j]=="@"):
+            encontre=True
+        else: j=j+1
+        if(encontre):
+            palabra=palabra+var_correo[i]
+        i=i+1
+    print(palabra)
+    return palabra
+def sacarInicio(var_correo):
+    i=0
+    palabra=""
+    encontrado=False
+    while(i<len(var_correo) and encontrado==False):
+        if(var_correo[i]!="@"):
+            palabra=palabra+var_correo[i]
+        else:
+            encontrado=True
+        i=i+1
+    return palabra
+
+def esValidoCorreo(extencio):
+    res=False
+    if(extencio=="@gmail.com" or extencio=="@yahoo.com" or extencio=="@outlook.com" or extencio=="@hotmail.com" ):
+        res=True
+    return res
 
 def mensaje(req,mensajeError):  
     messages.add_message(request=req, level=messages.WARNING, message = mensajeError)
@@ -148,6 +194,30 @@ def generador(variable,numero):
         if(numero==2):
             cadena="Error el campo "+variable+" es muy pequeño"
     return cadena
+def hay_letra(var_contraseña):
+    valido_contraseña = False
+    i=0
+    while(i<len(var_contraseña)and valido_contraseña == False):
+        aux = (int)(ord(var_contraseña[i]))
+        letrita = var_contraseña[i]
+        if ((aux>64 and aux<91) or (aux>96 and aux<123)
+            or letrita=="á" or letrita=="é" or letrita=="í" 
+            or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
+            or letrita=="Í" or letrita=="Ó" or letrita=="Ú"):
+            valido_contraseña=True
+        i=i+1
+    return valido_contraseña
+def hay_numero(var_contraseña):
+    valido_contraseña = False
+    i=0
+    while(i<len(var_contraseña)and valido_contraseña == False):
+        aux = (int)(ord(var_contraseña[i]))
+        letrita = var_contraseña[i]
+        if (aux>47 and aux<59):
+            valido_contraseña=True
+        
+        i =i +1
+    return valido_contraseña
 def Formulario_Registro(request):
     if request.method=="POST":
         nombre=request.POST.get('nombre','')
@@ -232,16 +302,27 @@ def Formulario_Registro(request):
                 mensaje(request,"Error: ¡Correo ya registrado! por favor ingrese un correo diferente a : "+ correo)
                 return res
 
+            if(hay_letra(contraseña) == False or hay_numero(contraseña) == False):
+                mensaje(request,"Error: La contraseña debe contener caracteres alfanumericos")
+                return res
             if(confirmacion!=contraseña):
                 mensaje(request,"La contraseña de verificacion no coincide")
+                return res
+            
+            if(len(sacarInicio(correo))>32):
+                mensaje(request,"Error: nombre de correo ingresado invalido")
                 return res
             else:   
                 if(valido_correo==False or not('@gmail.com' in correo) and not('@hotmail.com' in correo)and not('@outlook.com')and not('@yahoo.com')):
                     mensaje(request,"Error el correo debe estar en los siguientes dominios: gmail, hotmail, outlook, yahoo")
                     return res
+                
                     #falta un detallito un graaaan detallito
+                if(esValidoCorreo(sacarExt(correo))==False):
+                    mensaje(request,"Error el correo debe estar en los siguientes dominios: gmail, hotmail, outlook, yahoo")
+                    return res
+                
                 else:
-
                     mensaje(request,"todo bien ")
                     # estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
                     # estudiante.save() #ingresar datos
