@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import Template, Context, context
 from django.shortcuts import render, redirect
-from gestionBD.models import Leccion, Profesor, Estudiante
+from gestionBD.models import Leccion, Profesor, Estudiante, Cursa
 from tkinter import messagebox as MessageBox
 from django.contrib import messages
 
@@ -321,4 +321,18 @@ def formulario_nuevoVideo(request):
     
     return render (request, "formulario.html")
         
+def guardar_video_vistoBD(request):
+    id_leccion = request.GET.get('id_leccion', None)
+    id_profesor = request.GET.get('id_profesor', None)
+    nivel_leccion = request.GET.get('nivel_leccion', None)
+    cursa = Cursa(visto=1, id_leccion_id = id_leccion, id_profesor_id= id_profesor, nivel_leccion=nivel_leccion )
+    cursa.save()
+    return redirect("/Mis_Cursos/")
 
+def eliminar_video_vistoBD(request):
+    id_leccion = request.GET.get('id_leccion', None)
+    id_profesor = request.GET.get('id_profesor', None)
+    nivel_leccion = request.GET.get('nivel_leccion', None)
+    cursa = Cursa.objects.get(id_leccion_id = id_leccion, id_profesor_id= id_profesor, nivel_leccion=nivel_leccion )
+    cursa.delete()
+    return redirect("/Mis_Cursos/")

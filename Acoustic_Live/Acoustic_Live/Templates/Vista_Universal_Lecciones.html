@@ -7,6 +7,56 @@
 {% block content %}
 {% load static %}
 
+<script>
+
+    jQuery(document).ready(function($){
+
+        var cantidad_videos_vistos = JSON.parse("{{tiqueados}}"); 
+        var id_profesor = JSON.parse("{{id_profesor}}"); 
+        var nivel = JSON.parse("{{nivel_leccion}}"); 
+         
+        var cantidad_videos = JSON.parse("{{cantidad}}");    
+        var porcentaje = 100/cantidad_videos;
+        var progress = porcentaje*cantidad_videos_vistos;
+
+            $("#progreso input").on('change', function(){
+
+                    var ID_checkbox = this.id;
+                    var check = "#"+ ID_checkbox + " input";
+                    if ($(check).is(":checked") == true) {
+                        progress = progress+porcentaje;
+
+                        $.ajax({
+                            type: "GET",
+                            url: '/guardar_db',
+                            data: {
+                                "id_leccion": ID_checkbox,
+                                "id_profesor" : id_profesor,
+                                "nivel_leccion" : nivel,
+                            },
+                        });
+                        
+                        $('#blips > .progress-bar').attr("style","width:" + progress + "%");
+
+                    }else if ($(check).is(":checked") == false) {
+                        progress = progress-porcentaje;
+
+                        $.ajax({
+                            type: "GET",
+                            url: '/eliminar_db',
+                            data: {
+                                "id_leccion": ID_checkbox,
+                                "id_profesor" : id_profesor,
+                                "nivel_leccion" : nivel,
+                            },
+                            dataType: "json",
+                        });
+
+                        $('#blips > .progress-bar').attr("style","width:" + progress + "%");
+                    }
+            }); 
+    });
+</script>
 
 
 <div class="container-fluid" style="background-color: #343F4B;padding-top: 6rem;padding-bottom: 0.5rem;">
@@ -31,8 +81,9 @@
         </div>
         <div class="col-lg-5 col-md-5 col-sm-12">
             <h5 class="text-light" style="margin-top: 2%;">Tu progreso en este curso:</h5>
+                
                 <div class="progress" id="blips">
-                  <div class="progress-bar" role="progressbar">
+                    <div class="progress-bar" role="progressbar" style="width: {{ tamanio_barra_progreso }};" >
                     <span class="sr-only"></span>
                   </div>
                 </div>
@@ -48,11 +99,6 @@
         <div class="container"> 
              
 
-  
-
-
-
-
             {% if lecciones %}
             {% if bandera %} 
             <div class="container">
@@ -63,14 +109,29 @@
             {% endif %}
             
             {% for leccion in lecciones %} 
-                
 
-                <h1 style="color: white; margin-top: 30px; margin-bottom: 30px;">{{ leccion.nombre_leccion }}&nbsp;<input class="option-input" type="checkbox" id="activar"></h1>
+                {% if leccion.id in lista_vistos %}
+                    <div class="class" id="progreso">
+                            
+                        <div class="checkbox" id="{{ leccion.id }}">
+                        <h1 style="color: white; margin-top: 30px; margin-bottom: 30px;">{{ leccion.nombre_leccion }}&nbsp;    
+                        <input type="checkbox" value="{{ leccion.id }}" nombre = "{{ leccion.id }}" id="{{ leccion.id }}" checked>
+                        </h1>
+                        </div>
+                        
+                    </div>
+                {% else %}
+                    <div class="class" id="progreso">
+                            
+                        <div class="checkbox" id="{{ leccion.id }}">
+                        <h1 style="color: white; margin-top: 30px; margin-bottom: 30px;">{{ leccion.nombre_leccion }}&nbsp;    
+                        <input type="checkbox" value="{{ leccion.id }}" nombre = "{{ leccion.id }}" id="{{ leccion.id }}" >
+                        </h1>
+                        </div>
+                        
+                    </div>
+                {% endif %}
                 
-                
-   
-
-
                 <div class="row">
                     <div class="container">
                         <div class="ratio" style="--bs-aspect-ratio: 50%;">
