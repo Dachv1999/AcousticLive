@@ -20,17 +20,32 @@
               </tr>
             </thead>
             <tbody>
-              <!--for-->
+              {% for leccion in lecciones %}
               <tr>
-                <td>nombre video</td><!--{{video.nombre}}-->
-                <td>descripcion del video </td> <!--{{video.descripcion}}-->
+                <td>{{ leccion.nombre_leccion  }}</td><!--{{video.nombre}}-->
+                <td> {{ leccion.descripcion }} </td> <!--{{video.descripcion}}-->
                 <td>
-                    <center><a href="" class="btn btn-secondary" style="margin-right: 2%; margin-left: 2%;margin-top: 2%;">Subir</a>
-                    <a href="" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">bajar</a>
-                    <a href="" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">editar</a></center>
+
+                  {% ifequal 1 leccion.orden %}
+                  
+                    <center><a href="/Bajar/3/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">Bajar</a></center>
+                  
+                  {% else %}
+                    {% ifequal cantidad leccion.orden %}
+                  
+                    <center><a href="/Subir/3/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" style="margin-right: 2%; margin-left: 2%;margin-top: 2%;">Subir</a></center>
+
+                    {% else %}
+
+                      <center><a href="/Subir/3/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" style="margin-right: 2%; margin-left: 2%;margin-top: 2%;">Subir</a>
+                      <a href="/Bajar/3/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">bajar</a></center>
+                    
+                    {% endifequal %}
+                  {% endifequal %}
+                    <center><a href="" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">editar</a></center>
                 </td>
               </tr>
-              <!--endfor-->
+              {% endfor %}
               </tr>
               </tr>
             </tbody>
