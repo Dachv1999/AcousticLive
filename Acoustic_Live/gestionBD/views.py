@@ -148,6 +148,7 @@ def crud_profesores(request, nivel): #CRUD Profesores
     contexto = {
         'lecciones' : lecciones,
         'cantidad' : cant,
+        'nivel' : nivel,
 
     }
     return render(request,'CRUD_Profesores.html', contexto)
@@ -193,3 +194,34 @@ def eliminar_video_profesor(request, id_profesor, leccion_id, orden_video, nivel
 
     redireccion = '/Mis_Videos/'+ str(nivel_leccion) +'/'  
     return redirect(redireccion)
+
+
+    
+def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
+    lecciones = Leccion.objects.filter(nivel=nivel, idprofesor_id=id_profesor).order_by('orden')
+    profesores = Profesor.objects.filter(id=id_profesor)
+
+    cant = 0
+    for leccion in lecciones:
+        cant = cant + 1
+        
+    level = " " 
+
+    if nivel == 1:
+        level = "Nivel Principiante"
+    elif nivel == 2:
+        level = "Nivel Medio"
+    else:
+        level = "Nivel Avanzado"
+
+    atras = "/Mis_Videos/" + str(nivel)
+    contexto = {
+        'profesores' : profesores,
+        'lecciones' : lecciones,
+        'nivel_leccion' : level,
+        'id_profesor' : id_profesor,
+        'atras' : atras,
+        'cantidad' : cant,
+    }
+    
+    return render(request,'Vista_Universal_Lecciones_For_Profesor.html', contexto)
