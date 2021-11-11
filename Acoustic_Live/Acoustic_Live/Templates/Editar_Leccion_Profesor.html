@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+ {% block title %}
+     Acoustic Live | Editar Leccion
+        
+ {% endblock %}
+
+{% block content %}
+{% load static %}  
+<div class="container-fluid">
+        <link rel="stylesheet" href="{% static '/css/fondo.css' %}" > 
+        
+
+            </script><!--para que es este scrip??-->
+        <div class="container contenedor">
+           
+            <div class="row justify-content-center pt-5">
+                <div class="col-md-7">
+
+                    <h2 class="display-6 text-center" style="padding-top: 70px;">Editar Leccion</h2>
+                    
+
+                    {% if messages %}
+                    <div class="ventana">
+                        <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    
+                    
+                    <form action="/validar_video_editado/{{id_video}}/{{nivel}}" method="POST"> 
+                        {% csrf_token %}
+                        <div class="row form-group justify-content-center  pt-3">
+                            <label for="nombre" class="col-form-label col-md-2 ">
+                                Nombre*:
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="nombre" value="{{nombre}}" id="nombre" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="row form-group justify-content-center  pt-3">
+                            <label for="Descripcion" class="col-form-label col-md-2 ">
+                                Descripci&oacute;n*:    
+                            </label>
+                            <div class="col-md-6">
+                                <textarea name="descripcion" id="descripcion" class="form-control" cols="30" rows="4">{{descripcion}}</textarea>
+                            </div>
+                        </div>
+    
+                       
+    
+                        <div class="row form-group justify-content-center  pt-3">
+                            <label for="Descripcion" class="col-form-label col-md-2 ">
+                                Link*:
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="link" value="{{link}}" id="link" class="form-control">
+                            </div>
+                        </div>
+    
+                        <div class="row form-group justify-content-end pt-3 ">
+                            
+                            <div class="col col-md-8 text-start">
+        
+                                  <p>
+    
+                                    <input type= "submit" value="Guardar Cambios" class="btn btn-dark btn-block mt-1" style="margin-left: 10%; margin-right: 10px;" data-bs-toggle="modal" data-bs-target="#ventana" >
+    
+                                    <!--<input type= "reset" value="Borrar  " class="btn btn-dark btn-block mt-1" >-->
+                                    
+                                                       
+                                    <a type="button" href="/Mis_Videos/{{nivel}}/"  class="btn btn-dark btn-block mt-1" >Cancelar </a>
+                                    
+ 
+    
+                                  </p>     
+                             
+                            </div>
+                           
+                           
+                       
+                        </div>  
+                    </form>
+                    
+                    <div class="row form-group text-center  pt-3">
+                        <p >(*)Campos obligatorios</p>
+                    </div>              
+    
+                </div>
+                    
+            </div>
+                
+        </div>
+
+    
+</div>
+
+{% endblock %}

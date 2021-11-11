@@ -49,7 +49,8 @@ def niveles(request): #Vista niveles
     
     return HttpResponse(documento)
 
-def loginn(request): 
+
+def login(request): 
     if request.method=="POST":
         res= redirect("/Login/")
         usuario_login=request.POST.get('usuario','')
@@ -544,3 +545,126 @@ def eliminar_video_vistoBD(request):
     cursa = Cursa.objects.get(id_leccion_id = id_leccion, id_profesor_id= id_profesor, nivel_leccion=nivel_leccion )
     cursa.delete()
     return redirect("/Mis_Cursos/")
+
+
+def vista_editar_leccion(request, id_video, nivel):
+   lecc = Leccion.objects.get(id=id_video)
+   
+   nombre = lecc.nombre_leccion
+   descripcion = lecc.descripcion
+   link = lecc.link
+   
+   contexto = {
+    'nombre' : nombre,
+    'descripcion': descripcion,
+    'link' : link,
+    'nivel' : nivel,
+    'id_video' : id_video
+   }
+
+   return render(request,"Editar_Leccion_Profesor.html",contexto)
+
+def formulario_editar_video(request,id_video,nivel):
+
+    if request.method=="POST":
+        nombre=request.POST.get('nombre','')
+        descripcion= request.POST.get('descripcion','')
+        link= request.POST.get('link','')
+        
+        nombre1 = nombre.strip()
+        descripcion1 = descripcion.strip()
+        link1 = link.strip()
+        redireccion = "/Editar_video/" + str(id_video) + "/"+str(nivel)
+        auxiliar_descripcion =descripcion.upper()
+        auxiliar_nombre = nombre.upper() 
+        
+        if ((len(nombre1)) != 0 and (len(descripcion1)) != 0 and (len(link1)) != 0):
+            if(len(nombre)>50):
+                messages.add_message(request=request, level=messages.WARNING, message = "El nombre es muy grande")
+                return redirect(redireccion)
+            if(len(descripcion)>500):
+                messages.add_message(request=request, level=messages.WARNING, message = "La descripción es muy grande")
+                return redirect(redireccion)
+            if(len(descripcion)<20 ):
+                messages.add_message(request=request, level=messages.WARNING, message = "La descripción es muy pequeña")
+                return redirect(redireccion)
+            
+            valido = True
+            i = 0
+            while(i<len(nombre) and valido):
+                aux = (int)(ord(nombre[i]))
+                letrita = nombre[i]
+                if (not((aux>64 and aux<91) or (aux>96 and aux<123) or (aux>47 and aux<59) \
+                    or (aux==40 or aux==41 or aux==32 or aux==46 or aux==44
+                    or letrita=="¿" or aux==63 or aux==45 or letrita=='!' or aux==35
+                    or aux==58 or letrita=="á" or letrita=="é" or letrita=="í"
+                    or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
+                    or letrita=="Í" or letrita=="Ó" or letrita=="Ú"))):
+                    
+                    valido = False
+                i +=1
+                
+            if valido== False:
+                messages.add_message(request=request, level=messages.WARNING, message = "El nombre contiene carcteres inválidos")
+                return redirect(redireccion)       
+            #letra repetida
+            encontre = False
+            numero =0
+            n=''
+            while(numero<len(auxiliar_nombre)-2 and not encontre):
+                codigo = (ord(auxiliar_nombre[numero]))
+                if not(codigo>47 and codigo<59):
+                    if auxiliar_nombre[numero]==auxiliar_nombre[numero+1] and auxiliar_nombre[numero]==auxiliar_nombre[numero+2] :
+                        n =nombre[numero]
+                        encontre = True
+                numero += 1
+            if(encontre):
+                messages.add_message(request=request, level=messages.WARNING, message = "El carácter '" + n + "' no debería repetirse tantas veces en el nombre")
+                return redirect(redireccion) 
+            ###para la descripcion
+            encontre1 = False
+            contador1 =0
+            n1=''
+            while(contador1<len(auxiliar_descripcion)-2 and not encontre1):
+                codigoDescripcion = (ord(auxiliar_descripcion[contador1]))
+                if not(codigoDescripcion>47 and codigoDescripcion<59):
+                    if auxiliar_descripcion[contador1]==auxiliar_descripcion[contador1+1] and auxiliar_descripcion[contador1]==auxiliar_descripcion[contador1+2] :
+                        n1 =descripcion[contador1]
+                        encontre1 = True
+                contador1 += 1
+            if(encontre1):
+                messages.add_message(request=request, level=messages.WARNING, message = "El carácter '" + n1 + "' no debería repetirse tantas veces en la descripción")
+                return redirect(redireccion) 
+            ###fin
+            #verficar link 
+            link_auxi1="https://www.youtube.com/embed/"
+
+
+            if(not('https://www.youtube.com/embed/' in link)):
+                
+
+                if(not('https://youtu.be/' in link)):
+                    messages.add_message(request=request, level=messages.WARNING, message = "Verifique el link que ingresó")
+                    return redirect(redireccion)
+                else:
+                    
+                    link=link_auxi1+link[17:]
+              
+         
+
+
+            lecc=Leccion.objects.get(id=id_video)
+            lecc.nombre_leccion = nombre
+            lecc.link = link
+            lecc.descripcion = descripcion
+            lecc.save()
+            messages.add_message(request=request, level=messages.SUCCESS, message = "Video editado correctamente")
+            dir = "/Mis_Videos/" + str(nivel) + "/"
+            return redirect(dir)
+        else:
+            messages.add_message(request=request, level=messages.ERROR, message = "Por favor revise los campos")
+            return redirect(redireccion)
+    
+    return render (request, "formulario.html")
+
+

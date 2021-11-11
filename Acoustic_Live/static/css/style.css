@@ -204,6 +204,11 @@ nav label:hover{
     src: url('../Imagenes/Comfortaa-VariableFont_wght.ttf');
 }
 
+.contenedor {
+    min-height:100vh;/*importante*/
+    position:relative;/*importante*/
+}
+
 .footer-content{
     display: flex;
     align-items: center;
