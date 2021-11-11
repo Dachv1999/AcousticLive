@@ -49,6 +49,7 @@ def niveles(request): #Vista niveles
     
     return HttpResponse(documento)
 
+
 def login(request): 
     if request.method=="POST":
         res= redirect("/Login/")

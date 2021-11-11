@@ -7,17 +7,18 @@
 
 {% block content %}
 {% load static %}  
-<div class="container-fluid">
+<div class="container-fluid contenedor">
         <link rel="stylesheet" href="{% static '/css/fondo.css' %}" > 
         
 
             </script><!--para que es este scrip??-->
-        <div class="container contenedor">
+            <div class="row" style="padding-top: 90px;">
+        <div class="col-lg-7 col-md-12 col-sm-12">
            
-            <div class="row justify-content-center pt-5">
-                <div class="col-md-7">
+            <div class="row justify-content-center">
+                <div class="col-md-12" style="color: white;">
 
-                    <h2 class="display-6 text-center" style="padding-top: 70px;">Formulario</h2>
+                    <h2 class="display-6 text-center" style="padding-top: 50px;">Formulario</h2>
                     
 
                     {% if messages %}
@@ -110,8 +111,31 @@
             </div>
                 
         </div>
-
-    
+        <div class="col-lg-5 col-md-12 col-sm-12" style="background-color: #343F4B;padding: 3%; color: white;overflow: auto; height: 500px;">
+            <h1>Tutorial para subir una lecci&oacute;n</h1>
+            <p>1. Llenar el campo "Nombre" con el t&iacute;tulo del video(Solo se aceptan caracteres alfanum&eacute;ricos) <br>
+               2. Llenar el campo "Descripci&oacute;n" con informaci&oacute;n acerca de la lecci&oacute;n que va a subir <br>
+               3. Para el campo "Nivel" desplegar las opciones y seleccionar el nivel al cual desea subir la lecci&oacute;n <br>
+            </p>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <img src="{% static 'Imagenes/tutorial_nivel.png' %}" style="width: 100%;">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <img src="{% static 'Imagenes/tutorial_nivel_2.png' %}" style="width: 100%;">
+                </div>
+            </div>
+            <br>
+            <p>
+                4. Para llenar el campo de link ir a Youtube y hacer click en la opci&oacute;n compartir </p> 
+                <img src="{% static 'Imagenes/link.png' %}" style="width: 100%;"><br><br>
+            <p>5. Aparecer&aacute; una ventana emergente donde tendr&aacute;s que darle click a la opci&oacute;n copiar</p>
+                <center><img src="{% static 'Imagenes/link2.png' %}" style="width: 80%;"></center><br><br>
+            <p>6. Pegar la direcci&oacute;n previamente copiada en el espacio "Link" </p>
+            <img src="{% static 'Imagenes/link3.png' %}" style="width: 100%;"><br><br>
+            <p>7. Finalmente hacer click sobre el bot&oacute;n "Subir" y la lecci&oacute;n se subir&acute; si sigui&oacute; todos los pasos correctamente.</p>
+        </div>
+    </div>    
 </div>
 
 {% endblock %}
