@@ -49,7 +49,7 @@ def niveles(request): #Vista niveles
     
     return HttpResponse(documento)
 
-def login(request): 
+def loginn(request): 
     if request.method=="POST":
         res= redirect("/Login/")
         usuario_login=request.POST.get('usuario','')
@@ -219,6 +219,8 @@ def hay_numero(var_contraseña):
         
         i =i +1
     return valido_contraseña
+
+    
 def Formulario_Registro(request):
     if request.method=="POST":
         nombre=request.POST.get('nombre','')
