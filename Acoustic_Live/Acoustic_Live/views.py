@@ -271,17 +271,23 @@ def Formulario_Registro(request):
             if(espacio(nombreUsuario)):
                 mensaje(request,"Error el nombre de usario debe tener caracteres alfabéticos")
                 return res   
-            if(validarTamaño(nombre,25,2)==1):
+            if(validarTamaño(nombre,20,3)==1):
                 mensaje(request,generador("Nombre",1))
                 return res
-            elif (validarTamaño(nombre,25,2)==2):
+            elif (validarTamaño(nombre,20,3)==2):
                 mensaje(request,generador("Nombre",2))
                 return res
-            if(validarTamaño(apellidoPaterno,25,2)==1):
+            if(validarTamaño(apellidoPaterno,15,3)==1):
                 mensaje(request,generador("apellido paterno",1))
                 return res
-            elif(validarTamaño(apellidoPaterno,25,2)==2):
-                mensaje(request,generador("apellido paterno",1))
+            elif(validarTamaño(apellidoPaterno,15,3)==2):
+                mensaje(request,generador("apellido paterno",2))
+                return res
+            if(validarTamaño(apellidoMaterno,15,3)==1):
+                mensaje(request,generador("apellido materno",1))
+                return res
+            elif(validarTamaño(apellidoMaterno,15,3)==2):
+                mensaje(request,generador("apellido materno",2))
                 return res
             if(validarTamaño(nombreUsuario,30,5)==1):
                 mensaje(request,generador("nombre de usuario",1))
@@ -310,7 +316,7 @@ def Formulario_Registro(request):
                 mensaje(request,"Error: La contraseña debe contener caracteres alfanumericos")
                 return res
             if(confirmacion!=contraseña):
-                mensaje(request,"La contraseña de verificacion no coincide")
+                mensaje(request,"La contraseña de verificación no coincide")
                 return res
             
             if(len(sacarInicio(correo))>32):
@@ -337,7 +343,6 @@ def Formulario_Registro(request):
             return res
 
     return render (request, "Formulario_Registro.html")
-
 
 def nivel_medio(request): #Vista nivel medio
     doc_externo = open("Acoustic_Live/Templates/Vista_Nivel_Medio.html")
