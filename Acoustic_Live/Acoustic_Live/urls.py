@@ -22,7 +22,7 @@ from gestionBD.views import lista_principiante, lista_medio, lista_avanzado, cru
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Mis_Cursos/', niveles),
-    path('Login/', loginn),
+    path('Login/', login),
     path('Formulario_Registro/', Formulario_Registro),
     path('Nivel_Principiante/<int:id_profesor>/', lista_principiante),
     path('Nivel_Medio/<int:id_profesor>/', lista_medio),

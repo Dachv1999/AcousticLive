@@ -14,10 +14,14 @@
         var cantidad_videos_vistos = JSON.parse("{{tiqueados}}"); 
         var id_profesor = JSON.parse("{{id_profesor}}"); 
         var nivel = JSON.parse("{{nivel_leccion}}"); 
-         
-        var cantidad_videos = JSON.parse("{{cantidad}}");    
-        var porcentaje = 100/cantidad_videos;
+        var cantidad_videos = JSON.parse("{{cantidad}}");
+        if (cantidad_videos ==0){
+            var porcentaje = 0;
+        }else{
+            var porcentaje = 100/cantidad_videos;
+        }
         var progress = porcentaje*cantidad_videos_vistos;
+        document.getElementById("demo").innerHTML = "Tu progreso en este curso: "+progress+"%";
 
             $("#progreso input").on('change', function(){
 
@@ -36,6 +40,7 @@
                             },
                         });
                         
+                        document.getElementById("demo").innerHTML = "Tu progreso en este curso: "+progress+"%";
                         $('#blips > .progress-bar').attr("style","width:" + progress + "%");
 
                     }else if ($(check).is(":checked") == false) {
@@ -52,6 +57,7 @@
                             dataType: "json",
                         });
 
+                        document.getElementById("demo").innerHTML = "Tu progreso en este curso: "+progress+"%";
                         $('#blips > .progress-bar').attr("style","width:" + progress + "%");
                     }
             }); 
@@ -80,7 +86,7 @@
             </p>
         </div>
         <div class="col-lg-5 col-md-5 col-sm-12">
-            <h5 class="text-light" style="margin-top: 2%;">Tu progreso en este curso:</h5>
+            <h5 class="text-light" style="margin-top: 2%;" id="demo"></h5>
                 
                 <div class="progress" id="blips">
                     <div class="progress-bar" role="progressbar" style="width: {{ tamanio_barra_progreso }};" >
@@ -96,7 +102,6 @@
     <link rel="stylesheet" href="{% static '/css/Fondo.css' %}" >
         <div class="container contenedor"> 
              
-
             {% if lecciones %}
             {% if bandera %} 
             <div class="container">
