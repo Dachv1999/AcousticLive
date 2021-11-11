@@ -9,6 +9,19 @@
 
 <div class="container-fluid" style="padding-top: 90px;">
     <link rel="stylesheet" href="{% static '/css/fondo.css' %}" >
+
+
+    {% if messages %}
+    <div class="ventana">
+        <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+
     <div class="container contenedor">
       <form action="/Inicio_Profesores/" method="GET">       
         <input type="image" name="boton_back" style="margin-left: 20px; " src="{% static 'Imagenes/flechita.png' %}" alt="Volver atras" width="50" height="50">                
@@ -46,7 +59,8 @@
                     
                     {% endifequal %}
                   {% endifequal %}
-                    <center><a href="" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">Editar</a></center>
+                    <center><a href="/Editar_video/{{leccion.id}}/{{leccion.nivel}}" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">Editar</a></center>
+                    <center> <a href="/Eliminar_video/3/{{leccion.id}}/{{leccion.orden}}/{{leccion.nivel}}" class="btn btn-danger" style="margin-right: 2%; margin-top: 2%;">Eliminar</a></center>
                 </td>
               </tr>
               {% endfor %}

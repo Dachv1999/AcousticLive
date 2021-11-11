@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Acoustic_Live.views import niveles, nivel_medio, nivel_avanzado,formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA, login,Formulario_Registro,inicio,inicio_profesores,Formulario_Registro, guardar_video_vistoBD, eliminar_video_vistoBD
-from gestionBD.views import lista_principiante, lista_medio, lista_avanzado, crud_profesores, mover_video_arriba, mover_video_abajo
+from Acoustic_Live.views import niveles, nivel_medio, nivel_avanzado,formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA, login,Formulario_Registro,inicio,inicio_profesores,Formulario_Registro, guardar_video_vistoBD, eliminar_video_vistoBD,formulario_editar_video,vista_editar_leccion
+from gestionBD.views import lista_principiante, lista_medio, lista_avanzado, crud_profesores, mover_video_arriba, mover_video_abajo, eliminar_video_profesor
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,6 +36,9 @@ urlpatterns = [
     path('eliminar_db/', eliminar_video_vistoBD, name='eliminar_db'),
     path('Subir/<int:id_profesor>/<int:orden_video>/<int:num_nivel>', mover_video_arriba),
     path('Bajar/<int:id_profesor>/<int:orden_video>/<int:num_nivel>', mover_video_abajo),
+    path('Eliminar_video/<int:id_profesor>/<int:leccion_id>/<int:orden_video>/<int:nivel_leccion>', eliminar_video_profesor),
     path('Mis_Videos/<int:nivel>/',crud_profesores),
+    path('Editar_video/<int:id_video>/<int:nivel>',vista_editar_leccion),
+    path('validar_video_editado/<int:id_video>/<int:nivel>',formulario_editar_video)
     # path('Envio/', envio_formulario, name="Envio"),
 ]

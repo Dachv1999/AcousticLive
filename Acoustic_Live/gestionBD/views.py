@@ -176,3 +176,20 @@ def mover_video_abajo(request, id_profesor, orden_video, num_nivel):
     lecciones2.save()
     return redirect(redireccion)
 
+
+def eliminar_video_profesor(request, id_profesor, leccion_id, orden_video, nivel_leccion):
+ 
+    leccion_a_eliminar = Leccion.objects.get( id = leccion_id, idprofesor_id=id_profesor, nivel = nivel_leccion)
+    leccion_a_eliminar.delete()
+
+    lecciones = Leccion.objects.filter( idprofesor_id=id_profesor, nivel = nivel_leccion)
+     
+    orden_nuevo = 1
+    for leccion in lecciones:
+       
+       leccion.orden = orden_nuevo
+       orden_nuevo = orden_nuevo + 1
+       leccion.save()
+
+    redireccion = '/Mis_Videos/'+ str(nivel_leccion) +'/'  
+    return redirect(redireccion)
