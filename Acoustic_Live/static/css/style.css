@@ -31,19 +31,28 @@ nav{
 }
 .enlace{
     position: absolute;
-    /*padding: 20px 50px;*/
+    padding: 0.5px 0px;
 }
 .logo{
-    height: 80px;
-    width: 100%;
+    height: 79px;
 }
-nav ul{
-    /*float: inline-start;*/
-    width: 100%;
-    height: 100%;
-    margin-left:22%;
-    justify-content: flex-start;/**/
-
+.der{
+    float: right;
+    margin-right: 10%;
+    margin-left: 10%;
+    list-style: none;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+.iz{
+    float: left;
+    margin-left: 10%;
+    margin-right: 10%;
+    list-style: none;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
 }
 nav ul li{
     text-align: center;/**/
@@ -56,8 +65,7 @@ nav ul li a{
     color: white;
     font-size: 18px;
     padding: 7px 13px;
-    border-radius:10px;
-    /*text-transform: uppercase;*/
+    border-radius: 3px;
     text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -80,9 +88,8 @@ nav label:hover{
     font-size: 40px;
     color:white;
     float: right;
-    margin-top: 20px;
-    /*line-height: 80px;*/
-    margin-right: 40px;
+    line-height: 80px;
+    margin-right: 20px;
     cursor: pointer;
     display: none;
 }
@@ -97,11 +104,6 @@ nav label:hover{
     nav ul li a{
         font-size: 15px;
     }
-    nav ul{
-        
-        margin-left:19%;
-        
-    }
 }
 
 @media (max-width: 890px){
@@ -109,22 +111,21 @@ nav label:hover{
         display: block;
     }
     
-    nav ul{
+    .men{
+        display: flex;
+        align-items: center;
+        justify-content: center;
         flex-direction: column;
+        text-align: center;
         position: fixed;
-
         width:100%;
-        height: 250px;
+        height: 200px;
         background: #2c3e50;
         top: 80px;
         left: -100%;
-        text-align: left;
+        text-align: center;
         transition: all .5s;
         border-radius: 1px;
-    }
-    nav ul{
-        margin-left: 0%;
-        margin-right: 0px;
     }
     nav ul li{
         display: block;
@@ -139,7 +140,7 @@ nav label:hover{
         background: none;
         color: lightgray;
     }
-    #check:checked ~ ul{
+    #check:checked ~ .men{
         left:0;
     }
 }

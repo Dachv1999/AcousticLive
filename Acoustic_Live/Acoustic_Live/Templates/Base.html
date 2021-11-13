@@ -29,30 +29,30 @@ $(document).ready(function() {
 </head>
 <body>
     <!-- cabezera ini-->
-    <header >
-        
-        <nav style="z-index: 2;">
-            
-            <input type="checkbox" id="check">
-            
-            <a href="/Inicio/" class="enlace">
-                <img src="{% static 'Imagenes/Logo.jpg' %}" alt="" class="logo">
-            </a>
-            <ul>
-                <li><a class="#"  href="/Inicio/">Inicio</a></li>
-                <li><a class="#"  href="/Mis_Cursos/">Mis Cursos</a></li>
-               <!-- <li><a  href="#">tutoriales</a></li>
-                <li><a  href="#">bibliografia</a></li>
-                <li><a  href="#">eventos</a></li>-->
-                <li><a class="#"  href="/Login/">Ingresar</a></li>
-                <li><a  href="#">Cerrar Sesi&oacute;n</a></li>
-            </ul>
-            <label for="check" class="checkbtn">
-                <i class="fas fa-bars"></i>
-            </label>
-        </nav>
-      
-    </header> 
+    <nav style="z-index: 2;">
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <a href="/Inicio/" class="enlace">
+            <img src="{% static 'Imagenes/Logo.jpg' %}" alt="" class="logo">
+        </a>
+        <div class="men">
+            <div class="iz">
+                <ul>
+                    <li><a href="/Inicio/">Inicio</a></li>
+                    <li><a href="/Mis_Cursos">Mis Cursos</a></li>
+                </ul>
+            </div>
+            <div class="der">
+                <ul>
+                    <li><a href="/Login/">Ingresar</a></li>
+                    <!-- <li><a href="#">Cerrar sesi&oacute;n</a></li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section></section> 
     <!-- cabezera fin-->
      {% block content %}   {% endblock %}
      <footer style="margin-top: 2%; padding-bottom: 1%; background-color: #111; padding-top: 1.5%; color: #fff;">
