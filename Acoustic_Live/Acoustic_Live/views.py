@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from gestionBD.models import Leccion, Profesor, Estudiante, Cursa
 from tkinter import messagebox as MessageBox
 from django.contrib import messages
-
+from django.contrib.auth.decorators import user_passes_test
 varBandera=0
 varUsuario=""
 varContraUsuario=""
@@ -35,13 +35,23 @@ def salirProfe(request):
 def inicio_profesores(request): #Vista Inicio de profesores
     if(varBandera==0):
         return redirect("/Inicio/")
-
-    return render(request,"Vista_Principal_Profesores.html",{'okProfe':'okProfe'})    
+    else:
+        if(varBandera==1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
+             return render(request,"Vista_Principal_Profesores.html",{'okProfe':'okProfe'})
+        else:
+             return redirect("/Inicio/")
+    # return render(request,"Vista_Principal_Profesores.html",{'okProfe':'okProfe'})    
 
 def niveles(request): #Vista niveles
     if(varBandera==0):
         return redirect("/Login/")
-    return render(request,"Division_Niveles.html")
+    else:
+        #varUsuario = chiri
+        if(varBandera ==1 and (varUsuario !='Aron_prof'and varUsuario !='mario_prof' and varUsuario !='christian_prof')):
+            return render(request,"Division_Niveles.html")
+        else:
+            return redirect("/Inicio_Profesores/")
+    # return render(request,"Division_Niveles.html")
 
 def login(request): 
     if request.method=="POST":
@@ -388,14 +398,21 @@ def profesoresNP(request): #Vista profesoresNivelPrincipante
     cantidad_cursos2 =cursos_profesor2.count()
     cursos_profesor3= Leccion.objects.filter(nivel=1, idprofesor_id=3)
     cantidad_cursos3 =cursos_profesor3.count()
-    doc_externo = open("Acoustic_Live/Templates/Vista_Profesores_NP.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
+    if varBandera == 0:
+        return redirect('/Inicio/')
+    else:
+        if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
+            return redirect('/Inicio_Profesores/')
+        else:
+            return render(request,'Vista_Profesores_NP.html',{'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
+    # doc_externo = open("Acoustic_Live/Templates/Vista_Profesores_NP.html")
+    # plt = Template(doc_externo.read())
+    # doc_externo.close()
     
-    ctx = Context({'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
-    documento = plt.render(ctx)
+    # ctx = Context({'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
+    # documento = plt.render(ctx)
 
-    return HttpResponse(documento)
+    # return HttpResponse(documento)
 
 def profesoresNM(request): #Vista profesoresNM
     cursos_profesor1= Leccion.objects.filter(nivel=2, idprofesor_id=1)
@@ -404,14 +421,21 @@ def profesoresNM(request): #Vista profesoresNM
     cantidad_cursos2 =cursos_profesor2.count()
     cursos_profesor3= Leccion.objects.filter(nivel=2, idprofesor_id=3)
     cantidad_cursos3 =cursos_profesor3.count()
-    doc_externo = open("Acoustic_Live/Templates/Vista_Profesores_NM.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
+    if varBandera == 0:
+        return redirect('/Inicio/')
+    else:
+        if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
+            return redirect('/Inicio_Profesores/')
+        else:
+            return render(request,'Vista_Profesores_NM.html',{'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
+    # doc_externo = open("Acoustic_Live/Templates/Vista_Profesores_NM.html")
+    # plt = Template(doc_externo.read())
+    # doc_externo.close()
 
-    ctx = Context({'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
-    documento = plt.render(ctx)
+    # ctx = Context({'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
+    # documento = plt.render(ctx)
 
-    return HttpResponse(documento)
+    # return HttpResponse(documento)
 
 def profesoresNA(request): #Vista profesoresNA
     cursos_profesor1= Leccion.objects.filter(nivel=3, idprofesor_id=1)
@@ -420,14 +444,21 @@ def profesoresNA(request): #Vista profesoresNA
     cantidad_cursos2 =cursos_profesor2.count()
     cursos_profesor3= Leccion.objects.filter(nivel=3, idprofesor_id=3)
     cantidad_cursos3 =cursos_profesor3.count()
-    doc_externo = open("Acoustic_Live/Templates/Vista_Profesores_NA.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
+    if varBandera == 0:
+        return redirect('/Inicio/')
+    else:
+        if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
+            return redirect('/Inicio_Profesores/')
+        else:
+            return render(request,'Vista_Profesores_NA.html',{'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
+    # doc_externo = open("Acoustic_Live/Templates/Vista_Profesores_NA.html")
+    # plt = Template(doc_externo.read())
+    # doc_externo.close()
 
-    ctx = Context({'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
-    documento = plt.render(ctx)
+    # ctx = Context({'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
+    # documento = plt.render(ctx)
 
-    return HttpResponse(documento)
+    # return HttpResponse(documento)
 
 def formulario_nuevoVideo(request, id_profesor):
 
