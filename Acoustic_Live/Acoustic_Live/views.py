@@ -1,3 +1,4 @@
+from tkinter.constants import NO
 from django.http import HttpResponse
 from django.template import Template, Context, context
 from django.shortcuts import render, redirect
@@ -5,16 +6,13 @@ from gestionBD.models import Leccion, Profesor, Estudiante, Cursa
 from tkinter import messagebox as MessageBox
 from django.contrib import messages
 
+varBandera=0
+varUsuario=""
+varContraUsuario=""
+logeado="hola"
+
 def inicio(request): #Vista Inicio
-    doc_externo = open("Acoustic_Live/Templates/Inicio.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
-
-    ctx = Context()
-
-    documento = plt.render(ctx)
-    
-    return HttpResponse(documento)
+    return render(request,"Inicio.html",{'bandera': logeado})
 
 def crud_profesores(request): #CRUD Profesores
     doc_externo = open("Acoustic_Live/Templates/CRUD_Profesores.html")
@@ -27,28 +25,23 @@ def crud_profesores(request): #CRUD Profesores
     
     return HttpResponse(documento)
 
+def salirProfe(request):
+    global logeado
+    logeado="hola"
+    global varBandera
+    varBandera=0
+    return render(request,"Inicio.html",{'bandera': "hola"})
+
 def inicio_profesores(request): #Vista Inicio de profesores
-    doc_externo = open("Acoustic_Live/Templates/Vista_Principal_Profesores.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
+    if(varBandera==0):
+        return redirect("/Inicio/")
 
-    ctx = Context()
-
-    documento = plt.render(ctx)
-    
-    return HttpResponse(documento)    
+    return render(request,"Vista_Principal_Profesores.html",{'okProfe':'okProfe'})    
 
 def niveles(request): #Vista niveles
-    doc_externo = open("Acoustic_Live/Templates/Division_Niveles.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
-
-    ctx = Context()
-
-    documento = plt.render(ctx)
-    
-    return HttpResponse(documento)
-
+    if(varBandera==0):
+        return redirect("/Login/")
+    return render(request,"Division_Niveles.html")
 
 def login(request): 
     if request.method=="POST":
@@ -64,10 +57,34 @@ def login(request):
         elif validar(usuario_login)==False:
             mensaje(request,"Error el nombre de usuario no es valido")
             return res
+        global varUsuario
+        global varContraUsuario
+        global varBandera
+        global logeado
+        if("_prof" in usuario_login):
+            if(Profesor.objects.filter(user_name=usuario_login).exists()):
+                if(Profesor.objects.filter(contraseña=contraseña).exists()and Profesor.objects.filter(user_name=usuario_login).exists()):
+                    logeado=None
+                    varUsuario=usuario_login
+                    varContraUsuario=contraseña
+                    varBandera=1
+                    return redirect("/Inicio_Profesores/")
+                else:
+                        mensaje(request,"Error: contraseña incorrecta")
+                        return res
+            else:
+                mensaje(request,"Error: Usuario no registrado")
+                return res
+
+
         if(Estudiante.objects.filter(usuario=usuario_login).exists()):
             if(Estudiante.objects.filter(contraseña_estudiante=contraseña).exists()and Estudiante.objects.filter(usuario=usuario_login).exists()):
-                mensaje(request,"Todo bien :D")
-                return res
+                # mensaje(request,"Todo bien :D")
+                logeado=None
+                varUsuario=usuario_login
+                varContraUsuario=contraseña
+                varBandera=1
+                return redirect("/Inicio/") 
             else:
                 mensaje(request,"Error: contraseña incorrecta")
                 return res

@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Acoustic_Live.views import niveles, nivel_medio, nivel_avanzado,formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA, login,Formulario_Registro,inicio,inicio_profesores,Formulario_Registro, guardar_video_vistoBD, eliminar_video_vistoBD,formulario_editar_video,vista_editar_leccion
+from Acoustic_Live.views import niveles, nivel_medio, nivel_avanzado,formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA, login,Formulario_Registro,inicio,inicio_profesores,Formulario_Registro, guardar_video_vistoBD, eliminar_video_vistoBD,formulario_editar_video,vista_editar_leccion,salirProfe
+
 from gestionBD.views import lista_principiante, lista_medio, lista_avanzado, crud_profesores, mover_video_arriba, mover_video_abajo, eliminar_video_profesor,Vista_Universal_Para_Profesor
 
 
@@ -42,7 +43,7 @@ urlpatterns = [
     path('Editar_video/<int:id_video>/<int:nivel>',vista_editar_leccion),
     path('validar_video_editado/<int:id_video>/<int:nivel>',formulario_editar_video),
     path('vista_videos_para_profesores/<int:id_profesor>/<int:nivel>',Vista_Universal_Para_Profesor),
-  
+    path('salirProfe/', salirProfe),
 
 
     # path('Envio/', envio_formulario, name="Envio"),
