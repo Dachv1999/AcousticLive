@@ -959,8 +959,6 @@ def eliminar_video_profesor(request, id_profesor, leccion_id, orden_video, nivel
 
     redireccion = '/Mis_Videos/'+ str(nivel_leccion) +'/'  
     return redirect(redireccion)
-
-
     
 def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
     lecciones = Leccion.objects.filter(nivel=nivel, idprofesor_id=id_profesor).order_by('orden')
