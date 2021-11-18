@@ -47,7 +47,7 @@ def recuperacion_contraseña(request):
                 messages.add_message(request=request, level=messages.SUCCESS, message = "Se envió a su correo electrónico")
                 return redirect("/Recuperar_Contra/")
             else:
-                messages.add_message(request=request, level=messages.ERROR, message = "Correo Incorrecto")
+                messages.add_message(request=request, level=messages.ERROR, message = "Correo incorrecto")
                 return redirect("/Recuperar_Contra/")
     return render (request, "recuperarContraseña.html")
 
@@ -264,11 +264,11 @@ def generador(variable,numero):
     
     cadena=False
     if(numero==1):
-        cadena="Error el campo "+variable+" es muy grande"
+        cadena="Error el "+variable+"  muy grande"
         
     else:
         if(numero==2):
-            cadena="Error el campo "+variable+" es muy pequeño"
+            cadena="Error el "+variable+"  muy pequeño"
     return cadena
 def hay_letra(var_contraseña):
     valido_contraseña = False
@@ -317,24 +317,24 @@ def Formulario_Registro(request):
             valido_correo=validarCorreo(correo)
 
             if((len(apellidoPaterno)==0 and len(apellidoMaterno)==0)):
-                mensaje(request,"Error debe ingresar al menos un apellido")
+                mensaje(request,"Error: Debe ingresar al menos un apellido")
                 return res
             if(validoNombre==False):
-                mensaje(request,"Nombre ingresado invalido")
+                mensaje(request,"Nombre ingresado inválido")
                 return res
             if(validoApePat==False):
-                mensaje(request,"Apellido paterno ingresado invalido")
+                mensaje(request,"Error el apellido paterno debe tener caracteres alfabéticos")
                 return res
             if(validoApeMat==False):
-                mensaje(request,"Apellido materno ingresado invalido")
+                mensaje(request,"Error el apellido materno debe tener caracteres alfabéticos")
                 return res
 
             if(valido_usuario==False):
-                mensaje(request,"Nombre de usuario invalido")
+                mensaje(request,"Nombre de usuario inválido")
                 return res
         
             if(espacio(nombre)):
-                mensaje(request,"Error el nombre debe tener caracteres alfabéticos")
+                mensaje(request,"Error: El nombre debe tener caracteres alfabéticos")
                 return res
             if(espacio(apellidoPaterno)):
                 mensaje(request,"Error el apellido paterno debe tener caracteres alfabéticos")
@@ -346,10 +346,10 @@ def Formulario_Registro(request):
                 mensaje(request,"Error el nombre de usario debe tener caracteres alfabéticos")
                 return res   
             if(validarTamaño(nombre,20,3)==1):
-                mensaje(request,generador("Nombre",1))
+                mensaje(request,generador("nombre",1))
                 return res
             elif (validarTamaño(nombre,20,3)==2):
-                mensaje(request,generador("Nombre",2))
+                mensaje(request,generador("nombre",2))
                 return res
             if(validarTamaño(apellidoPaterno,15,3)==1):
                 mensaje(request,generador("apellido paterno",1))
@@ -370,13 +370,13 @@ def Formulario_Registro(request):
                 mensaje(request,generador("nombre de usuario",2))
                 return res
             if(validarTamaño(contraseña,30,8)==1):
-                mensaje(request,"Error: la contraseña debe tener un maximo de 30 caracteres" )
+                mensaje(request,"Error: La contraseña debe tener un máximo de 30 caracteres" )
                 return res
             elif (validarTamaño(contraseña,30,8)==2):
-                mensaje(request,"Error: la contraseña debe tener un minimo de 8 caracteres")
+                mensaje(request,"Error: La contraseña debe tener un mínimo de 8 caracteres")
                 return res
             if(contraseña ==nombreUsuario):
-                mensaje(request,"Error: La contraseña es poco segura, ¡ingrese una nueva!")
+                mensaje(request,"Error: La contraseña es poco segura, ¡Ingrese una nueva!")
                 return res
             if(Estudiante.objects.filter(usuario=nombreUsuario).exists()):
                 mensaje(request,"Nombre de usuario existente")
@@ -387,7 +387,7 @@ def Formulario_Registro(request):
                 return res
 
             if(hay_letra(contraseña) == False or hay_numero(contraseña) == False):
-                mensaje(request,"Error: La contraseña debe contener caracteres alfanumericos")
+                mensaje(request,"Error: La contraseña debe contener caracteres alfanuméricos")
                 return res
             if(confirmacion!=contraseña):
                 mensaje(request,"La contraseña de verificación no coincide")
@@ -397,7 +397,7 @@ def Formulario_Registro(request):
                 return res
             
             if(len(sacarInicio(correo))>32):
-                mensaje(request,"Error: nombre de correo ingresado invalido")
+                mensaje(request,"Error: nombre de correo ingresado inválido")
                 return res
             else:   
                 if(valido_correo==False or not('@gmail.com' in correo) and not('@hotmail.com' in correo)and not('@outlook.com')and not('@yahoo.com')):
@@ -412,11 +412,11 @@ def Formulario_Registro(request):
                 else:
                     estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
                     estudiante.save() #ingresar datos
-                    mensaje(request,"Bienvenido a Acusctic Live :D")
+                    mensaje(request,"Bienvenido a Acusctic Live")
                     return redirect("/Login/")
 
         else:
-            mensaje(request,"Porfavor llene todos los campos obligatorios")
+            mensaje(request,"Por favor llene todos los campos")
             return res
 
     return render (request, "Formulario_Registro.html")
