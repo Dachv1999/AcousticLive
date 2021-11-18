@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
+from django.core.mail import send_mail
 
 
 MESSAGE_TAGS = {
@@ -142,6 +143,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+EMAIL_HOST='smtp.googlemail.com'
+EMAIL_PORT= 587
+EMAIL_HOST_USER= 'acoustic.live.proyecto@gmail.com'
+EMAIL_HOST_PASSWORD='cris73acousticlive'
+EMAIL_USE_TLS= True
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")

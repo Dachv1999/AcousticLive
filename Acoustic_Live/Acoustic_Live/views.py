@@ -6,10 +6,45 @@ from gestionBD.models import Leccion, Profesor, Estudiante, Cursa
 from tkinter import messagebox as MessageBox
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
+from django.template.loader import get_template
+from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
 varBandera=0
 varUsuario=""
 varContraUsuario=""
 logeado="hola"
+
+def send_email(email):
+    print(email)
+    c=Estudiante.objects.get(correo_estudiante=email)
+    passs=c.contraseña_estudiante
+    context = {'contra':passs}
+    template=get_template('envioEmail.html')
+    content = template.render(context)
+    email = EmailMultiAlternatives(
+        'otro titulo',
+        ' ',
+        settings.EMAIL_HOST_USER,
+        [email] #DESTINATARIO
+
+    )
+    email.attach_alternative(content,'text/html')
+    email.send()
+
+def recuperacion_contraseña(request): 
+    if request.method=="POST":
+        res= redirect("/Recuperar_Contra/")
+        correo=request.POST.get('correo_electronico','')
+        correos = Estudiante.objects.filter(correo_estudiante=correo)
+        if correos:
+            send_email(correo)
+            messages.add_message(request=request, level=messages.SUCCESS, message = "Se Envio a su Correo")
+            return redirect("/Recuperar_Contra/")
+        else:
+            messages.add_message(request=request, level=messages.ERROR, message = "Correo Icorrecto")
+            return redirect("/Recuperar_Contra/")
+    return render (request, "recuperarContraseña.html")
+
 
 def inicio(request): #Vista Inicio
     return render(request,"Inicio.html",{'bandera': logeado})
