@@ -985,46 +985,54 @@ def crud_profesores(request, nivel): #CRUD Profesores
     # return render(request,'CRUD_Profesores.html', contexto)
 
 def mover_video_arriba(request, id_profesor, orden_video, num_nivel):
-    lecciones1 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video)
-    lecciones2 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video- 1)
-    redireccion = '/Mis_Videos/'+ str(num_nivel) +'/'
+    if(varBandera==0):
+        return redirect("/")
+    else:
+        lecciones1 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video)
+        lecciones2 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video- 1)
+        redireccion = '/Mis_Videos/'+ str(num_nivel) +'/'
 
-    lecciones2.orden = lecciones2.orden + 1
-    lecciones1.orden = lecciones1.orden - 1
-    
-    lecciones1.save()
-    lecciones2.save()
-    return redirect(redireccion)
+        lecciones2.orden = lecciones2.orden + 1
+        lecciones1.orden = lecciones1.orden - 1
+        
+        lecciones1.save()
+        lecciones2.save()
+        return redirect(redireccion)
 
 def mover_video_abajo(request, id_profesor, orden_video, num_nivel):
-    lecciones1 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video)
-    lecciones2 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video+ 1)
-    redireccion = '/Mis_Videos/'+ str(num_nivel) +'/'
+    if(varBandera==0):
+        return redirect("/")
+    else:
+        lecciones1 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video)
+        lecciones2 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video+ 1)
+        redireccion = '/Mis_Videos/'+ str(num_nivel) +'/'
 
-    lecciones2.orden = lecciones2.orden - 1
-    lecciones1.orden = lecciones1.orden + 1
-    
-    lecciones1.save()
-    lecciones2.save()
-    return redirect(redireccion)
+        lecciones2.orden = lecciones2.orden - 1
+        lecciones1.orden = lecciones1.orden + 1
+        
+        lecciones1.save()
+        lecciones2.save()
+        return redirect(redireccion)
 
 
 def eliminar_video_profesor(request, id_profesor, leccion_id, orden_video, nivel_leccion):
- 
-    leccion_a_eliminar = Leccion.objects.get( id = leccion_id, idprofesor_id=id_profesor, nivel = nivel_leccion)
-    leccion_a_eliminar.delete()
+    if(varBandera==0):
+        return redirect("/")
+    else:
+        leccion_a_eliminar = Leccion.objects.get( id = leccion_id, idprofesor_id=id_profesor, nivel = nivel_leccion)
+        leccion_a_eliminar.delete()
 
-    lecciones = Leccion.objects.filter( idprofesor_id=id_profesor, nivel = nivel_leccion)
-     
-    orden_nuevo = 1
-    for leccion in lecciones:
-       
-       leccion.orden = orden_nuevo
-       orden_nuevo = orden_nuevo + 1
-       leccion.save()
+        lecciones = Leccion.objects.filter( idprofesor_id=id_profesor, nivel = nivel_leccion)
+        
+        orden_nuevo = 1
+        for leccion in lecciones:
+        
+            leccion.orden = orden_nuevo
+            orden_nuevo = orden_nuevo + 1
+            leccion.save()
 
-    redireccion = '/Mis_Videos/'+ str(nivel_leccion) +'/'  
-    return redirect(redireccion)
+        redireccion = '/Mis_Videos/'+ str(nivel_leccion) +'/'  
+        return redirect(redireccion)
     
 def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
     lecciones = Leccion.objects.filter(nivel=nivel, idprofesor_id=id_profesor).order_by('orden')
