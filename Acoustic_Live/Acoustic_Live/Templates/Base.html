@@ -38,18 +38,43 @@ $(document).ready(function() {
             <img src="{% static 'Imagenes/Logo.jpg' %}" alt="" class="logo">
         </a>
         <div class="men">
-            <div class="iz">
-                <ul>
-                    <li><a href="/Inicio/">Inicio</a></li>
-                    <li><a href="/Mis_Cursos">Mis Cursos</a></li>
-                </ul>
-            </div>
+            {%if not okProfe%}
+                <div class="iz">
+                    <ul>
+                        <li><a href="/Inicio/">Inicio</a></li>
+                        <li><a href="/Mis_Cursos">Mis Cursos</a></li>
+                    </ul>
+                </div>
+                <div class="der">
+                    {%if bandera%}
+                    <ul>
+                        <li><a href="/Login/">Ingresar</a></li>
+                        <!-- <li><a href="#">Cerrar sesi&oacute;n</a></li> -->
+                    </ul>
+                    {%else%}
+                    <ul>
+                        <li><a href="/salirProfe/">Cerrar sesi&oacute;n</a></li>
+                    </ul>
+                    {%endif%}
+                </div>
+           
+            <!-- {%endif%}
+            {%if bandera%}
             <div class="der">
                 <ul>
-                    <li><a href="/Login/">Ingresar</a></li>
-                    <!-- <li><a href="#">Cerrar sesi&oacute;n</a></li> -->
+                    
+                    <li><a href="/salirProfe/">Cerrar sesi&oacute;n</a></li>
                 </ul>
             </div>
+            {%endif%}
+            {%if okProfe%}
+            <div class="der">
+                <ul>
+                    
+                    <li><a href="/salirProfe/">Cerrar sesi&oacute;n</a></li>
+                </ul>
+            </div>
+            {%endif%} -->
         </div>
     </nav>
     <section></section> 
