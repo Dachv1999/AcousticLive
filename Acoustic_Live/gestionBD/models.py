@@ -40,7 +40,7 @@ class Cursa(models.Model):
     id_leccion= models.ForeignKey(Leccion,on_delete=CASCADE)
     id_profesor= models.ForeignKey(Profesor,on_delete=CASCADE, null=True)
     nivel_leccion = models.IntegerField(null=True)
-    #id_estudiante =models.ForeignKey(Estudiante,on_delete=CASCADE)
+    id_estudiante =models.ForeignKey(Estudiante,on_delete=CASCADE,null=True)
 
     def __str__(self):
         return self.id_leccion

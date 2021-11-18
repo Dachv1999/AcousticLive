@@ -45,22 +45,22 @@
 
                   {% ifequal 1 leccion.orden %}
                   
-                    <center><a href="/Bajar/3/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">Bajar</a></center>
+                    <center><a href="/Bajar/{{id}}/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">Bajar</a></center>
                   
                   {% else %}
                     {% ifequal cantidad leccion.orden %}
                   
-                    <center><a href="/Subir/3/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" style="margin-right: 2%; margin-left: 2%;margin-top: 2%;">Subir</a></center>
+                    <center><a href="/Subir/{{id}}/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" style="margin-right: 2%; margin-left: 2%;margin-top: 2%;">Subir</a></center>
 
                     {% else %}
 
-                      <center><a href="/Subir/3/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" style="margin-right: 2%; margin-left: 2%;margin-top: 2%;">Subir</a>
-                      <a href="/Bajar/3/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">Bajar</a></center>
+                      <center><a href="/Subir/{{id}}/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" style="margin-right: 2%; margin-left: 2%;margin-top: 2%;">Subir</a>
+                      <a href="/Bajar/{{id}}/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">Bajar</a></center>
                     
                     {% endifequal %}
                   {% endifequal %}
                     <center><a href="/Editar_video/{{leccion.id}}/{{leccion.nivel}}" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">Editar</a></center>
-                    <center> <a href="/Eliminar_video/3/{{leccion.id}}/{{leccion.orden}}/{{leccion.nivel}}" class="btn btn-danger" style="margin-right: 2%; margin-top: 2%;">Eliminar</a></center>
+                    <center> <a href="/Eliminar_video/{{id}}/{{leccion.id}}/{{leccion.orden}}/{{leccion.nivel}}" class="btn btn-danger" style="margin-right: 2%; margin-top: 2%;">Eliminar</a></center>
                 </td>
               </tr>
               {% endfor %}
@@ -69,7 +69,7 @@
             </tbody>
           </table>
         </div>
-        <form action="/vista_videos_para_profesores/3/{{nivel}}" method="GET">   
+        <form action="/vista_videos_para_profesores/{{id}}/{{nivel}}" method="GET">   
           <center><input type="submit" class="btn btn-dark w-150" value="Ver en la p&aacute;gina"></center>
         </form>
      </div>
