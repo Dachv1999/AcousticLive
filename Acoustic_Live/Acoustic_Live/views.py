@@ -22,7 +22,7 @@ def send_email(email):
     template=get_template('envioEmail.html')
     content = template.render(context)
     email = EmailMultiAlternatives(
-        'otro titulo',
+        'Recuperacion De Contraseña',
         ' ',
         settings.EMAIL_HOST_USER,
         [email] #DESTINATARIO
@@ -35,31 +35,29 @@ def recuperacion_contraseña(request):
     if request.method=="POST":
         res= redirect("/Recuperar_Contra/")
         correo=request.POST.get('correo_electronico','')
-        correos = Estudiante.objects.filter(correo_estudiante=correo)
-        if correos:
-            send_email(correo)
-            messages.add_message(request=request, level=messages.SUCCESS, message = "Se Envio a su Correo")
+        correos= correo.strip()
+        if(len(correos)==0):
+            print('vacio')
+            messages.add_message(request=request, level=messages.ERROR, message = "Debe llenar el campo correo")
             return redirect("/Recuperar_Contra/")
         else:
-            messages.add_message(request=request, level=messages.ERROR, message = "Correo Icorrecto")
-            return redirect("/Recuperar_Contra/")
+            correos = Estudiante.objects.filter(correo_estudiante=correo)
+            if correos:
+                send_email(correo)
+                messages.add_message(request=request, level=messages.SUCCESS, message = "Se envió a su correo electrónico")
+                return redirect("/Recuperar_Contra/")
+            else:
+                messages.add_message(request=request, level=messages.ERROR, message = "Correo Incorrecto")
+                return redirect("/Recuperar_Contra/")
     return render (request, "recuperarContraseña.html")
 
 
 def inicio(request): #Vista Inicio
     return render(request,"Inicio.html",{'bandera': logeado})
 
-def crud_profesores(request): #CRUD Profesores
-    doc_externo = open("Acoustic_Live/Templates/CRUD_Profesores.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
-
-    ctx = Context()
-
-    documento = plt.render(ctx)
+# def crud_profesores(request): #CRUD Profesores
+#     return render(request,'CRUD_Profesores.html',{'okProfe','okProfe'})
     
-    return HttpResponse(documento)
-
 def salirProfe(request):
     global logeado
     logeado="hola"
@@ -68,11 +66,25 @@ def salirProfe(request):
     return render(request,"Inicio.html",{'bandera': "hola"})
 
 def inicio_profesores(request): #Vista Inicio de profesores
+    
     if(varBandera==0):
         return redirect("/Inicio/")
     else:
+        profesor = Profesor.objects.get(user_name=varUsuario)
+        ok='okProfe'
+        id=profesor.id
+        id_profesor='/Formulario/'+str(id)+'/'
+        nombre_profesor=profesor.nombre_profesor
+        apellido_profesor =profesor.apellido_profesor
+        contexto={
+        'okProfe':ok,
+        'id_profesor':id_profesor,
+        'nombre_profesor':nombre_profesor,
+        'id':id,
+        'apellido_profesor':apellido_profesor ,
+        }
         if(varBandera==1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
-             return render(request,"Vista_Principal_Profesores.html",{'okProfe':'okProfe'})
+             return render(request,"Vista_Principal_Profesores.html",contexto)
         else:
              return redirect("/Inicio/")
     # return render(request,"Vista_Principal_Profesores.html",{'okProfe':'okProfe'})    
@@ -380,6 +392,9 @@ def Formulario_Registro(request):
             if(confirmacion!=contraseña):
                 mensaje(request,"La contraseña de verificación no coincide")
                 return res
+            if("_prof" in nombreUsuario): 
+                mensaje(request,"No puedes poner _prof en tu usuario")
+                return res
             
             if(len(sacarInicio(correo))>32):
                 mensaje(request,"Error: nombre de correo ingresado invalido")
@@ -395,8 +410,8 @@ def Formulario_Registro(request):
                     return res
                 
                 else:
-                    # estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
-                    # estudiante.save() #ingresar datos
+                    estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
+                    estudiante.save() #ingresar datos
                     mensaje(request,"Bienvenido a Acusctic Live :D")
                     return redirect("/Login/")
 
@@ -619,25 +634,28 @@ def formulario_nuevoVideo(request, id_profesor):
                     messages.add_message(request=request, level=messages.ERROR, message = "Por favor revise los campos")
                     return redirect(redireccion)
     
-            return render (request, "formulario.html")
+            return render (request, "formulario.html",{'okProfe': "okProfe"})
+           
        
         else:
              return redirect("/Inicio/")
 
         
-def guardar_video_vistoBD(request):
+def guardar_video_vistoBD(request):#aqui
+    id_estudiante = request.GET.get('id_estudiante', None)
     id_leccion = request.GET.get('id_leccion', None)
     id_profesor = request.GET.get('id_profesor', None)
     nivel_leccion = request.GET.get('nivel_leccion', None)
-    cursa = Cursa(visto=1, id_leccion_id = id_leccion, id_profesor_id= id_profesor, nivel_leccion=nivel_leccion )
+    cursa = Cursa(visto=1, id_leccion_id = id_leccion, id_profesor_id= id_profesor, nivel_leccion=nivel_leccion, id_estudiante_id=id_estudiante)
     cursa.save()
     return redirect("/Mis_Cursos/")
 
 def eliminar_video_vistoBD(request):
+    id_estudiante = request.GET.get('id_estudiante', None)
     id_leccion = request.GET.get('id_leccion', None)
     id_profesor = request.GET.get('id_profesor', None)
     nivel_leccion = request.GET.get('nivel_leccion', None)
-    cursa = Cursa.objects.get(id_leccion_id = id_leccion, id_profesor_id= id_profesor, nivel_leccion=nivel_leccion )
+    cursa = Cursa.objects.get(id_leccion_id = id_leccion, id_profesor_id= id_profesor, nivel_leccion=nivel_leccion, id_estudiante_id=id_estudiante)
     cursa.delete()
     return redirect("/Mis_Cursos/")
 
@@ -648,13 +666,14 @@ def vista_editar_leccion(request, id_video, nivel):
    nombre = lecc.nombre_leccion
    descripcion = lecc.descripcion
    link = lecc.link
-   
+   ok='okProfe'
    contexto = {
     'nombre' : nombre,
     'descripcion': descripcion,
     'link' : link,
     'nivel' : nivel,
-    'id_video' : id_video
+    'id_video' : id_video,
+    'okProfe':ok,
    }
    if(varBandera==0):
         return redirect("/Inicio/")
@@ -769,49 +788,53 @@ def formulario_editar_video(request,id_video,nivel):
     return render (request, "formulario.html")
 
 def lista_principiante(request, id_profesor):
-    lecciones = Leccion.objects.filter(nivel=1, idprofesor_id=id_profesor).order_by('orden')
-    profesores = Profesor.objects.filter(id=id_profesor)
-    cursan = Cursa.objects.filter(id_profesor_id=id_profesor, nivel_leccion = 1)
-
-    lista_vistos = []
-
-
-    for cursa in cursan:
-        lista_vistos.append(cursa.id_leccion_id)
-
-    cant = 0
-    for leccion in lecciones:
-        cant = cant + 1
-
-    cant_tiqueados = 0
-    for cursa in cursan:
-        cant_tiqueados = cant_tiqueados + 1
     
-    if cant != 0:
-        porcentaje_vistos = int((cant_tiqueados * 100) / cant)
-    else:
-        porcentaje_vistos = 0 
-
-
-    level = "Nivel Principiante"
-    atras = "/Profesores_Nivel_Principiante/"
-    nivel = 1
-    tamanio_barra_progreso = str(porcentaje_vistos) +'%'
-    contexto = {
-        'profesores' : profesores,
-        'lecciones' : lecciones,
-        'nivel' : level,
-        'nivel_leccion' : nivel,
-        'id_profesor' : id_profesor,
-        'atras' : atras,
-        'cantidad' : cant,
-        'lista_vistos' : lista_vistos,
-        'tiqueados' : cant_tiqueados,
-        'tamanio_barra_progreso' : tamanio_barra_progreso
-    }
     if varBandera == 0:
         return redirect('/Inicio/')
     else:
+        estudiante=Estudiante.objects.get(usuario=varUsuario)
+        lecciones = Leccion.objects.filter(nivel=1, idprofesor_id=id_profesor).order_by('orden')
+        profesores = Profesor.objects.filter(id=id_profesor)
+        id_estudiante= estudiante.id
+        cursan = Cursa.objects.filter(id_profesor_id=id_profesor, nivel_leccion = 1,id_estudiante_id=id_estudiante)
+
+        lista_vistos = []
+
+
+        for cursa in cursan:
+            lista_vistos.append(cursa.id_leccion_id)
+
+        cant = 0
+        for leccion in lecciones:
+            cant = cant + 1
+
+        cant_tiqueados = 0
+        for cursa in cursan:
+            cant_tiqueados = cant_tiqueados + 1
+        
+        if cant != 0:
+            porcentaje_vistos = int((cant_tiqueados * 100) / cant)
+        else:
+            porcentaje_vistos = 0 
+
+
+        level = "Nivel Principiante"
+        atras = "/Profesores_Nivel_Principiante/"
+        nivel = 1
+        tamanio_barra_progreso = str(porcentaje_vistos) +'%'
+        contexto = {
+            'profesores' : profesores,
+            'lecciones' : lecciones,
+            'nivel' : level,
+            'nivel_leccion' : nivel,
+            'id_profesor' : id_profesor,
+            'atras' : atras,
+            'cantidad' : cant,
+            'lista_vistos' : lista_vistos,
+            'tiqueados' : cant_tiqueados,
+            'tamanio_barra_progreso' : tamanio_barra_progreso,
+            'id_estudiante':id_estudiante
+        }
         if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
             return redirect('/Inicio_Profesores/')
         else:
@@ -820,52 +843,53 @@ def lista_principiante(request, id_profesor):
 
 def lista_medio(request, id_profesor):
     
-    lecciones = Leccion.objects.filter(nivel=2, idprofesor_id=id_profesor).order_by('orden')
-    profesores = Profesor.objects.filter(id=id_profesor)
-    cursan = Cursa.objects.filter(id_profesor_id=id_profesor, nivel_leccion = 2)
-
-    lista_vistos = []
-
-    for cursa in cursan:
-        lista_vistos.append(cursa.id_leccion_id)
-
-    cant = 0
-    for leccion in lecciones:
-        cant = cant + 1
-
-    cant_tiqueados = 0
-    for cursa in cursan:
-        cant_tiqueados = cant_tiqueados + 1
-
-    if cant != 0:
-        porcentaje_vistos = int((cant_tiqueados * 100) / cant)
-    else:
-        porcentaje_vistos = 0 
-
-    level = "Nivel Medio"
-    atras = "/Profesores_Nivel_Medio/"
-    ok ='okProfe'
-    bandera = True
-    nivel = 2
-    tamanio_barra_progreso = str(porcentaje_vistos) +'%'
-    contexto = {
-        'profesores' : profesores,
-        'lecciones' : lecciones,
-        'nivel' : level,
-        'nivel_leccion' : nivel,
-        'id_profesor' : id_profesor,
-        'atras' : atras,
-        'bandera' : bandera,
-        'cantidad' : cant,
-        'lista_vistos' : lista_vistos,
-        'tiqueados' : cant_tiqueados,
-        'tamanio_barra_progreso' : tamanio_barra_progreso,
-        'bandera':varBandera,
-        'okProfe':ok
-    }
     if varBandera == 0:
         return redirect('/Inicio/')
     else:
+        estudiante=Estudiante.objects.get(usuario=varUsuario)
+        lecciones = Leccion.objects.filter(nivel=2, idprofesor_id=id_profesor).order_by('orden')
+        profesores = Profesor.objects.filter(id=id_profesor)
+        id_estudiante= estudiante.id
+        cursan = Cursa.objects.filter(id_profesor_id=id_profesor, nivel_leccion = 2,id_estudiante_id=id_estudiante)
+
+        lista_vistos = []
+
+        for cursa in cursan:
+            lista_vistos.append(cursa.id_leccion_id)
+
+        cant = 0
+        for leccion in lecciones:
+            cant = cant + 1
+
+        cant_tiqueados = 0
+        for cursa in cursan:
+            cant_tiqueados = cant_tiqueados + 1
+
+        if cant != 0:
+            porcentaje_vistos = int((cant_tiqueados * 100) / cant)
+        else:
+            porcentaje_vistos = 0 
+
+        level = "Nivel Medio"
+        atras = "/Profesores_Nivel_Medio/"
+        ok ='okProfe'
+        bandera = True
+        nivel = 2
+        tamanio_barra_progreso = str(porcentaje_vistos) +'%'
+        contexto = {
+            'profesores' : profesores,
+            'lecciones' : lecciones,
+            'nivel' : level,
+            'nivel_leccion' : nivel,
+            'id_profesor' : id_profesor,
+            'atras' : atras,
+            'bandera_universal' : bandera,
+            'cantidad' : cant,
+            'lista_vistos' : lista_vistos,
+            'tiqueados' : cant_tiqueados,
+            'tamanio_barra_progreso' : tamanio_barra_progreso,
+            'id_estudiante':id_estudiante,
+        }
         if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
             return redirect('/Inicio_Profesores/')
         else:
@@ -874,53 +898,55 @@ def lista_medio(request, id_profesor):
     # return render(request,'Vista_Universal_Lecciones.html', contexto)
 
 def lista_avanzado(request, id_profesor):
-    lecciones = Leccion.objects.filter(nivel=3, idprofesor_id=id_profesor).order_by('orden')
-    profesores = Profesor.objects.filter(id=id_profesor)
-    cursan = Cursa.objects.filter(id_profesor_id=id_profesor, nivel_leccion = 3)
-
-    lista_vistos = []
-
-    for cursa in cursan:
-        lista_vistos.append(cursa.id_leccion_id)
-
-    cant = 0
-    for leccion in lecciones:
-        cant = cant + 1
-
-    cant_tiqueados = 0
-    for cursa in cursan:
-        cant_tiqueados = cant_tiqueados + 1
-
-    if cant != 0:
-        porcentaje_vistos = int((cant_tiqueados * 100) / cant)
-    else:
-        porcentaje_vistos = 0 
-
-    level = "Nivel Avanzado"
-    atras = "/Profesores_Nivel_Avanzado/"
-    bandera = True
-    nivel = 3
-    ok ='okProfe'
-    print(varBandera)
-    tamanio_barra_progreso = str(porcentaje_vistos) +'%'
-    contexto = {
-        'profesores' : profesores,
-        'lecciones' : lecciones,
-        'nivel' : level,
-        'nivel_leccion' : nivel,
-        'id_profesor' : id_profesor,
-        'atras' : atras,
-        'bandera' : bandera,
-        'cantidad' : cant,
-        'lista_vistos' : lista_vistos,
-        'tiqueados' : cant_tiqueados,
-        'tamanio_barra_progreso' : tamanio_barra_progreso,
-        'bandera':varBandera,
-        'okProfe':ok
-    }
+    
     if varBandera == 0:
         return redirect('/Inicio/')
     else:
+        estudiante=Estudiante.objects.get(usuario=varUsuario)
+        lecciones = Leccion.objects.filter(nivel=3, idprofesor_id=id_profesor).order_by('orden')
+        profesores = Profesor.objects.filter(id=id_profesor)
+        id_estudiante= estudiante.id
+        cursan = Cursa.objects.filter(id_profesor_id=id_profesor, nivel_leccion = 3,id_estudiante_id=id_estudiante)
+
+        lista_vistos = []
+
+        for cursa in cursan:
+            lista_vistos.append(cursa.id_leccion_id)
+
+        cant = 0
+        for leccion in lecciones:
+            cant = cant + 1
+
+        cant_tiqueados = 0
+        for cursa in cursan:
+            cant_tiqueados = cant_tiqueados + 1
+
+        if cant != 0:
+            porcentaje_vistos = int((cant_tiqueados * 100) / cant)
+        else:
+            porcentaje_vistos = 0 
+
+        level = "Nivel Avanzado"
+        atras = "/Profesores_Nivel_Avanzado/"
+        bandera = True
+        nivel = 3
+        ok ='okProfe'
+        print(varBandera)
+        tamanio_barra_progreso = str(porcentaje_vistos) +'%'
+        contexto = {
+            'profesores' : profesores,
+            'lecciones' : lecciones,
+            'nivel' : level,
+            'nivel_leccion' : nivel,
+            'id_profesor' : id_profesor,
+            'atras' : atras,
+            'bandera_universal' : bandera,
+            'cantidad' : cant,
+            'lista_vistos' : lista_vistos,
+            'tiqueados' : cant_tiqueados,
+            'tamanio_barra_progreso' : tamanio_barra_progreso,
+            'id_estudiante':id_estudiante,
+        }
         if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
             return redirect('/Inicio_Profesores/')
         else:
@@ -930,22 +956,27 @@ def lista_avanzado(request, id_profesor):
 
 
 def crud_profesores(request, nivel): #CRUD Profesores
-
-    lecciones = Leccion.objects.filter(nivel=nivel, idprofesor_id=3).order_by('orden')
-
-    cant = 0
-    for leccion in lecciones:
-        cant = cant + 1
-        
-    contexto = {
-        'lecciones' : lecciones,
-        'cantidad' : cant,
-        'nivel' : nivel,
-
-    }
+    
     if(varBandera==0):
         return redirect("/Inicio/")
     else:
+        profesor = Profesor.objects.get(user_name=varUsuario)
+        id=profesor.id
+        
+        lecciones = Leccion.objects.filter(nivel=nivel, idprofesor_id=id).order_by('orden')
+
+        cant = 0
+        for leccion in lecciones:
+            cant = cant + 1
+        ok='okProfe'
+        contexto = {
+            'lecciones' : lecciones,
+            'cantidad' : cant,
+            'nivel' : nivel,
+            'okProfe':ok,
+            'id':id,
+
+        }
         if(varBandera==1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
              return render(request,'CRUD_Profesores.html', contexto)
         else:
@@ -1013,6 +1044,7 @@ def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
         level = "Nivel Avanzado"
 
     atras = "/Mis_Videos/" + str(nivel)
+    ok='okProfe'
     contexto = {
         'profesores' : profesores,
         'lecciones' : lecciones,
@@ -1020,6 +1052,7 @@ def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
         'id_profesor' : id_profesor,
         'atras' : atras,
         'cantidad' : cant,
+        'okProfe':ok
     }
     if(varBandera==0):
         return redirect("/Inicio/")

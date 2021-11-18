@@ -34,9 +34,15 @@ $(document).ready(function() {
         <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
         </label>
-        <a href="/Inicio/" class="enlace">
-            <img src="{% static 'Imagenes/Logo.jpg' %}" alt="" class="logo">
-        </a>
+        {%if not okProfe%}
+            <a href="/Inicio/" class="enlace">
+                <img src="{% static 'Imagenes/Logo.jpg' %}" alt="" class="logo">
+            </a>
+        {%else%}
+            <a href="/Inicio_Profesores/" class="enlace">
+                <img src="{% static 'Imagenes/Logo.jpg' %}" alt="" class="logo">
+            </a>
+        {%endif%}
         <div class="men">
             {%if not okProfe%}
                 <div class="iz">
@@ -57,24 +63,26 @@ $(document).ready(function() {
                     </ul>
                     {%endif%}
                 </div>
-           
-            <!-- {%endif%}
-            {%if bandera%}
-            <div class="der">
+            {%else%}
+            <div class="iz">
                 <ul>
-                    
+                    <li><a href="/Inicio_Profesores/">Inicio</a></li>
+                </ul>
+            </div>
+            <div class="der">
+                {%if bandera%}
+                <ul>
+                    <li><a href="/Login/">Ingresar</a></li>
+                    <!-- <li><a href="#">Cerrar sesi&oacute;n</a></li> -->
+                </ul>
+                {%else%}
+                <ul>
                     <li><a href="/salirProfe/">Cerrar sesi&oacute;n</a></li>
                 </ul>
+                {%endif%}
             </div>
             {%endif%}
-            {%if okProfe%}
-            <div class="der">
-                <ul>
-                    
-                    <li><a href="/salirProfe/">Cerrar sesi&oacute;n</a></li>
-                </ul>
-            </div>
-            {%endif%} -->
+
         </div>
     </nav>
     <section></section> 
