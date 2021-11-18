@@ -68,7 +68,7 @@ def salirProfe(request):
 def inicio_profesores(request): #Vista Inicio de profesores
     
     if(varBandera==0):
-        return redirect("/Inicio/")
+        return redirect("/")
     else:
         profesor = Profesor.objects.get(user_name=varUsuario)
         ok='okProfe'
@@ -141,7 +141,7 @@ def login(request):
                 varUsuario=usuario_login
                 varContraUsuario=contraseña
                 varBandera=1
-                return redirect("/Inicio/") 
+                return redirect("/") 
             else:
                 mensaje(request,"Error: contraseña incorrecta")
                 return res
@@ -449,7 +449,7 @@ def profesoresNP(request): #Vista profesoresNivelPrincipante
     cursos_profesor3= Leccion.objects.filter(nivel=1, idprofesor_id=3)
     cantidad_cursos3 =cursos_profesor3.count()
     if varBandera == 0:
-        return redirect('/Inicio/')
+        return redirect('/')
     else:
         if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
             return redirect('/Inicio_Profesores/')
@@ -472,7 +472,7 @@ def profesoresNM(request): #Vista profesoresNM
     cursos_profesor3= Leccion.objects.filter(nivel=2, idprofesor_id=3)
     cantidad_cursos3 =cursos_profesor3.count()
     if varBandera == 0:
-        return redirect('/Inicio/')
+        return redirect('/')
     else:
         if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
             return redirect('/Inicio_Profesores/')
@@ -495,7 +495,7 @@ def profesoresNA(request): #Vista profesoresNA
     cursos_profesor3= Leccion.objects.filter(nivel=3, idprofesor_id=3)
     cantidad_cursos3 =cursos_profesor3.count()
     if varBandera == 0:
-        return redirect('/Inicio/')
+        return redirect('/')
     else:
         if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
             return redirect('/Inicio_Profesores/')
@@ -512,7 +512,7 @@ def profesoresNA(request): #Vista profesoresNA
 
 def formulario_nuevoVideo(request, id_profesor):
     if(varBandera==0):
-        return redirect("/Inicio/")
+        return redirect("/")
     else:
         if(varBandera==1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
             if request.method=="POST":
@@ -638,7 +638,7 @@ def formulario_nuevoVideo(request, id_profesor):
            
        
         else:
-             return redirect("/Inicio/")
+             return redirect("/")
 
         
 def guardar_video_vistoBD(request):#aqui
@@ -676,12 +676,12 @@ def vista_editar_leccion(request, id_video, nivel):
     'okProfe':ok,
    }
    if(varBandera==0):
-        return redirect("/Inicio/")
+        return redirect("/")
    else:
         if(varBandera==1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
             return render(request,"Editar_Leccion_Profesor.html",contexto)
         else:
-            return redirect("/Inicio/")
+            return redirect("/")
 #    return render(request,"Editar_Leccion_Profesor.html",contexto)
 
 def formulario_editar_video(request,id_video,nivel):
@@ -790,7 +790,7 @@ def formulario_editar_video(request,id_video,nivel):
 def lista_principiante(request, id_profesor):
     
     if varBandera == 0:
-        return redirect('/Inicio/')
+        return redirect('/')
     else:
         estudiante=Estudiante.objects.get(usuario=varUsuario)
         lecciones = Leccion.objects.filter(nivel=1, idprofesor_id=id_profesor).order_by('orden')
@@ -844,7 +844,7 @@ def lista_principiante(request, id_profesor):
 def lista_medio(request, id_profesor):
     
     if varBandera == 0:
-        return redirect('/Inicio/')
+        return redirect('/')
     else:
         estudiante=Estudiante.objects.get(usuario=varUsuario)
         lecciones = Leccion.objects.filter(nivel=2, idprofesor_id=id_profesor).order_by('orden')
@@ -900,7 +900,7 @@ def lista_medio(request, id_profesor):
 def lista_avanzado(request, id_profesor):
     
     if varBandera == 0:
-        return redirect('/Inicio/')
+        return redirect('/')
     else:
         estudiante=Estudiante.objects.get(usuario=varUsuario)
         lecciones = Leccion.objects.filter(nivel=3, idprofesor_id=id_profesor).order_by('orden')
@@ -958,7 +958,7 @@ def lista_avanzado(request, id_profesor):
 def crud_profesores(request, nivel): #CRUD Profesores
     
     if(varBandera==0):
-        return redirect("/Inicio/")
+        return redirect("/")
     else:
         profesor = Profesor.objects.get(user_name=varUsuario)
         id=profesor.id
@@ -980,7 +980,7 @@ def crud_profesores(request, nivel): #CRUD Profesores
         if(varBandera==1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
              return render(request,'CRUD_Profesores.html', contexto)
         else:
-             return redirect("/Inicio/")
+             return redirect("/")
 
     # return render(request,'CRUD_Profesores.html', contexto)
 
@@ -1055,10 +1055,10 @@ def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
         'okProfe':ok
     }
     if(varBandera==0):
-        return redirect("/Inicio/")
+        return redirect("/")
     else:
         if(varBandera==1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
             return render(request,'Vista_Universal_Lecciones_For_Profesor.html', contexto)
         else:
-             return redirect("/Inicio/")
+             return redirect("/")
     # return render(request,'Vista_Universal_Lecciones_For_Profesor.html', contexto)
