@@ -34,7 +34,7 @@ urlpatterns = [
     path('Profesores_Nivel_Principiante/', profesoresNP),
     path('Profesores_Nivel_Medio/', profesoresNM),
     path('Profesores_Nivel_Avanzado/', profesoresNA),
-    path('Inicio/', inicio),
+    path('', inicio),
     path('Inicio_Profesores/', inicio_profesores),
     path('guardar_db/', guardar_video_vistoBD, name='guardar_db'),
     path('eliminar_db/', eliminar_video_vistoBD, name='eliminar_db'),
