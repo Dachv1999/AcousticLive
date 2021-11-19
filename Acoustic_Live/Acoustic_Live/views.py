@@ -412,12 +412,14 @@ def Formulario_Registro(request):
                     return res
                 
                 else:
-                    # estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
-                    # estudiante.save() #ingresar datos
-                    # estudiante1 = User.objects.create_user(nombreUsuario,correo,contraseña)
-                    # estudiante1.save()
+                    estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, 
+                    correo_estudiante = correo, contraseña_estudiante = contraseña)
+                    estudiante.save() #ingresar datos
+                    estudiante1 = User.objects.create_user(nombreUsuario,correo,contraseña)
+                    estudiante1.save()
                     mensaje(request,"Bienvenido a Acusctic Live")
                     return redirect("/Login/")
+                    
 
         else:
             mensaje(request,"Por favor llene todos los campos")
