@@ -22,7 +22,7 @@ from django.contrib.auth.decorators import user_passes_test
 def send_email(email1):
     print(email1)
     c=''
-    if email1== 'mariof.acousticlive@gmail.com' or 'cristian.acousticlive@gmail.com' or 'aarons.acousticlive@gmail.com':
+    if email1== 'mariof.acousticlive@gmail.com' or email1=='cristian.acousticlive@gmail.com' or email1=='aarons.acousticlive@gmail.com':
         c=Profesor.objects.get(email=email1)
         passs=c.contraseña
     else:
@@ -45,14 +45,15 @@ def recuperacion_contraseña(request):
     if request.method=="POST":
         res= redirect("/Recuperar_Contra/")
         correo=request.POST.get('correo_electronico','')
-        correos= correo.strip()
-        if(len(correos)==0):
+        correosi= correo.strip()
+        if(len(correosi)==0):
             print('vacio')
             messages.add_message(request=request, level=messages.ERROR, message = "Debe llenar el campo correo")
             return redirect("/Recuperar_Contra/")
         else:
+            correos=False
             correo_profe=False
-            if correo== 'mariof.acousticlive@gmail.com' or 'cristian.acousticlive@gmail.com' or 'aarons.acousticlive@gmail.com':
+            if correo== 'mariof.acousticlive@gmail.com' or correo=='cristian.acousticlive@gmail.com' or correo=='aarons.acousticlive@gmail.com':
                 correo_profe=True
             else:
                 correos = Estudiante.objects.filter(correo_estudiante=correo)
