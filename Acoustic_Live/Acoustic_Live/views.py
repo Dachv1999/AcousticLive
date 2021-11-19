@@ -170,12 +170,12 @@ def validar(nombreUsuario):
         if (not((aux>64 and aux<91) or (aux>96 and aux<123)or (aux>47 and aux<59)
             or letrita=="á" or letrita=="é" or letrita=="í" or letrita=="_" or letrita=="-"
             or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
-            or letrita=="Í" or letrita=="Ó" or letrita=="Ú" or letrita==" ")):
+            or letrita=="Í" or letrita=="Ó" or letrita=="Ú" or letrita==" "
+            or letrita=="ñ" or letrita=="Ñ")):
                     
             valido_usuario = False
         i +=1
     return valido_usuario
-
 def espacio(palabra):
     res=False
     contador=0
@@ -191,8 +191,6 @@ def espacio(palabra):
     if(contador==1 and len(palabra)==1):
         res=True
     return res
-
-
 def validarNombres(palabra):
     valido = True
     i = 0
@@ -202,12 +200,12 @@ def validarNombres(palabra):
         if (not((aux>64 and aux<91) or (aux>96 and aux<123)
             or letrita=="á" or letrita=="é" or letrita=="í"
             or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
-            or letrita=="Í" or letrita=="Ó" or letrita=="Ú" or letrita==" ")):
+            or letrita=="Í" or letrita=="Ó" or letrita=="Ú" or letrita==" "
+            or letrita=="ñ" or letrita=="Ñ")):
                     
             valido = False
         i +=1
     return valido
-
 def validarCorreo(correo):
     valido_correo = True
     i = 0
@@ -247,27 +245,23 @@ def sacarInicio(var_correo):
             encontrado=True
         i=i+1
     return palabra
-
 def esValidoCorreo(extencio):
     res=False
     if(extencio=="@gmail.com" or extencio=="@yahoo.com" or extencio=="@outlook.com" or extencio=="@hotmail.com" ):
         res=True
     return res
-
 def mensaje(req,mensajeError):  
     messages.add_message(request=req, level=messages.WARNING, message = mensajeError)
-
 def validarTamaño(palabra,maximo,minimo):
     
     cadena=-1
-    if(len(palabra)>maximo):
+    if(len(palabra)!=0 and len(palabra)>maximo):
         cadena=1
         
     else:
-        if(len(palabra)<minimo):
+        if(len(palabra)!=0 and len(palabra)<minimo):
             cadena=2
     return cadena
-
 def generador(variable,numero):
     
     cadena=False
@@ -418,10 +412,10 @@ def Formulario_Registro(request):
                     return res
                 
                 else:
-                    estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
-                    estudiante.save() #ingresar datos
-                    estudiante1 = User.objects.create_user(nombreUsuario,correo,contraseña)
-                    estudiante1.save()
+                    # estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
+                    # estudiante.save() #ingresar datos
+                    # estudiante1 = User.objects.create_user(nombreUsuario,correo,contraseña)
+                    # estudiante1.save()
                     mensaje(request,"Bienvenido a Acusctic Live")
                     return redirect("/Login/")
 
