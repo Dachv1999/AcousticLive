@@ -19,22 +19,27 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import user_passes_test
 
 
-def send_email(email):
-    print(email)
-    c=Estudiante.objects.get(correo_estudiante=email)
-    passs=c.contraseña_estudiante
+def send_email(email1):
+    print(email1)
+    c=''
+    if email1== 'mariof.acousticlive@gmail.com' or 'cristian.acousticlive@gmail.com' or 'aarons.acousticlive@gmail.com':
+        c=Profesor.objects.get(email=email1)
+        passs=c.contraseña
+    else:
+        c=Estudiante.objects.get(correo_estudiante=email1)
+        passs=c.contraseña_estudiante
     context = {'contra':passs}
     template=get_template('envioEmail.html')
     content = template.render(context)
-    email = EmailMultiAlternatives(
+    email1 = EmailMultiAlternatives(
         'Recuperacion De Contraseña',
         ' ',
         settings.EMAIL_HOST_USER,
-        [email] #DESTINATARIO
+        [email1] #DESTINATARIO
 
     )
-    email.attach_alternative(content,'text/html')
-    email.send()
+    email1.attach_alternative(content,'text/html')
+    email1.send()
 
 def recuperacion_contraseña(request): 
     if request.method=="POST":
@@ -46,8 +51,12 @@ def recuperacion_contraseña(request):
             messages.add_message(request=request, level=messages.ERROR, message = "Debe llenar el campo correo")
             return redirect("/Recuperar_Contra/")
         else:
-            correos = Estudiante.objects.filter(correo_estudiante=correo)
-            if correos:
+            correo_profe=False
+            if correo== 'mariof.acousticlive@gmail.com' or 'cristian.acousticlive@gmail.com' or 'aarons.acousticlive@gmail.com':
+                correo_profe=True
+            else:
+                correos = Estudiante.objects.filter(correo_estudiante=correo)
+            if correos or correo_profe:
                 send_email(correo)
                 messages.add_message(request=request, level=messages.SUCCESS, message = "Se envió a su correo electrónico")
                 return redirect("/Recuperar_Contra/")
