@@ -34,17 +34,18 @@ $(document).ready(function() {
         <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
         </label>
-        {%if not okProfe%}
-            <a href="/" class="enlace">
-                <img src="{% static 'Imagenes/Logo.jpg' %}" alt="" class="logo">
-            </a>
-        {%else%}
+        {%if indentificador_profesor %}
             <a href="/Inicio_Profesores/" class="enlace">
                 <img src="{% static 'Imagenes/Logo.jpg' %}" alt="" class="logo">
             </a>
+        {%else%}
+            <a href="/" class="enlace">
+                <img src="{% static 'Imagenes/Logo.jpg' %}" alt="" class="logo">
+            </a>
         {%endif%}
+
         <div class="men">
-            {%if not okProfe%}
+            {%if not indentificador_profesor %}
                 <div class="iz">
                     <ul>
                         <li></li>
@@ -58,19 +59,19 @@ $(document).ready(function() {
                         <li></li>
                         <li></li>
                         <li></li>
-                        <li><a href="/Inicio/">Inicio</a></li>
-                        <li><a href="/Mis_Cursos">Mis Cursos</a></li>
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/Mis_Cursos">Mis cursos</a></li>
                     </ul>
                 </div>
                 <div class="der">
-                    {%if bandera%}
+                    {%if user.is_authenticated %}
                     <ul>
-                        <li><a href="/Login/">Ingresar</a></li>
+                        <li><a href="/Salir/">Cerrar sesi&oacute;n</a></li>
                         <!-- <li><a href="#">Cerrar sesi&oacute;n</a></li> -->
                     </ul>
                     {%else%}
                     <ul>
-                        <li><a href="/salirProfe/">Cerrar sesi&oacute;n</a></li>
+                        <li><a href="/Login/">Ingresar</a></li>
                     </ul>
                     {%endif%}
                 </div>
@@ -92,14 +93,14 @@ $(document).ready(function() {
                 </ul>
             </div>
             <div class="der">
-                {%if bandera%}
+                {%if user.is_authenticated%}
                 <ul>
-                    <li><a href="/Login/">Ingresar</a></li>
+                    <li><a href="/Salir/">Cerrar sesi&oacute;n</a></li>
                     <!-- <li><a href="#">Cerrar sesi&oacute;n</a></li> -->
                 </ul>
                 {%else%}
                 <ul>
-                    <li><a href="/salirProfe/">Cerrar sesi&oacute;n</a></li>
+                    <li><a href="/Login/">Ingresar</a></li>
                 </ul>
                 {%endif%}
             </div>

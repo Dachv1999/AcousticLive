@@ -1,18 +1,23 @@
-from tkinter.constants import NO
+
+from os import devnull
 from django.http import HttpResponse
 from django.template import Template, Context, context
 from django.shortcuts import render, redirect
 from gestionBD.models import Leccion, Profesor, Estudiante, Cursa
-from tkinter import messagebox as MessageBox
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
-varBandera=0
-varUsuario=""
-varContraUsuario=""
-logeado="hola"
+
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.decorators import user_passes_test
+
 
 def send_email(email):
     print(email)
@@ -53,54 +58,57 @@ def recuperacion_contraseña(request):
 
 
 def inicio(request): #Vista Inicio
-    return render(request,"Inicio.html",{'bandera': logeado})
+    # doc_externo = open("Acoustic_Live/Templates/Inicio.html")
+    # plt = Template(doc_externo.read())
+    # doc_externo.close()
 
+    # ctx = Context()
+
+    # documento = plt.render(ctx)
+    
+    # return HttpResponse(documento)
+    return render(request,'Inicio.html')
 # def crud_profesores(request): #CRUD Profesores
 #     return render(request,'CRUD_Profesores.html',{'okProfe','okProfe'})
-    
-def salirProfe(request):
-    global logeado
-    logeado="hola"
-    global varBandera
-    varBandera=0
-    return render(request,"Inicio.html",{'bandera': "hola"})
+def profesor(user):
+    return  user.get_username() == 'Aron_prof' or user.get_username() == 'mantequilla_prof' or user.get_username() == 'christian_prof' or user.get_username() == 'mario_prof'
 
+@login_required(login_url='/Login/')
+@user_passes_test(profesor,login_url='/') # apra profesor
 def inicio_profesores(request): #Vista Inicio de profesores
+    username = request.user.username
+    profesor = Profesor.objects.get(user_name=username)
+    id=profesor.id
+    id_profesor='/Formulario/'+str(id)+'/'
+    nombre_profesor=profesor.nombre_profesor
+    apellido_profesor =profesor.apellido_profesor
+    identificador_profesor=False
+    if id==1 or id==2 or id==3 or id==4:
+        identificador_profesor=True
+    contexto={
+    'id_profesor':id_profesor,
+    'nombre_profesor':nombre_profesor,
+    'id':id,
+    'apellido_profesor':apellido_profesor ,
+    'indentificador_profesor': identificador_profesor,
+    }
     
-    if(varBandera==0):
-        return redirect("/")
-    else:
-        profesor = Profesor.objects.get(user_name=varUsuario)
-        ok='okProfe'
-        id=profesor.id
-        id_profesor='/Formulario/'+str(id)+'/'
-        nombre_profesor=profesor.nombre_profesor
-        apellido_profesor =profesor.apellido_profesor
-        contexto={
-        'okProfe':ok,
-        'id_profesor':id_profesor,
-        'nombre_profesor':nombre_profesor,
-        'id':id,
-        'apellido_profesor':apellido_profesor ,
-        }
-        if(varBandera==1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
-             return render(request,"Vista_Principal_Profesores.html",contexto)
-        else:
-             return redirect("/Inicio/")
+    return render(request,"Vista_Principal_Profesores.html",contexto)
+
     # return render(request,"Vista_Principal_Profesores.html",{'okProfe':'okProfe'})    
 
-def niveles(request): #Vista niveles
-    if(varBandera==0):
-        return redirect("/Login/")
-    else:
-        #varUsuario = chiri
-        if(varBandera ==1 and (varUsuario !='Aron_prof'and varUsuario !='mario_prof' and varUsuario !='christian_prof')):
-            return render(request,"Division_Niveles.html")
-        else:
-            return redirect("/Inicio_Profesores/")
-    # return render(request,"Division_Niveles.html")
+def profesor1(user):
+    b= not (user.get_username() == 'mantequilla_prof' or user.get_username() == 'Aron_prof' or user.get_username() == 'christian_prof' or user.get_username() == 'mario_prof')
+    print(b)
+    return  b
 
-def login(request): 
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/') # para estudiantes
+def niveles(request): #Vista niveles
+    return render(request,"Division_Niveles.html")
+
+
+def login1(request): 
     if request.method=="POST":
         res= redirect("/Login/")
         usuario_login=request.POST.get('usuario','')
@@ -114,18 +122,14 @@ def login(request):
         elif validar(usuario_login)==False:
             mensaje(request,"Error el nombre de usuario no es valido")
             return res
-        global varUsuario
-        global varContraUsuario
-        global varBandera
-        global logeado
         if("_prof" in usuario_login):
             if(Profesor.objects.filter(user_name=usuario_login).exists()):
                 if(Profesor.objects.filter(contraseña=contraseña).exists()and Profesor.objects.filter(user_name=usuario_login).exists()):
-                    logeado=None
-                    varUsuario=usuario_login
-                    varContraUsuario=contraseña
-                    varBandera=1
-                    return redirect("/Inicio_Profesores/")
+                    usuario = authenticate(username=usuario_login, password=contraseña)
+                    if usuario is not None:
+                        login(request, usuario)
+                    #messages.success(request, F"Bienvenid@ de nuevo {nombre_usuario}")   
+                        return redirect("/Inicio_Profesores/")
                 else:
                         mensaje(request,"Error: contraseña incorrecta")
                         return res
@@ -136,12 +140,11 @@ def login(request):
 
         if(Estudiante.objects.filter(usuario=usuario_login).exists()):
             if(Estudiante.objects.filter(contraseña_estudiante=contraseña).exists()and Estudiante.objects.filter(usuario=usuario_login).exists()):
-                # mensaje(request,"Todo bien :D")
-                logeado=None
-                varUsuario=usuario_login
-                varContraUsuario=contraseña
-                varBandera=1
-                return redirect("/") 
+                usuario = authenticate(username=usuario_login, password=contraseña)
+                if usuario is not None:
+                    login(request,usuario)
+                        #messages.success(request, F"Bienvenid@ de nuevo {nombre_usuario}")   
+                    return redirect("/")
             else:
                 mensaje(request,"Error: contraseña incorrecta")
                 return res
@@ -153,6 +156,11 @@ def login(request):
     return render (request, "login.html")
 
 
+def salir1(request):
+    logout(request)
+    #messages.success(request, F"Tu sesión se ha cerrado correctamente")
+    return redirect("/")
+
 def validar(nombreUsuario):
     valido_usuario = True
     i = 0
@@ -162,12 +170,12 @@ def validar(nombreUsuario):
         if (not((aux>64 and aux<91) or (aux>96 and aux<123)or (aux>47 and aux<59)
             or letrita=="á" or letrita=="é" or letrita=="í" or letrita=="_" or letrita=="-"
             or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
-            or letrita=="Í" or letrita=="Ó" or letrita=="Ú" or letrita==" ")):
+            or letrita=="Í" or letrita=="Ó" or letrita=="Ú" or letrita==" "
+            or letrita=="ñ" or letrita=="Ñ")):
                     
             valido_usuario = False
         i +=1
     return valido_usuario
-
 def espacio(palabra):
     res=False
     contador=0
@@ -183,8 +191,6 @@ def espacio(palabra):
     if(contador==1 and len(palabra)==1):
         res=True
     return res
-
-
 def validarNombres(palabra):
     valido = True
     i = 0
@@ -194,12 +200,12 @@ def validarNombres(palabra):
         if (not((aux>64 and aux<91) or (aux>96 and aux<123)
             or letrita=="á" or letrita=="é" or letrita=="í"
             or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
-            or letrita=="Í" or letrita=="Ó" or letrita=="Ú" or letrita==" ")):
+            or letrita=="Í" or letrita=="Ó" or letrita=="Ú" or letrita==" "
+            or letrita=="ñ" or letrita=="Ñ")):
                     
             valido = False
         i +=1
     return valido
-
 def validarCorreo(correo):
     valido_correo = True
     i = 0
@@ -239,27 +245,23 @@ def sacarInicio(var_correo):
             encontrado=True
         i=i+1
     return palabra
-
 def esValidoCorreo(extencio):
     res=False
     if(extencio=="@gmail.com" or extencio=="@yahoo.com" or extencio=="@outlook.com" or extencio=="@hotmail.com" ):
         res=True
     return res
-
 def mensaje(req,mensajeError):  
     messages.add_message(request=req, level=messages.WARNING, message = mensajeError)
-
 def validarTamaño(palabra,maximo,minimo):
     
     cadena=-1
-    if(len(palabra)>maximo):
+    if(len(palabra)!=0 and len(palabra)>maximo):
         cadena=1
         
     else:
-        if(len(palabra)<minimo):
+        if(len(palabra)!=0 and len(palabra)<minimo):
             cadena=2
     return cadena
-
 def generador(variable,numero):
     
     cadena=False
@@ -410,10 +412,14 @@ def Formulario_Registro(request):
                     return res
                 
                 else:
-                    estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, correo_estudiante = correo, contraseña_estudiante = contraseña)
+                    estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, 
+                    correo_estudiante = correo, contraseña_estudiante = contraseña)
                     estudiante.save() #ingresar datos
+                    estudiante1 = User.objects.create_user(nombreUsuario,correo,contraseña)
+                    estudiante1.save()
                     mensaje(request,"Bienvenido a Acusctic Live")
                     return redirect("/Login/")
+                    
 
         else:
             mensaje(request,"Por favor llene todos los campos")
@@ -441,6 +447,8 @@ def nivel_avanzado(request): #Vista nivel avanzado
     
     return HttpResponse(documento)
 
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/') # para estudiantes
 def profesoresNP(request): #Vista profesoresNivelPrincipante
     cursos_profesor1= Leccion.objects.filter(nivel=1, idprofesor_id=1)
     cantidad_cursos1 =cursos_profesor1.count()
@@ -448,22 +456,12 @@ def profesoresNP(request): #Vista profesoresNivelPrincipante
     cantidad_cursos2 =cursos_profesor2.count()
     cursos_profesor3= Leccion.objects.filter(nivel=1, idprofesor_id=3)
     cantidad_cursos3 =cursos_profesor3.count()
-    if varBandera == 0:
-        return redirect('/')
-    else:
-        if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
-            return redirect('/Inicio_Profesores/')
-        else:
-            return render(request,'Vista_Profesores_NP.html',{'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
-    # doc_externo = open("Acoustic_Live/Templates/Vista_Profesores_NP.html")
-    # plt = Template(doc_externo.read())
-    # doc_externo.close()
     
-    # ctx = Context({'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
-    # documento = plt.render(ctx)
+    contexto = {'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3}
+    return render(request,'Vista_Profesores_NP.html', contexto)
 
-    # return HttpResponse(documento)
-
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/') # para estudiantes
 def profesoresNM(request): #Vista profesoresNM
     cursos_profesor1= Leccion.objects.filter(nivel=2, idprofesor_id=1)
     cantidad_cursos1 =cursos_profesor1.count()
@@ -471,22 +469,14 @@ def profesoresNM(request): #Vista profesoresNM
     cantidad_cursos2 =cursos_profesor2.count()
     cursos_profesor3= Leccion.objects.filter(nivel=2, idprofesor_id=3)
     cantidad_cursos3 =cursos_profesor3.count()
-    if varBandera == 0:
-        return redirect('/')
-    else:
-        if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
-            return redirect('/Inicio_Profesores/')
-        else:
-            return render(request,'Vista_Profesores_NM.html',{'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
-    # doc_externo = open("Acoustic_Live/Templates/Vista_Profesores_NM.html")
-    # plt = Template(doc_externo.read())
-    # doc_externo.close()
 
-    # ctx = Context({'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
-    # documento = plt.render(ctx)
+    contexto = {'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3}
+    return render(request,'Vista_Profesores_NM.html', contexto)
 
-    # return HttpResponse(documento)
+    
 
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/') # para estudiantes
 def profesoresNA(request): #Vista profesoresNA
     cursos_profesor1= Leccion.objects.filter(nivel=3, idprofesor_id=1)
     cantidad_cursos1 =cursos_profesor1.count()
@@ -494,153 +484,144 @@ def profesoresNA(request): #Vista profesoresNA
     cantidad_cursos2 =cursos_profesor2.count()
     cursos_profesor3= Leccion.objects.filter(nivel=3, idprofesor_id=3)
     cantidad_cursos3 =cursos_profesor3.count()
-    if varBandera == 0:
-        return redirect('/')
-    else:
-        if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
-            return redirect('/Inicio_Profesores/')
-        else:
-            return render(request,'Vista_Profesores_NA.html',{'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
-    # doc_externo = open("Acoustic_Live/Templates/Vista_Profesores_NA.html")
-    # plt = Template(doc_externo.read())
-    # doc_externo.close()
 
-    # ctx = Context({'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3})
-    # documento = plt.render(ctx)
-
-    # return HttpResponse(documento)
-
-def formulario_nuevoVideo(request, id_profesor):
-    if(varBandera==0):
-        return redirect("/")
-    else:
-        if(varBandera==1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
-            if request.method=="POST":
-                nombre=request.POST.get('nombre','')
-                descripcion= request.POST.get('descripcion','')
-                link= request.POST.get('link','')
-                niveles= request.POST.get('nivel','')
-
-                lecciones = Leccion.objects.filter(idprofesor_id=id_profesor)
-                leccion_2 = Leccion.objects.filter(idprofesor_id=id_profesor,nivel=niveles)
-                
-                redireccion = "/Formulario/"+ str(id_profesor)
-                cant = 0
-                for leccion in leccion_2:
-                    cant = cant + 1
-
-                nombre1 = nombre.strip()
-                descripcion1 = descripcion.strip()
-                link1 = link.strip()
-
-                auxiliar_descripcion =descripcion.upper()
-                auxiliar_nombre = nombre.upper() 
-                
-                if ((len(nombre1)) != 0 and (len(descripcion1)) != 0 and (len(link1)) != 0):
-                    if(len(nombre)>50):
-                        messages.add_message(request=request, level=messages.WARNING, message = "El nombre es muy grande")
-                        return redirect(redireccion)
-                    if(len(descripcion)>500):
-                        messages.add_message(request=request, level=messages.WARNING, message = "La descripción es muy grande")
-                        return redirect(redireccion)
-                    if(len(descripcion)<20 ):
-                        messages.add_message(request=request, level=messages.WARNING, message = "La descripción es muy pequeña")
-                        return redirect(redireccion)
-                    
-                    valido = True
-                    i = 0
-                    while(i<len(nombre) and valido):
-                        aux = (int)(ord(nombre[i]))
-                        letrita = nombre[i]
-                        if (not((aux>64 and aux<91) or (aux>96 and aux<123) or (aux>47 and aux<59) \
-                            or (aux==40 or aux==41 or aux==32 or aux==46 or aux==44
-                            or letrita=="¿" or aux==63 or aux==45 or letrita=='!' or aux==35
-                            or aux==58 or letrita=="á" or letrita=="é" or letrita=="í"
-                            or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
-                            or letrita=="Í" or letrita=="Ó" or letrita=="Ú"))):
-                            
-                            valido = False
-                        i +=1
-                        
-                    if valido== False:
-                        messages.add_message(request=request, level=messages.WARNING, message = "El nombre contiene carcteres inválidos")
-                        return redirect(redireccion)       
-                    #letra repetida
-                    encontre = False
-                    numero =0
-                    n=''
-                    while(numero<len(auxiliar_nombre)-2 and not encontre):
-                        codigo = (ord(auxiliar_nombre[numero]))
-                        if not(codigo>47 and codigo<59):
-                            if auxiliar_nombre[numero]==auxiliar_nombre[numero+1] and auxiliar_nombre[numero]==auxiliar_nombre[numero+2] :
-                                n =nombre[numero]
-                                encontre = True
-                        numero += 1
-                    if(encontre):
-                        doc_externo=open("Acoustic_Live/Templates/formulario.html")
-                        plt = Template(doc_externo.read()) #documento almacenado
-                        doc_externo.close()
-                        #ctx = Context({"letra_encontrada_nombre":n})
-                        #documento =plt.render(ctx)
-                        #return HttpResponse(documento)
-                        messages.add_message(request=request, level=messages.WARNING, message = "El carácter '" + n + "' no debería repetirse tantas veces en el nombre")
-                        return redirect(redireccion) 
-                    ###para la descripcion
-                    encontre1 = False
-                    contador1 =0
-                    n1=''
-                    while(contador1<len(auxiliar_descripcion)-2 and not encontre1):
-                        codigoDescripcion = (ord(auxiliar_descripcion[contador1]))
-                        if not(codigoDescripcion>47 and codigoDescripcion<59):
-                            if auxiliar_descripcion[contador1]==auxiliar_descripcion[contador1+1] and auxiliar_descripcion[contador1]==auxiliar_descripcion[contador1+2] :
-                                n1 =descripcion[contador1]
-                                encontre1 = True
-                        contador1 += 1
-                    if(encontre1):
-                        doc_externo=open("Acoustic_Live/Templates/formulario.html")
-                        plt = Template(doc_externo.read()) #documento almacenado
-                        doc_externo.close()
-                        #ctx = Context({"letra_encontrada_descripcion":n1})
-                        #documento =plt.render(ctx)
-                        #return HttpResponse(documento)
-                        messages.add_message(request=request, level=messages.WARNING, message = "El carácter '" + n1 + "' no debería repetirse tantas veces en la descripción")
-                        return redirect(redireccion) 
-                    ###fin
-                    #verficar link 
-                    link_auxi1="https://www.youtube.com/embed/"
-
-                    if(not('https://youtu.be/' in link)):
-                        messages.add_message(request=request, level=messages.WARNING, message = "Verifique el link que ingresó")
-                        return redirect(redireccion)
-                    else:
-                        link=link_auxi1+link[17:]
-                    hayVideo=False
-                    for leccion in lecciones:
-                        if hayVideo==False:
-                            if leccion.link==link:
-                                hayVideo=True
-                    if hayVideo==True:  
-                        messages.add_message(request=request, level=messages.ERROR, message = "El video que ingresó ya existe")
-                        return redirect(redireccion)
-                    else:
-                        if (cant > 0):
-                            lecc=Leccion(nombre_leccion = nombre, nivel=niveles,link=link, descripcion = descripcion, idprofesor_id =id_profesor, orden = cant + 1)
-                        else:
-                            lecc=Leccion(nombre_leccion = nombre, nivel=niveles,link=link, descripcion = descripcion, idprofesor_id =id_profesor, orden = cant)
-                        lecc.save()
-                        messages.add_message(request=request, level=messages.SUCCESS, message = "Video guardado correctamente")
-                        return redirect(redireccion)
-                else:
-                    messages.add_message(request=request, level=messages.ERROR, message = "Por favor revise los campos")
-                    return redirect(redireccion)
+    contexto = {'cantidad_cursos_1':cantidad_cursos1,'cantidad_cursos_2':cantidad_cursos2,'cantidad_cursos_3':cantidad_cursos3}
     
-            return render (request, "formulario.html",{'okProfe': "okProfe"})
-           
-       
-        else:
-             return redirect("/")
 
-        
+    return render(request,'Vista_Profesores_NA.html', contexto)
+
+@login_required(login_url='/Login/')
+@user_passes_test(profesor,login_url='/')
+def formulario_nuevoVideo(request, id_profesor):
+    username = request.user.username
+    profesor = Profesor.objects.get(user_name=username)
+    id=profesor.id
+    identificador_profesor=False
+    if id==1 or id==2 or id==3 or id==4:
+        identificador_profesor=True
+    if request.method=="POST":
+        nombre=request.POST.get('nombre','')
+        descripcion= request.POST.get('descripcion','')
+        link= request.POST.get('link','')
+        niveles= request.POST.get('nivel','')
+
+        lecciones = Leccion.objects.filter(idprofesor_id=id_profesor)
+        leccion_2 = Leccion.objects.filter(idprofesor_id=id_profesor,nivel=niveles)
+                
+        redireccion = "/Formulario/"+ str(id_profesor)
+        cant = 0
+        for leccion in leccion_2:
+            cant = cant + 1
+
+        nombre1 = nombre.strip()
+        descripcion1 = descripcion.strip()
+        link1 = link.strip()
+
+        auxiliar_descripcion =descripcion.upper()
+        auxiliar_nombre = nombre.upper() 
+                
+        if ((len(nombre1)) != 0 and (len(descripcion1)) != 0 and (len(link1)) != 0):
+            if(len(nombre)>50):
+                messages.add_message(request=request, level=messages.WARNING, message = "El nombre es muy grande")
+                return redirect(redireccion)
+            if(len(descripcion)>500):
+                messages.add_message(request=request, level=messages.WARNING, message = "La descripción es muy grande")
+                return redirect(redireccion)
+            if(len(descripcion)<20 ):
+                messages.add_message(request=request, level=messages.WARNING, message = "La descripción es muy pequeña")
+                return redirect(redireccion)
+                    
+            valido = True
+            i = 0
+            while(i<len(nombre) and valido):
+                aux = (int)(ord(nombre[i]))
+                letrita = nombre[i]
+                if (not((aux>64 and aux<91) or (aux>96 and aux<123) or (aux>47 and aux<59) \
+                    or (aux==40 or aux==41 or aux==32 or aux==46 or aux==44
+                    or letrita=="¿" or aux==63 or aux==45 or letrita=='!' or aux==35
+                    or aux==58 or letrita=="á" or letrita=="é" or letrita=="í"
+                    or letrita=="ó" or letrita=="ú" or letrita=="Á" or letrita=="É"
+                    or letrita=="Í" or letrita=="Ó" or letrita=="Ú"))):
+                            
+                    valido = False
+                i +=1
+                        
+            if valido== False:
+                messages.add_message(request=request, level=messages.WARNING, message = "El nombre contiene carcteres inválidos")
+                return redirect(redireccion)       
+            #letra repetida
+            encontre = False
+            numero =0
+            n=''
+            while(numero<len(auxiliar_nombre)-2 and not encontre):
+                codigo = (ord(auxiliar_nombre[numero]))
+                if not(codigo>47 and codigo<59):
+                    if auxiliar_nombre[numero]==auxiliar_nombre[numero+1] and auxiliar_nombre[numero]==auxiliar_nombre[numero+2] :
+                        n =nombre[numero]
+                        encontre = True
+                numero += 1
+            if(encontre):
+                doc_externo=open("Acoustic_Live/Templates/formulario.html")
+                plt = Template(doc_externo.read()) #documento almacenado
+                doc_externo.close()
+                #ctx = Context({"letra_encontrada_nombre":n})
+                #documento =plt.render(ctx)
+                #return HttpResponse(documento)
+                messages.add_message(request=request, level=messages.WARNING, message = "El carácter '" + n + "' no debería repetirse tantas veces en el nombre")
+                return redirect(redireccion) 
+            ###para la descripcion
+            encontre1 = False
+            contador1 =0
+            n1=''
+            while(contador1<len(auxiliar_descripcion)-2 and not encontre1):
+                codigoDescripcion = (ord(auxiliar_descripcion[contador1]))
+                if not(codigoDescripcion>47 and codigoDescripcion<59):
+                    if auxiliar_descripcion[contador1]==auxiliar_descripcion[contador1+1] and auxiliar_descripcion[contador1]==auxiliar_descripcion[contador1+2] :
+                        n1 =descripcion[contador1]
+                        encontre1 = True
+                contador1 += 1
+            if(encontre1):
+                doc_externo=open("Acoustic_Live/Templates/formulario.html")
+                plt = Template(doc_externo.read()) #documento almacenado
+                doc_externo.close()
+                #ctx = Context({"letra_encontrada_descripcion":n1})
+                #documento =plt.render(ctx)
+                #return HttpResponse(documento)
+                messages.add_message(request=request, level=messages.WARNING, message = "El carácter '" + n1 + "' no debería repetirse tantas veces en la descripción")
+                return redirect(redireccion) 
+            ###fin
+            #verficar link 
+            link_auxi1="https://www.youtube.com/embed/"
+
+            if(not('https://youtu.be/' in link)):
+                messages.add_message(request=request, level=messages.WARNING, message = "Verifique el link que ingresó")
+                return redirect(redireccion)
+            else:
+                link=link_auxi1+link[17:]
+            hayVideo=False
+            for leccion in lecciones:
+                if hayVideo==False:
+                    if leccion.link==link:
+                        hayVideo=True
+            if hayVideo==True:  
+                messages.add_message(request=request, level=messages.ERROR, message = "El video que ingresó ya existe")
+                return redirect(redireccion)
+            else:
+                if (cant > 0):
+                    lecc=Leccion(nombre_leccion = nombre, nivel=niveles,link=link, descripcion = descripcion, idprofesor_id =id_profesor, orden = cant + 1)
+                else:
+                    lecc=Leccion(nombre_leccion = nombre, nivel=niveles,link=link, descripcion = descripcion, idprofesor_id =id_profesor, orden = cant)
+                lecc.save()
+                messages.add_message(request=request, level=messages.SUCCESS, message = "Video guardado correctamente")
+                return redirect(redireccion)
+        else:
+            messages.add_message(request=request, level=messages.ERROR, message = "Por favor revise los campos")
+            return redirect(redireccion)
+    
+    return render (request, "formulario.html",{'indentificador_profesor':identificador_profesor})
+
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/')       
 def guardar_video_vistoBD(request):#aqui
     id_estudiante = request.GET.get('id_estudiante', None)
     id_leccion = request.GET.get('id_leccion', None)
@@ -650,6 +631,8 @@ def guardar_video_vistoBD(request):#aqui
     cursa.save()
     return redirect("/Mis_Cursos/")
 
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/')
 def eliminar_video_vistoBD(request):
     id_estudiante = request.GET.get('id_estudiante', None)
     id_leccion = request.GET.get('id_leccion', None)
@@ -659,31 +642,33 @@ def eliminar_video_vistoBD(request):
     cursa.delete()
     return redirect("/Mis_Cursos/")
 
-
+@login_required(login_url='/Login/')
+@user_passes_test(profesor,login_url='/')
 def vista_editar_leccion(request, id_video, nivel):
-   lecc = Leccion.objects.get(id=id_video)
-   
-   nombre = lecc.nombre_leccion
-   descripcion = lecc.descripcion
-   link = lecc.link
-   ok='okProfe'
-   contexto = {
+    lecc = Leccion.objects.get(id=id_video)
+    username = request.user.username
+    profesor = Profesor.objects.get(user_name=username)
+    id=profesor.id
+    identificador_profesor=False
+    if id==1 or id==2 or id==3 or id==4:
+        identificador_profesor=True
+    nombre = lecc.nombre_leccion
+    descripcion = lecc.descripcion
+    link = lecc.link
+
+    contexto = {
     'nombre' : nombre,
     'descripcion': descripcion,
     'link' : link,
     'nivel' : nivel,
     'id_video' : id_video,
-    'okProfe':ok,
-   }
-   if(varBandera==0):
-        return redirect("/")
-   else:
-        if(varBandera==1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
-            return render(request,"Editar_Leccion_Profesor.html",contexto)
-        else:
-            return redirect("/")
-#    return render(request,"Editar_Leccion_Profesor.html",contexto)
+    'indentificador_profesor':identificador_profesor,
+    }
 
+    return render(request,"Editar_Leccion_Profesor.html",contexto)
+
+@login_required(login_url='/Login/')
+@user_passes_test(profesor,login_url='/')
 def formulario_editar_video(request,id_video,nivel):
 
     if request.method=="POST":
@@ -787,257 +772,233 @@ def formulario_editar_video(request,id_video,nivel):
     
     return render (request, "formulario.html")
 
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/')
 def lista_principiante(request, id_profesor):
-    
-    if varBandera == 0:
-        return redirect('/')
-    else:
-        estudiante=Estudiante.objects.get(usuario=varUsuario)
-        lecciones = Leccion.objects.filter(nivel=1, idprofesor_id=id_profesor).order_by('orden')
-        profesores = Profesor.objects.filter(id=id_profesor)
-        id_estudiante= estudiante.id
-        cursan = Cursa.objects.filter(id_profesor_id=id_profesor, nivel_leccion = 1,id_estudiante_id=id_estudiante)
+    username = request.user.username
+    estudiante=Estudiante.objects.get(usuario=username)
+    lecciones = Leccion.objects.filter(nivel=1, idprofesor_id=id_profesor).order_by('orden')
+    profesores = Profesor.objects.filter(id=id_profesor)
+    id_estudiante= estudiante.id
+    cursan = Cursa.objects.filter(id_profesor_id=id_profesor, nivel_leccion = 1,id_estudiante_id=id_estudiante)
 
-        lista_vistos = []
+    lista_vistos = []
 
 
-        for cursa in cursan:
-            lista_vistos.append(cursa.id_leccion_id)
+    for cursa in cursan:
+        lista_vistos.append(cursa.id_leccion_id)
 
-        cant = 0
-        for leccion in lecciones:
-            cant = cant + 1
+    cant = 0
+    for leccion in lecciones:
+        cant = cant + 1
 
-        cant_tiqueados = 0
-        for cursa in cursan:
-            cant_tiqueados = cant_tiqueados + 1
+    cant_tiqueados = 0
+    for cursa in cursan:
+        cant_tiqueados = cant_tiqueados + 1
         
-        if cant != 0:
-            porcentaje_vistos = int((cant_tiqueados * 100) / cant)
-        else:
-            porcentaje_vistos = 0 
+    if cant != 0:
+        porcentaje_vistos = int((cant_tiqueados * 100) / cant)
+    else:
+        porcentaje_vistos = 0 
 
 
-        level = "Nivel Principiante"
-        atras = "/Profesores_Nivel_Principiante/"
-        nivel = 1
-        tamanio_barra_progreso = str(porcentaje_vistos) +'%'
-        contexto = {
-            'profesores' : profesores,
-            'lecciones' : lecciones,
-            'nivel' : level,
-            'nivel_leccion' : nivel,
-            'id_profesor' : id_profesor,
-            'atras' : atras,
-            'cantidad' : cant,
-            'lista_vistos' : lista_vistos,
-            'tiqueados' : cant_tiqueados,
-            'tamanio_barra_progreso' : tamanio_barra_progreso,
-            'id_estudiante':id_estudiante
-        }
-        if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
-            return redirect('/Inicio_Profesores/')
-        else:
-            return render(request,'Vista_Universal_Lecciones.html', contexto)
-    # return render(request,'Vista_Universal_Lecciones.html', contexto)
+    level = "Nivel Principiante"
+    atras = "/Profesores_Nivel_Principiante/"
+    nivel = 1
+    tamanio_barra_progreso = str(porcentaje_vistos) +'%'
+    contexto = {
+        'profesores' : profesores,
+        'lecciones' : lecciones,
+        'nivel' : level,
+        'nivel_leccion' : nivel,
+        'id_profesor' : id_profesor,
+        'atras' : atras,
+        'cantidad' : cant,
+        'lista_vistos' : lista_vistos,
+        'tiqueados' : cant_tiqueados,
+        'tamanio_barra_progreso' : tamanio_barra_progreso,
+        'id_estudiante':id_estudiante
+    }
+        
+    return render(request,'Vista_Universal_Lecciones.html', contexto)
 
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/')
 def lista_medio(request, id_profesor):
-    
-    if varBandera == 0:
-        return redirect('/')
+    username1 = request.user.username
+    estudiante=Estudiante.objects.get(usuario=username1)
+    lecciones = Leccion.objects.filter(nivel=2, idprofesor_id=id_profesor).order_by('orden')
+    profesores = Profesor.objects.filter(id=id_profesor)
+    id_estudiante= estudiante.id
+    cursan = Cursa.objects.filter(id_profesor_id=id_profesor, nivel_leccion = 2,id_estudiante_id=id_estudiante)
+
+    lista_vistos = []
+
+    for cursa in cursan:
+        lista_vistos.append(cursa.id_leccion_id)
+
+    cant = 0
+    for leccion in lecciones:
+        cant = cant + 1
+
+    cant_tiqueados = 0
+    for cursa in cursan:
+        cant_tiqueados = cant_tiqueados + 1
+
+    if cant != 0:
+        porcentaje_vistos = int((cant_tiqueados * 100) / cant)
     else:
-        estudiante=Estudiante.objects.get(usuario=varUsuario)
-        lecciones = Leccion.objects.filter(nivel=2, idprofesor_id=id_profesor).order_by('orden')
-        profesores = Profesor.objects.filter(id=id_profesor)
-        id_estudiante= estudiante.id
-        cursan = Cursa.objects.filter(id_profesor_id=id_profesor, nivel_leccion = 2,id_estudiante_id=id_estudiante)
+        porcentaje_vistos = 0 
 
-        lista_vistos = []
-
-        for cursa in cursan:
-            lista_vistos.append(cursa.id_leccion_id)
-
-        cant = 0
-        for leccion in lecciones:
-            cant = cant + 1
-
-        cant_tiqueados = 0
-        for cursa in cursan:
-            cant_tiqueados = cant_tiqueados + 1
-
-        if cant != 0:
-            porcentaje_vistos = int((cant_tiqueados * 100) / cant)
-        else:
-            porcentaje_vistos = 0 
-
-        level = "Nivel Medio"
-        atras = "/Profesores_Nivel_Medio/"
-        ok ='okProfe'
-        bandera = True
-        nivel = 2
-        tamanio_barra_progreso = str(porcentaje_vistos) +'%'
-        contexto = {
-            'profesores' : profesores,
-            'lecciones' : lecciones,
-            'nivel' : level,
-            'nivel_leccion' : nivel,
-            'id_profesor' : id_profesor,
-            'atras' : atras,
-            'bandera_universal' : bandera,
-            'cantidad' : cant,
-            'lista_vistos' : lista_vistos,
-            'tiqueados' : cant_tiqueados,
-            'tamanio_barra_progreso' : tamanio_barra_progreso,
-            'id_estudiante':id_estudiante,
-        }
-        if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
-            return redirect('/Inicio_Profesores/')
-        else:
-            return render(request,'Vista_Universal_Lecciones.html', contexto)
+    level = "Nivel Medio"
+    atras = "/Profesores_Nivel_Medio/"
+    bandera = True
+    nivel = 2
+    tamanio_barra_progreso = str(porcentaje_vistos) +'%'
+    contexto = {
+        'profesores' : profesores,
+        'lecciones' : lecciones,
+        'nivel' : level,
+        'nivel_leccion' : nivel,
+        'id_profesor' : id_profesor,
+        'atras' : atras,
+        'bandera_universal' : bandera,
+        'cantidad' : cant,
+        'lista_vistos' : lista_vistos,
+        'tiqueados' : cant_tiqueados,
+        'tamanio_barra_progreso' : tamanio_barra_progreso,
+        'id_estudiante':id_estudiante,
+    }
     
-    # return render(request,'Vista_Universal_Lecciones.html', contexto)
+    return render(request,'Vista_Universal_Lecciones.html', contexto)
 
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/')
 def lista_avanzado(request, id_profesor):
-    
-    if varBandera == 0:
-        return redirect('/')
+    username1 = request.user.username
+    estudiante=Estudiante.objects.get(usuario=username1)
+    lecciones = Leccion.objects.filter(nivel=3, idprofesor_id=id_profesor).order_by('orden')
+    profesores = Profesor.objects.filter(id=id_profesor)
+    id_estudiante= estudiante.id
+    cursan = Cursa.objects.filter(id_profesor_id=id_profesor, nivel_leccion = 3,id_estudiante_id=id_estudiante)
+
+    lista_vistos = []
+
+    for cursa in cursan:
+        lista_vistos.append(cursa.id_leccion_id)
+
+    cant = 0
+    for leccion in lecciones:
+        cant = cant + 1
+
+    cant_tiqueados = 0
+    for cursa in cursan:
+        cant_tiqueados = cant_tiqueados + 1
+
+    if cant != 0:
+        porcentaje_vistos = int((cant_tiqueados * 100) / cant)
     else:
-        estudiante=Estudiante.objects.get(usuario=varUsuario)
-        lecciones = Leccion.objects.filter(nivel=3, idprofesor_id=id_profesor).order_by('orden')
-        profesores = Profesor.objects.filter(id=id_profesor)
-        id_estudiante= estudiante.id
-        cursan = Cursa.objects.filter(id_profesor_id=id_profesor, nivel_leccion = 3,id_estudiante_id=id_estudiante)
+        porcentaje_vistos = 0 
 
-        lista_vistos = []
+    level = "Nivel Avanzado"
+    atras = "/Profesores_Nivel_Avanzado/"
+    bandera = True
+    nivel = 3
+    tamanio_barra_progreso = str(porcentaje_vistos) +'%'
+    contexto = {
+        'profesores' : profesores,
+        'lecciones' : lecciones,
+        'nivel' : level,
+        'nivel_leccion' : nivel,
+        'id_profesor' : id_profesor,
+        'atras' : atras,
+        'bandera_universal' : bandera,
+        'cantidad' : cant,
+        'lista_vistos' : lista_vistos,
+        'tiqueados' : cant_tiqueados,
+        'tamanio_barra_progreso' : tamanio_barra_progreso,
+        'id_estudiante':id_estudiante,
+    }
+    return render(request,'Vista_Universal_Lecciones.html', contexto)
 
-        for cursa in cursan:
-            lista_vistos.append(cursa.id_leccion_id)
-
-        cant = 0
-        for leccion in lecciones:
-            cant = cant + 1
-
-        cant_tiqueados = 0
-        for cursa in cursan:
-            cant_tiqueados = cant_tiqueados + 1
-
-        if cant != 0:
-            porcentaje_vistos = int((cant_tiqueados * 100) / cant)
-        else:
-            porcentaje_vistos = 0 
-
-        level = "Nivel Avanzado"
-        atras = "/Profesores_Nivel_Avanzado/"
-        bandera = True
-        nivel = 3
-        ok ='okProfe'
-        print(varBandera)
-        tamanio_barra_progreso = str(porcentaje_vistos) +'%'
-        contexto = {
-            'profesores' : profesores,
-            'lecciones' : lecciones,
-            'nivel' : level,
-            'nivel_leccion' : nivel,
-            'id_profesor' : id_profesor,
-            'atras' : atras,
-            'bandera_universal' : bandera,
-            'cantidad' : cant,
-            'lista_vistos' : lista_vistos,
-            'tiqueados' : cant_tiqueados,
-            'tamanio_barra_progreso' : tamanio_barra_progreso,
-            'id_estudiante':id_estudiante,
-        }
-        if (varBandera == 1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
-            return redirect('/Inicio_Profesores/')
-        else:
-            return render(request,'Vista_Universal_Lecciones.html', contexto)
-    
-    # return render(request,'Vista_Universal_Lecciones.html', contexto)
-
-
+@login_required(login_url='/Login/')
+@user_passes_test(profesor,login_url='/')
 def crud_profesores(request, nivel): #CRUD Profesores
+    username1 = request.user.username
+    profesor = Profesor.objects.get(user_name=username1)
+    id=profesor.id
+    identificador_profesor=False
+    if id==1 or id==2 or id==3 or id==4:
+        identificador_profesor=True
+    lecciones = Leccion.objects.filter(nivel=nivel, idprofesor_id=id).order_by('orden')
     
-    if(varBandera==0):
-        return redirect("/")
-    else:
-        profesor = Profesor.objects.get(user_name=varUsuario)
-        id=profesor.id
-        
-        lecciones = Leccion.objects.filter(nivel=nivel, idprofesor_id=id).order_by('orden')
+    cant = 0
+    for leccion in lecciones:
+        cant = cant + 1
+    contexto = {
+        'lecciones' : lecciones,
+        'cantidad' : cant,
+        'nivel' : nivel,
+        'id':id,
+        'indentificador_profesor':identificador_profesor,
+    }
+    return render(request,'CRUD_Profesores.html', contexto)
 
-        cant = 0
-        for leccion in lecciones:
-            cant = cant + 1
-        ok='okProfe'
-        contexto = {
-            'lecciones' : lecciones,
-            'cantidad' : cant,
-            'nivel' : nivel,
-            'okProfe':ok,
-            'id':id,
-
-        }
-        if(varBandera==1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
-             return render(request,'CRUD_Profesores.html', contexto)
-        else:
-             return redirect("/")
-
-    # return render(request,'CRUD_Profesores.html', contexto)
-
+@login_required(login_url='/Login/')
+@user_passes_test(profesor,login_url='/')
 def mover_video_arriba(request, id_profesor, orden_video, num_nivel):
-    if(varBandera==0):
-        return redirect("/")
-    else:
-        lecciones1 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video)
-        lecciones2 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video- 1)
-        redireccion = '/Mis_Videos/'+ str(num_nivel) +'/'
+    lecciones1 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video)
+    lecciones2 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video- 1)
+    redireccion = '/Mis_Videos/'+ str(num_nivel) +'/'
 
-        lecciones2.orden = lecciones2.orden + 1
-        lecciones1.orden = lecciones1.orden - 1
-        
-        lecciones1.save()
-        lecciones2.save()
-        return redirect(redireccion)
+    lecciones2.orden = lecciones2.orden + 1
+    lecciones1.orden = lecciones1.orden - 1
 
+    lecciones1.save()
+    lecciones2.save()
+    return redirect(redireccion)
+
+@login_required(login_url='/Login/')
+@user_passes_test(profesor,login_url='/')
 def mover_video_abajo(request, id_profesor, orden_video, num_nivel):
-    if(varBandera==0):
-        return redirect("/")
-    else:
-        lecciones1 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video)
-        lecciones2 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video+ 1)
-        redireccion = '/Mis_Videos/'+ str(num_nivel) +'/'
+    lecciones1 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video)
+    lecciones2 = Leccion.objects.get(nivel= num_nivel, idprofesor_id=id_profesor, orden = orden_video+ 1)
+    redireccion = '/Mis_Videos/'+ str(num_nivel) +'/'
 
-        lecciones2.orden = lecciones2.orden - 1
-        lecciones1.orden = lecciones1.orden + 1
+    lecciones2.orden = lecciones2.orden - 1
+    lecciones1.orden = lecciones1.orden + 1
         
-        lecciones1.save()
-        lecciones2.save()
-        return redirect(redireccion)
+    lecciones1.save()
+    lecciones2.save()
+    return redirect(redireccion)
 
-
+@login_required(login_url='/Login/')
+@user_passes_test(profesor,login_url='/')
 def eliminar_video_profesor(request, id_profesor, leccion_id, orden_video, nivel_leccion):
-    if(varBandera==0):
-        return redirect("/")
-    else:
-        leccion_a_eliminar = Leccion.objects.get( id = leccion_id, idprofesor_id=id_profesor, nivel = nivel_leccion)
-        leccion_a_eliminar.delete()
+    leccion_a_eliminar = Leccion.objects.get( id = leccion_id, idprofesor_id=id_profesor, nivel = nivel_leccion)
+    leccion_a_eliminar.delete()
 
-        lecciones = Leccion.objects.filter( idprofesor_id=id_profesor, nivel = nivel_leccion)
+    lecciones = Leccion.objects.filter( idprofesor_id=id_profesor, nivel = nivel_leccion)
         
-        orden_nuevo = 1
-        for leccion in lecciones:
+    orden_nuevo = 1
+    for leccion in lecciones:
         
-            leccion.orden = orden_nuevo
-            orden_nuevo = orden_nuevo + 1
-            leccion.save()
+        leccion.orden = orden_nuevo
+        orden_nuevo = orden_nuevo + 1
+        leccion.save()
 
-        redireccion = '/Mis_Videos/'+ str(nivel_leccion) +'/'  
-        return redirect(redireccion)
-    
+    redireccion = '/Mis_Videos/'+ str(nivel_leccion) +'/'  
+    return redirect(redireccion)
+
+@login_required(login_url='/Login/')
+@user_passes_test(profesor,login_url='/') 
 def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
     lecciones = Leccion.objects.filter(nivel=nivel, idprofesor_id=id_profesor).order_by('orden')
     profesores = Profesor.objects.filter(id=id_profesor)
-
+    id=id_profesor
+    identificador_profesor=False
+    if id==1 or id==2 or id==3 or id==4:
+        identificador_profesor=True
     cant = 0
     for leccion in lecciones:
         cant = cant + 1
@@ -1052,7 +1013,6 @@ def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
         level = "Nivel Avanzado"
 
     atras = "/Mis_Videos/" + str(nivel)
-    ok='okProfe'
     contexto = {
         'profesores' : profesores,
         'lecciones' : lecciones,
@@ -1060,13 +1020,6 @@ def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
         'id_profesor' : id_profesor,
         'atras' : atras,
         'cantidad' : cant,
-        'okProfe':ok
+        'indentificador_profesor':identificador_profesor
     }
-    if(varBandera==0):
-        return redirect("/")
-    else:
-        if(varBandera==1 and (varUsuario =='Aron_prof'or varUsuario =='mario_prof'or varUsuario =='christian_prof')):
-            return render(request,'Vista_Universal_Lecciones_For_Profesor.html', contexto)
-        else:
-             return redirect("/")
-    # return render(request,'Vista_Universal_Lecciones_For_Profesor.html', contexto)
+    return render(request,'Vista_Universal_Lecciones_For_Profesor.html', contexto)
