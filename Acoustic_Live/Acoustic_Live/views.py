@@ -22,7 +22,7 @@ from django.contrib.auth.decorators import user_passes_test
 def send_email(email1):
     print(email1)
     c=''
-    if email1== 'mariof.acousticlive@gmail.com' or email1=='cristian.acousticlive@gmail.com' or email1=='aarons.acousticlive@gmail.com':
+    if email1== 'mariof.acousticlive@gmail.com' or email1=='cristianvib.acousticlive@gmail.com' or email1=='aarons.acousticlive@gmail.com':
         c=Profesor.objects.get(email=email1)
         passs=c.contraseña
     else:
@@ -53,7 +53,7 @@ def recuperacion_contraseña(request):
         else:
             correos=False
             correo_profe=False
-            if correo== 'mariof.acousticlive@gmail.com' or correo=='cristian.acousticlive@gmail.com' or correo=='aarons.acousticlive@gmail.com':
+            if correo== 'mariof.acousticlive@gmail.com' or correo=='cristianvib.acousticlive@gmail.com' or correo=='aarons.acousticlive@gmail.com':
                 correo_profe=True
             else:
                 correos = Estudiante.objects.filter(correo_estudiante=correo)
