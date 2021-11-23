@@ -68,12 +68,11 @@
         
                                   <p>
     
-                                    <input type= "submit" value="Guardar Cambios" class="btn btn-dark btn-block mt-1" style="margin-left: 10%; margin-right: 10px;" data-bs-toggle="modal" data-bs-target="#ventana" >
+                                    <input type= "submit" value="Guardar Cambios" class="btn btn-dark btn-block mt-1" style="margin-left: 9%; margin-right: 10px;" data-bs-toggle="modal" data-bs-target="#ventana" >
     
                                     <!--<input type= "reset" value="Borrar  " class="btn btn-dark btn-block mt-1" >-->
                                     
-                                                       
-                                    <a type="button" href="/Mis_Videos/{{nivel}}/"  class="btn btn-dark btn-block mt-1" >Cancelar </a>
+                                    <a href="#exampleModal"  class="btn btn-dark btn-block mt-1" style="margin-top: 2%;" data-bs-toggle="modal">Cancelar</a>
                                     
  
     
@@ -85,6 +84,24 @@
                        
                         </div>  
                     </form>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel" style="color: black;">Cancelar</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <p style="color: black;">¿Seguro que desea cancelar?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="/Mis_Videos/{{nivel}}/" class="btn btn-primary" class="btn btn-primary" >Aceptar</a>
+                                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>  
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     
                     <div class="row form-group text-center  pt-3">
                         <p >(*)Campos obligatorios</p>

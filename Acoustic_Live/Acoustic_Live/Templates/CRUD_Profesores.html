@@ -7,6 +7,25 @@
 {% block content %}
 {% load static %}
 
+<script type="text/javascript">
+  var id_profesor = " ";
+  var id_leccion = " ";
+  var ordena = " ";
+  var nivell = " ";
+  function clicked(e, id_prof, id_lecc, orden, nivel) {
+    id_profesor = id_prof;
+    id_leccion = id_lecc;
+    ordena = orden;
+    nivell = nivel;
+  }
+
+  function clicked2(e) {
+    var path = 'Eliminar_video/'+id_profesor+'/'+ id_leccion + '/'+ ordena + '/'+ nivell; //cambio en el url
+    window.location.replace("http://127.0.0.1:8000/" + path);
+  }
+
+</script>
+
 <div class="container-fluid" style="padding-top: 90px;">
     <link rel="stylesheet" href="{% static '/css/fondo.css' %}" >
 
@@ -45,8 +64,7 @@
                 
                   {% ifequal 1 cantidad %}
                     <center><a href="/Editar_video/{{leccion.id}}/{{leccion.nivel}}" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">Editar</a></center>
-                    <center> <a href="/Eliminar_video/{{id}}/{{leccion.id}}/{{leccion.orden}}/{{leccion.nivel}}" class="btn btn-danger" style="margin-right: 2%; margin-top: 2%;">Eliminar</a></center>
-
+                    <center> <a href="#exampleModal" id="{{leccion.id}}" class="btn btn-danger" style="margin-right: 2%; margin-top: 2%;" onclick="clicked(event,'{{id}}', '{{ leccion.id }}', '{{ leccion.orden }}','{{ leccion.nivel }}')" data-bs-toggle="modal">Eliminar</a></center>
                   {% else %}
 
                     {% ifequal 1 leccion.orden %}
@@ -66,8 +84,8 @@
                       {% endifequal %}
                     {% endifequal %}
                     <center><a href="/Editar_video/{{leccion.id}}/{{leccion.nivel}}" class="btn btn-secondary" style="margin-right: 2%; margin-top: 2%;">Editar</a></center>
-                    <center> <a href="/Eliminar_video/{{id}}/{{leccion.id}}/{{leccion.orden}}/{{leccion.nivel}}" class="btn btn-danger" style="margin-right: 2%; margin-top: 2%;">Eliminar</a></center>
-                  {% endifequal %}
+                    <center> <a href="#exampleModal" id="{{leccion.id}}" class="btn btn-danger" style="margin-right: 2%; margin-top: 2%;" onclick="clicked(event,'{{id}}', '{{ leccion.id }}', '{{ leccion.orden }}','{{ leccion.nivel }}')" data-bs-toggle="modal">Eliminar</a></center>
+                    {% endifequal %}
                 </td>
               </tr>
               {% endfor %}
@@ -75,6 +93,23 @@
               </tr>
             </tbody>
           </table>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>¿Seguro que desea eliminar?</p>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-primary" class="btn btn-primary" onclick="clicked2(event)" >Aceptar</button>
+                  <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>  
+              </div>
+            </div>
+          </div>
         </div>
         <form action="/vista_videos_para_profesores/{{id}}/{{nivel}}" method="GET">   
           <center><input type="submit" class="btn btn-dark w-150" value="Ver en la p&aacute;gina"></center>
