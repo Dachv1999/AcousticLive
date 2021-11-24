@@ -437,6 +437,16 @@ def Formulario_Registro(request):
 
     return render (request, "Formulario_Registro.html")
 
+def seccion_canciones(request): #Vista de seccion canciones
+    doc_externo = open("Acoustic_Live/Templates/Seccion_Canciones.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)
+
 def nivel_medio(request): #Vista nivel medio
     doc_externo = open("Acoustic_Live/Templates/Vista_Nivel_Medio.html")
     plt = Template(doc_externo.read())
