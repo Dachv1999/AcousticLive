@@ -18,32 +18,47 @@
         <div class="row">
             <h1 class="text-light">Generos</h1>
             <div class="col-lg-2 col-md-4 col-sm-6">
+                <form action="/Genero/1/" method="GET">  
                 <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                </form>
                 <h4 class="text-center text-light">Todos</h4>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
-                <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                <form action="/Genero/2/" method="GET">  
+                <Center><input type="image" name="2" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                </form>
                 <h4 class="text-center text-light">Rock</h4>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
-                <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                <form action="/Genero/3/" method="GET">  
+                <Center><input type="image" name="3" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                </form>
                 <h4 class="text-center text-light">Pop</h4>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
-                <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                <form action="/Genero/4/" method="GET">  
+                <Center><input type="image" name="4" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                </form>
                 <h4 class="text-center text-light">Romantico</h4>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
-                <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                <form action="/Genero/5/" method="GET">  
+                <Center><input type="image" name="5" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                </form>
                 <h4 class="text-center text-light">Folkloricas</h4>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
-                <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                <form action="/Genero/6/" method="GET">  
+                <Center><input type="image" name="6" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                </form>
                 <h4 class="text-center text-light">Regae</h4>
             </div>
         </div>
-            <h1 class="text-light" style="margin-top: 5%;">Canciones</h1>
-
+            {% if texto %}
+                <h1 class="text-light" style="margin-top: 5%;">{{texto}}</h1>
+            {% else %}
+                <h1 class="text-light" style="margin-top: 5%;">Canciones</h1>
+            {% endif %}
     </div>
 </div>
 

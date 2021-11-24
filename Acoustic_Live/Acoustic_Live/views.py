@@ -68,18 +68,8 @@ def recuperacion_contraseña(request):
 
 
 def inicio(request): #Vista Inicio
-    # doc_externo = open("Acoustic_Live/Templates/Inicio.html")
-    # plt = Template(doc_externo.read())
-    # doc_externo.close()
-
-    # ctx = Context()
-
-    # documento = plt.render(ctx)
-    
-    # return HttpResponse(documento)
     return render(request,'Inicio.html')
-# def crud_profesores(request): #CRUD Profesores
-#     return render(request,'CRUD_Profesores.html',{'okProfe','okProfe'})
+
 def profesor(user):
     return  user.get_username() == 'Aron_prof' or user.get_username() == 'mantequilla_prof' or user.get_username() == 'christian_prof' or user.get_username() == 'mario_prof'
 
@@ -105,12 +95,9 @@ def inicio_profesores(request): #Vista Inicio de profesores
     
     return render(request,"Vista_Principal_Profesores.html",contexto)
 
-    # return render(request,"Vista_Principal_Profesores.html",{'okProfe':'okProfe'})    
-
 def profesor1(user):
-    b= not (user.get_username() == 'mantequilla_prof' or user.get_username() == 'Aron_prof' or user.get_username() == 'christian_prof' or user.get_username() == 'mario_prof')
-    print(b)
-    return  b
+    prof= not (user.get_username() == 'mantequilla_prof' or user.get_username() == 'Aron_prof' or user.get_username() == 'christian_prof' or user.get_username() == 'mario_prof')
+    return prof
 
 @login_required(login_url='/Login/')
 @user_passes_test(profesor1,login_url='/Inicio_Profesores/') # para estudiantes
@@ -1043,3 +1030,26 @@ def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
         'indentificador_profesor':identificador_profesor
     }
     return render(request,'Vista_Universal_Lecciones_For_Profesor.html', contexto)
+
+
+def genero(request, num_genero):
+    
+    texto = " "
+    if num_genero == 1:
+        texto = 'Todas las canciones'
+    elif num_genero == 2:
+        texto = 'Género "Rock"'
+    elif num_genero == 3:
+        texto = 'Género "Pop"'
+    elif num_genero == 4:
+        texto = 'Género "Romántico"'
+    elif num_genero == 5:
+        texto = 'Género "Folklóricas"'
+    elif num_genero == 6:
+        texto = 'Género "Regae"'
+
+    contexto = {
+        'texto' : texto,
+    }
+
+    return render(request,'Seccion_Canciones.html', contexto)
