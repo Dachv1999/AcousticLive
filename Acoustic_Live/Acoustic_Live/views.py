@@ -1042,11 +1042,11 @@ def genero(request, num_genero):
     elif num_genero == 3:
         texto = 'Género "Pop"'
     elif num_genero == 4:
-        texto = 'Género "Romántico"'
+        texto = 'Género "Baladas"'
     elif num_genero == 5:
         texto = 'Género "Folklóricas"'
     elif num_genero == 6:
-        texto = 'Género "Regae"'
+        texto = 'Género "Reggae"'
 
     contexto = {
         'texto' : texto,
