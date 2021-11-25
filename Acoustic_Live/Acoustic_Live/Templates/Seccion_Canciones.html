@@ -12,37 +12,57 @@
             <div class="row">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="Buscar">
-                    <button class="btn btn-secondary" type="button" id="button-addon2">Button</button>
+                    <button class="btn btn-dark" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
                   </div>
             </div>
         <div class="row">
-            <h1 class="text-light">Generos</h1>
+            <h1 class="text-light" style="margin-bottom: 2%;">G&eacute;neros</h1>
             <div class="col-lg-2 col-md-4 col-sm-6">
-                <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
-                <h4 class="text-center text-light">Todos</h4>
+                <Center><input type="image" name="1" src="{% static 'Imagenes/todos.png' %}" alt="Todos" style="width: 140px; border-radius: 100%;"></Center>
+                <!--<h4 class="text-center text-light">Todos</h4>-->
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
-                <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
-                <h4 class="text-center text-light">Rock</h4>
+                <Center><input type="image" name="1" src="{% static 'Imagenes/pop.png' %}" alt="Pop" style="width: 140px; border-radius: 100%;"></Center>
+                <!--<h4 class="text-center text-light">Pop</h4>-->
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
-                <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
-                <h4 class="text-center text-light">Pop</h4>
+                <Center><input type="image" name="1" src="{% static 'Imagenes/rock.png' %}" alt="Rock" style="width: 140px; border-radius: 100%;"></Center>
+                <!--<h4 class="text-center text-light">Rock</h4>-->
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
-                <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
-                <h4 class="text-center text-light">Romantico</h4>
+                <Center><input type="image" name="1" src="{% static 'Imagenes/baladas.png' %}" alt="Baladas" style="width: 140px; border-radius: 100%;"></Center>
+                <!--<h4 class="text-center text-light">Baladas</h4>-->
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
-                <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
-                <h4 class="text-center text-light">Folkloricas</h4>
+                <Center><input type="image" name="1" src="{% static 'Imagenes/clasicos.png' %}" alt="Clasicos" style="width: 140px; border-radius: 100%;"></Center>
+                <!--<h4 class="text-center text-light">Cl&aacute;sicos</h4>-->
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
-                <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
-                <h4 class="text-center text-light">Regae</h4>
+                <Center><input type="image" name="1" src="{% static 'Imagenes/reggae.png' %}" alt="Reggae" style="width: 140px; border-radius: 100%;"></Center>
+                <!--<h4 class="text-center text-light">Reggae</h4>-->
             </div>
         </div>
             <h1 class="text-light" style="margin-top: 5%;">Canciones</h1>
+            <center><div class="miniatura" style="background-color: rgb(49, 51, 53); height: 80px; width: 70%; display: flex; margin-bottom: 10px;">
+                 <div class="imagen">
+                    <img src="{% static 'Imagenes/chachacha.jpg' %}" alt="" style="width: 80px; margin-right: 15px;">
+                 </div>
+                <div class="texto" style="padding: 1%">
+                     <a href="" style="text-decoration: none; color: #fff;"><h4>Chachach&aacute;</h4></a>
+                     <p style="text-align-last: left;">J&oacute;sean Log</p>
+                </div>
+            </div>
+            </center>
+            <center><div class="miniatura" style="background-color: rgb(49, 51, 53); height: 80px; width: 70%; display: flex;">
+                <div class="imagen">
+                   <img src="{% static 'Imagenes/adele.jpg' %}" alt="" style="width: 80px; height: 80px; margin-right: 15px;">
+                </div>
+               <div class="texto" style="padding: 1%">
+                    <a href="" style="text-decoration: none; color: #fff;"><h4>Make you feel my love</h4></a>
+                    <p style="text-align-last: left;">Adele</p>
+               </div>
+           </div>
+           </center>
 
     </div>
 </div>
