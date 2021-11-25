@@ -1,9 +1,10 @@
 
 from os import devnull
+import random
 from django.http import HttpResponse
 from django.template import Template, Context, context
 from django.shortcuts import render, redirect
-from gestionBD.models import Leccion, Profesor, Estudiante, Cursa
+from gestionBD.models import Leccion, Profesor, Estudiante, Cursa, Cancion
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.template.loader import get_template
@@ -424,15 +425,7 @@ def Formulario_Registro(request):
 
     return render (request, "Formulario_Registro.html")
 
-def seccion_canciones(request): #Vista de seccion canciones
-    doc_externo = open("Acoustic_Live/Templates/Seccion_Canciones.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
 
-    ctx = Context()
-    documento = plt.render(ctx)
-    
-    return HttpResponse(documento)
 
 def nivel_medio(request): #Vista nivel medio
     doc_externo = open("Acoustic_Live/Templates/Vista_Nivel_Medio.html")
@@ -1031,25 +1024,48 @@ def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
     }
     return render(request,'Vista_Universal_Lecciones_For_Profesor.html', contexto)
 
-
+#@login_required(login_url='/Login/')
+#@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
 def genero(request, num_genero):
     
     texto = " "
     if num_genero == 1:
         texto = 'Todas las canciones'
+        canciones = Cancion.objects.all().order_by('nombre_cancion')
     elif num_genero == 2:
         texto = 'Género "Rock"'
+        canciones = Cancion.objects.filter(genero_musica='rock')
     elif num_genero == 3:
         texto = 'Género "Pop"'
+        canciones = Cancion.objects.filter(genero_musica='pop')
     elif num_genero == 4:
         texto = 'Género "Baladas"'
+        canciones = Cancion.objects.filter(genero_musica='balada')
     elif num_genero == 5:
         texto = 'Género "Folklóricas"'
+        canciones = Cancion.objects.filter(genero_musica='folklorica')
     elif num_genero == 6:
         texto = 'Género "Reggae"'
-
+        canciones = Cancion.objects.filter(genero_musica='reggae')
     contexto = {
         'texto' : texto,
+        'canciones':canciones,
     }
 
     return render(request,'Seccion_Canciones.html', contexto)
+
+#@login_required(login_url='/Login/')
+#@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+def seccion_canciones(request): #Vista de seccion canciones
+    doc_externo = open("Acoustic_Live/Templates/Seccion_Canciones.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+    lista=[]    
+    canciones= Cancion.objects.all()
+    for cancion1 in canciones:
+        lista.append(cancion1)   
+    random.shuffle(lista)         
+    ctx = Context({'canciones_aleatorias':lista})
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)

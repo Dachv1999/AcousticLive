@@ -56,9 +56,33 @@
         </div>
             {% if texto %}
                 <h1 class="text-light" style="margin-top: 5%;">{{texto}}</h1>
-            {% else %}
-                <h1 class="text-light" style="margin-top: 5%;">Canciones</h1>
+                {%for cancion in canciones%}
+
                 <div class="miniatura" style="background-color: rgb(49, 51, 53); height: 120px; width: 70%; display: flex; margin-bottom: 10px;">
+                    <div class="imagen">
+                        <img src="/../{{cancion.imagen_cancion }}" alt="" style="height: 120px;width: 120px; margin-right: 15px;">
+                    </div>
+                    <div class="texto" style="padding-top: 3%">
+                        <a href="" style="text-decoration: none; color: #fff;"><h4>{{cancion.nombre_cancion}}</h4></a>
+                        <p style="text-align-last: left;">{{cancion.grupo_artista}}</p>
+                    </div>
+                </div>
+                {%endfor%}
+            {% else %}
+                
+
+                <h1 class="text-light" style="margin-top: 5%;">Canciones</h1>
+                {%for cancion_aleatoria in canciones_aleatorias%}
+                <div class="miniatura" style="background-color: rgb(49, 51, 53); height: 120px; width: 70%; display: flex; margin-bottom: 10px;">
+                    <div class="imagen">
+                        <img src="/../{{cancion_aleatoria.imagen_cancion }}" alt="" style="height: 120px;width: 120px; margin-right: 15px;">
+                    </div>
+                    <div class="texto" style="padding-top: 3%">
+                        <a href="" style="text-decoration: none; color: #fff;"><h4>{{cancion_aleatoria.nombre_cancion}}</h4></a>
+                        <p style="text-align-last: left;">{{cancion_aleatoria.grupo_artista}}</p>
+                    </div>
+                </div>
+                <!-- <div class="miniatura" style="background-color: rgb(49, 51, 53); height: 120px; width: 70%; display: flex; margin-bottom: 10px;">
                     <div class="imagen">
                         <img src="{% static 'Imagenes/chachacha.jpg' %}" alt="" style="width: 120px; margin-right: 15px;">
                     </div>
@@ -66,8 +90,8 @@
                         <a href="" style="text-decoration: none; color: #fff;"><h4>Chachach&aacute;</h4></a>
                         <p style="text-align-last: left;">J&oacute;sean Log</p>
                     </div>
-                </div>
-                <div class="miniatura" style="background-color: rgb(49, 51, 53); height: 120px; width: 70%; display: flex;">
+                </div> -->
+                <!-- <div class="miniatura" style="background-color: rgb(49, 51, 53); height: 120px; width: 70%; display: flex;">
                     <div class="imagen">
                     <img src="{% static 'Imagenes/adele.jpg' %}" alt="" style="width: 120px; height: 120px; margin-right: 15px;">
                     </div>
@@ -75,7 +99,8 @@
                         <a href="" style="text-decoration: none; color: #fff;"><h4>Make you feel my love</h4></a>
                         <p style="text-align-last: left;">Adele</p>
                     </div>
-                </div>
+                </div> -->
+                {%endfor%}
            {% endif %}
     </div>
 </div>
