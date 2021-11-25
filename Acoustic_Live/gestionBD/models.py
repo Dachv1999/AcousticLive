@@ -13,7 +13,8 @@ class Profesor(models.Model):
     def __str__(self):
         return self.nombre_profesor
 class Cancion(models.Model):
-    
+    nombre_cancion = models.CharField(max_length=300)
+    grupo_artista = models.CharField(max_length=200)
     imagen_cancion =models.ImageField(upload_to='static/Imagenes', default='', blank=True)
     def __str__(self):
         return self.nombre_cancion
