@@ -1080,5 +1080,35 @@ def cancion_base(request): #Base de las canciones
     
     return HttpResponse(documento)
 
-def cancion_fria(request): #Vista Inicio
-    return render(request,'Canciones/Fria.html')
+def cancion_fria(request):
+    return render(request,'../Canciones/Fria.html')
+
+def por_mil_noches(request):
+    doc_externo = open("Acoustic_Live/Canciones/airbag_por_mil_noches.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)
+
+def videogames(request):
+    doc_externo = open("Acoustic_Live/Canciones/lana_del_rey_videogames.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)
+
+def tratame_suavemente(request):
+    doc_externo = open("Acoustic_Live/Canciones/soda_stereo_tratame_suavemente.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)
