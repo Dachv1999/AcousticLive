@@ -247,3 +247,20 @@ input[type="checkbox"]{
     margin: 0 auto;
     min-width: 400px;
 }
+
+.flex-container{
+    display: flex;
+    
+}
+.flex-container div{
+    margin-left: 15px;
+}
+.letracordes{
+    background: rgba(212, 212, 212, 0.3);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0,-0,-0,0.568);
+    color: white;
+    width: 500px;
+    margin-bottom: 10%;
+}
