@@ -1,0 +1,254 @@
+{% extends 'Base.html' %}
+
+ {% block title %}
+     Acoustic Live | Cancion
+ {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+    <link rel="stylesheet" href="{% static '/css/fondo.css' %}">
+    <div class="container contenedor"  style="padding-top: 120px;">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="row">
+                    <div class="flex-container">
+                        <div>
+                            <!--En la parte donde dice "src" va la imagen de la cancion-->
+                            <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                        </div>
+                        <div class="text-light">
+                            <!--En los h remplazan los datos que estan escritos-->
+                            <h2>Video Games</h2>
+                            <h5>Lana del Rey</h5>
+                            <h5>2012-Born To Die</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 7%; padding-right: 5%;padding-left: 5%;">
+                    <div class="container letracordes" style="padding-left: 10%; padding-right: 10%;">
+                        <!--Remplazando los lorem ponen lo de la letra, cada p es un parrafo aumenten segun lo que 
+                        necesiten-->
+
+<pre>
+<p>Intro: </br>
+F#m   LA   F#m   LA   DO#m   RE
+F#m   LA   F#m   LA   DO#m   RE   F#m</p>
+
+<p> F#m            LA   
+Swinging in the backyard</br>
+F#m             LA
+Pull up in your fast car</br>
+  DO#m         RE                         
+Whistling my name</br>
+F#m        LA
+Open up a beer</br>
+        F#m          LA
+And you take it over here</br>
+            DO#m   RE   F#m
+And play a video game</p>
+
+<p>    F#m              LA
+I'm in his favorite sun dress</br>
+F#m             LA
+Watching me get undressed</br>
+DO#m            RE
+Take that body downtown</br>
+F#m            LA
+I say you the bestest</br>
+F#m           LA
+Lean in for a big kiss</br>
+DO#m              RE      F#m
+Put his favorite perfume on</br>
+           DO#m  RE
+Go play a video game</p>
+
+<p>     MI
+It's you, it's you
+It's all for you, Everything I do</br>
+                    RE
+I tell you all the time</p>
+
+<p>                                LA
+Heaven is a place on earth with you</br>
+                            SOL    F#m
+Tell me all the things you want to do</br>
+I heard that you like the bad girls</br>
+RE
+Honey, is that true?</br>
+                              LA
+It's better than I ever even knew</br>
+                             SOL       F#m
+They say that the world was built for two</br>
+                          RE            Rem
+Only worth living if somebody is loving you</br>
+              F#m
+Baby now you do</p>
+
+<p> F#m           LA
+Singing in the old bars</br>
+   F#m             LA
+Swinging with the old stars</br>
+ DO#m           RE
+Living for the fame</br>   
+ F#m             LA
+Kissing in the blue dark</br>
+   F#m            LA
+Playing pool and wild darts</br>
+ DO#m  RE
+Video games</p>
+
+<p> F#m                LA
+He holds me in his big arms</br>
+  F#m           LA
+Drunk and I am seeing stars</br>
+  DO#m          RE
+This is all I think of</br>   
+ F#m               LA
+Watching all our friends fall</br>
+F#m           LA
+In and out of Old Paul's</br>
+  DO#m        RE    F#m
+This is my idea of fun</br>
+         DO#m   RE
+Playing video games</p>
+
+<p>     MI
+It's you, it's you
+It's all for you, Everything I do</br>
+                    RE
+I tell you all the time</p>
+
+<p>                                LA
+Heaven is a place on earth with you</br>
+                            SOL    F#m
+Tell me all the things you want to do</br>
+I heard that you like the bad girls</br>
+RE
+Honey, is that true?</br>
+                              LA
+It's better than I ever even knew</br>
+                             SOL       F#m
+They say that the world was built for two</br>
+                          RE            Rem
+Only worth living if somebody is loving you</br>
+              F#m
+Baby now you do</p>
+
+<p>F#m  LA  F#m  LA  DO#m  RE
+F#m  LA  F#m  LA  DO#m  RE  F#m</p>
+
+<p>     MI
+It's you, it's you
+It's all for you, Everything I do</br>
+                    RE
+I tell you all the time</p>
+
+<p>                                LA
+Heaven is a place on earth with you</br>
+                            SOL    F#m
+Tell me all the things you want to do</br>
+I heard that you like the bad girls</br>
+RE
+Honey, is that true?</br>
+                              LA
+It's better than I ever even knew</br>
+                             SOL       F#m
+They say that the world was built for two</br>
+                          RE            Rem
+Only worth living if somebody is loving you</br>
+              F#m
+Baby now you do</p>
+
+<p>F#m  LA  F#m  LA  DO#m  RE
+F#m  LA  F#m  LA  DO#m  RE  F#m
+F#m  LA  F#m  LA  DO#m  RE
+F#m  LA  F#m  LA  DO#m  RE  F#m</p>
+
+</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="row" style="margin-top: 6%;">
+                    <!--dentro de center ponen el video (en el src ponen el link con embed), si es que
+                    remplazan todo el iframe entonces ponen en width="350" y en height="250"-->
+                    <center><iframe width="350" height="250" src="https://www.youtube.com/embed/Tw7kAea7Jrg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+                </div>
+                <div class="row" style="margin-top: 5%;">
+                    <h2 class="text-light">Acordes</h2>
+
+                <!--Esto es una fila con dos acordes, segun lo que necesiten van aumentando 
+                    todo lo que esta adentro-->
+                    <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                       
+                    <!--esto es solo un acorde-->
+                        <div>
+                            <!--en el "src" remplazan con la imagen de la nota-->
+                            <img src="{% static 'acordes_guitarra/FA#m(fa sostenido menor).png' %}"style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Fa sostenido</br>menor</h6>
+                        </div>
+                    <!--aqui termina el acorde-->
+
+                    <!--Este es el segundo acorde-->
+                        <div>
+                            <img src="{% static 'acordes_guitarra/LA (la mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">La mayor</h6>
+                        </div>
+                     <!--aqui termina el segundo acorde-->
+                    </div>
+                 <!--Aqui termina la fila de dos acordes-->
+                 <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                       
+                    <!--esto es solo un acorde-->
+                        <div>
+                            <!--en el "src" remplazan con la imagen de la nota-->
+                            <img src="{% static 'acordes_guitarra/DO#m(do sostenido menor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Do sostenido</br>menor</h6>
+                        </div>
+                    <!--aqui termina el acorde-->
+
+                    <!--Este es el segundo acorde-->
+                        <div>
+                            <img src="{% static 'acordes_guitarra/RE (re mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Re mayor</h6>
+                        </div>
+                     <!--aqui termina el segundo acorde-->
+                    </div>
+                 <!--Aqui termina la fila de dos acordes-->
+
+                 <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                       
+                    <!--esto es solo un acorde-->
+                        <div>
+                            <!--en el "src" remplazan con la imagen de la nota-->
+                            <img src="{% static 'acordes_guitarra/MI(mi mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Mi mayor</h6>
+                        </div>
+                    <!--aqui termina el acorde-->
+
+                    <!--Este es el segundo acorde-->
+                        <div>
+                            <img src="{% static 'acordes_guitarra/REm(re menor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Re menor</h6>
+                        </div>
+                     <!--aqui termina el segundo acorde-->
+                    </div>
+                 <!--Aqui termina la fila de dos acordes-->
+                 <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                       
+                    <!--esto es solo un acorde-->
+                        <div>
+                            <!--en el "src" remplazan con la imagen de la nota-->
+                            <img src="{% static 'acordes_guitarra/SOL(sol mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Sol mayor</h6>
+                        </div>
+                                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
