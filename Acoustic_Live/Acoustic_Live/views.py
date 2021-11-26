@@ -1069,3 +1069,13 @@ def seccion_canciones(request): #Vista de seccion canciones
     documento = plt.render(ctx)
     
     return HttpResponse(documento)
+
+def cancion_base(request): #Base de las canciones
+    doc_externo = open("Acoustic_Live/Templates/Cancion_base.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    ctx = Context()
+    documento = plt.render(ctx)
+    
+    return HttpResponse(documento)
