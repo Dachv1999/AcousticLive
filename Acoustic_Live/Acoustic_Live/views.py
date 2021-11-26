@@ -1079,3 +1079,6 @@ def cancion_base(request): #Base de las canciones
     documento = plt.render(ctx)
     
     return HttpResponse(documento)
+
+def cancion_fria(request): #Vista Inicio
+    return render(request,'Canciones/Fria.html')
