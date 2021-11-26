@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Acoustic_Live.views import niveles, salir1,nivel_medio, nivel_avanzado,formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA, login1,Formulario_Registro,inicio,inicio_profesores,Formulario_Registro, guardar_video_vistoBD, eliminar_video_vistoBD,formulario_editar_video,vista_editar_leccion,lista_principiante, lista_medio, lista_avanzado, crud_profesores, mover_video_arriba, mover_video_abajo, eliminar_video_profesor,Vista_Universal_Para_Profesor, recuperacion_contraseña, seccion_canciones, genero, cancion_base
+from Acoustic_Live.views import niveles, salir1,nivel_medio, nivel_avanzado,formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA, login1,Formulario_Registro,inicio,inicio_profesores,Formulario_Registro, guardar_video_vistoBD, eliminar_video_vistoBD,formulario_editar_video,vista_editar_leccion,lista_principiante, lista_medio, lista_avanzado, crud_profesores, mover_video_arriba, mover_video_abajo, eliminar_video_profesor,Vista_Universal_Para_Profesor, recuperacion_contraseña, seccion_canciones, genero, cancion_base,por_mil_noches,videogames,tratame_suavemente
 
 
 # from gestionBD.views import lista_principiante, lista_medio, lista_avanzado, crud_profesores, mover_video_arriba, mover_video_abajo, eliminar_video_profesor,Vista_Universal_Para_Profesor
@@ -50,7 +50,8 @@ urlpatterns = [
     path('vista_videos_para_profesores/<int:id_profesor>/<int:nivel>',Vista_Universal_Para_Profesor),
 
     path('Genero/<int:num_genero>/', genero),
-
-
+    path('airbag_por_mil_noches/',por_mil_noches),
+    path('videogames/',videogames),
+    path('tratame_suavemente/',tratame_suavemente),
     # path('Envio/', envio_formulario, name="Envio"),
 ]
