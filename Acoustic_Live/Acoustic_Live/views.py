@@ -1086,6 +1086,9 @@ def cancion_ave_cristal(request):
 def por_mil_noches(request):
     return render(request,'Canciones/airbag_por_mil_noches.html')
 
+def muchacha_de_risa(request):
+    return render(request,'Canciones/Muchacha_de_Risa.html')
+
 def videogames(request):
     return render(request,'Canciones/lana_del_rey_videogames.html')
 
@@ -1094,3 +1097,9 @@ def tratame_suavemente(request):
     
 def ley_y_trampa(request):
     return render(request,'Canciones/Ley_y_trampa.html')
+
+def sangre_espanola(request):
+    return render(request,'Canciones/Sangre_Espanola.html')
+
+def puerta_jardin(request):
+    return render(request,'Canciones/Puerta_de_Jardin.html')
