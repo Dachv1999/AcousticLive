@@ -1091,3 +1091,6 @@ def videogames(request):
 
 def tratame_suavemente(request):
     return render(request,'Canciones/soda_stereo_tratame_suavemente.html')
+    
+def ley_y_trampa(request):
+    return render(request,'Canciones/Ley_y_trampa.html')
