@@ -1,0 +1,191 @@
+{% extends 'Base.html' %}
+
+ {% block title %}
+     Acoustic Live | Cancion
+ {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+    <link rel="stylesheet" href="{% static '/css/fondo.css' %}">
+    <div class="container contenedor"  style="padding-top: 120px;">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="row">
+                    <div class="flex-container">
+                        <div>
+                            <!--En la parte donde dice "src" va la imagen de la cancion-->
+                            <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                        </div>
+                        <div class="text-light">
+                            <!--En los h remplazan los datos que estan escritos-->
+                            <h2>Pensamientos</h2>
+                            <h5>Airbag</h5>
+                            <h5>2021-Al parecer todo ha sido una trampa</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 7%; padding-right: 5%;padding-left: 5%;">
+                    <div class="container letracordes" style="padding-left: 10%; padding-right: 10%;">
+                        <!--Remplazando los lorem ponen lo de la letra, cada p es un parrafo aumenten segun lo que 
+                        necesiten-->
+                    
+<pre>
+<p>Intro: SIm SIm SIm SIm
+       SOL MIm SIm RE
+       SOL MIm SIm RE</p>
+<p>SOL     MIm           SIm   FA#m             SOL
+    Esperaba que me digas lo que nos va a pasar</br>
+       MIm       SIm    FA#m           SOL
+si pudiera mataría por verte una vez más</br>
+       MIm        SIm   FA#m        SOL
+De tu boca no salían palabras al azar</br>
+      MIm             SIm  RE
+Como vez ya no hay salida, no puedo escapar</p>
+
+<p>SOL  MIm 
+Oh-oh-oh</br>
+SIm                   RE
+Lee mis pensamientos, sabe lo que siento</br>
+SOL  MIm 
+Oh-oh-oh</br>
+SIm             RE
+Sexo y amargura en esta locura</br>
+SOL  MIm 
+Oh-oh-oh</br>
+   SIm              RE
+Hemos tomado tanto, no se lo que hablo</br>
+SOL  MIm 
+Oh-oh-oh</br>
+     SIm                RE
+No quiero que te alejes, que te alejes</p>
+
+<p>SOL      MIm            SIm   FA#m          SOL
+    Y pasamos todo el día tirados sin hablar</br>
+     MIm          SIm       FA#m          SOL
+Nos dijimos las mentiras que quería escuchar</br>
+       MIm           SIm      FA#m          SOL
+Esta noche está dormida, tendré que festejar</br>
+       MIm            SIm  RE
+Como ves ya no hay salida, no puedo escapar</p>
+
+<p>SOL  MIm 
+Oh-oh-oh</br>
+SIm                   RE
+Lee mis pensamientos, sabe lo que siento</br>
+SOL  MIm 
+Oh-oh-oh</br>
+SIm             RE
+Sexo y amargura en esta locura</br>
+SOL  MIm 
+Oh-oh-oh</br>
+   SIm              RE
+Hemos tomado tanto, no se lo que hablo</br>
+SOL  MIm 
+Oh-oh-oh</br>
+     SIm              RE
+Prendido a tu cintura en esta locura</br>
+SOL  MIm 
+Oh-oh-oh</br>
+     SIm             RE
+Tal vez en la mañana encuentre la calma</br>    
+SOL  MIm 
+Oh-oh-oh</br>
+     SIm                RE
+No quiero que te alejes, que te alejes</p>
+
+<p>SOL   MIm    SIm   RE   SOL   MIm 
+SIm                   RE
+Lee mis pensamientos, sabe lo que siento</br> 
+SOL   MIm    SIm   RE
+SOL     MIm           SIm    RE
+   Esperaba que me digas...</br> 
+
+SOL   MIm    SIm   SIm
+SIm   SIm    SIm</p>
+</pre>
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="row" style="margin-top: 6%;">
+                    <!--dentro de center ponen el video (en el src ponen el link con embed), si es que
+                    remplazan todo el iframe entonces ponen en width="350" y en height="250"-->
+                    <center><iframe width="350" height="250" src="https://www.youtube.com/embed/-hdHoMolRiw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+                </div>
+                <div class="row" style="margin-top: 5%;">
+                    <h2 class="text-light">Acordes</h2>
+
+                <!--Esto es una fila con dos acordes, segun lo que necesiten van aumentando 
+                    todo lo que esta adentro-->
+                    <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                       
+                    <!--esto es solo un acorde-->
+                        <div>
+                            <!--en el "src" remplazan con la imagen de la nota-->
+                            <img src="{% static 'acordes_guitarra/SIm(si menor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Si menor</h6>
+                        </div>
+                    <!--aqui termina el acorde-->
+
+                    <!--Este es el segundo acorde-->
+                        <div>
+                            <img src="{% static 'acordes_guitarra/SOL(sol mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Sol mayor</h6>
+                        </div>
+                     <!--aqui termina el segundo acorde-->
+                    </div>
+                    <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                       
+                        <!--esto es solo un acorde-->
+                            <div>
+                                <!--en el "src" remplazan con la imagen de la nota-->
+                                <img src="{% static 'acordes_guitarra/MIm(mi menor).png' %}" style="height: 180px; width: 100px;">
+                                <h6 class="text-light text-center">Mi menor</h6>
+                            </div>
+                        <!--aqui termina el acorde-->
+    
+                        <!--Este es el segundo acorde-->
+                            <div>
+                                <img src="{% static 'acordes_guitarra/RE(re mayor).png' %}" style="height: 180px; width: 100px;">
+                                <h6 class="text-light text-center">Re mayor</h6>
+                            </div>
+                         <!--aqui termina el segundo acorde-->
+                        </div>
+
+                        <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                       
+                            <!--esto es solo un acorde-->
+                                <div>
+                                    <!--en el "src" remplazan con la imagen de la nota-->
+                                    <img src="{% static 'acordes_guitarra/FA#m(fa sostenido menor).png' %}" style="height: 180px; width: 100px;">
+                                    <h6 class="text-light text-center">Fa sostenido</br>menor</h6>
+                                </div>
+                            <!--aqui termina el acorde-->
+        
+                            <!--Este es el segundo acorde-->
+                            
+                             <!--aqui termina el segundo acorde-->
+                            </div>
+
+
+
+                 <!--Aqui termina la fila de dos acordes-->
+                                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
