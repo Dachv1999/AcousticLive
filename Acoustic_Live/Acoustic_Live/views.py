@@ -1100,9 +1100,9 @@ def buscador(request):
         #         Q(grupo_artista__icontains = copia[2])
         #         ).order_by('nombre_cancion')
         if(len(listita)>0):
-            resultado="Este es el resultado para la busqueda: "+valor
+            resultado="Resultados de la busqueda para: "+ valor
         else:
-            resultado="No hay resultados para la busqueda:  "+valor
+            resultado="No hay resultados para: " + valor
         ctx = Context({'canciones_aleatorias':listita,'text': resultado,'busqueda':valor})
         documento = plt.render(ctx)
     else:
