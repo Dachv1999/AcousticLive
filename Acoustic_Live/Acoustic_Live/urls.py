@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Acoustic_Live.views import niveles, salir1,nivel_medio, nivel_avanzado,formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA, login1,Formulario_Registro,inicio,inicio_profesores,Formulario_Registro, guardar_video_vistoBD, eliminar_video_vistoBD,formulario_editar_video,vista_editar_leccion,lista_principiante, lista_medio, lista_avanzado, crud_profesores, mover_video_arriba, mover_video_abajo, eliminar_video_profesor,Vista_Universal_Para_Profesor, recuperacion_contraseña, seccion_canciones, genero, cancion_base, cancion_ave_cristal,por_mil_noches,videogames,tratame_suavemente, ley_y_trampa,muchacha_de_risa,sangre_espanola,puerta_jardin
+from Acoustic_Live.views import niveles, salir1,nivel_medio, nivel_avanzado,formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA, login1,Formulario_Registro,inicio,inicio_profesores,Formulario_Registro, guardar_video_vistoBD, eliminar_video_vistoBD,formulario_editar_video,vista_editar_leccion,lista_principiante, lista_medio, lista_avanzado, crud_profesores, mover_video_arriba, mover_video_abajo, eliminar_video_profesor,Vista_Universal_Para_Profesor, recuperacion_contraseña, seccion_canciones, genero, cancion_base, cancion_ave_cristal,por_mil_noches,videogames,tratame_suavemente, ley_y_trampa,muchacha_de_risa,sangre_espanola,puerta_jardin,pensamientos,little_things,buscador
 
 
 
@@ -39,6 +39,7 @@ urlpatterns = [
     path('', inicio),
     path('Inicio_Profesores/', inicio_profesores),
     path('Canciones/', seccion_canciones),
+    path('buscar/', buscador),
     path('Cancion_base/', cancion_base),
     path('guardar_db/', guardar_video_vistoBD, name='guardar_db'),
     path('eliminar_db/', eliminar_video_vistoBD, name='eliminar_db'),
@@ -57,6 +58,8 @@ urlpatterns = [
     path('Ave_Cristal/', cancion_ave_cristal),
     path('airbag_por_mil_noches/',por_mil_noches),
     path('videogames/',videogames),
+    path('airbag_pensamientos/',pensamientos),
+    path('little_things/', little_things),
     path('tratame_suavemente/',tratame_suavemente),
     path('Ley_Y_Trampa/', ley_y_trampa),
     path('Muchacha_de_Risa/', muchacha_de_risa),
