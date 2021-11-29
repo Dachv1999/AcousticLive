@@ -126,7 +126,7 @@ def login1(request):
                     usuario = authenticate(username=usuario_login, password=contraseña)
                     if usuario is not None:
                         login(request, usuario)
-                    #messages.success(request, F"Bienvenid@ de nuevo {nombre_usuario}")   
+                        messages.info(request, "¡Bienvenido "+ request.user.first_name+" a Acoustic Live!")   
                         return redirect("/Inicio_Profesores/")
                 else:
                         mensaje(request,"Error: contraseña incorrecta")
@@ -141,7 +141,7 @@ def login1(request):
                 usuario = authenticate(username=usuario_login, password=contraseña)
                 if usuario is not None:
                     login(request,usuario)
-                        #messages.success(request, F"Bienvenid@ de nuevo {nombre_usuario}")   
+                    messages.info(request, "¡Bienvenido "+ request.user.first_name+" a Acoustic Live!")    
                     return redirect("/")
             else:
                 mensaje(request,"Error: contraseña incorrecta")
