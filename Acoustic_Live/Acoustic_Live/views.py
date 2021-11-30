@@ -1170,3 +1170,6 @@ def puerta_jardin(request):
 
 def besos_guerra(request):
     return render(request,'Canciones/Besos_en_Guerra.html')
+
+def cambiare_mi_tristeza(request):
+    return render(request,'Canciones/cambiare_mi_tristeza.html')
