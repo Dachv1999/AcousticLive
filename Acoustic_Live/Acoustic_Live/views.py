@@ -127,7 +127,7 @@ def login1(request):
                     usuario = authenticate(username=usuario_login, password=contraseña)
                     if usuario is not None:
                         login(request, usuario)
-                    #messages.success(request, F"Bienvenid@ de nuevo {nombre_usuario}")   
+                        messages.info(request, "¡Bienvenido "+ request.user.first_name+" a Acoustic Live!")   
                         return redirect("/Inicio_Profesores/")
                 else:
                         mensaje(request,"Error: contraseña incorrecta")
@@ -142,7 +142,7 @@ def login1(request):
                 usuario = authenticate(username=usuario_login, password=contraseña)
                 if usuario is not None:
                     login(request,usuario)
-                        #messages.success(request, F"Bienvenid@ de nuevo {nombre_usuario}")   
+                    messages.info(request, "¡Bienvenido "+ request.user.first_name+" a Acoustic Live!")    
                     return redirect("/")
             else:
                 mensaje(request,"Error: contraseña incorrecta")
@@ -1100,7 +1100,7 @@ def buscador(request):
         #         Q(grupo_artista__icontains = copia[2])
         #         ).order_by('nombre_cancion')
         if(len(listita)>0):
-            resultado="Este es el resultado para la busqueda: "+valor
+            resultado="Resultados de la busqueda para: "+ valor
         else:
             resultado="No hay resultados para la busqueda:  "+valor
         # ctx = Context({'canciones_aleatorias':listita,'text': resultado,'busqueda':valor})
@@ -1167,3 +1167,6 @@ def sangre_espanola(request):
 
 def puerta_jardin(request):
     return render(request,'Canciones/Puerta_de_Jardin.html')
+
+def besos_guerra(request):
+    return render(request,'Canciones/Besos_en_Guerra.html')

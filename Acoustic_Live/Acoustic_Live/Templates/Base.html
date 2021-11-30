@@ -69,6 +69,7 @@ $(document).ready(function() {
                 <div class="der">
                     {%if user.is_authenticated %}
                     <ul>
+                        <li style="color: white;"> {{request.user.first_name}}</li>
                         <li><a href="/Salir/">Cerrar sesi&oacute;n</a></li>
                         <!-- <li><a href="#">Cerrar sesi&oacute;n</a></li> -->
                     </ul>
@@ -98,6 +99,7 @@ $(document).ready(function() {
             <div class="der">
                 {%if user.is_authenticated%}
                 <ul>
+                    <li style="color: white;">{{request.user.first_name}}</li>
                     <li><a href="/Salir/">Cerrar sesi&oacute;n</a></li>
                     <!-- <li><a href="#">Cerrar sesi&oacute;n</a></li> -->
                 </ul>
