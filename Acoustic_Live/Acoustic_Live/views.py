@@ -1,7 +1,7 @@
 
 from os import devnull
 import random
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from django.template import Template, Context, context
 from django.shortcuts import render, redirect
 from gestionBD.models import Leccion, Profesor, Estudiante, Cursa, Cancion
@@ -18,6 +18,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import user_passes_test
+from django.db.models import Q
 
 
 def send_email(email1):
@@ -126,7 +127,7 @@ def login1(request):
                     usuario = authenticate(username=usuario_login, password=contraseña)
                     if usuario is not None:
                         login(request, usuario)
-                    #messages.success(request, F"Bienvenid@ de nuevo {nombre_usuario}")   
+                        messages.info(request, "¡Bienvenido "+ request.user.first_name+" a Acoustic Live!")   
                         return redirect("/Inicio_Profesores/")
                 else:
                         mensaje(request,"Error: contraseña incorrecta")
@@ -141,7 +142,7 @@ def login1(request):
                 usuario = authenticate(username=usuario_login, password=contraseña)
                 if usuario is not None:
                     login(request,usuario)
-                        #messages.success(request, F"Bienvenid@ de nuevo {nombre_usuario}")   
+                    messages.info(request, "¡Bienvenido "+ request.user.first_name+" a Acoustic Live!")    
                     return redirect("/")
             else:
                 mensaje(request,"Error: contraseña incorrecta")
@@ -1065,10 +1066,66 @@ def seccion_canciones(request): #Vista de seccion canciones
     for cancion1 in canciones:
         lista.append(cancion1)   
     random.shuffle(lista)         
-    ctx = Context({'canciones_aleatorias':lista})
+    ctx = Context({'canciones_aleatorias':lista,'text': 'Canciones'})
     documento = plt.render(ctx)
     
     return HttpResponse(documento)
+
+def buscador(request):
+    doc_externo = open("Acoustic_Live/Templates/Seccion_Canciones.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+    valor=request.POST.get('Buscar','')
+    if valor and cumple(valor):
+        copia=valor.split(' ')
+        if len(copia)==1:
+            listita=Cancion.objects.filter(
+                Q(nombre_cancion__icontains = valor) |
+                Q(grupo_artista__icontains = valor)
+                ).order_by('nombre_cancion')
+        if len(copia)>1: #si activo el de abajo es len(copia)>1
+            listita=Cancion.objects.filter(
+                Q(nombre_cancion__icontains = copia[0]) |
+                Q(grupo_artista__icontains = copia[0]) |
+                Q(nombre_cancion__icontains = copia[1]) |
+                Q(grupo_artista__icontains = copia[1])
+                ).order_by('nombre_cancion')
+        # if len(copia)>2:
+        #     listita=Cancion.objects.filter(
+        #         Q(nombre_cancion__icontains = copia[0]) |
+        #         Q(grupo_artista__icontains = copia[0]) |
+        #         Q(nombre_cancion__icontains = copia[1]) |
+        #         Q(grupo_artista__icontains = copia[1]) |
+        #         Q(nombre_cancion__icontains = copia[2]) |
+        #         Q(grupo_artista__icontains = copia[2])
+        #         ).order_by('nombre_cancion')
+        if(len(listita)>0):
+            resultado="Resultados de la busqueda para: "+ valor
+        else:
+            resultado="No hay resultados para la busqueda:  "+valor
+        # ctx = Context({'canciones_aleatorias':listita,'text': resultado,'busqueda':valor})
+        # documento = plt.render(ctx)
+        return render(request,"seccion_canciones.html",{'canciones_aleatorias':listita,'text': resultado,'busqueda':valor})
+    else:
+        lista=[]    
+        canciones= Cancion.objects.all()
+        for cancion1 in canciones:
+            lista.append(cancion1)           
+        random.shuffle(lista)
+        ctx = Context({'canciones_aleatorias':lista,'text':'Canciones'})
+        documento = plt.render(ctx)
+    
+        return redirect("/Canciones/")
+
+def cumple(valor):
+    res=True
+    if len(valor)==1 and valor==' ':
+        res=False
+    i=0
+    c=0
+    if '  ' in valor:
+        res=False
+    return res
 
 def cancion_base(request): #Base de las canciones
     doc_externo = open("Acoustic_Live/Templates/Canciones/Cancion_base.html")
@@ -1079,3 +1136,37 @@ def cancion_base(request): #Base de las canciones
     documento = plt.render(ctx)
     
     return HttpResponse(documento)
+
+
+def cancion_ave_cristal(request):
+    return render(request,'Canciones/Ave_de_Cristal.html')
+
+def por_mil_noches(request):
+    return render(request,'Canciones/airbag_por_mil_noches.html')
+
+def muchacha_de_risa(request):
+    return render(request,'Canciones/Muchacha_de_Risa.html')
+
+def videogames(request):
+    return render(request,'Canciones/lana_del_rey_videogames.html')
+
+def tratame_suavemente(request):
+    return render(request,'Canciones/soda_stereo_tratame_suavemente.html')
+    
+def pensamientos(request):
+    return render(request,'Canciones/airbag_pensamientos.html')
+
+def little_things(request):
+    return render(request,'Canciones/1d_little_things.html')
+    
+def ley_y_trampa(request):
+    return render(request,'Canciones/Ley_y_trampa.html')
+
+def sangre_espanola(request):
+    return render(request,'Canciones/Sangre_Espanola.html')
+
+def puerta_jardin(request):
+    return render(request,'Canciones/Puerta_de_Jardin.html')
+
+def besos_guerra(request):
+    return render(request,'Canciones/Besos_en_Guerra.html')

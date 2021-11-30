@@ -1,0 +1,140 @@
+{% extends 'Base.html' %}
+
+ {% block title %}
+     Acoustic Live | Cancion
+ {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+    <link rel="stylesheet" href="{% static '/css/fondo.css' %}">
+    <div class="container contenedor"  style="padding-top: 120px;">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="row">
+                    <div class="flex-container">
+                        <div>
+                            <!--En la parte donde dice "src" va la imagen de la cancion-->
+                            <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                        </div>
+                        <div class="text-light">
+                            <!--En los h remplazan los datos que estan escritos-->
+                            <h2>En la Puerta de un Jardin</h2>
+                            <h5>Amaru</h5>
+                            <h5>1992-"Compañera..."</h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row" style="margin-top: 7%; padding-right: 5%;padding-left: 5%;">
+                    <div class="container letracordes" style="padding-left: 10%; padding-right: 10%;">
+                        <!--Remplazando los lorem ponen lo de la letra, cada p es un parrafo aumenten segun lo que 
+                        necesiten-->
+                        
+                        <pre><div></div><a>Em</a>                    <a>B7</a>
+En la puerta de un jardín
+                            <div></div>                     <a>Em</a>
+Triste me puse a llorar
+                            <div></div> <a>C</a>    <a>G</a>     <a>A</a>       <a>G</a>
+Como si las flores fueran
+                            <div></div> <a>B7</a>               <a>Em</a>
+Remedio para olvidar
+                            <div></div><a>C</a>    <a>G</a>     <a>A</a>       <a>G</a>
+Como si las flores fueran
+                            <div></div> <a>B7</a>               <a>Em</a>
+Remedio para olvidar
+                            
+                            <div></div><a>Em</a>                <a>B7</a>
+Fuiste mi primer amor
+                            <div></div>                     <a>Em</a>
+Tú me enseñaste a querer
+                            <div></div>  <a>C</a>       <a>G</a>   <a>A</a>      <a>G</a>
+No me enseñes a olvidar
+                            <div></div>    <a>B7</a>                <a>Em</a>
+Eso yo no quiero aprender
+                            
+                            <div></div>  <a>C</a>       <a>G</a>   <a>A</a>      <a>G</a>
+No me enseñes a olvidar
+                            <div></div>    <a>B7</a>                <a>Em</a>
+Eso yo no quiero aprender
+                            
+                            
+La lay lara lay
+                            
+                            <div></div>  <a>C</a>       <a>G</a>   <a>A</a>      <a>G</a>
+No me enseñes a olvidar
+                            <div></div>    <a>B7</a>                <a>Em</a>
+Eso yo no quiero aprender
+                            </pre>
+                            
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="row" style="margin-top: 6%;">
+                    <!--dentro de center ponen el video (en el src ponen el link con embed), si es que
+                    remplazan todo el iframe entonces ponen en width="350" y en height="250"-->
+                    <center><iframe width="350" height="250" src="https://www.youtube.com/embed/36fUndsM5aI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+                </div>
+                <div class="row" style="margin-top: 5%;">
+                    <h2 class="text-light">Acordes</h2>
+
+                <!--Esto es una fila con dos acordes, segun lo que necesiten van aumentando 
+                    todo lo que esta adentro-->
+                    <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                       
+                    <!--esto es solo un acorde-->
+                        <div>
+                            <!--en el "src" remplazan con la imagen de la nota-->
+                            <img src="{% static 'acordes_guitarra/Mim(mi menor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">MI menor</h6>
+                        </div>
+                    <!--aqui termina el acorde-->
+
+                    <!--Este es el segundo acorde-->
+                        <div>
+                            <img src="{% static 'acordes_guitarra/SI7(si septima).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">SI séptima</h6>
+                        </div>
+                     <!--aqui termina el segundo acorde-->
+                    </div>
+                 <!--Aqui termina la fila de dos acordes-->
+                 <!--Esto es una fila con dos acordes, segun lo que necesiten van aumentando 
+                    todo lo que esta adentro-->
+                    <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                       
+                        <!--esto es solo un acorde-->
+                            <div>
+                                <!--en el "src" remplazan con la imagen de la nota-->
+                                <img src="{% static 'acordes_guitarra/DO(do mayor).png' %}" style="height: 180px; width: 100px;">
+                                <h6 class="text-light text-center">DO</h6>
+                            </div>
+                        <!--aqui termina el acorde-->
+    
+                        <!--Este es el segundo acorde-->
+                            <div>
+                                <img src="{% static 'acordes_guitarra/SOL(sol mayor).png' %}" style="height: 180px; width: 100px;">
+                                <h6 class="text-light text-center">SOL</h6>
+                            </div>
+                         <!--aqui termina el segundo acorde-->
+                    </div>
+                    <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                       
+                        <!--esto es solo un acorde-->
+                            <div>
+                                <!--en el "src" remplazan con la imagen de la nota-->
+                                <img src="{% static 'acordes_guitarra/LA (la mayor).png' %}" style="height: 180px; width: 100px;">
+                                <h6 class="text-light text-center">LA</h6>
+                            </div>
+                        <!--aqui termina el acorde-->
+    
+                    </div>
+                                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

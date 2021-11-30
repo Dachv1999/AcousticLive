@@ -9,11 +9,14 @@
 <div class="container-fluid">
     <link rel="stylesheet" href="{% static '/css/fondo.css' %}" >
     <div class="container contenedor" style="padding-top: 120px;">
+        <!--<p>¿Que cancion quieres tocar hoy {{request.user.first_name}}? (esto para cuando ya se enlace con canciones)</p>-->
             <div class="row">
-                <div class="input-group mb-3" style="z-index: 1;">
-                    <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="Buscar">
-                    <button class="btn btn-dark" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
-                </div>
+                <form action="/buscar/" method="POST">
+                    <div class="input-group mb-3" style="z-index: 1;">
+                        <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="Buscar" name="Buscar" value = '{{ busqueda }}'>
+                        <button class="btn btn-dark" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
             </div>
         <div class="row">
             <h1 class="text-light" style="margin-bottom: 2%;">G&eacute;neros</h1>
@@ -71,7 +74,7 @@
             {% else %}
                 
 
-                <h1 class="text-light" style="margin-top: 5%;">Canciones</h1>
+                <h1 class="text-light" style="margin-top: 5%;">{{text}}</h1>
                 {%for cancion_aleatoria in canciones_aleatorias%}
                 <div class="miniatura" style="background-color: rgb(49, 51, 53); height: 120px; width: 70%; display: flex; margin-bottom: 10px;">
                     <div class="imagen">
