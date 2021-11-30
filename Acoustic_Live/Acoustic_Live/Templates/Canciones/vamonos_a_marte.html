@@ -1,0 +1,150 @@
+{% extends 'Base.html' %}
+
+ {% block title %}
+     Acoustic Live | Cancion
+ {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+    <link rel="stylesheet" href="{% static '/css/fondo.css' %}">
+    <div class="container contenedor"  style="padding-top: 120px;">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="row">
+                    <div class="flex-container">
+                        <div>
+                            <!--En la parte donde dice "src" va la imagen de la cancion-->
+                            <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                        </div>
+                        <div class="text-light">
+                            <!--En los h remplazan los datos que estan escritos-->
+                            <h2>V&aacute;monos a Marte</h2>
+                            <h5>Kevin Kaarl</h5>
+                            <h5>2019 - Hasta el fin del mundo</h5>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 7%; padding-right: 5%;padding-left: 5%;">
+                    <div class="container letracordes" style="padding-left: 10%; padding-right: 10%;">
+                        <!--Remplazando los lorem ponen lo de la letra, cada p es un parrafo aumenten segun lo que 
+                        necesiten-->
+                        <pre>
+
+<p>[Intro] F y G sin cejilla</br>
+FA  SOL DO  MI
+FA  SOL DO  DO</br>
+FA         SOL           DO   MI
+ Desde el cielo todo es m&aacute;s bonito</br>
+ FA    SOL DO               MI              FA
+ D&eacute;jame llevarte a las estrellas otra vez</br>
+ SOL                DO  MI
+ Como la noche de ayer</br>
+FA   SOL   DO       DO       MI           FA
+ V&aacute;monos a marte donde nadie vaya a buscarte</br>
+      SOL      DO
+ Ni a ti ni a mi
+      MIm          FA         SOL         DO
+ Donde todo es m&aacute;s callado y solitario pa los dos</br>
+MI                  FA   SOL    DO  MI
+ Donde no hay nadie m&aacute;s que t&uacute; y yo</P>
+
+<p>
+FA    SOL DO              MI          FA         SOL         DO
+Dejemos la tierra llena de gente tan mierda que nos quiere aplastar</br>
+    MI      FA          SOL           DO
+V&aacute;monos de viaje a las estrellas y a marte</br>
+    MI              FA             SOL
+A olvidar nuestros problemas tan punzantes</br>
+DO           MI       FA           SOL            DO
+Contemplemos las constelaciones y todas nuestras visiones</br>
+         MI         FA        SOL         DO      MI   FA  SOL
+que nos quitan el vac&iacute;o que sentimos en la tierra</p>
+
+<p>
+ DO             MI          FA    SOL
+ Toma mi mano Y v&aacute;monos de aqu&iacute;</br>
+DO        MI           FA             SOL
+ Ponte tu su&eacute;ter gris y comencemos a huir</br>
+
+Intermedio
+DO     MIm       FA       SOL(x2)
+</P>
+
+<p>DO  MI  FA</br>
+  SOL    DO          MI            FA        SOL      DO
+V&aacute;monos a marte donde nadie vaya a buscarte ni a ti ni a mi</br>
+   MI7              FA         SOL        DO
+Donde todo es m&aacute;s callado y solitario pa los dos</br>
+  MI         FA          SOL     DO  DO
+Donde no hay nadie m&aacute;s que t&uacute; y  yo</p>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="row" style="margin-top: 6%;">
+                    <!--dentro de center ponen el video (en el src ponen el link con embed), si es que
+                    remplazan todo el iframe entonces ponen en width="350" y en height="250"-->
+                    <center><iframe width="350" height="250" src="https://www.youtube.com/embed/er2upfZf_cg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+                </div>
+                <div class="row" style="margin-top: 5%;">
+                    <h2 class="text-light">Acordes</h2>
+
+                <!--Esto es una fila con dos acordes, segun lo que necesiten van aumentando 
+                    todo lo que esta adentro-->
+                    <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                       
+                    <!--esto es solo un acorde-->
+                        <div>
+                            <!--en el "src" remplazan con la imagen de la nota-->
+                            <img src="{% static 'acordes_guitarra/FA(fa mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Fa mayor</h6>
+                        </div>
+                    <!--aqui termina el acorde-->
+
+                    <!--Este es el segundo acorde-->
+                        <div>
+                            <img src="{% static 'acordes_guitarra/SOL(sol mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Sol mayor</h6>
+                        </div>
+                     <!--aqui termina el segundo acorde-->
+                    </div>
+                    <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                       
+                        <!--esto es solo un acorde-->
+                            <div>
+                                <!--en el "src" remplazan con la imagen de la nota-->
+                                <img src="{% static 'acordes_guitarra/DO(do mayor).png' %}" style="height: 180px; width: 100px;">
+                                <h6 class="text-light text-center">Do mayor</h6>
+                            </div>
+                        <!--aqui termina el acorde-->
+    
+                        <!--Este es el segundo acorde-->
+                            <div>
+                                <img src="{% static 'acordes_guitarra/MI(mi mayor).png' %}" style="height: 180px; width: 100px;">
+                                <h6 class="text-light text-center">Mi mayor</h6>
+                            </div>
+                         <!--aqui termina el segundo acorde-->
+                    </div>
+                    <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                       
+                        <!--esto es solo un acorde-->
+                            <div>
+                                <!--en el "src" remplazan con la imagen de la nota-->
+                                <img src="{% static 'acordes_guitarra/Mim(mi menor).png' %}" style="height: 180px; width: 100px;">
+                                <h6 class="text-light text-center">Mi menor</h6>
+                            </div>
+                        <!--aqui termina el acorde-->
+                    </div>
+                                        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
