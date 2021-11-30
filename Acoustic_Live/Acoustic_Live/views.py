@@ -1166,3 +1166,6 @@ def sangre_espanola(request):
 
 def puerta_jardin(request):
     return render(request,'Canciones/Puerta_de_Jardin.html')
+
+def besos_guerra(request):
+    return render(request,'Canciones/Besos_en_Guerra.html')
