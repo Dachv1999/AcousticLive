@@ -1103,8 +1103,9 @@ def buscador(request):
             resultado="Este es el resultado para la busqueda: "+valor
         else:
             resultado="No hay resultados para la busqueda:  "+valor
-        ctx = Context({'canciones_aleatorias':listita,'text': resultado,'busqueda':valor})
-        documento = plt.render(ctx)
+        # ctx = Context({'canciones_aleatorias':listita,'text': resultado,'busqueda':valor})
+        # documento = plt.render(ctx)
+        return render(request,"seccion_canciones.html",{'canciones_aleatorias':listita,'text': resultado,'busqueda':valor})
     else:
         lista=[]    
         canciones= Cancion.objects.all()
@@ -1114,7 +1115,7 @@ def buscador(request):
         ctx = Context({'canciones_aleatorias':lista,'text':'Canciones'})
         documento = plt.render(ctx)
     
-    return HttpResponse(documento)
+        return redirect("/Canciones/")
 
 def cumple(valor):
     res=True
