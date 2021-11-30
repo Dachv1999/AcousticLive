@@ -1173,3 +1173,6 @@ def besos_guerra(request):
 
 def cambiare_mi_tristeza(request):
     return render(request,'Canciones/cambiare_mi_tristeza.html')
+    
+def vamonos_a_marte(request):
+    return render(request,'Canciones/vamonos_a_marte.html')
