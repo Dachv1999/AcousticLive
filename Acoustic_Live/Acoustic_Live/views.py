@@ -1182,3 +1182,9 @@ def quiza(request):
 
 def desde_mi_interior(request):
     return render(request,'Canciones/desde_mi_interior.html')
+
+def vives_en_mi(request):
+    return render(request,'Canciones/vives_en_mi.html')
+
+def cuenta_con_migo(request):
+    return render(request,'Canciones/cuenta_con_migo.html')

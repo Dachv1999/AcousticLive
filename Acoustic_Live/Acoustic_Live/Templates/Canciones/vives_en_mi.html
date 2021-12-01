@@ -1,0 +1,132 @@
+{% extends 'Base.html' %}
+
+ {% block title %}
+     Acoustic Live | Cancion
+ {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+    <link rel="stylesheet" href="{% static '/css/fondo.css' %}">
+    <div class="container contenedor"  style="padding-top: 120px;">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="row">
+                    <div class="flex-container">
+                        <div>
+                            <!--En la parte donde dice "src" va la imagen de la cancion-->
+                            <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                        </div>
+                        <div class="text-light">
+                            <!--En los h remplazan los datos que estan escritos-->
+                            <h2>Vives En Mi</h2>
+                            <h5>Hillsong Young & Freee</h5>
+                            <h5>2013  Donde estas</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 7%; padding-right: 5%;padding-left: 5%;">
+                    <div class="container letracordes" style="padding-left: 10%; padding-right: 10%;">
+                        <!--Remplazando los lorem ponen lo de la letra, cada p es un parrafo aumenten segun lo que 
+                        necesiten-->
+
+<pre>
+INTRO, BASE, INTERMEDIOS,FINAL: C-D-Bm-E
+VERSO 1:
+C                   D
+Al despertar te cantaré
+Bm                  Em
+Mis ojos en Ti fijaré
+C                  D
+Al ritmo de tu corazón
+Bm             Em
+Caminaré hacia tu amor
+VERSO 2:
+C                       D
+Tu fuego en mi interior ardiendo está
+Bm                  Em
+Salvaje amor que brillará
+C                   D
+Esta pasión todos verán
+Bm                Em
+Tu gloria resplandecerá
+
+PRE-CORO:
+C                     D
+Tú nunca me dejarás, tu amor me sostendrá
+Bm                   Em
+Junto a mí estarás y por siempre brillarás
+
+CORO:
+C                D
+Tú vives en mí vives en mí
+Bm               Em
+Soy tuyo para siempre
+PUENTE:
+   C             D           
+///Por siempre, por siempre,
+   Bm           Em 
+   por siempre en tu amor///
+   C             D           
+   Por siempre, por siempre, 
+   Bm           Em
+   por siempre yo sé que
+    
+</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="row" style="margin-top: 6%;">
+                    <!--dentro de center ponen el video (en el src ponen el link con embed), si es que
+                    remplazan todo el iframe entonces ponen en width="350" y en height="250"-->
+                    <center><iframe width="350" height="250" src="https://www.youtube.com/embed/MthbdDqF_PM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+                </div>
+                <!-- https://www.youtube.com/embed/2RUv_uv3C4M -->
+                <div class="row" style="margin-top: 5%;">
+                    <h2 class="text-light">Acordes</h2>
+
+                <!--Esto es una fila con dos acordes, segun lo que necesiten van aumentando 
+                    todo lo que esta adentro-->
+                    <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                    
+                        
+                        
+                        <div>
+                            <!--en el "src" remplazan con la imagen de la nota-->
+                            <img src="{% static 'acordes_guitarra/DO(do mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Do mayor</h6>
+                        </div>
+                        <div>
+                            <img src="{% static 'acordes_guitarra/RE(re mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Re mayor</h6>
+                            <br>
+                        </div>
+                        
+
+                    </div>
+                 <!--Aqui termina la fila de dos acordes-->
+
+                 <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                        <div>
+                            <img src="{% static 'acordes_guitarra/SIm(si menor).png' %}"style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Si menor</h6>
+                        </div>
+                   
+                        <div>
+                            <img src="{% static 'acordes_guitarra/Mim(mi menor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Mi menor</h6>
+                        </div>
+
+                    </div>
+                 <!--Aqui termina la fila de dos acordes-->
+
+                 
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
