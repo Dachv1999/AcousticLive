@@ -1176,3 +1176,9 @@ def cambiare_mi_tristeza(request):
     
 def vamonos_a_marte(request):
     return render(request,'Canciones/vamonos_a_marte.html')
+
+def quiza(request):
+    return render(request,'Canciones/quiza.html')
+
+def desde_mi_interior(request):
+    return render(request,'Canciones/desde_mi_interior.html')

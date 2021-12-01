@@ -1,0 +1,181 @@
+{% extends 'Base.html' %}
+
+ {% block title %}
+     Acoustic Live | Cancion
+ {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+    <link rel="stylesheet" href="{% static '/css/fondo.css' %}">
+    <div class="container contenedor"  style="padding-top: 120px;">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="row">
+                    <div class="flex-container">
+                        <div>
+                            <!--En la parte donde dice "src" va la imagen de la cancion-->
+                            <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                        </div>
+                        <div class="text-light">
+                            <!--En los h remplazan los datos que estan escritos-->
+                            <h2>Desde Mi Interior</h2>
+                            <h5>Hillsong UNITED</h5>
+                            <h5>2007 Con Todo</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 7%; padding-right: 5%;padding-left: 5%;">
+                    <div class="container letracordes" style="padding-left: 10%; padding-right: 10%;">
+                        <!--Remplazando los lorem ponen lo de la letra, cada p es un parrafo aumenten segun lo que 
+                        necesiten-->
+
+<pre>
+
+Intro: F C G  (6X)
+fa do sol Lam Rem
+
+Verso I
+             F             C          G
+Mil veces te falle, Mas tu fuiste fiel
+          F               C         G
+Tu gracia me levanto, Me basta tu amor
+
+Coro:
+         Am       F               C    G
+Mi Dios eterno tu luz por siempre brillara
+       Am       F        C     G
+Y tu gloria incomparable sin final.
+
+Intro:F C G(x2)
+
+Verso II
+          F           C     G
+Señor tu voluntad permanecera,
+                F         C      G
+En ti me quiero perder en adoración
+
+Coro:
+        Am        F                C    G
+Mi Dios eterno tu luz por siempre brillara
+      Am       F          C     G
+Y tu gloria incomparable sin final.
+
+Puente:
+  F                  C                Am
+Yeeee...  De mi Corazon te doy el control
+             G                F
+Consume todo mi interior, Dios,
+               Am                G
+Tu justicia y amor me abrazan Señor
+               Dm
+Te amo desde mi interior
+
+Intro:F C G (x2)(Arranca bateria)
+
+Verso II
+
+           F
+Señor tu voluntad ...(Repite el segundo verso)
+
+
+Puente:
+
+F
+  De mi corazon...
+
+Coro: (La voz masculina sube una octava)
+
+      Am        F                C    G
+Dios eterno tu luz por siempre brillara
+      Am       F          C     G
+Y tu gloria incomparable sin final
+       C      F         G      Am
+El clamor mi ser es contigo estar
+       F       G            F    G
+Desde mi interior mi alma clamara
+
+(Solo)
+F  C  Am  G  F  Am  G  Dm
+
+Puente:
+ F                   C
+   De mi Corazon te ..
+
+Coro (2x)
+      Am        F             C    G
+Dios eterno tu luz por siempre brillara
+      Am       F          C      G
+Y tu gloria incomparable sin final
+       C        F       G      Am
+El clamor mi ser es contigo estar
+       F        G         F     G
+Desde mi interior mi alma clamara
+
+final
+       F        G          F    G    F
+Desde mi interior mi alma clamaraaaa
+
+</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="row" style="margin-top: 6%;">
+                    <!--dentro de center ponen el video (en el src ponen el link con embed), si es que
+                    remplazan todo el iframe entonces ponen en width="350" y en height="250"-->
+                    <center><iframe width="350" height="250" src="https://www.youtube.com/embed/lPyFRnVVjB8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+                </div>
+                <div class="row" style="margin-top: 5%;">
+                    <h2 class="text-light">Acordes</h2>
+
+                <!--Esto es una fila con dos acordes, segun lo que necesiten van aumentando 
+                    todo lo que esta adentro-->
+                    <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                    
+                        <div>
+                            <img src="{% static 'acordes_guitarra/FA(fa mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Fa mayor</h6>
+                            <br>
+                        </div>
+                        
+                        <div>
+                            <!--en el "src" remplazan con la imagen de la nota-->
+                            <img src="{% static 'acordes_guitarra/DO(do mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Do mayor</h6>
+                        </div>
+                        
+
+                    </div>
+                 <!--Aqui termina la fila de dos acordes-->
+
+                 <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                        <div>
+                            <img src="{% static 'acordes_guitarra/SOL(sol mayor).png' %}"style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Sol mayor</h6>
+                        </div>
+                   
+                        <div>
+                            <img src="{% static 'acordes_guitarra/LAm(la menor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">La menor</h6>
+                        </div>
+
+                    </div>
+                 <!--Aqui termina la fila de dos acordes-->
+
+                 <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                    <div>
+                        <img src="{% static 'acordes_guitarra/Rem(re menor).png' %}"style="height: 180px; width: 100px;">
+                        <h6 class="text-light text-center">Re menor</h6>
+                    </div>
+
+                </div>
+             <!--Aqui termina la fila de dos acordes-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
