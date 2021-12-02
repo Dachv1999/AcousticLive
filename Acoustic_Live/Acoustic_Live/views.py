@@ -1132,7 +1132,7 @@ def cancion_base(request,id_cancion): #Base de las canciones
     doc_externo = open("Acoustic_Live/Templates/Canciones/Cancion_base.html")
     plt = Template(doc_externo.read())
     doc_externo.close()
-    if id_cancion>41 and id_cancion<2:
+    if id_cancion>50: #and id_cancion<2:
         return render(request,'p.html')
     else:
         cancion= Cancion.objects.get(id=id_cancion)
