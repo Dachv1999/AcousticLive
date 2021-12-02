@@ -1029,25 +1029,26 @@ def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
 #@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
 def genero(request, num_genero):
     
-    texto = " "
+    texto =""
     if num_genero == 1:
         texto = 'Todas las canciones'
         canciones = Cancion.objects.all().order_by('nombre_cancion')
     elif num_genero == 2:
         texto = 'Género "Rock"'
-        canciones = Cancion.objects.filter(genero_musica='rock')
+        canciones = Cancion.objects.filter(genero_musica='Rock')
     elif num_genero == 3:
         texto = 'Género "Pop"'
-        canciones = Cancion.objects.filter(genero_musica='pop')
+        canciones = Cancion.objects.filter(genero_musica='Pop')
     elif num_genero == 4:
         texto = 'Género "Baladas"'
-        canciones = Cancion.objects.filter(genero_musica='balada')
+        canciones = Cancion.objects.filter(genero_musica='Balada')
     elif num_genero == 5:
         texto = 'Género "Folklóricas"'
-        canciones = Cancion.objects.filter(genero_musica='folklorica')
+        canciones = Cancion.objects.filter(genero_musica='Folklorica')
     elif num_genero == 6:
         texto = 'Género "Reggae"'
-        canciones = Cancion.objects.filter(genero_musica='reggae')
+        canciones = Cancion.objects.filter(genero_musica='Reggae')
+
     contexto = {
         'texto' : texto,
         'canciones':canciones,
@@ -1127,13 +1128,36 @@ def cumple(valor):
         res=False
     return res
 
-def cancion_base(request): #Base de las canciones
-    doc_externo = open("Acoustic_Live/Templates/Canciones/Cancion_base.html")
+# def cancion_base(request): #Base de las canciones
+#     doc_externo = open("Acoustic_Live/Templates/Canciones/Cancion_base.html")
+def cancion_base(request,id_cancion): #Base de las canciones
+    doc_externo = open("Acoustic_Live/Templates/Cancion_base.html")
     plt = Template(doc_externo.read())
     doc_externo.close()
-
-    ctx = Context()
+    if id_cancion>6:
+        return render(request,'p.html')
+    else:
+        cancion= Cancion.objects.get(id=id_cancion)
+        i=cancion.acordes_imagenes
+        imagenes =i.split() 
+        print(imagenes)
+        n=cancion.acordes_nombres
+        nombre =n.split()     
+        
+        acordes_verdaderas=[] 
+        i=0
+        while i< len(imagenes):
+            acordes_verdaderas.append(Fotos(nombre[i],imagenes[i]))
+            i +=1
+        contexto = {
+            'cancion':cancion,
+            'acorde_normal':acordes_verdaderas,
+        }
+        
+        ctx = Context(contexto)
+    
     documento = plt.render(ctx)
+    return HttpResponse(documento)
     
     return HttpResponse(documento)
 
@@ -1188,3 +1212,9 @@ def vives_en_mi(request):
 
 def cuenta_con_migo(request):
     return render(request,'Canciones/cuenta_con_migo.html')
+    
+
+class Fotos(object):
+    def __init__(self, nn,ii):
+        self.i ='static/acordes_guitarra/'+ii
+        self.n =nn
