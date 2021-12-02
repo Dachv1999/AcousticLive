@@ -1124,14 +1124,12 @@ def cancion_base(request,id_cancion): #Base de las canciones
         cancion= Cancion.objects.get(id=id_cancion)
         i=cancion.acordes_imagenes
         imagenes =i.split() 
-        
-        n=cancion.acordes_nombres
-        nombre =n.split()     
+        nombre=' '   
         
         acordes_verdaderas=[] 
         i=0
         while i< len(imagenes):
-            acordes_verdaderas.append(Fotos(nombre[i],imagenes[i]))
+            acordes_verdaderas.append(Fotos(nombre,imagenes[i]))
             i +=1
         contexto = {
             'cancion':cancion,

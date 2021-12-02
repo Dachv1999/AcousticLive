@@ -20,7 +20,6 @@ class Cancion(models.Model):
     link_video= models.CharField(max_length=60)
     acordes_letra= models.TextField()
     acordes_imagenes=models.TextField()
-    acordes_nombres= models.TextField()
     imagen_cancion =models.ImageField(upload_to='static/Imagenes/imagenes_canciones', default='', blank=True)
     def __str__(self):
         return self.nombre_cancion
