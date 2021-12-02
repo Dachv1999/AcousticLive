@@ -69,17 +69,17 @@
 
                     {% ifequal 1 leccion.orden %}
                     
-                      <center><a href="/Bajar/{{id}}/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" title="Bajar" style="margin-right: 2%; margin-top: 2%;"><i class="fas fa-chevron-down"></i></a></center>
+                      <center><a href="/Bajar/{{id}}/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" title="Mover abajo" style="margin-right: 2%; margin-top: 2%;"><i class="fas fa-chevron-down"></i></a></center>
                     
                     {% else %}
                       {% ifequal cantidad leccion.orden %}
                     
-                      <center><a href="/Subir/{{id}}/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" title="Subir" style="margin-right: 2%; margin-left: 2%;margin-top: 2%;"><i class="fas fa-chevron-up"></i></a></center>
+                      <center><a href="/Subir/{{id}}/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" title="Mover arriba" style="margin-right: 2%; margin-left: 2%;margin-top: 2%;"><i class="fas fa-chevron-up"></i></a></center>
 
                       {% else %}
 
-                        <center><a href="/Subir/{{id}}/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" title="Subir" style="margin-right: 2%; margin-left: 2%;margin-top: 2%;"><i class="fas fa-chevron-up"></i></a>
-                        <a href="/Bajar/{{id}}/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" title="Bajar" style="margin-right: 2%; margin-top: 2%;"><i class="fas fa-chevron-down"></i></a></center>
+                        <center><a href="/Subir/{{id}}/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" title="Mover arriba" style="margin-right: 2%; margin-left: 2%;margin-top: 2%;"><i class="fas fa-chevron-up"></i></a>
+                        <a href="/Bajar/{{id}}/{{ leccion.orden }}/{{ leccion.nivel }}" class="btn btn-secondary" title="Mover abajo" style="margin-right: 2%; margin-top: 2%;"><i class="fas fa-chevron-down"></i></a></center>
                       
                       {% endifequal %}
                     {% endifequal %}
