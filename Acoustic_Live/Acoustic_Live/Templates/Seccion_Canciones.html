@@ -57,11 +57,38 @@
                 <!--<h4 class="text-center text-light">Reggae</h4>-->
             </div>
         </div>
+        
             {% if texto %}
                 <h1 class="text-light" style="margin-top: 5%;">{{texto}}</h1>
+              
                 {%for cancion in canciones%}
 
-                <div class="miniatura" style="background-color: rgb(49, 51, 53); height: 100%; width: 70%; display: flex; margin-bottom: 10px;">
+                <div class="nose">
+                    <div class="imagenCancion">
+                        <img src="/../{{cancion.imagen_cancion }}" alt="" style="height: 100%;width: 100%; margin-right: 0px;">
+                    </div>
+                    <div class="curso">
+                        
+                        <div id="textoCancion" >
+                            <div id="n">
+                                <a href="/Cancion_base/{{cancion.id}}" style="text-decoration: none; color: #fff;"><h4>{{cancion.nombre_cancion}}</h4></a>
+                                <p style="text-align-last: left;">{{cancion.grupo_artista}}</p>
+                            </div>
+                            <div class="nn">
+                                <div>
+                                    <p>genero pipipipip</p>
+                                </div>
+                                <div class="difi">
+                                    <p>dificutlad dificil</p>
+                                </div>
+                            </div>
+                                                     
+                                
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="miniatura" style="background-color: rgb(49, 51, 53); height: 100%; width: 70%; display: flex; margin-bottom: 10px;">
                     <div class="imagen">
                         <img src="/../{{cancion.imagen_cancion }}" alt="" style="height: 120px;width: 120px; margin-right: 15px;">
                     </div>
@@ -69,19 +96,19 @@
                         <a href="" style="text-decoration: none; color: #fff;"><h4>{{cancion.nombre_cancion}}</h4></a>
                         <p style="text-align-last: left;">{{cancion.grupo_artista}}</p>
                     </div>
-                </div>
+                </div> -->
                 {%endfor%}
             {% else %}
                 
 
                 <h1 class="text-light" style="margin-top: 5%;">{{text}}</h1>
                 {%for cancion_aleatoria in canciones_aleatorias%}
-                <div class="miniatura" style="background-color: rgb(49, 51, 53); height: 100%; width: 70%; display: flex; margin-bottom: 10px;">
+                <div class="miniatura" style="background-color: rgb(49, 51, 53); height: 120px; width: 70%; display: flex; margin-bottom: 10px;">
                     <div class="imagen">
-                        <img src="/../{{cancion_aleatoria.imagen_cancion }}" alt="" style="height: 120px;width: 120px; margin-right: 15px;">
+                        <a href="#"><img src="/../{{cancion_aleatoria.imagen_cancion }}" alt="" style="height: 120px; width: 120px; margin-right: 15px;"></a>
                     </div>
                     <div class="texto" style="padding-top: 3%">
-                        <a href="" style="text-decoration: none; color: #fff;"><h4>{{cancion_aleatoria.nombre_cancion}}</h4></a>
+                        <a href="{{cancion_aleatoria.redireccion_cancion}}" style="text-decoration: none; color: #fff;"><h4>{{cancion_aleatoria.nombre_cancion}}</h4></a>
                         <p style="text-align-last: left;">{{cancion_aleatoria.grupo_artista}}</p>
                     </div>
                 </div>

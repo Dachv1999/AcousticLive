@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Acoustic_Live.views import niveles, salir1,nivel_medio, nivel_avanzado,formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA, login1,Formulario_Registro,inicio,inicio_profesores,Formulario_Registro, guardar_video_vistoBD, eliminar_video_vistoBD,formulario_editar_video,vista_editar_leccion,lista_principiante, lista_medio, lista_avanzado, crud_profesores, mover_video_arriba, mover_video_abajo, eliminar_video_profesor,Vista_Universal_Para_Profesor, recuperacion_contraseña, seccion_canciones, genero, cancion_base, cancion_ave_cristal,por_mil_noches,videogames,tratame_suavemente, ley_y_trampa,muchacha_de_risa,sangre_espanola,puerta_jardin,pensamientos,little_things,buscador,besos_guerra
+from Acoustic_Live.views import niveles, salir1,nivel_medio, nivel_avanzado,\
+    formulario_nuevoVideo, profesoresNP, profesoresNM, profesoresNA, login1,\
+    Formulario_Registro,inicio,inicio_profesores,Formulario_Registro,\
+    guardar_video_vistoBD, eliminar_video_vistoBD,formulario_editar_video,\
+    vista_editar_leccion,lista_principiante, lista_medio, lista_avanzado, \
+    crud_profesores, mover_video_arriba, mover_video_abajo, eliminar_video_profesor,Vista_Universal_Para_Profesor,\
+    recuperacion_contraseña, seccion_canciones, genero, cancion_base,buscador
 
 
 
@@ -40,7 +46,7 @@ urlpatterns = [
     path('Inicio_Profesores/', inicio_profesores),
     path('Canciones/', seccion_canciones),
     path('buscar/', buscador),
-    path('Cancion_base/', cancion_base),
+    path('Cancion_base/<int:id_cancion>', cancion_base),
     path('guardar_db/', guardar_video_vistoBD, name='guardar_db'),
     path('eliminar_db/', eliminar_video_vistoBD, name='eliminar_db'),
     path('Subir/<int:id_profesor>/<int:orden_video>/<int:num_nivel>', mover_video_arriba),
@@ -55,16 +61,23 @@ urlpatterns = [
     
     
     #Canciones
-    path('Ave_Cristal/', cancion_ave_cristal),
-    path('airbag_por_mil_noches/',por_mil_noches),
-    path('videogames/',videogames),
-    path('airbag_pensamientos/',pensamientos),
-    path('little_things/', little_things),
-    path('tratame_suavemente/',tratame_suavemente),
-    path('Ley_Y_Trampa/', ley_y_trampa),
-    path('Muchacha_de_Risa/', muchacha_de_risa),
-    path('Sangre_Espanola/', sangre_espanola),
-    path('Puerta_Jardin/', puerta_jardin),
-    path('Besos_en_Guerra/', besos_guerra),
+    # path('Ave_Cristal/', cancion_ave_cristal),
+    # path('airbag_por_mil_noches/',por_mil_noches),
+    # path('videogames/',videogames),
+    # path('airbag_pensamientos/',pensamientos),
+    # path('little_things/', little_things),
+    # path('tratame_suavemente/',tratame_suavemente),
+    # path('Ley_Y_Trampa/', ley_y_trampa),
+    # path('Muchacha_de_Risa/', muchacha_de_risa),
+    # path('Sangre_Espanola/', sangre_espanola),
+    # path('Puerta_Jardin/', puerta_jardin),
+    # path('Besos_en_Guerra/', besos_guerra),
+    # path('cambiare_mi_tristeza/', cambiare_mi_tristeza),
+    # path('Vamonos_A_Marte/', vamonos_a_marte),
+    # path('quizá/', quiza),
+    # path('desde_mi_interior/', desde_mi_interior),
+    # path('vives_en_mi/', vives_en_mi),
+    # path('cuenta_con_migo/', cuenta_con_migo),
+    
     # path('Envio/', envio_formulario, name="Envio"),
 ]

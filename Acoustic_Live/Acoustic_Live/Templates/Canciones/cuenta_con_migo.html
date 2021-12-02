@@ -1,0 +1,147 @@
+{% extends 'Base.html' %}
+
+ {% block title %}
+     Acoustic Live | Cancion
+ {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+    <link rel="stylesheet" href="{% static '/css/fondo.css' %}">
+    <div class="container contenedor"  style="padding-top: 120px;">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="row">
+                    <div class="flex-container">
+                        <div>
+                            <!--En la parte donde dice "src" va la imagen de la cancion-->
+                            <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                        </div>
+                        <div class="text-light">
+                            <!--En los h remplazan los datos que estan escritos-->
+                            <h2>Cuenta Con Migo</h2>
+                            <h5>Kike Pavón</h5>
+                            <h5>2013 Cielo Sobre Tierra </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 7%; padding-right: 5%;padding-left: 5%;">
+                    <div class="container letracordes" style="padding-left: 10%; padding-right: 10%;">
+                        <!--Remplazando los lorem ponen lo de la letra, cada p es un parrafo aumenten segun lo que 
+                        necesiten-->
+
+<pre>
+VERSO 1:
+    MI
+A través de las generaciones
+
+       DO#m
+Viviendo diferentes situaciones
+         LA
+Tus hijos han llevado tu palabra
+           DO#m       SI
+A pueblos ciudades y naciones
+
+
+VERSO 2:
+       MI
+Algunos han dado su propia vida
+      DO#m
+Otros viven lejos de su familia
+           LA
+También hay los que lo han dejado todo
+       DO#m            SI
+Para que sepan que tú, Jesús
+              LA
+Eres la alternativa
+
+(Aqui dejan sonar los acordes sin palm mute)
+
+
+PRECORO:
+    DO#m            LA        MI        SI
+Yo no sé si mi situación será difícil o más fácil
+     DO#m            LA
+Pero Jesús yo te digo hoy
+
+
+(CORO)
+        DO#m      LA              MI            SI
+Cuenta conmigo,          para alcanzar esta generación
+        DO#m      LA            MI              SI
+Cuenta conmigo,          me pertenece esta generación
+
+
+PUENTE:
+e|-------------------------------------------------|
+B|-------------------------------------------------|
+G|--6-6-6--2--4-4-4--6-8-8/10\6-6-6--6-4-2--9-9-9--|
+D|--6-6-6--2--4-4-4--6-8-8/10\6-6-6--6-4-2--9-9-9--|  X4
+A|--4-4-4--0--2-2-2--4-6-6/8-\4-4-4--4-2-0--7-7-7--|
+E|-------------------------------------------------|
+
+(CORO)
+        DO#m      LA              MI            SI
+Cuenta conmigo,          para alcanzar esta generación
+        DO#m      LA            MI              SI
+Cuenta conmigo,          me pertenece esta generación...
+
+
+</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="row" style="margin-top: 6%;">
+                    <!--dentro de center ponen el video (en el src ponen el link con embed), si es que
+                    remplazan todo el iframe entonces ponen en width="350" y en height="250"-->
+                    <center><iframe width="350" height="250" src="https://www.youtube.com/embed/RPUGodgZHOE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+                </div>
+                <!-- https://www.youtube.com/embed/2RUv_uv3C4M -->
+                <div class="row" style="margin-top: 5%;">
+                    <h2 class="text-light">Acordes</h2>
+
+                <!--Esto es una fila con dos acordes, segun lo que necesiten van aumentando 
+                    todo lo que esta adentro-->
+                    <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                    
+                        
+                        
+                        <div>
+                            <!--en el "src" remplazan con la imagen de la nota-->
+                            <img src="{% static 'acordes_guitarra/MI(mi mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Do mayor</h6>
+                        </div>
+                        <div>
+                            <img src="{% static 'acordes_guitarra/DO#m(do sostenido menor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Do sostenido<br>menor</h6>
+                            <br>
+                        </div>
+                        
+
+                    </div>
+                 <!--Aqui termina la fila de dos acordes-->
+
+                 <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                        <div>
+                            <img src="{% static 'acordes_guitarra/LA (la mayor).png' %}"style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">La mayor</h6>
+                        </div>
+                   
+                        <div>
+                            <img src="{% static 'acordes_guitarra/Si(si mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Si mayor</h6>
+                        </div>
+
+                    </div>
+                 <!--Aqui termina la fila de dos acordes-->
+
+                 
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

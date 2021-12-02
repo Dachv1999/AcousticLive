@@ -1,0 +1,136 @@
+{% extends 'Base.html' %}
+
+ {% block title %}
+     Acoustic Live | Cancion
+ {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+    <link rel="stylesheet" href="{% static '/css/fondo.css' %}">
+    <div class="container contenedor"  style="padding-top: 120px;">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="row">
+                    <div class="flex-container">
+                        <div>
+                            <!--En la parte donde dice "src" va la imagen de la cancion-->
+                            <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                        </div>
+                        <div class="text-light">
+                            <!--En los h remplazan los datos que estan escritos-->
+                            <h2>Cambiare Mi Tristeza</h2>
+                            <h5>Vertical</h5>
+                            <h5>2002 Alabanzas Contemporaneas</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 7%; padding-right: 5%;padding-left: 5%;">
+                    <div class="container letracordes" style="padding-left: 10%; padding-right: 10%;">
+                        <!--Remplazando los lorem ponen lo de la letra, cada p es un parrafo aumenten segun lo que 
+                        necesiten-->
+
+<pre>
+
+(INTRO)
+LA   -   RE   -   FA#m -   MI    
+LA   -   RE   -   FA#m -   MI   
+<!-- E--------------------------|----------------------------|
+B--------------------------|----------------------------|
+G----------14--14--14--13--|----------14----14--14--16--|
+D--11--11--12--16--16--14--|--11--11--12----16--16--18--|
+A--12--12------------------|--12--12--------------------|
+E--------------------------|----------------------------| -->
+(CORO)
+LA      RE      FA#m  MI
+Cambiare mi tristeza, 
+LA      RE      FA#m  MI
+Cambiare mi vergüenza
+LA     RE       FA#m            MI   A-D-FA#m-E   
+Los entregare,  por el gozo de Dios
+LA      RE   FA#m E    A   D   F#m MI
+Cambiare mi dolor   y mi enfermedad
+LA      RE      FA#m  MI LA RE  F#m  MI
+Los entregare por el gozo de Dios
+LA      RE      FA#m       MI      
+//SI Señor   SI, SI Señor//
+
+(Estrofa)
+LA             RE            FA#m       MI
+Estando atribulado, pero nunca derrotado
+LA      RE      FA#m  MI
+Y perseguido este
+LA                     RE      
+Maldiciones no me afectan 
+        FA#m        MI
+Pues yo se a quien voy 
+       LA           RE
+En su gozo fuerte soy
+
+MI
+Aunque triste en al noche yo este
+       SOL                      LA
+El gozo viene en la mañana
+
+Coro:
+LA      RE      FA#m  MI
+Cambiare mi tristeza...
+
+
+</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="row" style="margin-top: 6%;">
+                    <!--dentro de center ponen el video (en el src ponen el link con embed), si es que
+                    remplazan todo el iframe entonces ponen en width="350" y en height="250"-->
+                    <center><iframe width="350" height="250" src="https://www.youtube.com/embed/qeIiwwBvuEM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+                </div>
+                <div class="row" style="margin-top: 5%;">
+                    <h2 class="text-light">Acordes</h2>
+
+                <!--Esto es una fila con dos acordes, segun lo que necesiten van aumentando 
+                    todo lo que esta adentro-->
+                    <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                    
+                    
+                        <div>
+                            <img src="{% static 'acordes_guitarra/LA (la mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">La mayor</h6>
+                        </div>
+                     
+                        <div>
+                            <img src="{% static 'acordes_guitarra/RE(re mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Re mayor</h6>
+                        </div>
+    
+                        
+                   
+
+                    
+                    </div>
+                 <!--Aqui termina la fila de dos acordes-->
+
+                 <div class="flex-container" style="justify-content: center; margin-top: 7%;">
+                        <div>
+                            <img src="{% static 'acordes_guitarra/FA#m(fa sostenido menor).png' %}"style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Fa sostenido</br>menor</h6>
+                        </div>
+                   
+                        <div>
+                            <!--en el "src" remplazan con la imagen de la nota-->
+                            <img src="{% static 'acordes_guitarra/MI(mi mayor).png' %}" style="height: 180px; width: 100px;">
+                            <h6 class="text-light text-center">Mi mayor</h6>
+                        </div>
+
+                    </div>
+                 <!--Aqui termina la fila de dos acordes-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

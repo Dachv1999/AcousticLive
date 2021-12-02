@@ -1029,25 +1029,26 @@ def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
 #@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
 def genero(request, num_genero):
     
-    texto = " "
+    texto =""
     if num_genero == 1:
         texto = 'Todas las canciones'
         canciones = Cancion.objects.all().order_by('nombre_cancion')
     elif num_genero == 2:
         texto = 'Género "Rock"'
-        canciones = Cancion.objects.filter(genero_musica='rock')
+        canciones = Cancion.objects.filter(genero_musica='Rock')
     elif num_genero == 3:
         texto = 'Género "Pop"'
-        canciones = Cancion.objects.filter(genero_musica='pop')
+        canciones = Cancion.objects.filter(genero_musica='Pop')
     elif num_genero == 4:
         texto = 'Género "Baladas"'
-        canciones = Cancion.objects.filter(genero_musica='balada')
+        canciones = Cancion.objects.filter(genero_musica='Balada')
     elif num_genero == 5:
         texto = 'Género "Folklóricas"'
-        canciones = Cancion.objects.filter(genero_musica='folklorica')
+        canciones = Cancion.objects.filter(genero_musica='Folklorica')
     elif num_genero == 6:
         texto = 'Género "Reggae"'
-        canciones = Cancion.objects.filter(genero_musica='reggae')
+        canciones = Cancion.objects.filter(genero_musica='Reggae')
+
     contexto = {
         'texto' : texto,
         'canciones':canciones,
@@ -1102,9 +1103,10 @@ def buscador(request):
         if(len(listita)>0):
             resultado="Resultados de la busqueda para: "+ valor
         else:
-            resultado="No hay resultados para: " + valor
-        ctx = Context({'canciones_aleatorias':listita,'text': resultado,'busqueda':valor})
-        documento = plt.render(ctx)
+            resultado="No hay resultados para la busqueda:  "+valor
+        # ctx = Context({'canciones_aleatorias':listita,'text': resultado,'busqueda':valor})
+        # documento = plt.render(ctx)
+        return render(request,"seccion_canciones.html",{'canciones_aleatorias':listita,'text': resultado,'busqueda':valor})
     else:
         lista=[]    
         canciones= Cancion.objects.all()
@@ -1114,7 +1116,7 @@ def buscador(request):
         ctx = Context({'canciones_aleatorias':lista,'text':'Canciones'})
         documento = plt.render(ctx)
     
-    return HttpResponse(documento)
+        return redirect("/Canciones/")
 
 def cumple(valor):
     res=True
@@ -1126,46 +1128,34 @@ def cumple(valor):
         res=False
     return res
 
-def cancion_base(request): #Base de las canciones
+def cancion_base(request,id_cancion): #Base de las canciones
     doc_externo = open("Acoustic_Live/Templates/Canciones/Cancion_base.html")
     plt = Template(doc_externo.read())
     doc_externo.close()
-
-    ctx = Context()
-    documento = plt.render(ctx)
+    if id_cancion>6:
+        return render(request,'p.html')
+    else:
+        cancion= Cancion.objects.get(id=id_cancion)
+        i=cancion.acordes_imagenes
+        imagenes =i.split() 
+        nombre=' '   
+        
+        acordes_verdaderas=[] 
+        i=0
+        while i< len(imagenes):
+            acordes_verdaderas.append(Fotos(nombre,imagenes[i]))
+            i +=1
+        contexto = {
+            'cancion':cancion,
+            'acorde_normal':acordes_verdaderas,
+        }
+        
+        ctx = Context(contexto)
     
+    documento = plt.render(ctx)
     return HttpResponse(documento)
 
-
-def cancion_ave_cristal(request):
-    return render(request,'Canciones/Ave_de_Cristal.html')
-
-def por_mil_noches(request):
-    return render(request,'Canciones/airbag_por_mil_noches.html')
-
-def muchacha_de_risa(request):
-    return render(request,'Canciones/Muchacha_de_Risa.html')
-
-def videogames(request):
-    return render(request,'Canciones/lana_del_rey_videogames.html')
-
-def tratame_suavemente(request):
-    return render(request,'Canciones/soda_stereo_tratame_suavemente.html')
-    
-def pensamientos(request):
-    return render(request,'Canciones/airbag_pensamientos.html')
-
-def little_things(request):
-    return render(request,'Canciones/1d_little_things.html')
-    
-def ley_y_trampa(request):
-    return render(request,'Canciones/Ley_y_trampa.html')
-
-def sangre_espanola(request):
-    return render(request,'Canciones/Sangre_Espanola.html')
-
-def puerta_jardin(request):
-    return render(request,'Canciones/Puerta_de_Jardin.html')
-
-def besos_guerra(request):
-    return render(request,'Canciones/Besos_en_Guerra.html')
+class Fotos(object):
+    def __init__(self, nn,ii):
+        self.i ='static/acordes_guitarra/'+ii
+        self.n =nn
