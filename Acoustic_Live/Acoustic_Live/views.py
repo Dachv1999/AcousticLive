@@ -1082,7 +1082,7 @@ def cancion_base(request,id_cancion): #Base de las canciones
         cancion= Cancion.objects.get(id=id_cancion)
         i=cancion.acordes_imagenes
         imagenes =i.split() 
-        print(imagenes)
+        
         n=cancion.acordes_nombres
         nombre =n.split()     
         
