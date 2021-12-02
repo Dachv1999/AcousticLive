@@ -16,60 +16,53 @@
                     <div class="flex-container">
                         <div>
                             <!--En la parte donde dice "src" va la imagen de la cancion-->
-                            <Center><input type="image" name="1" src="{% static 'Imagenes/llamita_icon.ico' %}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
+                            <Center><input type="image" name="1" src="/../{{cancion.imagen_cancion }}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
                         </div>
                         <div class="text-light">
                             <!--En los h remplazan los datos que estan escritos-->
-                            <h2>Nombre de la cancion</h2>
-                            <h5>Artista o grupo</h5>
-                            <h5>Fecha-Album</h5>
+                            <h2>{{cancion.nombre_cancion}}</h2>
+                            <h5>{{cancion.grupo_artista}}</h5>
+                            <h5>{{cancion.fecha_album}}</h5>
                         </div>
-                    </div>
+
+                    </div>              
                 </div>
                 <div class="row" style="margin-top: 7%; padding-right: 5%;padding-left: 5%;">
                     <div class="container letracordes" style="padding-left: 10%; padding-right: 10%;">
                         <!--Remplazando los lorem ponen lo de la letra, cada p es un parrafo aumenten segun lo que 
                         necesiten-->
-                        <p class="text-light">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed ducimus quis culpa dicta expedita consectetur quasi eum quidem nemo odio deserunt corrupti aliquid aut, omnis porro sint odit. Modi, quidem!</p>
-                        <p class="text-light">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed ducimus quis culpa dicta expedita consectetur quasi eum quidem nemo odio deserunt corrupti aliquid aut, omnis porro sint odit. Modi, quidem!</p>
-                        <p class="text-light">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed ducimus quis culpa dicta expedita consectetur quasi eum quidem nemo odio deserunt corrupti aliquid aut, omnis porro sint odit. Modi, quidem!</p>
+                        <h5>
+                            <!-- <pre>{{cancion.nombre_cancion}}</pre> -->
+                           <pre>{{ cancion.acordes_letra|linebreaks }}</pre>
+                        </h5>
                     </div>
+                    
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="row" style="margin-top: 6%;">
-                    <!--dentro de center ponen el video (en el src ponen el link con embed), si es que
-                    remplazan todo el iframe entonces ponen en width="350" y en height="250"-->
-                    <center><iframe width="350" height="250" src="https://www.youtube.com/embed/ptc4Awb0UpU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+                   
+                    <center><iframe width="350" height="250" src="{{cancion.link_video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
                 </div>
                 <div class="row" style="margin-top: 5%;">
                     <h2 class="text-light">Acordes</h2>
 
-                <!--Esto es una fila con dos acordes, segun lo que necesiten van aumentando 
-                    todo lo que esta adentro-->
-                    <div class="flex-container" style="justify-content: center; margin-top: 7%;">
-                       
-                    <!--esto es solo un acorde-->
+            
+                    <div class="grid-container" style="justify-content: center; margin-top: 7%;">
+                        {% if acorde_normal%}
+                        {%for completo in acorde_normal%}
                         <div>
-                            <!--en el "src" remplazan con la imagen de la nota-->
-                            <img src="{% static 'Imagenes/llamita_icon.ico' %}" style="height: 180px; width: 125px;">
-                            <h6 class="text-light text-center">nombre nota</h6>
-                        </div>
-                    <!--aqui termina el acorde-->
-
-                    <!--Este es el segundo acorde-->
-                        <div>
-                            <img src="{% static 'Imagenes/llamita_icon.ico' %}" style="height: 180px; width: 125px;">
-                            <h6 class="text-light text-center">nombre nota</h6>
-                        </div>
-                     <!--aqui termina el segundo acorde-->
-                    </div>
-                 <!--Aqui termina la fila de dos acordes-->
-                                        
-                    </div>
+                            
+                            <img src="/../{{completo.i}}" style="height: 180px; width: 125px;">
+                            <h6 class="text-light text-center">{{completo.n}}</h6>
+                        </div> 
+                        {%endfor%}
+                        {% endif %}              
+                    </div>                                                
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}

@@ -40,7 +40,7 @@ urlpatterns = [
     path('Inicio_Profesores/', inicio_profesores),
     path('Canciones/', seccion_canciones),
     path('buscar/', buscador),
-    path('Cancion_base/', cancion_base),
+    path('Cancion_base/<int:id_cancion>', cancion_base),
     path('guardar_db/', guardar_video_vistoBD, name='guardar_db'),
     path('eliminar_db/', eliminar_video_vistoBD, name='eliminar_db'),
     path('Subir/<int:id_profesor>/<int:orden_video>/<int:num_nivel>', mover_video_arriba),
