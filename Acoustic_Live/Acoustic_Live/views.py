@@ -414,7 +414,9 @@ def Formulario_Registro(request):
                     estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, 
                     correo_estudiante = correo, contraseña_estudiante = contraseña)
                     estudiante.save() #ingresar datos
-                    estudiante1 = User.objects.create_user(nombreUsuario,correo,contraseña)
+                    auxi = nombre.split()
+                    auxi1 = str(auxi[0])
+                    estudiante1 = User.objects.create_user(username = nombreUsuario,email = correo,password = contraseña, first_name = auxi1)
                     estudiante1.save()
                     mensaje(request,"Bienvenido a Acusctic Live")
                     return redirect("/Login/")
@@ -646,27 +648,74 @@ def eliminar_video_vistoBD(request):
 @login_required(login_url='/Login/')
 @user_passes_test(profesor,login_url='/')
 def vista_editar_leccion(request, id_video, nivel):
-    lecc = Leccion.objects.get(id=id_video)
-    username = request.user.username
-    profesor = Profesor.objects.get(user_name=username)
-    id=profesor.id
-    identificador_profesor=False
-    if id==1 or id==2 or id==3 or id==4:
-        identificador_profesor=True
-    nombre = lecc.nombre_leccion
-    descripcion = lecc.descripcion
-    link = lecc.link
+    print(id_video)
+    prof = Profesor.objects.get(user_name = request.user.username)
+    leccion1 = Leccion.objects.filter(nivel = nivel, idprofesor_id = prof.id)
+    try: 
+        lecc = Leccion.objects.get(id=id_video)
+        if lecc in leccion1:
+            username = request.user.username
+            profesor = Profesor.objects.get(user_name=username)
+            id=profesor.id
+            identificador_profesor=False
+            if id==1 or id==2 or id==3 or id==4:
+                identificador_profesor=True
+            nombre = lecc.nombre_leccion
+            descripcion = lecc.descripcion
+            link = lecc.link
 
-    contexto = {
-    'nombre' : nombre,
-    'descripcion': descripcion,
-    'link' : link,
-    'nivel' : nivel,
-    'id_video' : id_video,
-    'indentificador_profesor':identificador_profesor,
-    }
+            contexto = {
+            'nombre' : nombre,
+            'descripcion': descripcion,
+            'link' : link,
+            'nivel' : nivel,
+            'id_video' : id_video,
+            'indentificador_profesor':identificador_profesor,
+            }
 
-    return render(request,"Editar_Leccion_Profesor.html",contexto)
+            return render(request,"Editar_Leccion_Profesor.html",contexto)
+        else:
+            username = request.user.username
+            profesor = Profesor.objects.get(user_name=username)
+            id=profesor.id
+            id_profesor='/Formulario/'+str(id)+'/'
+            nombre_profesor=profesor.nombre_profesor
+            apellido_profesor =profesor.apellido_profesor
+            identificador_profesor=False
+
+            if id==1 or id==2 or id==3 or id==4:
+                identificador_profesor=True
+
+            contexto={
+                'id_profesor':id_profesor,
+                'nombre_profesor':nombre_profesor,
+                'id':id,
+                'apellido_profesor':apellido_profesor ,
+                'indentificador_profesor': identificador_profesor,
+            }
+            return render(request,'Vista_Principal_Profesores.html', contexto)
+    except:
+
+        username = request.user.username
+        profesor = Profesor.objects.get(user_name=username)
+        id=profesor.id
+        id_profesor='/Formulario/'+str(id)+'/'
+        nombre_profesor=profesor.nombre_profesor
+        apellido_profesor =profesor.apellido_profesor
+        identificador_profesor=False
+
+        if id==1 or id==2 or id==3 or id==4:
+            identificador_profesor=True
+
+        contexto={
+            'id_profesor':id_profesor,
+            'nombre_profesor':nombre_profesor,
+            'id':id,
+            'apellido_profesor':apellido_profesor ,
+            'indentificador_profesor': identificador_profesor,
+        }
+        return render(request,'Vista_Principal_Profesores.html', contexto)
+
 
 @login_required(login_url='/Login/')
 @user_passes_test(profesor,login_url='/')
@@ -925,25 +974,48 @@ def lista_avanzado(request, id_profesor):
 @login_required(login_url='/Login/')
 @user_passes_test(profesor,login_url='/')
 def crud_profesores(request, nivel): #CRUD Profesores
-    username1 = request.user.username
-    profesor = Profesor.objects.get(user_name=username1)
-    id=profesor.id
-    identificador_profesor=False
-    if id==1 or id==2 or id==3 or id==4:
-        identificador_profesor=True
-    lecciones = Leccion.objects.filter(nivel=nivel, idprofesor_id=id).order_by('orden')
     
-    cant = 0
-    for leccion in lecciones:
-        cant = cant + 1
-    contexto = {
-        'lecciones' : lecciones,
-        'cantidad' : cant,
-        'nivel' : nivel,
-        'id':id,
-        'indentificador_profesor':identificador_profesor,
-    }
-    return render(request,'CRUD_Profesores.html', contexto)
+    if nivel<4 and nivel>0:
+        username1 = request.user.username
+        profesor = Profesor.objects.get(user_name=username1)
+        id=profesor.id
+        identificador_profesor=False
+        if id==1 or id==2 or id==3 or id==4:
+            identificador_profesor=True
+        lecciones = Leccion.objects.filter(nivel=nivel, idprofesor_id=id).order_by('orden')
+        
+        cant = 0
+        for leccion in lecciones:
+            cant = cant + 1
+
+        contexto = {
+            'lecciones' : lecciones,
+            'cantidad' : cant,
+            'nivel' : nivel,
+            'id':id,
+            'indentificador_profesor':identificador_profesor,
+        }
+        return render(request,'CRUD_Profesores.html', contexto)
+    else: 
+        username = request.user.username
+        profesor = Profesor.objects.get(user_name=username)
+        id=profesor.id
+        id_profesor='/Formulario/'+str(id)+'/'
+        nombre_profesor=profesor.nombre_profesor
+        apellido_profesor =profesor.apellido_profesor
+        identificador_profesor=False
+
+        if id==1 or id==2 or id==3 or id==4:
+            identificador_profesor=True
+
+        contexto={
+            'id_profesor':id_profesor,
+            'nombre_profesor':nombre_profesor,
+            'id':id,
+            'apellido_profesor':apellido_profesor ,
+            'indentificador_profesor': identificador_profesor,
+        }
+        return render(request,'Vista_Principal_Profesores.html', contexto)
 
 @login_required(login_url='/Login/')
 @user_passes_test(profesor,login_url='/')
@@ -1062,11 +1134,19 @@ def seccion_canciones(request): #Vista de seccion canciones
     doc_externo = open("Acoustic_Live/Templates/Seccion_Canciones.html")
     plt = Template(doc_externo.read())
     doc_externo.close()
+    lista1=[]
     lista=[]    
     canciones= Cancion.objects.all()
+    i = 0
+    
     for cancion1 in canciones:
-        lista.append(cancion1)   
-    random.shuffle(lista)         
+        lista1.append(cancion1)
+        random.shuffle(lista1)
+
+    while i < 5:
+        lista.append(lista1[i])
+        i += 1
+        
     ctx = Context({'canciones_aleatorias':lista,'text': 'Canciones'})
     documento = plt.render(ctx)
     
@@ -1114,9 +1194,24 @@ def cumple(valor):
 def cancion_base(request,id_cancion): #Base de las canciones
     doc_externo = open("Acoustic_Live/Templates/Canciones/Cancion_base.html")
     plt = Template(doc_externo.read())
+    song = Cancion.objects.all()
     doc_externo.close()
-    if id_cancion>50: #and id_cancion<2:
-        return render(request,'p.html')
+    id_cancion = int(id_cancion)
+    if id_cancion>len(song)+1 or id_cancion<2:
+        lista1=[]
+        lista=[]    
+        canciones= Cancion.objects.all()
+        i = 0
+        
+        for cancion1 in canciones:
+            lista1.append(cancion1)
+            random.shuffle(lista1)
+
+        while i < 5:
+            lista.append(lista1[i])
+            i += 1
+
+        return render(request,'Seccion_Canciones.html', {'canciones_aleatorias':lista,'text':'Canciones'})
     else:
         cancion= Cancion.objects.get(id=id_cancion)
         i=cancion.acordes_imagenes

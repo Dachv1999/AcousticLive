@@ -61,6 +61,14 @@ nav ul li{
     line-height: 80px;
     margin: 0px 0px;
 }
+
+#usuario{
+    font-size: 18px;
+    text-decoration: none;
+}
+
+
+
 nav ul li a{
     color: white;
     font-size: 18px;
@@ -104,6 +112,9 @@ nav label:hover{
     nav ul li a{
         font-size: 15px;
     }
+    #usuario{
+        font-size: 15px;
+    }
 }
 
 @media (max-width: 890px){
@@ -119,7 +130,7 @@ nav label:hover{
         text-align: center;
         position: fixed;
         width:100%;
-        height: 200px;
+        height: 265px;
         background: #2c3e50;
         top: 80px;
         left: -100%;
@@ -136,6 +147,11 @@ nav label:hover{
     nav ul li a{
         font-size: 20px;
     }
+
+    #usuario{
+        font-size: 20px;
+    }
+
     li a:hover, li a.active{
         background: none;
         color: lightgray;

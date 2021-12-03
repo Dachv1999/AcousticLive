@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <link rel="icon" href="{% static '/imagenes/icon.ico' %}">
 </head>
 <body>
-    <h1>Se debe de cambiar el codigo para permitir mas vistas</h1>
+    <div class="container-fluid contenedor">
+        <link rel="stylesheet" href="{% static '/css/fondo.css' %}" >
+        <div class="container">
+            <center><img src="{% static 'Imagenes/problemas_tecnicos.jpg' %}" style="height: 500px; width: 700px; margin-top: 50px;" ></center>
+            <center><h1 style="color: white;">No se puede ingresar nada por URL</h1></center>
+        </div>
+    </div>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
+
 </html>

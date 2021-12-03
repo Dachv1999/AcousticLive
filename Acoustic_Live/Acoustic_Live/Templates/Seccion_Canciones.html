@@ -13,7 +13,7 @@
             <div class="row">
                 <form action="/buscar/" method="POST">
                     <div class="input-group mb-3" style="z-index: 1;">
-                        <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="Buscar" name="Buscar" value = '{{ busqueda }}'>
+                        <input type="text" class="form-control" placeholder="Buscar por nombre de canci&oacute;n, artista o grupo" aria-label="Buscar" aria-describedby="Buscar" name="Buscar" value = '{{ busqueda }}'>
                         <button class="btn btn-dark" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
@@ -60,44 +60,40 @@
         
             {% if texto %}
                 <h1 class="text-light" style="margin-top: 5%;">{{texto}}</h1>
-              
-                {%for cancion in canciones%}
 
-                <div class="nose">
-                    <div class="imagenCancion">
-                        <img src="/../{{cancion.imagen_cancion }}" alt="" style="height: 100%;width: 100%; margin-right: 0px;">
-                    </div>
-                    <div class="curso">
-                        
-                        <div id="textoCancion" >
-                            <div id="n">
-                                <a href="/Cancion_base/{{cancion.id}}" style="text-decoration: none; color: #fff;"><h4>{{cancion.nombre_cancion}}</h4></a>
-                                <p style="text-align-last: left;">{{cancion.grupo_artista}}</p>
-                            </div>
-                            <div class="nn">
-                                <div>
-                                    <p>G&eacute;nero: {{cancion.genero_musica}}</p>
-                                </div>
-                                <div class="difi">
-                                    <p>{{cancion.fecha_album}}</p>
-                                </div>
-                            </div>
-                                                     
-                                
+                {% if canciones %}
+                    {%for cancion in canciones%}
+
+                    <div class="nose">
+                        <div class="imagenCancion">
+                            <img src="/../{{cancion.imagen_cancion }}" alt="" style="height: 100%;width: 100%; margin-right: 0px;">
+                        </div>
+                        <div class="curso">
                             
+                            <div id="textoCancion" >
+                                <div id="n">
+                                    <a href="/Cancion_base/{{cancion.id}}" style="text-decoration: none; color: #fff;"><h4>{{cancion.nombre_cancion}}</h4></a>
+                                    <p style="text-align-last: left;">{{cancion.grupo_artista}}</p>
+                                </div>
+                                <div class="nn">
+                                    <div>
+                                        <p>G&eacute;nero: {{cancion.genero_musica}}</p>
+                                    </div>
+                                    <div class="difi">
+                                        <p>{{cancion.fecha_album}}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- <div class="miniatura" style="background-color: rgb(49, 51, 53); height: 100%; width: 70%; display: flex; margin-bottom: 10px;">
-                    <div class="imagen">
-                        <img src="/../{{cancion.imagen_cancion }}" alt="" style="height: 120px;width: 120px; margin-right: 15px;">
+                    
+                    {%endfor%}
+                {% else %}
+                    <div class="container" style="padding-top: 60px; padding-bottom: 60px;">
+                        <center><h1>No hay videos disponibles</h1></center>
+                        
                     </div>
-                    <div class="texto" style="padding-top: 3%">
-                        <a href="" style="text-decoration: none; color: #fff;"><h4>{{cancion.nombre_cancion}}</h4></a>
-                        <p style="text-align-last: left;">{{cancion.grupo_artista}}</p>
-                    </div>
-                </div> -->
-                {%endfor%}
+                {% endif %}
             {% else %}
                 
 
@@ -112,24 +108,7 @@
                         <p style="text-align-last: left;">{{cancion_aleatoria.grupo_artista}}</p>
                     </div>
                 </div>
-                <!-- <div class="miniatura" style="background-color: rgb(49, 51, 53); height: 120px; width: 70%; display: flex; margin-bottom: 10px;">
-                    <div class="imagen">
-                        <img src="{% static 'Imagenes/chachacha.jpg' %}" alt="" style="width: 120px; margin-right: 15px;">
-                    </div>
-                    <div class="texto" style="padding-top: 3%">
-                        <a href="" style="text-decoration: none; color: #fff;"><h4>Chachach&aacute;</h4></a>
-                        <p style="text-align-last: left;">J&oacute;sean Log</p>
-                    </div>
-                </div> -->
-                <!-- <div class="miniatura" style="background-color: rgb(49, 51, 53); height: 120px; width: 70%; display: flex;">
-                    <div class="imagen">
-                    <img src="{% static 'Imagenes/adele.jpg' %}" alt="" style="width: 120px; height: 120px; margin-right: 15px;">
-                    </div>
-                    <div class="texto" style="padding-top: 3%">
-                        <a href="" style="text-decoration: none; color: #fff;"><h4>Make you feel my love</h4></a>
-                        <p style="text-align-last: left;">Adele</p>
-                    </div>
-                </div> -->
+                
                 {%endfor%}
            {% endif %}
     </div>

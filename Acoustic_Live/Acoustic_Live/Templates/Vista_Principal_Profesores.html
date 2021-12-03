@@ -9,11 +9,12 @@
 
     <div class="container-fluid">
         <link rel="stylesheet" href="{% static '/css/fondo.css' %}">
-        <div class="container contenedor" style="padding-top: 10%;">{% if messages %}
-            <div class="ventana">
+        <div class="container contenedor" style="padding-top: 10%;">
+        {% if messages %}
+            <div class="ventana" >
                 <ul class="messages">
                 {% for message in messages %}
-                    <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    <p class="alert" style="background-color:rgb(8, 109, 8);">{{ message }}</p>
                 {% endfor %}
                 </ul>
             </div>
