@@ -1077,29 +1077,14 @@ def buscador(request):
     plt = Template(doc_externo.read())
     doc_externo.close()
     valor=request.POST.get('Buscar','')
+    valor=valor.strip()
     if valor and cumple(valor):
-        copia=valor.split(' ')
-        if len(copia)==1:
-            listita=Cancion.objects.filter(
-                Q(nombre_cancion__icontains = valor) |
-                Q(grupo_artista__icontains = valor)
-                ).order_by('nombre_cancion')
-        if len(copia)>1: #si activo el de abajo es len(copia)>1
-            listita=Cancion.objects.filter(
-                Q(nombre_cancion__icontains = copia[0]) |
-                Q(grupo_artista__icontains = copia[0]) |
-                Q(nombre_cancion__icontains = copia[1]) |
-                Q(grupo_artista__icontains = copia[1])
-                ).order_by('nombre_cancion')
-        # if len(copia)>2:
-        #     listita=Cancion.objects.filter(
-        #         Q(nombre_cancion__icontains = copia[0]) |
-        #         Q(grupo_artista__icontains = copia[0]) |
-        #         Q(nombre_cancion__icontains = copia[1]) |
-        #         Q(grupo_artista__icontains = copia[1]) |
-        #         Q(nombre_cancion__icontains = copia[2]) |
-        #         Q(grupo_artista__icontains = copia[2])
-        #         ).order_by('nombre_cancion')
+        
+        listita=Cancion.objects.filter(
+            Q(nombre_cancion__icontains = valor) |
+            Q(grupo_artista__icontains = valor)
+            ).order_by('nombre_cancion')
+        
         if(len(listita)>0):
             resultado="Resultados de la busqueda para: "+ valor
         else:
@@ -1122,8 +1107,6 @@ def cumple(valor):
     res=True
     if len(valor)==1 and valor==' ':
         res=False
-    i=0
-    c=0
     if '  ' in valor:
         res=False
     return res
@@ -1132,7 +1115,7 @@ def cancion_base(request,id_cancion): #Base de las canciones
     doc_externo = open("Acoustic_Live/Templates/Canciones/Cancion_base.html")
     plt = Template(doc_externo.read())
     doc_externo.close()
-    if id_cancion>6:
+    if id_cancion>50: #and id_cancion<2:
         return render(request,'p.html')
     else:
         cancion= Cancion.objects.get(id=id_cancion)
