@@ -1097,8 +1097,8 @@ def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
     }
     return render(request,'Vista_Universal_Lecciones_For_Profesor.html', contexto)
 
-#@login_required(login_url='/Login/')
-#@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
 def genero(request, num_genero):
     
     texto =""
@@ -1120,20 +1120,19 @@ def genero(request, num_genero):
     elif num_genero == 6:
         texto = 'Género "Reggae"'
         canciones = Cancion.objects.filter(genero_musica='Reggae')
-
+        
     contexto = {
         'texto' : texto,
         'canciones':canciones,
+        
     }
 
     return render(request,'Seccion_Canciones.html', contexto)
 
-#@login_required(login_url='/Login/')
-#@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
 def seccion_canciones(request): #Vista de seccion canciones
-    doc_externo = open("Acoustic_Live/Templates/Seccion_Canciones.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
+
     lista1=[]
     lista=[]    
     canciones= Cancion.objects.all()
@@ -1146,11 +1145,12 @@ def seccion_canciones(request): #Vista de seccion canciones
     while i < 5:
         lista.append(lista1[i])
         i += 1
-        
-    ctx = Context({'canciones_aleatorias':lista,'text': 'Canciones'})
-    documento = plt.render(ctx)
-    
-    return HttpResponse(documento)
+    contexto = {
+        'canciones_aleatorias':lista,
+        'text': 'Canciones',
+    }
+    return render(request,'Seccion_Canciones.html', contexto)
+
 
 def buscador(request):
     doc_externo = open("Acoustic_Live/Templates/Seccion_Canciones.html")
@@ -1190,12 +1190,11 @@ def cumple(valor):
     if '  ' in valor:
         res=False
     return res
-
-def cancion_base(request,id_cancion): #Base de las canciones
-    doc_externo = open("Acoustic_Live/Templates/Canciones/Cancion_base.html")
-    plt = Template(doc_externo.read())
+    
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+def cancion_base(request,id_cancion): #Base de las canciones   
     song = Cancion.objects.all()
-    doc_externo.close()
     id_cancion = int(id_cancion)
     if id_cancion>len(song)+1 or id_cancion<2:
         lista1=[]
@@ -1227,11 +1226,7 @@ def cancion_base(request,id_cancion): #Base de las canciones
             'cancion':cancion,
             'acorde_normal':acordes_verdaderas,
         }
-        
-        ctx = Context(contexto)
-    
-    documento = plt.render(ctx)
-    return HttpResponse(documento)
+    return render(request,'Canciones/Cancion_base.html', contexto)
 
 class Fotos(object):
     def __init__(self, nn,ii):

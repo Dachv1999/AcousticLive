@@ -10,11 +10,12 @@
 <div class="container-fluid">
     <link rel="stylesheet" href="{% static '/css/fondo.css' %}" >
     <div class="container contenedor" style="padding-top: 120px;" >
+      
       {% if messages %}
         <div class="ventana" >
             <ul class="messages">
             {% for message in messages %}
-                <p class="alert" style="background-color:rgb(8, 109, 8);">{{ message }}</p>
+                <p class="alert" style="background-color:rgb(214, 207, 141); color: black;">{{ message }}</p>
             {% endfor %}
             </ul>
         </div>

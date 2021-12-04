@@ -105,61 +105,7 @@ nav label:hover{
     display: none;
 }
 
-@media (max-width: 1031px){
-    .enlace{
-        padding-left: 0px;
-    }
-    nav ul li a{
-        font-size: 15px;
-    }
-    #usuario{
-        font-size: 15px;
-    }
-}
 
-@media (max-width: 890px){
-    .checkbtn{
-        display: block;
-    }
-    
-    .men{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-        position: fixed;
-        width:100%;
-        height: 265px;
-        background: #2c3e50;
-        top: 80px;
-        left: -100%;
-        text-align: center;
-        transition: all .5s;
-        border-radius: 1px;
-    }
-    nav ul li{
-        display: block;
-        margin: 10px 0;
-        line-height: 30px;
-
-    }
-    nav ul li a{
-        font-size: 20px;
-    }
-
-    #usuario{
-        font-size: 20px;
-    }
-
-    li a:hover, li a.active{
-        background: none;
-        color: lightgray;
-    }
-    #check:checked ~ .men{
-        left:0;
-    }
-}
 
 
 .info{
@@ -264,13 +210,15 @@ input[type="checkbox"]{
     margin: 0 auto;
     min-width: 400px;
 }
-
+.pipipi{
+    display: none;
+}
 .flex-container{
     display: flex;
     
 }
 .flex-container div{
-    margin-left: 15px;
+    margin-left: 10px;
 }
 .letracordes{
     background: rgba(212, 212, 212, 0.3);
@@ -329,6 +277,85 @@ input[type="checkbox"]{
 .grid-container div{
     margin-left: 15px;
 }
+.buscador_nose{
+    width: 65%;
+    margin: 0 auto;
+}
+
+ 
+
+@media (max-width: 1051px){
+    #videoCancion{
+        width: 330px;
+        height: 230px;
+        
+    }
+} 
+@media (max-width: 1031px){
+    .enlace{
+        padding-left: 0px;
+    }
+    nav ul li a{
+        font-size: 15px;
+    }
+    #usuario{
+        font-size: 15px;
+    }
+}
+@media (max-width: 991.2px){
+    #videoCancion{
+        width: 380px;
+        height: 280px;
+        
+    }
+} 
+
+@media (max-width: 890px){
+    .checkbtn{
+        display: block;
+    }
+    
+    .men{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        position: fixed;
+        width:100%;
+        height: 265px;
+        background: #2c3e50;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+        border-radius: 1px;
+    }
+    nav ul li{
+        display: block;
+        margin: 10px 0;
+        line-height: 30px;
+
+    }
+    nav ul li a{
+        font-size: 20px;
+    }
+
+    #usuario{
+        font-size: 20px;
+    }
+
+    li a:hover, li a.active{
+        background: none;
+        color: lightgray;
+    }
+    #check:checked ~ .men{
+        left:0;
+    }
+}
+
+
+
 @media (max-width: 768px){
     .nn{
         margin-left:20px;/* a 20 */      
@@ -338,6 +365,13 @@ input[type="checkbox"]{
     }
 
 } 
+
+@media (max-width: 730px){
+    .buscador_nose{
+        width: 100%;      
+    }
+} 
+
 @media (max-width: 640px){
     
     .nn{
@@ -354,15 +388,37 @@ input[type="checkbox"]{
     .imagenCancion{
         height: 120px;    
     }
-} 
-
-.buscador_nose{
-    width: 65%;
-    margin: 0 auto;
 }
-@media (max-width: 730px){
-    .buscador_nose{
-        width: 100%;      
+
+@media (max-width: 442px){
+    #videoCancion{
+        width: 300px;
+        height: 200px;
+        
+    }
+} 
+@media (max-width: 370px){
+    #videoCancion{
+        width: 250px;
+        height: 150px;
+        
     }
 } 
 
+@media (max-width: 340px){
+    .pipipi{
+        display: block;
+        
+    }
+    .pipi{
+        display: none;
+    }
+} 
+
+@media (max-width: 311px){
+    #videoCancion{
+        width: 220px;
+        height: 120px;
+        
+    }
+} 
