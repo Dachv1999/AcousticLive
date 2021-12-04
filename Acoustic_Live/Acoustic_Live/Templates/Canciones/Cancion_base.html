@@ -9,7 +9,12 @@
 
 <div class="container-fluid">
     <link rel="stylesheet" href="{% static '/css/fondo.css' %}">
-    <div class="container contenedor"  style="padding-top: 120px;">
+    <div style="padding-top: 70px;">
+        <form action="/Canciones/" method="GET">       
+            <input type="image" name="boton_back" style="margin-left: 20px; margin-top: 20px;" src="{% static 'Imagenes/flechita.png' %}" alt="Volver atras" width="50" height="50">                
+        </form>
+    </div>
+    <div class="container contenedor"  style="padding-top: 10px;">
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-12">
                 <div class="row">
@@ -27,7 +32,8 @@
 
                     </div>              
                 </div>
-                <div class="row" style="margin-top: 7%; padding-right: 5%;padding-left: 5%;">
+                <h3 style="margin-top: 4%; padding-left: 18%;">Letra y acordes</h3>
+                <div class="row" style="margin-top: 3%; padding-right: 5%;padding-left: 5%;">
                     <div class="container letracordes" style="padding-left: 10%; padding-right: 10%;">
                         <!--Remplazando los lorem ponen lo de la letra, cada p es un parrafo aumenten segun lo que 
                         necesiten-->
