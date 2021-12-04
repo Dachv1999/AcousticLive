@@ -306,8 +306,15 @@ def Formulario_Registro(request):
         correo= request.POST.get('correo','')
         contraseña= request.POST.get('contraseña','')
         confirmacion= request.POST.get('confirmacion','')
-        res=redirect("/Formulario_Registro/")
-
+    
+        contexto={
+        'nombre':nombre,
+        'apellidoPaterno':apellidoPaterno,
+        'apellidoMaterno':apellidoMaterno,
+        'nombreUsuario':nombreUsuario,
+        'correo':correo,
+        }
+        
         if(len(nombre)!=0 and len(correo)!=0 and len(contraseña)!=0 and len(nombreUsuario)!=0 and len(confirmacion)!=0):
             
             
@@ -319,96 +326,96 @@ def Formulario_Registro(request):
 
             if((len(apellidoPaterno)==0 and len(apellidoMaterno)==0)):
                 mensaje(request,"Error: Debe ingresar al menos un apellido")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validoNombre==False):
                 mensaje(request,"Nombre ingresado inválido")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validoApePat==False):
                 mensaje(request,"Error el apellido paterno debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validoApeMat==False):
                 mensaje(request,"Error el apellido materno debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
 
             if(valido_usuario==False):
                 mensaje(request,"Nombre de usuario inválido")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
         
             if(espacio(nombre)):
                 mensaje(request,"Error: El nombre debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(espacio(apellidoPaterno)):
                 mensaje(request,"Error el apellido paterno debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(espacio(apellidoMaterno)):
                 mensaje(request,"Error el apellido materno debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(espacio(nombreUsuario)):
                 mensaje(request,"Error el nombre de usario debe tener caracteres alfabéticos")
-                return res   
+                return render(request,"Formulario_Registro.html", contexto)   
             if(validarTamaño(nombre,20,3)==1):
                 mensaje(request,generador("nombre",1))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif (validarTamaño(nombre,20,3)==2):
                 mensaje(request,generador("nombre",2))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validarTamaño(apellidoPaterno,15,3)==1):
                 mensaje(request,generador("apellido paterno",1))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif(validarTamaño(apellidoPaterno,15,3)==2):
                 mensaje(request,generador("apellido paterno",2))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validarTamaño(apellidoMaterno,15,3)==1):
                 mensaje(request,generador("apellido materno",1))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif(validarTamaño(apellidoMaterno,15,3)==2):
                 mensaje(request,generador("apellido materno",2))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validarTamaño(nombreUsuario,30,5)==1):
                 mensaje(request,generador("nombre de usuario",1))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif (validarTamaño(nombreUsuario,30,5)==2):
                 mensaje(request,generador("nombre de usuario",2))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validarTamaño(contraseña,30,8)==1):
                 mensaje(request,"Error: La contraseña debe tener un máximo de 30 caracteres" )
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif (validarTamaño(contraseña,30,8)==2):
                 mensaje(request,"Error: La contraseña debe tener un mínimo de 8 caracteres")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(contraseña ==nombreUsuario):
                 mensaje(request,"Error: La contraseña es poco segura, ¡Ingrese una nueva!")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(Estudiante.objects.filter(usuario=nombreUsuario).exists()):
                 mensaje(request,"Nombre de usuario existente")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
 
             if(Estudiante.objects.filter(correo_estudiante=correo).exists()):
                 mensaje(request,"Error: ¡Correo ya registrado! por favor ingrese un correo diferente a : "+ correo)
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
 
             if(hay_letra(contraseña) == False or hay_numero(contraseña) == False):
                 mensaje(request,"Error: La contraseña debe contener caracteres alfanuméricos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(confirmacion!=contraseña):
                 mensaje(request,"La contraseña de verificación no coincide")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if("_prof" in nombreUsuario): 
                 mensaje(request,"No puedes poner _prof en tu usuario")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             
             if(len(sacarInicio(correo))>32):
                 mensaje(request,"Error: nombre de correo ingresado inválido")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             else:   
                 if(valido_correo==False or not('@gmail.com' in correo) and not('@hotmail.com' in correo)and not('@outlook.com')and not('@yahoo.com')):
                     mensaje(request,"Error el correo debe estar en los siguientes dominios: gmail, hotmail, outlook, yahoo")
-                    return res
+                    return render(request,"Formulario_Registro.html", contexto)
                 
                     #falta un detallito un graaaan detallito
                 if(esValidoCorreo(sacarExt(correo))==False):
                     mensaje(request,"Error el correo debe estar en los siguientes dominios: gmail, hotmail, outlook, yahoo")
-                    return res
+                    return render(request,"Formulario_Registro.html", contexto)
                 
                 else:
                     estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, 
@@ -424,7 +431,7 @@ def Formulario_Registro(request):
 
         else:
             mensaje(request,"Por favor llene todos los campos")
-            return res
+            return render(request,"Formulario_Registro.html", contexto)
 
     return render (request, "Formulario_Registro.html")
 
