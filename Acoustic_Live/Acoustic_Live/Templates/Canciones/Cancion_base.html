@@ -32,15 +32,15 @@
 
                     </div>              
                 </div>
-                <h3 style="margin-top: 4%; padding-left: 18%;">Letra y acordes</h3>
-                <div class="row" style="margin-top: 3%; padding-right: 5%;padding-left: 5%;">
-                    <div class="container letracordes" style="padding-left: 10%; padding-right: 10%;">
+                <h3 style="margin-top: 4%;">Letra y acordes</h3>
+                <div class="row" style="margin-top: 3%;">
+                    <div class="container letracordes">
                         <!--Remplazando los lorem ponen lo de la letra, cada p es un parrafo aumenten segun lo que 
                         necesiten-->
-                        <h5>
+                        <h6>
                             <!-- <pre>{{cancion.nombre_cancion}}</pre> -->
                            <pre>{{ cancion.acordes_letra|linebreaks }}</pre>
-                        </h5>
+                        </h6>
                     </div>
                     
                 </div>
@@ -51,7 +51,7 @@
                     <center><iframe width="350" height="250" src="{{cancion.link_video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
                 </div>
                 <div class="row" style="margin-top: 5%;">
-                    <h2 class="text-light">Acordes</h2>
+                    <h2 class="text-light text-center">Acordes</h2>
 
             
                     <div class="grid-container" style="justify-content: center; margin-top: 7%;">

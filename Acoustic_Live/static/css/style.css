@@ -278,7 +278,7 @@ input[type="checkbox"]{
     border-radius: 5px;
     box-shadow: 0 0 30px rgba(0,-0,-0,0.568);
     color: white;
-    width: 500px;
+    width: 100%;
     margin-bottom: 10%;
 }
 .nose{
@@ -355,3 +355,14 @@ input[type="checkbox"]{
         height: 120px;    
     }
 } 
+
+.buscador_nose{
+    width: 65%;
+    margin: 0 auto;
+}
+@media (max-width: 730px){
+    .buscador_nose{
+        width: 100%;      
+    }
+} 
+
