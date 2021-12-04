@@ -12,9 +12,11 @@
         <!--<p>¿Que cancion quieres tocar hoy {{request.user.first_name}}? (esto para cuando ya se enlace con canciones)</p>-->
             <div class="row">
                 <form action="/buscar/" method="POST">
-                    <div class="input-group mb-3" style="z-index: 1;">
-                        <input type="text" class="form-control" placeholder="Buscar por nombre de canci&oacute;n, artista o grupo" aria-label="Buscar" aria-describedby="Buscar" name="Buscar" value = '{{ busqueda }}'>
-                        <button class="btn btn-dark" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+                    <div class="buscador_nose">
+                        <div class="input-group mb-3" style="z-index: 1;">
+                            <input type="text" class="form-control" placeholder="Buscar canci&oacute;n o grupo" aria-label="Buscar" aria-describedby="Buscar" name="Buscar" value = '{{ busqueda }}'>
+                            <button class="btn btn-dark" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+                        </div>
                     </div>
                 </form>
             </div>
