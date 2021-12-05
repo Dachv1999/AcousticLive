@@ -290,6 +290,9 @@ input[type="checkbox"]{
         height: 230px;
         
     }
+    .curso{
+        width: 90%;    
+    }
 } 
 @media (max-width: 1031px){
     .enlace{
@@ -372,7 +375,7 @@ input[type="checkbox"]{
     }
 } 
 
-@media (max-width: 640px){
+@media (max-width: 710px){
     
     .nn{
         display: none;
