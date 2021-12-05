@@ -1113,19 +1113,19 @@ def genero(request, num_genero):
         texto = 'Todas las canciones'
         canciones = Cancion.objects.all().order_by('nombre_cancion')
     elif num_genero == 2:
-        texto = 'Género "Rock"'
+        texto = 'Género Rock'
         canciones = Cancion.objects.filter(genero_musica='Rock')
     elif num_genero == 3:
-        texto = 'Género "Pop"'
+        texto = 'Género Pop'
         canciones = Cancion.objects.filter(genero_musica='Pop')
     elif num_genero == 4:
-        texto = 'Género "Baladas"'
+        texto = 'Género Baladas'
         canciones = Cancion.objects.filter(genero_musica='Balada')
     elif num_genero == 5:
-        texto = 'Género "Folklóricas"'
-        canciones = Cancion.objects.filter(genero_musica='Folklorica')
+        texto = 'Género Folklore'
+        canciones = Cancion.objects.filter(genero_musica='Folklore')
     elif num_genero == 6:
-        texto = 'Género "Reggae"'
+        texto = 'Género Reggae'
         canciones = Cancion.objects.filter(genero_musica='Reggae')
         
     contexto = {
@@ -1197,9 +1197,9 @@ def buscador(request):
                     listita.append(canciones[i])
             i +=1
         if(len(listita)>0):
-            resultado="Resultados de la busqueda para: "+ valor
+            resultado="Resultado de la búsqueda: "+ valor
         else:
-            resultado="No hay resultados para la busqueda:  "+valor
+            resultado="No hay resultados para: "+valor
         return render(request,"seccion_canciones.html",{'canciones_aleatorias':listita,'text': resultado,'busqueda':valor})
     else:
     

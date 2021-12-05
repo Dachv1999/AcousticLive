@@ -9,26 +9,36 @@
 
 <div class="container-fluid">
     <link rel="stylesheet" href="{% static '/css/fondo.css' %}">
-    <div class="container contenedor"  style="padding-top: 120px;">
+    <div style="padding-top: 95px;">
+        
+    </div>
+    <div class="container contenedor"  style="padding-top: 10px;">
         <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-12">
+            <div class="col-lg-8 col-md-12 col-sm-12">
                 <div class="row">
                     <div class="flex-container">
                         <div>
                             <!--En la parte donde dice "src" va la imagen de la cancion-->
                             <Center><input type="image" name="1" src="/../{{cancion.imagen_cancion }}" alt="Nivel Principiante" width="120" height="120" style="border-radius: 100%;"></Center>
                         </div>
-                        <div class="text-light">
+                        <div class="text-light pipi">
                             <!--En los h remplazan los datos que estan escritos-->
                             <h2>{{cancion.nombre_cancion}}</h2>
                             <h5>{{cancion.grupo_artista}}</h5>
                             <h5>{{cancion.fecha_album}}</h5>
                         </div>
 
-                    </div>              
+                    </div>  
+                    <div class="text-light pipipi">
+                        <!--En los h remplazan los datos que estan escritos-->
+                        <h2>{{cancion.nombre_cancion}}</h2>
+                        <h5>{{cancion.grupo_artista}}</h5>
+                        <h5>{{cancion.fecha_album}}</h5>
+                    </div>            
                 </div>
-                <div class="row" style="margin-top: 7%; padding-right: 5%;padding-left: 5%;">
-                    <div class="container letracordes" style="padding-left: 10%; padding-right: 10%;">
+                <h3 style="margin-top: 4%;">Letra y acordes</h3>
+                <div class="row" style="margin-top: 3%;">
+                    <div class="container letracordes">
                         <!--Remplazando los lorem ponen lo de la letra, cada p es un parrafo aumenten segun lo que 
                         necesiten-->
                         <h5>
@@ -39,18 +49,18 @@
                     
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="col-lg-4 col-md-12 col-sm-12">
                 <div class="row" style="margin-top: 6%;">
                    
-                    <center><iframe width="350" height="250" src="{{cancion.link_video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+                    <center><iframe id="videoCancion" width="350" height="250" src="{{cancion.link_video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
                 </div>
                 <div class="row" style="margin-top: 5%;">
-                    <h2 class="text-light">Acordes</h2>
+                    <h2 class="text-light text-center">Acordes</h2>
 
             
                     <div class="grid-container" style="justify-content: center; margin-top: 7%;">
                         {% if acorde_normal%}
-                        {%for completo in acorde_normal%}   
+                        {%for completo in acorde_normal%}
                         <div>
                             
                             <img src="/../{{completo.i}}" style="height: 180px; width: 100px; margin: 6%;">

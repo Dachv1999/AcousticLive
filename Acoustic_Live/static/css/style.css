@@ -48,7 +48,7 @@ nav{
 .iz{
     float: left;
     margin-left: 10%;
-    margin-right: 10%;
+    /* margin-right: 10%; */
     list-style: none;
     text-decoration: none;
     list-style: none;
@@ -298,6 +298,10 @@ input[type="checkbox"]{
     .enlace{
         padding-left: 0px;
     }
+    .der{
+        margin-left: 5%;
+
+    }
     nav ul li a{
         font-size: 15px;
     }
@@ -317,7 +321,12 @@ input[type="checkbox"]{
     .checkbtn{
         display: block;
     }
-    
+    .iz{
+        margin-right: 10%;
+    }
+    .der{
+        margin-left: 10%;
+    }
     .men{
         display: flex;
         align-items: center;
