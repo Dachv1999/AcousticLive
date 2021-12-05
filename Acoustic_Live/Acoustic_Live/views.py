@@ -19,7 +19,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
-
+from unicodedata import normalize
 
 def send_email(email1):
     print(email1)
@@ -1104,8 +1104,8 @@ def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
     }
     return render(request,'Vista_Universal_Lecciones_For_Profesor.html', contexto)
 
-@login_required(login_url='/Login/')
-@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+# @login_required(login_url='/Login/')
+# @user_passes_test(profesor1,login_url='/Inicio_Profesores/')
 def genero(request, num_genero):
     
     texto =""
@@ -1113,19 +1113,19 @@ def genero(request, num_genero):
         texto = 'Todas las canciones'
         canciones = Cancion.objects.all().order_by('nombre_cancion')
     elif num_genero == 2:
-        texto = 'Género "Rock"'
+        texto = 'Género Rock'
         canciones = Cancion.objects.filter(genero_musica='Rock')
     elif num_genero == 3:
-        texto = 'Género "Pop"'
+        texto = 'Género Pop'
         canciones = Cancion.objects.filter(genero_musica='Pop')
     elif num_genero == 4:
-        texto = 'Género "Baladas"'
+        texto = 'Género Baladas'
         canciones = Cancion.objects.filter(genero_musica='Balada')
     elif num_genero == 5:
-        texto = 'Género "Folklóricas"'
-        canciones = Cancion.objects.filter(genero_musica='Folklorica')
+        texto = 'Género Folklore'
+        canciones = Cancion.objects.filter(genero_musica='Folklore')
     elif num_genero == 6:
-        texto = 'Género "Reggae"'
+        texto = 'Género Reggae'
         canciones = Cancion.objects.filter(genero_musica='Reggae')
         
     contexto = {
@@ -1136,8 +1136,8 @@ def genero(request, num_genero):
 
     return render(request,'Seccion_Canciones.html', contexto)
 
-@login_required(login_url='/Login/')
-@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+# @login_required(login_url='/Login/')
+# @user_passes_test(profesor1,login_url='/Inicio_Profesores/')
 def seccion_canciones(request): #Vista de seccion canciones
 
     lista1=[]
@@ -1158,35 +1158,50 @@ def seccion_canciones(request): #Vista de seccion canciones
     }
     return render(request,'Seccion_Canciones.html', contexto)
 
+def eliminarespacio(valor):
+    auxi = valor.split()
+    cadena = ""
+    for letra in auxi:
+        cadena = cadena + letra + " "
+    cadena = cadena.strip()
+
+    return cadena
+
+def quitar_tilde(valor):
+    trans_tab = dict.fromkeys(map(ord, u'\u0301\u0308'), None)
+    cadena = normalize('NFKC', normalize('NFKD', valor).translate(trans_tab))
+    return cadena
 
 def buscador(request):
-    doc_externo = open("Acoustic_Live/Templates/Seccion_Canciones.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
     valor=request.POST.get('Buscar','')
     valor=valor.strip()
+    valor =eliminarespacio(valor)
+    aux = quitar_tilde(valor)
     if valor and cumple(valor):
-        
-        listita=Cancion.objects.filter(
-            Q(nombre_cancion__icontains = valor) |
-            Q(grupo_artista__icontains = valor)
-            ).order_by('nombre_cancion')
-        
+    
+        canciones = Cancion.objects.all()
+        listita = []
+        i =0
+        aux = aux.upper()
+        while i < len(canciones):
+            cadena1 = canciones[i].nombre_cancion
+            cadena1 = quitar_tilde(cadena1)
+            cadena1 = cadena1.upper()
+            if aux in cadena1:
+                listita.append(canciones[i])
+            else:
+                cadena1 = canciones[i].grupo_artista
+                cadena1 = quitar_tilde(cadena1)
+                cadena1 = cadena1.upper()
+                if aux in cadena1:
+                    listita.append(canciones[i])
+            i +=1
         if(len(listita)>0):
-            resultado="Resultados de la busqueda para: "+ valor
+            resultado="Resultado de la búsqueda: "+ valor
         else:
-            resultado="No hay resultados para la busqueda:  "+valor
-        # ctx = Context({'canciones_aleatorias':listita,'text': resultado,'busqueda':valor})
-        # documento = plt.render(ctx)
+            resultado="No hay resultados para: "+valor
         return render(request,"seccion_canciones.html",{'canciones_aleatorias':listita,'text': resultado,'busqueda':valor})
     else:
-        lista=[]    
-        canciones= Cancion.objects.all()
-        for cancion1 in canciones:
-            lista.append(cancion1)           
-        random.shuffle(lista)
-        ctx = Context({'canciones_aleatorias':lista,'text':'Canciones'})
-        documento = plt.render(ctx)
     
         return redirect("/Canciones/")
 
@@ -1198,8 +1213,8 @@ def cumple(valor):
         res=False
     return res
     
-@login_required(login_url='/Login/')
-@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+# @login_required(login_url='/Login/')
+# @user_passes_test(profesor1,login_url='/Inicio_Profesores/')
 def cancion_base(request,id_cancion): #Base de las canciones   
     song = Cancion.objects.all()
     id_cancion = int(id_cancion)
