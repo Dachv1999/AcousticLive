@@ -13,9 +13,13 @@ class Profesor(models.Model):
     def __str__(self):
         return self.nombre_profesor
 class Cancion(models.Model):
-    nombre_cancion = models.CharField(max_length=300)
-    genero_musica = models.CharField(max_length=100)
-    grupo_artista = models.CharField(max_length=150)
+    nombre_cancion = models.CharField(max_length=100)
+    genero_musica = models.CharField(max_length=50)
+    grupo_artista = models.CharField(max_length=60)
+    fecha_album=models.CharField(max_length=60)
+    link_video= models.CharField(max_length=60)
+    acordes_letra= models.TextField()
+    acordes_imagenes=models.TextField()
     imagen_cancion =models.ImageField(upload_to='static/Imagenes/imagenes_canciones', default='', blank=True)
     def __str__(self):
         return self.nombre_cancion

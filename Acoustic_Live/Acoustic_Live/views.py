@@ -306,8 +306,15 @@ def Formulario_Registro(request):
         correo= request.POST.get('correo','')
         contraseña= request.POST.get('contraseña','')
         confirmacion= request.POST.get('confirmacion','')
-        res=redirect("/Formulario_Registro/")
-
+    
+        contexto={
+        'nombre':nombre,
+        'apellidoPaterno':apellidoPaterno,
+        'apellidoMaterno':apellidoMaterno,
+        'nombreUsuario':nombreUsuario,
+        'correo':correo,
+        }
+        
         if(len(nombre)!=0 and len(correo)!=0 and len(contraseña)!=0 and len(nombreUsuario)!=0 and len(confirmacion)!=0):
             
             
@@ -319,102 +326,104 @@ def Formulario_Registro(request):
 
             if((len(apellidoPaterno)==0 and len(apellidoMaterno)==0)):
                 mensaje(request,"Error: Debe ingresar al menos un apellido")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validoNombre==False):
                 mensaje(request,"Nombre ingresado inválido")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validoApePat==False):
                 mensaje(request,"Error el apellido paterno debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validoApeMat==False):
                 mensaje(request,"Error el apellido materno debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
 
             if(valido_usuario==False):
                 mensaje(request,"Nombre de usuario inválido")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
         
             if(espacio(nombre)):
                 mensaje(request,"Error: El nombre debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(espacio(apellidoPaterno)):
                 mensaje(request,"Error el apellido paterno debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(espacio(apellidoMaterno)):
                 mensaje(request,"Error el apellido materno debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(espacio(nombreUsuario)):
                 mensaje(request,"Error el nombre de usario debe tener caracteres alfabéticos")
-                return res   
+                return render(request,"Formulario_Registro.html", contexto)   
             if(validarTamaño(nombre,20,3)==1):
                 mensaje(request,generador("nombre",1))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif (validarTamaño(nombre,20,3)==2):
                 mensaje(request,generador("nombre",2))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validarTamaño(apellidoPaterno,15,3)==1):
                 mensaje(request,generador("apellido paterno",1))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif(validarTamaño(apellidoPaterno,15,3)==2):
                 mensaje(request,generador("apellido paterno",2))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validarTamaño(apellidoMaterno,15,3)==1):
                 mensaje(request,generador("apellido materno",1))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif(validarTamaño(apellidoMaterno,15,3)==2):
                 mensaje(request,generador("apellido materno",2))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validarTamaño(nombreUsuario,30,5)==1):
                 mensaje(request,generador("nombre de usuario",1))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif (validarTamaño(nombreUsuario,30,5)==2):
                 mensaje(request,generador("nombre de usuario",2))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validarTamaño(contraseña,30,8)==1):
                 mensaje(request,"Error: La contraseña debe tener un máximo de 30 caracteres" )
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif (validarTamaño(contraseña,30,8)==2):
                 mensaje(request,"Error: La contraseña debe tener un mínimo de 8 caracteres")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(contraseña ==nombreUsuario):
                 mensaje(request,"Error: La contraseña es poco segura, ¡Ingrese una nueva!")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(Estudiante.objects.filter(usuario=nombreUsuario).exists()):
                 mensaje(request,"Nombre de usuario existente")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
 
             if(Estudiante.objects.filter(correo_estudiante=correo).exists()):
                 mensaje(request,"Error: ¡Correo ya registrado! por favor ingrese un correo diferente a : "+ correo)
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
 
             if(hay_letra(contraseña) == False or hay_numero(contraseña) == False):
                 mensaje(request,"Error: La contraseña debe contener caracteres alfanuméricos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(confirmacion!=contraseña):
                 mensaje(request,"La contraseña de verificación no coincide")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if("_prof" in nombreUsuario): 
                 mensaje(request,"No puedes poner _prof en tu usuario")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             
             if(len(sacarInicio(correo))>32):
                 mensaje(request,"Error: nombre de correo ingresado inválido")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             else:   
                 if(valido_correo==False or not('@gmail.com' in correo) and not('@hotmail.com' in correo)and not('@outlook.com')and not('@yahoo.com')):
                     mensaje(request,"Error el correo debe estar en los siguientes dominios: gmail, hotmail, outlook, yahoo")
-                    return res
+                    return render(request,"Formulario_Registro.html", contexto)
                 
                     #falta un detallito un graaaan detallito
                 if(esValidoCorreo(sacarExt(correo))==False):
                     mensaje(request,"Error el correo debe estar en los siguientes dominios: gmail, hotmail, outlook, yahoo")
-                    return res
+                    return render(request,"Formulario_Registro.html", contexto)
                 
                 else:
                     estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, 
                     correo_estudiante = correo, contraseña_estudiante = contraseña)
                     estudiante.save() #ingresar datos
-                    estudiante1 = User.objects.create_user(nombreUsuario,correo,contraseña)
+                    auxi = nombre.split()
+                    auxi1 = str(auxi[0])
+                    estudiante1 = User.objects.create_user(username = nombreUsuario,email = correo,password = contraseña, first_name = auxi1)
                     estudiante1.save()
                     mensaje(request,"Bienvenido a Acusctic Live")
                     return redirect("/Login/")
@@ -422,7 +431,7 @@ def Formulario_Registro(request):
 
         else:
             mensaje(request,"Por favor llene todos los campos")
-            return res
+            return render(request,"Formulario_Registro.html", contexto)
 
     return render (request, "Formulario_Registro.html")
 
@@ -646,27 +655,74 @@ def eliminar_video_vistoBD(request):
 @login_required(login_url='/Login/')
 @user_passes_test(profesor,login_url='/')
 def vista_editar_leccion(request, id_video, nivel):
-    lecc = Leccion.objects.get(id=id_video)
-    username = request.user.username
-    profesor = Profesor.objects.get(user_name=username)
-    id=profesor.id
-    identificador_profesor=False
-    if id==1 or id==2 or id==3 or id==4:
-        identificador_profesor=True
-    nombre = lecc.nombre_leccion
-    descripcion = lecc.descripcion
-    link = lecc.link
+    print(id_video)
+    prof = Profesor.objects.get(user_name = request.user.username)
+    leccion1 = Leccion.objects.filter(nivel = nivel, idprofesor_id = prof.id)
+    try: 
+        lecc = Leccion.objects.get(id=id_video)
+        if lecc in leccion1:
+            username = request.user.username
+            profesor = Profesor.objects.get(user_name=username)
+            id=profesor.id
+            identificador_profesor=False
+            if id==1 or id==2 or id==3 or id==4:
+                identificador_profesor=True
+            nombre = lecc.nombre_leccion
+            descripcion = lecc.descripcion
+            link = lecc.link
 
-    contexto = {
-    'nombre' : nombre,
-    'descripcion': descripcion,
-    'link' : link,
-    'nivel' : nivel,
-    'id_video' : id_video,
-    'indentificador_profesor':identificador_profesor,
-    }
+            contexto = {
+            'nombre' : nombre,
+            'descripcion': descripcion,
+            'link' : link,
+            'nivel' : nivel,
+            'id_video' : id_video,
+            'indentificador_profesor':identificador_profesor,
+            }
 
-    return render(request,"Editar_Leccion_Profesor.html",contexto)
+            return render(request,"Editar_Leccion_Profesor.html",contexto)
+        else:
+            username = request.user.username
+            profesor = Profesor.objects.get(user_name=username)
+            id=profesor.id
+            id_profesor='/Formulario/'+str(id)+'/'
+            nombre_profesor=profesor.nombre_profesor
+            apellido_profesor =profesor.apellido_profesor
+            identificador_profesor=False
+
+            if id==1 or id==2 or id==3 or id==4:
+                identificador_profesor=True
+
+            contexto={
+                'id_profesor':id_profesor,
+                'nombre_profesor':nombre_profesor,
+                'id':id,
+                'apellido_profesor':apellido_profesor ,
+                'indentificador_profesor': identificador_profesor,
+            }
+            return render(request,'Vista_Principal_Profesores.html', contexto)
+    except:
+
+        username = request.user.username
+        profesor = Profesor.objects.get(user_name=username)
+        id=profesor.id
+        id_profesor='/Formulario/'+str(id)+'/'
+        nombre_profesor=profesor.nombre_profesor
+        apellido_profesor =profesor.apellido_profesor
+        identificador_profesor=False
+
+        if id==1 or id==2 or id==3 or id==4:
+            identificador_profesor=True
+
+        contexto={
+            'id_profesor':id_profesor,
+            'nombre_profesor':nombre_profesor,
+            'id':id,
+            'apellido_profesor':apellido_profesor ,
+            'indentificador_profesor': identificador_profesor,
+        }
+        return render(request,'Vista_Principal_Profesores.html', contexto)
+
 
 @login_required(login_url='/Login/')
 @user_passes_test(profesor,login_url='/')
@@ -925,25 +981,48 @@ def lista_avanzado(request, id_profesor):
 @login_required(login_url='/Login/')
 @user_passes_test(profesor,login_url='/')
 def crud_profesores(request, nivel): #CRUD Profesores
-    username1 = request.user.username
-    profesor = Profesor.objects.get(user_name=username1)
-    id=profesor.id
-    identificador_profesor=False
-    if id==1 or id==2 or id==3 or id==4:
-        identificador_profesor=True
-    lecciones = Leccion.objects.filter(nivel=nivel, idprofesor_id=id).order_by('orden')
     
-    cant = 0
-    for leccion in lecciones:
-        cant = cant + 1
-    contexto = {
-        'lecciones' : lecciones,
-        'cantidad' : cant,
-        'nivel' : nivel,
-        'id':id,
-        'indentificador_profesor':identificador_profesor,
-    }
-    return render(request,'CRUD_Profesores.html', contexto)
+    if nivel<4 and nivel>0:
+        username1 = request.user.username
+        profesor = Profesor.objects.get(user_name=username1)
+        id=profesor.id
+        identificador_profesor=False
+        if id==1 or id==2 or id==3 or id==4:
+            identificador_profesor=True
+        lecciones = Leccion.objects.filter(nivel=nivel, idprofesor_id=id).order_by('orden')
+        
+        cant = 0
+        for leccion in lecciones:
+            cant = cant + 1
+
+        contexto = {
+            'lecciones' : lecciones,
+            'cantidad' : cant,
+            'nivel' : nivel,
+            'id':id,
+            'indentificador_profesor':identificador_profesor,
+        }
+        return render(request,'CRUD_Profesores.html', contexto)
+    else: 
+        username = request.user.username
+        profesor = Profesor.objects.get(user_name=username)
+        id=profesor.id
+        id_profesor='/Formulario/'+str(id)+'/'
+        nombre_profesor=profesor.nombre_profesor
+        apellido_profesor =profesor.apellido_profesor
+        identificador_profesor=False
+
+        if id==1 or id==2 or id==3 or id==4:
+            identificador_profesor=True
+
+        contexto={
+            'id_profesor':id_profesor,
+            'nombre_profesor':nombre_profesor,
+            'id':id,
+            'apellido_profesor':apellido_profesor ,
+            'indentificador_profesor': identificador_profesor,
+        }
+        return render(request,'Vista_Principal_Profesores.html', contexto)
 
 @login_required(login_url='/Login/')
 @user_passes_test(profesor,login_url='/')
@@ -1025,80 +1104,74 @@ def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
     }
     return render(request,'Vista_Universal_Lecciones_For_Profesor.html', contexto)
 
-#@login_required(login_url='/Login/')
-#@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
 def genero(request, num_genero):
     
-    texto = " "
+    texto =""
     if num_genero == 1:
         texto = 'Todas las canciones'
         canciones = Cancion.objects.all().order_by('nombre_cancion')
     elif num_genero == 2:
         texto = 'Género "Rock"'
-        canciones = Cancion.objects.filter(genero_musica='rock')
+        canciones = Cancion.objects.filter(genero_musica='Rock')
     elif num_genero == 3:
         texto = 'Género "Pop"'
-        canciones = Cancion.objects.filter(genero_musica='pop')
+        canciones = Cancion.objects.filter(genero_musica='Pop')
     elif num_genero == 4:
         texto = 'Género "Baladas"'
-        canciones = Cancion.objects.filter(genero_musica='balada')
+        canciones = Cancion.objects.filter(genero_musica='Balada')
     elif num_genero == 5:
         texto = 'Género "Folklóricas"'
-        canciones = Cancion.objects.filter(genero_musica='folklorica')
+        canciones = Cancion.objects.filter(genero_musica='Folklorica')
     elif num_genero == 6:
         texto = 'Género "Reggae"'
-        canciones = Cancion.objects.filter(genero_musica='reggae')
+        canciones = Cancion.objects.filter(genero_musica='Reggae')
+        
     contexto = {
         'texto' : texto,
         'canciones':canciones,
+        
     }
 
     return render(request,'Seccion_Canciones.html', contexto)
 
-#@login_required(login_url='/Login/')
-#@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
 def seccion_canciones(request): #Vista de seccion canciones
-    doc_externo = open("Acoustic_Live/Templates/Seccion_Canciones.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
+
+    lista1=[]
     lista=[]    
     canciones= Cancion.objects.all()
-    for cancion1 in canciones:
-        lista.append(cancion1)   
-    random.shuffle(lista)         
-    ctx = Context({'canciones_aleatorias':lista,'text': 'Canciones'})
-    documento = plt.render(ctx)
+    i = 0
     
-    return HttpResponse(documento)
+    for cancion1 in canciones:
+        lista1.append(cancion1)
+        random.shuffle(lista1)
+
+    while i < 5:
+        lista.append(lista1[i])
+        i += 1
+    contexto = {
+        'canciones_aleatorias':lista,
+        'text': 'Canciones',
+    }
+    return render(request,'Seccion_Canciones.html', contexto)
+
 
 def buscador(request):
     doc_externo = open("Acoustic_Live/Templates/Seccion_Canciones.html")
     plt = Template(doc_externo.read())
     doc_externo.close()
     valor=request.POST.get('Buscar','')
+    valor=valor.strip()
     if valor and cumple(valor):
-        copia=valor.split(' ')
-        if len(copia)==1:
-            listita=Cancion.objects.filter(
-                Q(nombre_cancion__icontains = valor) |
-                Q(grupo_artista__icontains = valor)
-                ).order_by('nombre_cancion')
-        if len(copia)>1: #si activo el de abajo es len(copia)>1
-            listita=Cancion.objects.filter(
-                Q(nombre_cancion__icontains = copia[0]) |
-                Q(grupo_artista__icontains = copia[0]) |
-                Q(nombre_cancion__icontains = copia[1]) |
-                Q(grupo_artista__icontains = copia[1])
-                ).order_by('nombre_cancion')
-        # if len(copia)>2:
-        #     listita=Cancion.objects.filter(
-        #         Q(nombre_cancion__icontains = copia[0]) |
-        #         Q(grupo_artista__icontains = copia[0]) |
-        #         Q(nombre_cancion__icontains = copia[1]) |
-        #         Q(grupo_artista__icontains = copia[1]) |
-        #         Q(nombre_cancion__icontains = copia[2]) |
-        #         Q(grupo_artista__icontains = copia[2])
-        #         ).order_by('nombre_cancion')
+        
+        listita=Cancion.objects.filter(
+            Q(nombre_cancion__icontains = valor) |
+            Q(grupo_artista__icontains = valor)
+            ).order_by('nombre_cancion')
+        
         if(len(listita)>0):
             resultado="Resultados de la busqueda para: "+ valor
         else:
@@ -1121,70 +1194,48 @@ def cumple(valor):
     res=True
     if len(valor)==1 and valor==' ':
         res=False
-    i=0
-    c=0
     if '  ' in valor:
         res=False
     return res
-
-def cancion_base(request): #Base de las canciones
-    doc_externo = open("Acoustic_Live/Templates/Canciones/Cancion_base.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
-
-    ctx = Context()
-    documento = plt.render(ctx)
     
-    return HttpResponse(documento)
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+def cancion_base(request,id_cancion): #Base de las canciones   
+    song = Cancion.objects.all()
+    id_cancion = int(id_cancion)
+    if id_cancion>len(song)+1 or id_cancion<2:
+        lista1=[]
+        lista=[]    
+        canciones= Cancion.objects.all()
+        i = 0
+        
+        for cancion1 in canciones:
+            lista1.append(cancion1)
+            random.shuffle(lista1)
 
+        while i < 5:
+            lista.append(lista1[i])
+            i += 1
 
-def cancion_ave_cristal(request):
-    return render(request,'Canciones/Ave_de_Cristal.html')
+        return render(request,'Seccion_Canciones.html', {'canciones_aleatorias':lista,'text':'Canciones'})
+    else:
+        cancion= Cancion.objects.get(id=id_cancion)
+        i=cancion.acordes_imagenes
+        imagenes =i.split() 
+        nombre=' '   
+        
+        acordes_verdaderas=[] 
+        i=0
+        while i< len(imagenes):
+            acordes_verdaderas.append(Fotos(nombre,imagenes[i]))
+            i +=1
+        contexto = {
+            'cancion':cancion,
+            'acorde_normal':acordes_verdaderas,
+        }
+    return render(request,'Canciones/Cancion_base.html', contexto)
 
-def por_mil_noches(request):
-    return render(request,'Canciones/airbag_por_mil_noches.html')
-
-def muchacha_de_risa(request):
-    return render(request,'Canciones/Muchacha_de_Risa.html')
-
-def videogames(request):
-    return render(request,'Canciones/lana_del_rey_videogames.html')
-
-def tratame_suavemente(request):
-    return render(request,'Canciones/soda_stereo_tratame_suavemente.html')
-    
-def pensamientos(request):
-    return render(request,'Canciones/airbag_pensamientos.html')
-
-def little_things(request):
-    return render(request,'Canciones/1d_little_things.html')
-    
-def ley_y_trampa(request):
-    return render(request,'Canciones/Ley_y_trampa.html')
-
-def sangre_espanola(request):
-    return render(request,'Canciones/Sangre_Espanola.html')
-
-def puerta_jardin(request):
-    return render(request,'Canciones/Puerta_de_Jardin.html')
-
-def besos_guerra(request):
-    return render(request,'Canciones/Besos_en_Guerra.html')
-
-def cambiare_mi_tristeza(request):
-    return render(request,'Canciones/cambiare_mi_tristeza.html')
-    
-def vamonos_a_marte(request):
-    return render(request,'Canciones/vamonos_a_marte.html')
-
-def quiza(request):
-    return render(request,'Canciones/quiza.html')
-
-def desde_mi_interior(request):
-    return render(request,'Canciones/desde_mi_interior.html')
-
-def vives_en_mi(request):
-    return render(request,'Canciones/vives_en_mi.html')
-
-def cuenta_con_migo(request):
-    return render(request,'Canciones/cuenta_con_migo.html')
+class Fotos(object):
+    def __init__(self, nn,ii):
+        self.i ='static/acordes_guitarra/'+ii
+        self.n =nn
