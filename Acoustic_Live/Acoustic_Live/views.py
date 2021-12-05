@@ -306,8 +306,15 @@ def Formulario_Registro(request):
         correo= request.POST.get('correo','')
         contraseña= request.POST.get('contraseña','')
         confirmacion= request.POST.get('confirmacion','')
-        res=redirect("/Formulario_Registro/")
-
+    
+        contexto={
+        'nombre':nombre,
+        'apellidoPaterno':apellidoPaterno,
+        'apellidoMaterno':apellidoMaterno,
+        'nombreUsuario':nombreUsuario,
+        'correo':correo,
+        }
+        
         if(len(nombre)!=0 and len(correo)!=0 and len(contraseña)!=0 and len(nombreUsuario)!=0 and len(confirmacion)!=0):
             
             
@@ -319,96 +326,96 @@ def Formulario_Registro(request):
 
             if((len(apellidoPaterno)==0 and len(apellidoMaterno)==0)):
                 mensaje(request,"Error: Debe ingresar al menos un apellido")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validoNombre==False):
                 mensaje(request,"Nombre ingresado inválido")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validoApePat==False):
                 mensaje(request,"Error el apellido paterno debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validoApeMat==False):
                 mensaje(request,"Error el apellido materno debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
 
             if(valido_usuario==False):
                 mensaje(request,"Nombre de usuario inválido")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
         
             if(espacio(nombre)):
                 mensaje(request,"Error: El nombre debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(espacio(apellidoPaterno)):
                 mensaje(request,"Error el apellido paterno debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(espacio(apellidoMaterno)):
                 mensaje(request,"Error el apellido materno debe tener caracteres alfabéticos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(espacio(nombreUsuario)):
                 mensaje(request,"Error el nombre de usario debe tener caracteres alfabéticos")
-                return res   
+                return render(request,"Formulario_Registro.html", contexto)   
             if(validarTamaño(nombre,20,3)==1):
                 mensaje(request,generador("nombre",1))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif (validarTamaño(nombre,20,3)==2):
                 mensaje(request,generador("nombre",2))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validarTamaño(apellidoPaterno,15,3)==1):
                 mensaje(request,generador("apellido paterno",1))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif(validarTamaño(apellidoPaterno,15,3)==2):
                 mensaje(request,generador("apellido paterno",2))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validarTamaño(apellidoMaterno,15,3)==1):
                 mensaje(request,generador("apellido materno",1))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif(validarTamaño(apellidoMaterno,15,3)==2):
                 mensaje(request,generador("apellido materno",2))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validarTamaño(nombreUsuario,30,5)==1):
                 mensaje(request,generador("nombre de usuario",1))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif (validarTamaño(nombreUsuario,30,5)==2):
                 mensaje(request,generador("nombre de usuario",2))
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(validarTamaño(contraseña,30,8)==1):
                 mensaje(request,"Error: La contraseña debe tener un máximo de 30 caracteres" )
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             elif (validarTamaño(contraseña,30,8)==2):
                 mensaje(request,"Error: La contraseña debe tener un mínimo de 8 caracteres")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(contraseña ==nombreUsuario):
                 mensaje(request,"Error: La contraseña es poco segura, ¡Ingrese una nueva!")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(Estudiante.objects.filter(usuario=nombreUsuario).exists()):
                 mensaje(request,"Nombre de usuario existente")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
 
             if(Estudiante.objects.filter(correo_estudiante=correo).exists()):
                 mensaje(request,"Error: ¡Correo ya registrado! por favor ingrese un correo diferente a : "+ correo)
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
 
             if(hay_letra(contraseña) == False or hay_numero(contraseña) == False):
                 mensaje(request,"Error: La contraseña debe contener caracteres alfanuméricos")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if(confirmacion!=contraseña):
                 mensaje(request,"La contraseña de verificación no coincide")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             if("_prof" in nombreUsuario): 
                 mensaje(request,"No puedes poner _prof en tu usuario")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             
             if(len(sacarInicio(correo))>32):
                 mensaje(request,"Error: nombre de correo ingresado inválido")
-                return res
+                return render(request,"Formulario_Registro.html", contexto)
             else:   
                 if(valido_correo==False or not('@gmail.com' in correo) and not('@hotmail.com' in correo)and not('@outlook.com')and not('@yahoo.com')):
                     mensaje(request,"Error el correo debe estar en los siguientes dominios: gmail, hotmail, outlook, yahoo")
-                    return res
+                    return render(request,"Formulario_Registro.html", contexto)
                 
                     #falta un detallito un graaaan detallito
                 if(esValidoCorreo(sacarExt(correo))==False):
                     mensaje(request,"Error el correo debe estar en los siguientes dominios: gmail, hotmail, outlook, yahoo")
-                    return res
+                    return render(request,"Formulario_Registro.html", contexto)
                 
                 else:
                     estudiante = Estudiante(nombre_estudiante = nombre, apellidoP_estudiante = apellidoPaterno, apellidoM_estudiante = apellidoMaterno, usuario = nombreUsuario, 
@@ -424,7 +431,7 @@ def Formulario_Registro(request):
 
         else:
             mensaje(request,"Por favor llene todos los campos")
-            return res
+            return render(request,"Formulario_Registro.html", contexto)
 
     return render (request, "Formulario_Registro.html")
 
@@ -1097,8 +1104,8 @@ def Vista_Universal_Para_Profesor(request, id_profesor, nivel):
     }
     return render(request,'Vista_Universal_Lecciones_For_Profesor.html', contexto)
 
-#@login_required(login_url='/Login/')
-#@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
 def genero(request, num_genero):
     
     texto =""
@@ -1120,20 +1127,19 @@ def genero(request, num_genero):
     elif num_genero == 6:
         texto = 'Género "Reggae"'
         canciones = Cancion.objects.filter(genero_musica='Reggae')
-
+        
     contexto = {
         'texto' : texto,
         'canciones':canciones,
+        
     }
 
     return render(request,'Seccion_Canciones.html', contexto)
 
-#@login_required(login_url='/Login/')
-#@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
 def seccion_canciones(request): #Vista de seccion canciones
-    doc_externo = open("Acoustic_Live/Templates/Seccion_Canciones.html")
-    plt = Template(doc_externo.read())
-    doc_externo.close()
+
     lista1=[]
     lista=[]    
     canciones= Cancion.objects.all()
@@ -1146,11 +1152,12 @@ def seccion_canciones(request): #Vista de seccion canciones
     while i < 5:
         lista.append(lista1[i])
         i += 1
-        
-    ctx = Context({'canciones_aleatorias':lista,'text': 'Canciones'})
-    documento = plt.render(ctx)
-    
-    return HttpResponse(documento)
+    contexto = {
+        'canciones_aleatorias':lista,
+        'text': 'Canciones',
+    }
+    return render(request,'Seccion_Canciones.html', contexto)
+
 
 def buscador(request):
     doc_externo = open("Acoustic_Live/Templates/Seccion_Canciones.html")
@@ -1190,12 +1197,11 @@ def cumple(valor):
     if '  ' in valor:
         res=False
     return res
-
-def cancion_base(request,id_cancion): #Base de las canciones
-    doc_externo = open("Acoustic_Live/Templates/Canciones/Cancion_base.html")
-    plt = Template(doc_externo.read())
+    
+@login_required(login_url='/Login/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+def cancion_base(request,id_cancion): #Base de las canciones   
     song = Cancion.objects.all()
-    doc_externo.close()
     id_cancion = int(id_cancion)
     if id_cancion>len(song)+1 or id_cancion<2:
         lista1=[]
@@ -1227,11 +1233,7 @@ def cancion_base(request,id_cancion): #Base de las canciones
             'cancion':cancion,
             'acorde_normal':acordes_verdaderas,
         }
-        
-        ctx = Context(contexto)
-    
-    documento = plt.render(ctx)
-    return HttpResponse(documento)
+    return render(request,'Canciones/Cancion_base.html', contexto)
 
 class Fotos(object):
     def __init__(self, nn,ii):
