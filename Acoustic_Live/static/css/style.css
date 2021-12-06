@@ -281,8 +281,10 @@ input[type="checkbox"]{
     width: 65%;
     margin: 0 auto;
 }
+.k{
+    padding-left: 0px;
+}
 
- 
 
 @media (max-width: 1051px){
     #videoCancion{
