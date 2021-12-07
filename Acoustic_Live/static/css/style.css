@@ -221,7 +221,7 @@ input[type="checkbox"]{
     margin-left: 10px;
 }
 .letracordes{
-    background: rgba(212, 212, 212, 0.3);
+    background: rgba(212, 212, 212, 0.1);
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 30px rgba(0,-0,-0,0.568);
