@@ -69,8 +69,6 @@ def recuperacion_contraseña(request):
     return render (request, "recuperarContraseña.html")
 
 
-def inicio(request): #Vista Inicio
-    return render(request,'Inicio.html')
 
 def profesor(user):
     return  user.get_username() == 'Aron_prof' or user.get_username() == 'mantequilla_prof' or user.get_username() == 'christian_prof' or user.get_username() == 'mario_prof'
@@ -106,54 +104,59 @@ def profesor1(user):
 def niveles(request): #Vista niveles
     return render(request,"Division_Niveles.html")
 
-
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+#@user_passes_test(profesor,login_url='/')
 def login1(request): 
-    if request.method=="POST":
-        res= redirect("/Login/")
-        usuario_login=request.POST.get('usuario','')
-        contraseña=request.POST.get('contraseña','')
-        if(espacio(usuario_login)):
-            mensaje(request,"Porfavor llene todos los campos")
-            return res
-        if len(contraseña)==0 or len(usuario_login)==0:
-            mensaje(request,"Porfavor llene todos los campos")
-            return res
-        elif validar(usuario_login)==False:
-            mensaje(request,"Error el nombre de usuario no es valido")
-            return res
-        if("_prof" in usuario_login):
-            if(Profesor.objects.filter(user_name=usuario_login).exists()):
-                if(Profesor.objects.filter(contraseña=contraseña).exists()and Profesor.objects.filter(user_name=usuario_login).exists()):
+    try:
+        print(request.user.first_name)
+        return redirect('/')
+    except:
+        if request.method=="POST":   
+            res= redirect("/Login/")
+            usuario_login=request.POST.get('usuario','')
+            contraseña=request.POST.get('contraseña','')
+            if(espacio(usuario_login)):
+                mensaje(request,"Porfavor llene todos los campos")
+                return res
+            if len(contraseña)==0 or len(usuario_login)==0:
+                mensaje(request,"Porfavor llene todos los campos")
+                return res
+            elif validar(usuario_login)==False:
+                mensaje(request,"Error el nombre de usuario no es valido")
+                return res
+            if("_prof" in usuario_login):
+                if(Profesor.objects.filter(user_name=usuario_login).exists()):
+                    if(Profesor.objects.filter(contraseña=contraseña).exists()and Profesor.objects.filter(user_name=usuario_login).exists()):
+                        usuario = authenticate(username=usuario_login, password=contraseña)
+                        if usuario is not None:
+                            login(request, usuario)
+                            messages.info(request, "¡Bienvenido "+ request.user.first_name+" a Acoustic Live!")   
+                            return redirect("/Inicio_Profesores/")
+                    else:
+                            mensaje(request,"Error: contraseña incorrecta")
+                            return res
+                else:
+                    mensaje(request,"Error: Usuario no registrado")
+                    return res
+            if(Estudiante.objects.filter(usuario=usuario_login).exists()):
+                if(Estudiante.objects.filter(contraseña_estudiante=contraseña).exists()and Estudiante.objects.filter(usuario=usuario_login).exists()):
                     usuario = authenticate(username=usuario_login, password=contraseña)
                     if usuario is not None:
-                        login(request, usuario)
-                        messages.info(request, "¡Bienvenido "+ request.user.first_name+" a Acoustic Live!")   
-                        return redirect("/Inicio_Profesores/")
+                        login(request,usuario)
+                        messages.info(request, "¡Bienvenido "+ request.user.first_name+" a Acoustic Live!")    
+                        return redirect("/")
                 else:
-                        mensaje(request,"Error: contraseña incorrecta")
-                        return res
+                    mensaje(request,"Error: contraseña incorrecta")
+                    return res
             else:
                 mensaje(request,"Error: Usuario no registrado")
                 return res
-
-
-        if(Estudiante.objects.filter(usuario=usuario_login).exists()):
-            if(Estudiante.objects.filter(contraseña_estudiante=contraseña).exists()and Estudiante.objects.filter(usuario=usuario_login).exists()):
-                usuario = authenticate(username=usuario_login, password=contraseña)
-                if usuario is not None:
-                    login(request,usuario)
-                    messages.info(request, "¡Bienvenido "+ request.user.first_name+" a Acoustic Live!")    
-                    return redirect("/")
-            else:
-                mensaje(request,"Error: contraseña incorrecta")
-                return res
-        else:
-            mensaje(request,"Error: Usuario no registrado")
-            return res
     
     
     return render (request, "login.html")
-
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+def inicio(request): #Vista Inicio
+    return render(request,'Inicio.html')
 
 def salir1(request):
     logout(request)
@@ -1138,6 +1141,7 @@ def genero(request, num_genero):
 
 # @login_required(login_url='/Login/')
 # @user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
 def seccion_canciones(request): #Vista de seccion canciones
 
     lista1=[]
@@ -1215,6 +1219,7 @@ def cumple(valor):
     
 # @login_required(login_url='/Login/')
 # @user_passes_test(profesor1,login_url='/Inicio_Profesores/')
+@user_passes_test(profesor1,login_url='/Inicio_Profesores/')
 def cancion_base(request,id_cancion): #Base de las canciones   
     song = Cancion.objects.all()
     id_cancion = int(id_cancion)
