@@ -48,7 +48,7 @@ nav{
 .iz{
     float: left;
     margin-left: 10%;
-    margin-right: 10%;
+    /* margin-right: 10%; */
     list-style: none;
     text-decoration: none;
     list-style: none;
@@ -221,13 +221,14 @@ input[type="checkbox"]{
     margin-left: 10px;
 }
 .letracordes{
-    background: rgba(212, 212, 212, 0.3);
+    background: rgba(212, 212, 212, 0.15);
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 30px rgba(0,-0,-0,0.568);
     color: white;
     width: 100%;
     margin-bottom: 10%;
+    font-size: 20px;
 }
 .nose{
     display: flex;
@@ -281,8 +282,10 @@ input[type="checkbox"]{
     width: 65%;
     margin: 0 auto;
 }
+.k{
+    padding-left: 0px;
+}
 
- 
 
 @media (max-width: 1051px){
     #videoCancion{
@@ -290,10 +293,17 @@ input[type="checkbox"]{
         height: 230px;
         
     }
+    .curso{
+        width: 90%;    
+    }
 } 
 @media (max-width: 1031px){
     .enlace{
         padding-left: 0px;
+    }
+    .der{
+        margin-left: 5%;
+
     }
     nav ul li a{
         font-size: 15px;
@@ -314,7 +324,12 @@ input[type="checkbox"]{
     .checkbtn{
         display: block;
     }
-    
+    .iz{
+        margin-right: 10%;
+    }
+    .der{
+        margin-left: 10%;
+    }
     .men{
         display: flex;
         align-items: center;
@@ -372,7 +387,7 @@ input[type="checkbox"]{
     }
 } 
 
-@media (max-width: 640px){
+@media (max-width: 710px){
     
     .nn{
         display: none;
